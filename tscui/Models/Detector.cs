@@ -57,4 +57,19 @@ namespace tscui.Models
             set { _ucSaturationOccupy = value; }
         }
     }
+    public class OverlapPhaseType
+    {
+        public string name { set; get; }
+        public byte value { set; get; }
+    }
+    public class PhaseType
+    {
+        public string typeName { set; get; }
+        public byte ucType { set; get; }
+    }
+    public class PhaseOption
+    {
+        public string optionName { set; get; }
+        public byte ucOption { set; get; }
+    }
 }

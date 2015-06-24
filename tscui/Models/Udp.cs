@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Windows;
 using System.Threading;
 using tscui.Service;
 
@@ -66,10 +64,10 @@ namespace tscui.Models
         #region 关闭接收线程和socket连接
         public static void Close()
         {
-            if (_receiveThread != null)
+            if (_receiveThread != null && _receiveThread.ThreadState == ThreadState.Running)
                 _receiveThread.Abort();
-            if (_socket != null)
-                _socket.Close();
+           // if (_socket != null)
+              //  _socket.Close();
         }
         #endregion
 
@@ -195,22 +193,17 @@ namespace tscui.Models
         /// <summary>
         /// 直接用SOCKET来进行UDP的发送和接收
         /// 此功能不关注发送到信号机后的返回数据，只对发送是否成功进行判断
-        /// </summary>
-        /// <param name="ipstr"></param>
-        /// <param name="port"></param>
-        /// <param name="hex"></param>
-        /// <returns></returns>
+      
         public static bool sendUdpNoReciveData(string ipstr, int port, byte[] hex)
         {
             int recv;
             Socket server = null;
-            byte[] bytes = new byte[65535];
+            byte[] bytes = new byte[1024]; //这里字节数可以限制，不用65535个字节。接收字节数最多的一般是阶段配时，日志一类。设置为1K
             try
             {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Parse(ipstr), port);
                 server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                // string str = "Hello Server!";
-                //bytes = System.Text.Encoding.ASCII.GetBytes(str);
+              
                 server.SendTimeout = 4000;
                 server.ReceiveTimeout = 4000;
                 server.SendTo(hex, ip);
@@ -218,14 +211,11 @@ namespace tscui.Models
                 EndPoint Remote = (EndPoint)(sender);
                 //server.Bind(sender);
                 recv = server.ReceiveFrom(bytes, ref Remote);
-                Console.WriteLine("Message received from {0}", Remote.ToString());
-                //str = System.Text.Encoding.ASCII.GetString(bytes, 0, recv);
-                Console.WriteLine("Message: " + bytes[0]);
                 server.Close();
                 server = null;
                 if (bytes[0] == 134)
                     return false;
-                else
+                else 
                     return true;
             }
             catch (Exception exce)
@@ -257,6 +247,8 @@ namespace tscui.Models
                 udpClient.Connect(IPAddress.Parse(strip), port);
                 // Sends a message to the host to which you have connected.
                 Byte[] sendBytes = hex;//Encoding.ASCII.GetBytes("123456");
+                udpClient.Client.SendTimeout = 3000;
+                udpClient.Client.ReceiveTimeout = 3000;
                 udpClient.Send(sendBytes, sendBytes.Length);
                 //udpClient.EnableBroadcast = true;
                 //udpClient.Ttl
@@ -346,22 +338,30 @@ namespace tscui.Models
         }
 
         #region 车检器相关的部分
-        static Socket _checkCarSocket;
-        static IPEndPoint _checkCarLocal = new IPEndPoint(IPAddress.Parse("192.168.0.2"), 5238);
+
+        private static Socket _checkCarSocket = null; 
+      //  private static IPEndPoint _checkCarLocal = new IPEndPoint(IPAddress.Any, 0);
+      //  static IPEndPoint _checkCarLocal = new IPEndPoint(IPAddress.Any, 5238);
+     
+
         static Thread _checkCarReceiveThread = null;
         #region 开启线程
         public static void StartReceiveCheckCar()
         {
             try
             {
+               // Thread.Sleep(500);
+                IPEndPoint _checkCarLocal = new IPEndPoint(IPAddress.Any, 5238);
                 _checkCarSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                bool aa = _checkCarSocket.Connected;
+                _checkCarSocket.Bind(_checkCarLocal);
                 _checkCarReceiveThread = new Thread(ReceiveCheckCar);
+                _checkCarReceiveThread.Name = "CheckCarThread";
+                _checkCarReceiveThread.IsBackground = true;
                 _checkCarReceiveThread.Start();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message.ToString());
+                Console.WriteLine("Detector Thread binding error!");
             }
         }
         #endregion
@@ -371,22 +371,17 @@ namespace tscui.Models
             try
             {
                 //Thread.Sleep(200);
-                if (_checkCarSocket.Connected)
-                {
-                    _checkCarSocket.Bind(_checkCarLocal);
-                }
                 while (true)
                 {
                     byte[] buffer = new byte[255];
                     EndPoint remoteEP = (EndPoint)(new IPEndPoint(IPAddress.Any, 0));
                     int len = _checkCarSocket.ReceiveFrom(buffer, ref remoteEP);
-                    IPEndPoint ipEndPoint = remoteEP as IPEndPoint;
                     CheckCarService gb20999 = new CheckCarService(buffer, len);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message.ToString() + _checkCarSocket.Connected.ToString() + "UpdSocket类 Receive方法出错");
+                Console.WriteLine(ex.Message.ToString()  + "  UpdSocket类 Receive方法出错");
             }
         }
         #endregion

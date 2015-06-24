@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using tscui.Models;
 using System.Windows;
 using tscui.Pages.BaseTime;
@@ -337,10 +338,10 @@ namespace tscui.Utils
                         result = result + "正常";
                         break;
                     case 0x01:
-                        result = result + "线圈开路";
+                        result = result + "线圈短路";
                         break;
                     case 0x02:
-                        result = result + "线圈短路";
+                        result = result + "线圈开路";
                         break;
                     case 0x03:
                         result = result + "通道停振";
@@ -658,14 +659,14 @@ namespace tscui.Utils
 
                     case 0x01:
                         result = result + "控制方式切换";
-                        result = result + ",旧的控制方式【" + ControlModel2String(bpara[1]) + "】,新的控制方式【" + ControlModel2String(bpara[2]) + "】,";
+                        result = result + ",旧方式【" + ControlModel2String(bpara[1]) + "】,新方式【" + ControlModel2String(bpara[2]) + "】,";
                         switch (bpara[3])
                         {
                             case 0x00:
-                                result = result + "正常切换(上位机命令 时段表 面板)";
+                                result = result + "正常切换";
                                 break;
                             case 0x01:
-                                result = result + "异常切换  降级";
+                                result = result + "异常切换-降级";
                                 break;
 
                             default:
@@ -793,8 +794,17 @@ namespace tscui.Utils
                 case 0x0b:
                     result = result + "面板控制";
                     break;
+                case 0x0c:
+                    result = result + "时段关灯";
+                    break;
+                case 0x0d:
+                    result = result + "时段黄闪";
+                    break;
+                case 0x0e:
+                    result = result + "时段全红";
+                    break;
                 default:
-                    result = result + "未知";
+                    result = result + "启动未知";
                     break;
             }
             return result;
@@ -949,6 +959,25 @@ namespace tscui.Utils
 
             return true;
 
+        }
+
+        public static bool bIp(string ipstr)
+        {
+            Regex check = new Regex(@"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$");
+            try
+            {
+                if (!check.IsMatch(ipstr.Trim()))
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                // MessageBox.Show("信号机IP地址异常，请选择信号机!");
+
+            }
+            return true;
         }
 
     }

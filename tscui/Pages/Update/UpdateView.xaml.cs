@@ -1,14 +1,14 @@
-﻿using System.Windows.Controls;
-using Apex;
+﻿using System;
+using System.Windows.Forms;
 using Apex.MVVM;
 using Apex.Behaviours;
-using tscui.Views;
-using Microsoft.Win32;
-using tscui.Utils;
+using tscui.Service;
 using tscui.Models;
 using System.Windows;
-using System.Threading;
 using System.Collections.Generic;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace tscui.Pages.Update
 {
@@ -18,6 +18,7 @@ namespace tscui.Pages.Update
     [View(typeof(UpdateViewModel))]
     public partial class UpdateView : UserControl, IView
     {
+        private  TscData td;
         public UpdateView()
         {
             InitializeComponent();
@@ -49,118 +50,252 @@ namespace tscui.Pages.Update
            // ((UpdateViewModel)DataContext).ShowPopupCommand.Executed -= ShowPopupCommand_Executed;
         }
 
-        private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+   private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Tsc Program(*.aiton)|*.aiton";
-            dialog.Multiselect = false;
-            
-            //TextBox tb = sender as TextBox;
-            if (dialog.ShowDialog() == true)
+            td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (td == null)
             {
-                tbxFileName.Text = dialog.FileName;
-            }
-        }
-
-        private void TextBox_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-           
-        }
-        TscData t;
-        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_TSC_START);
-            Thread.Sleep(500);
-            int result = FtpHelper.UploadFtp(tbxFileName.Text, t.Node.sIpAddress, Define.FTP_NAME, Define.FTP_PASSWD);
-            Thread.Sleep(500);
-
-            if(result == 0)
-            {
-                Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_TSC_FINISH);
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_success"]);
-            }
-            else if (result == -2)
-            {
-                //升级失败后，不要发送完成指令
-                //Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_TSC_FINISH);
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_failed"]);
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (t == null)
-                return;
-            bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_TSC_REVERSE);
-            if (b == true)
-            {
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_reset_success"]);
+                this.Visibility = Visibility.Hidden;
             }
             else
             {
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_reset_failed"]);
+                this.Visibility = Visibility.Visible;
             }
         }
 
-        private void btnBakLocal_Click(object sender, RoutedEventArgs e)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
-            System.Windows.Interop.HwndSource source = PresentationSource.FromVisual(this) as System.Windows.Interop.HwndSource;
-            System.Windows.Forms.IWin32Window win = new FolderBrowserHelper(source.Handle);
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(win);
-            string path = dlg.SelectedPath;
-            List<string> ls = FtpHelper.GetFileList(t.Node.sIpAddress, "/userdata/backup/", Define.FTP_NAME, Define.FTP_PASSWD);
-            foreach(string fileName in ls)
-            {
-                FtpHelper.DownloadFtp(path, fileName, t.Node.sIpAddress + "/userdata/backup", Define.FTP_NAME, Define.FTP_PASSWD);
-            }
-           // FtpHelper.DownloadFtp()
-        }
-      
-        private void btnDatabaseSelected_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Tsc Database(*.db)|*.db";
-            dialog.Multiselect = false;
 
-            //TextBox tb = sender as TextBox;
-            if (dialog.ShowDialog() == true)
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                tbxDatabase.Text = dialog.FileName;
+                string ftpaddr = td.Node.sIpAddress;
+                FileListBox.Items.Clear();
+                List<string> ftpfilelist = new List<string>();
+                ftpfilelist = CFtp.GetFileList(ftpaddr, Pwdbox.Password);
+                if (ftpfilelist.Count == 0)
+                {
+                    return;
+                }
+                ftpfilelist.ForEach(i => { FileListBox.Items.Add(i); });
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("文件列表显示异常!", "文件列表", MessageBoxButton.OK,
+        MessageBoxImage.Exclamation);
+
             }
         }
 
-        private void btnUpdateDatabase_Click(object sender, RoutedEventArgs e)
+        private void DLfile_Click(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_DATABASE_START);
-            Thread.Sleep(500);
-            int result = FtpHelper.UploadFtp(tbxFileName.Text, t.Node.sIpAddress, Define.FTP_NAME, Define.FTP_PASSWD);
-            Thread.Sleep(500);
+            try
+            {
+                SaveFileDialog dlg = new SaveFileDialog();
+               dlg.FileName = FileListBox.SelectedItem.ToString();  // Default file name
+               
+               // dlg.DefaultExt = ".db"; // Default file extension
+               // dlg.Filter = "程序(.aiton)|*.aiton|数据文件(.db)|*.db|其他类型文件(*.*)|*.*"; // Filter files by extension
+                dlg.Filter = "所有类型文件(*.*)|*.*"; // Filter files by extension
 
-            if (result == 0)
-            {
-                Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_DATABASE_FINISH);
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_success"]);
+                dlg.InitialDirectory = "C:\\";
+                DialogResult result = dlg.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+
+                    string filepath = dlg.FileName;
+                    string filename = FileListBox.SelectedItem.ToString();
+                    string ftpaddr = td.Node.sIpAddress;
+                    if (CFtp.DownLoadFile(filename, filepath, ftpaddr, Pwdbox.Password))
+                    {
+                        MessageBox.Show("成功下载文件:" + filepath, "下载", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("下载失败!", "下载", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
-            else if (result == -2)
+            catch (Exception ex)
             {
-                //升级失败后，不要发送完成指令
-                //Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.UPDATE_TSC_FINISH);
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_update_failed"]);
+                MessageBox.Show("下载操作异常!", "下载", MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void DelFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string filename = FileListBox.SelectedItem.ToString();
+                string ftpaddr = td.Node.sIpAddress;
+                if (MessageBox.Show("确定要删除该文件?","删除",MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    return;
+                if (CFtp.Delete(filename, ftpaddr, Pwdbox.Password))
+                {
+                    this.Button_Click(null, null);
+                    MessageBox.Show("删除" + filename + "成功！", "删除", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("删除" + filename + "失败！", "删除", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("删除操作异常!", "删除", MessageBoxButton.OK,
+                       MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void BackFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string filename = FileListBox.SelectedItem.ToString();
+                string ftpaddr = td.Node.sIpAddress;
+                if (filename.Equals("Gb.aiton"))
+                {
+                    Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_TSC_START);
+                    this.Button_Click(null, null);
+
+                }
+                else if(filename.Equals("GbAitonTsc.db"))
+                {
+                    Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_DATABASE_START);
+                    this.Button_Click(null, null);
+
+                }
+                else
+                {
+                    MessageBox.Show("非标准程序和数据文件,无法备份！", "备份", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+                MessageBox.Show("备份操作成！", "备份", MessageBoxButton.OK,
+                       MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("备份操作异常!", "备份", MessageBoxButton.OK,
+                       MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void UploadFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog uploadOpenFileDialog = new OpenFileDialog();
+                uploadOpenFileDialog.Filter = "程序,数据文件|*.aiton;*.db|所有类型文件|*.*";
+                string filename = "";
+                string ftpaddr = td.Node.sIpAddress;
+                if (uploadOpenFileDialog.ShowDialog() == DialogResult.OK)
+                {
+
+                    filename = uploadOpenFileDialog.FileName;
+                    if (!CFtp.UploadFile(filename, ftpaddr, Pwdbox.Password))
+                    {
+                        MessageBox.Show("上传" + filename + "失败！", "上传", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        this.Button_Click(null, null);
+                        MessageBox.Show("上传" + filename + "成功！", "上传", MessageBoxButton.OK,
+                       MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("上传操作异常！", "上传", MessageBoxButton.OK,
+                   MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void Recover_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string filename = FileListBox.SelectedItem.ToString();
+                string ftpaddr = td.Node.sIpAddress;
+                if (filename.Equals("Gb.aiton.bak"))
+                {
+                    Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_TSC_REVERSE);
+                    this.Button_Click(null, null);
+
+                }
+                else if (filename.Equals("GbAitonTsc.db.bak"))
+                {
+                    Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_DATABASE_REVERSE);
+                    this.Button_Click(null, null);
+
+                }
+                else
+                {
+                    MessageBox.Show("非标准程序和数据文件,无法恢复！", "恢复", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+                MessageBox.Show("恢复操作成,信号机重启......！", "恢复", MessageBoxButton.OK,
+                       MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("恢复操作异常!", "恢复", MessageBoxButton.OK,
+                       MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void FileListBox_ContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
+        {
+            if (FileListBox.SelectedItems.Count == 0x0)
+            {
+                FileListBox.ContextMenu.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                FileListBox.ContextMenu.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ReStart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                byte[] mybyte = new byte[5];
+                mybyte[0] = 0x81;
+                mybyte[1] = 0xf6;
+                mybyte[2] = 0x1;
+                mybyte[3] = 0x0;
+                mybyte[4] = 0x1;
+                bool bRstart = Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, mybyte);
+                if (!bRstart)
+                {
+                    MessageBox.Show("重启命令发送失败！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    Application.Current.Properties[Define.TSC_DATA] = null;
+                    Application.Current.Resources["tscinfo"] = "当前信号机IP地址:000.000.000.000      端口号:0000       版本:0000";
+                    MessageBox.Show("重启命令发送成功！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("系统重启命令发送异常！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
     }

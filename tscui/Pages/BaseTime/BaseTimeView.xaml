@@ -6,13 +6,10 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tscui.Pages.BaseTime"
-             xmlns:mask="clr-namespace:tscui.Pages.LoadingMask"
              xmlns:apexMVVM="clr-namespace:Apex.MVVM;assembly=Apex"
-             xmlns:apexCommands="clr-namespace:Apex.Commands;assembly=Apex"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
-             xmlns:apexConverters="clr-namespace:Apex.Converters;assembly=Apex"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="500" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
 
     <!-- The View creates its own ViewModel, so set the ViewModel 
@@ -21,25 +18,25 @@
         <local:BaseTimeViewModel x:Name="baseTimeViewModel" />
     </apexMVVM:View.ViewModel>
 
-    <apexControls:ApexGrid>
-        
-        <GroupBox Grid.Column="0" Header="{DynamicResource tsc_time_month}" Height="422" HorizontalAlignment="Left" Name="groupBox1" VerticalAlignment="Top" Width="442" Margin="248,10,0,0">
+    <apexControls:ApexGrid Margin="0,0,0,10">
+
+        <GroupBox Grid.Column="0" Header="{DynamicResource tsc_time_month}" Height="344" HorizontalAlignment="Left" Name="groupBox1" VerticalAlignment="Top" Width="501" Margin="189,10,0,0">
             <i:Interaction.Behaviors>
                 <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0" />
             </i:Interaction.Behaviors>
-            <Grid >
+            <Grid Margin="0,0,0,22" >
                 <CheckBox x:Name="cbxJanuary" Content="{DynamicResource tsc_time_jan}" HorizontalAlignment="Left" Margin="33,41,0,0" VerticalAlignment="Top" Unchecked="cbxJanuary_Unchecked" Checked="cbxJanuary_Checked"/>
-                <CheckBox x:Name="cbxFebruary" Content="{DynamicResource tsc_time_feb}" HorizontalAlignment="Left" Margin="117,41,0,0" VerticalAlignment="Top" Checked="cbxFebruary_Checked" Unchecked="cbxFebruary_Unchecked"/>
-                <CheckBox x:Name="cbxMarch" Content="{DynamicResource tsc_time_mar}" HorizontalAlignment="Left" Margin="202,41,0,0" VerticalAlignment="Top" Checked="cbxMarch_Checked" Unchecked="cbxMarch_Unchecked"/>
-                <CheckBox x:Name="cbxApril" Content="{DynamicResource tsc_time_apr}" HorizontalAlignment="Left" Margin="280,41,0,0" VerticalAlignment="Top" Checked="cbxApril_Checked" Unchecked="cbxApril_Unchecked"/>
-                <CheckBox x:Name="cbxMay" Content="{DynamicResource tsc_time_may}" HorizontalAlignment="Left" Margin="33,87,0,0" VerticalAlignment="Top" Checked="cbxMay_Checked" Unchecked="cbxMay_Unchecked"/>
-                <CheckBox x:Name="cbxJune" Content="{DynamicResource tsc_time_jun}" HorizontalAlignment="Left" Margin="117,87,0,0" VerticalAlignment="Top" Checked="cbxJune_Checked" Unchecked="cbxJune_Unchecked"/>
-                <CheckBox x:Name="cbxJuly" Content="{DynamicResource tsc_time_jul}" HorizontalAlignment="Left" Margin="202,87,0,0" VerticalAlignment="Top" Checked="cbxJuly_Checked" Unchecked="cbxJuly_Unchecked"/>
-                <CheckBox x:Name="cbxAugust" Content="{DynamicResource tsc_time_aug}" HorizontalAlignment="Left" Margin="280,87,0,0" VerticalAlignment="Top" Checked="cbxAugust_Checked" Unchecked="cbxAugust_Unchecked"/>
-                <CheckBox x:Name="cbxAllMonth" Content="{DynamicResource tsc_time_all}" HorizontalAlignment="Left" Margin="282,203,0,0" VerticalAlignment="Top" Checked="cbxAllMonth_Checked" Unchecked="cbxAllMonth_Unchecked"/>
-                <CheckBox x:Name="cbxSeptember" Content="{DynamicResource tsc_time_sep}" HorizontalAlignment="Left" Margin="33,134,0,0" VerticalAlignment="Top" Checked="cbxSeptember_Checked" Unchecked="cbxSeptember_Unchecked"/>
-                <CheckBox x:Name="cbxOctober" Content="{DynamicResource tsc_time_oct}" HorizontalAlignment="Left" Margin="117,134,0,0" VerticalAlignment="Top" Checked="cbxOctober_Checked" Unchecked="cbxOctober_Unchecked"/>
-                <CheckBox x:Name="cbxNovember" Content="{DynamicResource tsc_time_nov}" HorizontalAlignment="Left" Margin="202,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="cbxNovember_Checked" Unchecked="cbxNovember_Unchecked">
+                <CheckBox x:Name="cbxFebruary" Content="{DynamicResource tsc_time_feb}" HorizontalAlignment="Left" Margin="139,41,0,0" VerticalAlignment="Top" Checked="cbxFebruary_Checked" Unchecked="cbxFebruary_Unchecked"/>
+                <CheckBox x:Name="cbxMarch" Content="{DynamicResource tsc_time_mar}" HorizontalAlignment="Left" Margin="255,41,0,0" VerticalAlignment="Top" Checked="cbxMarch_Checked" Unchecked="cbxMarch_Unchecked"/>
+                <CheckBox x:Name="cbxApril" Content="{DynamicResource tsc_time_apr}" HorizontalAlignment="Left" Margin="374,41,0,0" VerticalAlignment="Top" Checked="cbxApril_Checked" Unchecked="cbxApril_Unchecked"/>
+                <CheckBox x:Name="cbxMay" Content="{DynamicResource tsc_time_may}" HorizontalAlignment="Left" Margin="33,109,0,0" VerticalAlignment="Top" Checked="cbxMay_Checked" Unchecked="cbxMay_Unchecked"/>
+                <CheckBox x:Name="cbxJune" Content="{DynamicResource tsc_time_jun}" HorizontalAlignment="Left" Margin="139,109,0,0" VerticalAlignment="Top" Checked="cbxJune_Checked" Unchecked="cbxJune_Unchecked"/>
+                <CheckBox x:Name="cbxJuly" Content="{DynamicResource tsc_time_jul}" HorizontalAlignment="Left" Margin="255,109,0,0" VerticalAlignment="Top" Checked="cbxJuly_Checked" Unchecked="cbxJuly_Unchecked"/>
+                <CheckBox x:Name="cbxAugust" Content="{DynamicResource tsc_time_aug}" HorizontalAlignment="Left" Margin="374,109,0,0" VerticalAlignment="Top" Checked="cbxAugust_Checked" Unchecked="cbxAugust_Unchecked"/>
+                <CheckBox x:Name="cbxAllMonth" Content="{DynamicResource tsc_time_all}" HorizontalAlignment="Left" Margin="33,236,0,0" VerticalAlignment="Top" Checked="cbxAllMonth_Checked" Unchecked="cbxAllMonth_Unchecked"/>
+                <CheckBox x:Name="cbxSeptember" Content="{DynamicResource tsc_time_sep}" HorizontalAlignment="Left" Margin="33,172,0,0" VerticalAlignment="Top" Checked="cbxSeptember_Checked" Unchecked="cbxSeptember_Unchecked"/>
+                <CheckBox x:Name="cbxOctober" Content="{DynamicResource tsc_time_oct}" HorizontalAlignment="Left" Margin="139,172,0,0" VerticalAlignment="Top" Checked="cbxOctober_Checked" Unchecked="cbxOctober_Unchecked"/>
+                <CheckBox x:Name="cbxNovember" Content="{DynamicResource tsc_time_nov}" HorizontalAlignment="Left" Margin="255,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="cbxNovember_Checked" Unchecked="cbxNovember_Unchecked">
                     <CheckBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -49,7 +46,7 @@
                         </TransformGroup>
                     </CheckBox.RenderTransform>
                 </CheckBox>
-                <CheckBox x:Name="cbxDecember" Content="{DynamicResource tsc_time_Dec}" HorizontalAlignment="Left" Margin="280,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="cbxDecember_Checked" Unchecked="cbxDecember_Unchecked">
+                <CheckBox x:Name="cbxDecember" Content="{DynamicResource tsc_time_Dec}" HorizontalAlignment="Left" Margin="374,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="cbxDecember_Checked" Unchecked="cbxDecember_Unchecked">
                     <CheckBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -60,18 +57,33 @@
                     </CheckBox.RenderTransform>
                 </CheckBox>
                 <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="145,264,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click" Visibility="Hidden"/>
-                <Button x:Name="btnSave" Content="{DynamicResource tsc_time_save}" HorizontalAlignment="Left" Margin="244,264,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_time_id}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="344" Width="214" Margin="10,10,0,0">
-            <Grid>
-                <ListBox x:Name="lbxPlanId" HorizontalAlignment="Left" Height="322" VerticalAlignment="Top" Width="202" MouseLeftButtonDown="lbxPlanId_MouseLeftButtonDown" SelectionChanged="lbxPlanId_SelectionChanged"/>
+        <GroupBox Header="{DynamicResource tsc_time_id}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="344" Width="174" Margin="10,10,0,0">
+            <Grid Margin="0,0,-2,14">
+                <ListBox x:Name="lbxPlanId" HorizontalAlignment="Left" Height="323" VerticalAlignment="Top" Width="158" MouseLeftButtonDown="lbxPlanId_MouseLeftButtonDown" SelectionChanged="lbxPlanId_SelectionChanged" Margin="0,0,0,-15"  BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"  >
+
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Name="cmi2" Header="删除" Click="Delete_Plan"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
             </Grid>
         </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_time_schedule}" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top" Height="78" Width="214">
-            <ComboBox x:Name="cbxScheduleId" HorizontalAlignment="Left" Margin="27,8,0,0" VerticalAlignment="Top" Width="150" Height="35" SelectionChanged="cbxScheduleId_SelectionChanged"/>
+        <GroupBox Header="{DynamicResource tsc_time_schedule}" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top" Height="50" Width="174">
+            <ComboBox x:Name="cbxScheduleId" HorizontalAlignment="Left" Margin="0,2,0,-1" VerticalAlignment="Top" Width="155" Height="27" SelectionChanged="cbxScheduleId_SelectionChanged"/>
         </GroupBox>
+        <Button x:Name="btnSave" Content="{DynamicResource tsc_SchedulePlan_save}" HorizontalAlignment="Left" Margin="10,425,0,0" VerticalAlignment="Top" Height="25" Width="75" Click="btnSave_Click" />
+        <TextBlock HorizontalAlignment="Left" Margin="189,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="101" Width="501" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+            <Run FontSize="14" Text="按月时基操作说明:"/><LineBreak/>
+            <Run Text="1. 时基编号列表框显示的是按月时基号，时基号范围31-40，优先级为③最低！"/><LineBreak/>
+            <Run Text="2. 添加新时基须在时基列表框空白处单击鼠标生成新时基号，然后选择右边的月参数。选中某条时基号后单击鼠标右键可删除选中时基。"/><LineBreak/>
+            <Run Foreground="Purple" Text="3. 如果时基编号框对应的时基编号的月份参数未选择任何月份则该时基号不能保存。"/><LineBreak/>
+            <Run Text="4. 修改完该页所有时基后点击一次保存即可。"/><LineBreak/>
+
+            <LineBreak/></TextBlock>
 
     </apexControls:ApexGrid>
 </UserControl>

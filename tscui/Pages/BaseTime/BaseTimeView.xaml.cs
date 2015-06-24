@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
 using Apex.MVVM;
 using Apex.Behaviours;
 using tscui.Models;
 using tscui.Service;
-using System.Threading;
 using System.Windows;
 
 namespace tscui.Pages.BaseTime
@@ -14,9 +12,11 @@ namespace tscui.Pages.BaseTime
     /// <summary>
     /// Interaction logic for BaseTimeView.xaml
     /// </summary>
-    [View(typeof(BaseTimeViewModel))]
-    public partial class BaseTimeView : UserControl,IView
+    [View(typeof (BaseTimeViewModel))]
+    public partial class BaseTimeView : UserControl, IView
     {
+        private TscData td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+
         public BaseTimeView()
         {
             InitializeComponent();
@@ -35,10 +35,9 @@ namespace tscui.Pages.BaseTime
 
         private void btnRead_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<Plan> lp = t.ListPlan;
-            foreach(Plan p in lp)
+
+            List<Plan> lp = td.ListPlan;
+            foreach (Plan p in lp)
             {
                 Console.WriteLine(p.usMonthFlag);
             }
@@ -46,145 +45,148 @@ namespace tscui.Pages.BaseTime
 
         private void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Message m = TscDataUtils.SetPlanByCalendar(t.ListPlan);
-            if (m.flag)
+            try
             {
-                MessageBox.Show(m.obj+"保存成功");
+                for (Byte planindex = 0; planindex < td.ListPlan.Count; planindex++)
+                {
+                    if (td.ListPlan[planindex].ucId >= 30)
+                    {
+                        if (td.ListPlan[planindex].usMonthFlag == 0x0)
+                        {
+                            for (Byte lbxplanidx = 0; lbxplanidx < lbxPlanId.Items.Count; lbxplanidx++)
+                            {
+                                if (td.ListPlan[planindex].ucId == Convert.ToByte(lbxPlanId.Items[lbxplanidx]))
+                                {
+                                    lbxPlanId.Items.RemoveAt(lbxplanidx);
+                                    break;
+                                }
+                            }
+                            td.ListPlan.RemoveAt(planindex);
+                            --planindex;
+                        }
+                    }
+                }
+                Message m = TscDataUtils.SetPlanByCalendar(td.ListPlan);
+                if (m.flag)
+                {
+                    MessageBox.Show("按月时基保存成功!", "时基", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show("按月时基保存失败!", "时基", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(m.obj + "保存失败");
+                MessageBox.Show("保存月时基异常!", "时基", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
         }
-        TscData t;
+
         private void initMonth(ushort month)
         {
-            //ushort month = p.usMonthFlag;
+            cbxAllMonth_Unchecked(this, null);
             for (int i = 1; i <= 12; i++)
             {
                 if (((month >> i) & 0x01) == 0x01)
                 {
-                    if(i ==1)
-                    {
-                        cbxJanuary.IsChecked = true;
-                    }
-                    if (i ==2)
-                    {
-                        cbxFebruary.IsChecked = true;
-                    }
-                    if(i == 3)
-                    {
-                        cbxMarch.IsChecked = true;
-                    }
-                    if(i ==4)
-                    {
-                        cbxApril.IsChecked = true;
-                    }
-                    if(i ==5 )
-                    {
-                        cbxMay.IsChecked = true;
-                    }
-                    if(i==6)
-                    {
-                        cbxJune.IsChecked = true;
-                    }
-                    if(i==7)
-                    {
-                        cbxJuly.IsChecked = true;
-                    }
-                    if(i ==8)
-                    {
-                        cbxAugust.IsChecked = true;
-                    }
-                    if(i == 9)
-                    {
-                        cbxSeptember.IsChecked = true;
-                    }
-                    if(i==10)
-                    {
-                        cbxOctober.IsChecked = true;
-                    }
-                    if(i==11)
-                    {
-                        cbxNovember.IsChecked = true;
-                    }
-                    if(i==12)
-                    {
-                        cbxDecember.IsChecked = true;
-                    }
-                }
-                else
-                {
                     if (i == 1)
                     {
-                        cbxJanuary.IsChecked = false;
+                        cbxJanuary.IsChecked = true;
+                        continue;
                     }
                     if (i == 2)
                     {
-                        cbxFebruary.IsChecked = false;
+                        cbxFebruary.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 3)
                     {
-                        cbxMarch.IsChecked = false;
+                        cbxMarch.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 4)
                     {
-                        cbxApril.IsChecked = false;
+                        cbxApril.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 5)
                     {
-                        cbxMay.IsChecked = false;
+                        cbxMay.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 6)
                     {
-                        cbxJune.IsChecked = false;
+                        cbxJune.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 7)
                     {
-                        cbxJuly.IsChecked = false;
+                        cbxJuly.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 8)
                     {
-                        cbxAugust.IsChecked = false;
+                        cbxAugust.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 9)
                     {
-                        cbxSeptember.IsChecked = false;
+                        cbxSeptember.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 10)
                     {
-                        cbxOctober.IsChecked = false;
+                        cbxOctober.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 11)
                     {
-                        cbxNovember.IsChecked = false;
+                        cbxNovember.IsChecked = true;
+                        continue;
+
                     }
                     if (i == 12)
                     {
-                        cbxDecember.IsChecked = false;
+                        cbxDecember.IsChecked = true;
+                        continue;
+
                     }
                 }
+              
             }
         }
+
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
-               
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-
-                if(t == null)
+                if (td == null)
                 {
+                    this.Visibility = Visibility.Hidden;
                     return;
                 }
-                List<Plan> lp = t.ListPlan;
-                List<Schedule> ls = t.ListSchedule;
+                else
+                {
+                    this.Visibility = Visibility.Visible;
+                }
+                List<Plan> lp = td.ListPlan;
+                List<Schedule> ls = td.ListSchedule;
                 List<byte> lb = new List<byte>();
                 foreach (Schedule s in ls)
                 {
-                    if (!lb.Contains(s.ucId) && s.ucEventId != 0)
+                    if (!lb.Contains(s.ucId) && s.ucEventId != 0 && s.ucEventId != 0)
                     {
                         lb.Add(s.ucId);
                     }
@@ -195,56 +197,59 @@ namespace tscui.Pages.BaseTime
                     if (p.ucId >= 31 && p.ucId <= 40)
                     {
                         lbxPlanId.Items.Add(p.ucId);
-                        cbxScheduleId.SelectedItem = p.ucScheduleId;
-                        initMonth(p.usMonthFlag);
-                        break;
+                       // cbxScheduleId.SelectedItem = p.ucScheduleId;
+                      //  initMonth(p.usMonthFlag);
+                        if (lbxPlanId.SelectedIndex != 0x0)
+                             lbxPlanId.SelectedIndex = 0x0;
+                       // break;
                     }
                 }
-                
+             
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("加载月时基界面异常!", "时基", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
-            
+
         }
 
         private void lbxPlanId_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (t == null)
-                return;
-            List<Plan> lp = t.ListPlan;
+
+            List<Plan> lp = td.ListPlan;
             Plan pt = new Plan();
-            foreach(Plan p in lp)
+            foreach (Plan p in lp)
             {
-                    for(byte i=31; i<=40;i++)
-                    {
-                        if (!lbxPlanId.Items.Contains(i) && !(p.ucId == i))
-                        {
-                            
-                             pt.ucId = i;
-                             pt.ucScheduleId = Convert.ToByte(cbxScheduleId.SelectedItem);
-                             pt.ucWeekFlag = 254;
-                             pt.ulDayFlag = 4294967294;
-                             pt.usMonthFlag = 0;
-                             break;
-                         }
-                    }
-                    break;
-            }
-             if(pt.ucId >=31 && pt.ucId <= 40)
+                for (byte i = 31; i <= 40; i++)
                 {
-                    lbxPlanId.Items.Add(pt.ucId);
-                    lp.Add(pt);
+                    if (!lbxPlanId.Items.Contains(i) && !(p.ucId == i))
+                    {
+
+                        pt.ucId = i;
+                        pt.ucScheduleId = Convert.ToByte(cbxScheduleId.SelectedItem);
+                        pt.ucWeekFlag = 254;
+                        pt.ulDayFlag = 4294967294;
+                        pt.usMonthFlag = 0;
+                        break;
+                    }
                 }
+                break;
+            }
+            if (pt.ucId >= 31 && pt.ucId <= 40)
+            {
+                lbxPlanId.Items.Add(pt.ucId);
+                lp.Add(pt);
+            }
         }
 
         private void lbxPlanId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            byte id = Convert.ToByte(lbxPlanId.SelectedItem);
-            if (t == null)
+
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            byte id = Convert.ToByte(lbxPlanId.SelectedItem);
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == id)
@@ -252,381 +257,403 @@ namespace tscui.Pages.BaseTime
                     cbxScheduleId.SelectedItem = p.ucScheduleId;
                     ushort month = p.usMonthFlag;
                     initMonth(month);
-                    //Allday.IsChecked = false;
+                    break;
                 }
             }
         }
 
         private void cbxScheduleId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
                     p.ucScheduleId = Convert.ToByte(cbxScheduleId.SelectedItem);
+                    break;
                 }
             }
         }
 
         private void cbxJanuary_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8188);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8188);
+                    break;
                 }
             }
         }
 
         private void cbxJanuary_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
-
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 0x02);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 0x02);
+                    break;
                 }
             }
         }
 
         private void cbxFebruary_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 0x04);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 0x04);
+                    break;
                 }
             }
         }
 
         private void cbxMarch_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 0x08);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 0x08);
+                    break;
                 }
             }
         }
 
         private void cbxApril_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 0x10);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 0x10);
+                    break;
                 }
             }
         }
 
         private void cbxMay_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 32);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 32);
+                    break;
                 }
             }
         }
 
         private void cbxJune_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 64);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 64);
+                    break;
                 }
             }
         }
 
         private void cbxJuly_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 128);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 128);
+                    break;
                 }
             }
         }
 
         private void cbxAugust_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 256);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 256);
+                    break;
                 }
             }
         }
 
         private void cbxSeptember_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 512);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 512);
+                    break;
                 }
             }
         }
 
         private void cbxOctober_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
-
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 1024);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 1024);
+                    break;
                 }
             }
         }
 
         private void cbxNovember_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
-
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 2048);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 2048);
+                    break;
                 }
             }
         }
 
         private void cbxDecember_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag | 4096);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag | 4096);
+                    break;
                 }
             }
         }
 
         private void cbxFebruary_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8186);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8186);
+                    break;
                 }
             }
         }
 
         private void cbxMarch_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8182);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8182);
+                    break;
                 }
             }
         }
 
         private void cbxApril_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8174);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8174);
+                    break;
                 }
             }
         }
 
         private void cbxMay_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8158);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8158);
+                    break;
                 }
             }
         }
 
         private void cbxJune_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8126);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8126);
+                    break;
                 }
             }
         }
 
         private void cbxJuly_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 8062);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 8062);
+                    break;
                 }
             }
         }
 
         private void cbxAugust_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 7934);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 7934);
+                    break;
                 }
             }
         }
 
         private void cbxSeptember_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 7678);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 7678);
+                    break;
                 }
             }
         }
 
         private void cbxOctober_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 7166);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 7166);
+                    break;
                 }
             }
         }
 
         private void cbxNovember_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 6142);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 6142);
+                    break;
                 }
             }
         }
 
         private void cbxDecember_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (t == null)
+            if (td == null)
                 return;
-            List<Plan> lp = t.ListPlan;
+            List<Plan> lp = td.ListPlan;
             foreach (Plan p in lp)
             {
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
 
-                    p.usMonthFlag = (ushort)(p.usMonthFlag & 4094);
+                    p.usMonthFlag = (ushort) (p.usMonthFlag & 4094);
+                    break;
                 }
             }
         }
@@ -662,29 +689,42 @@ namespace tscui.Pages.BaseTime
             cbxNovember.IsChecked = false;
             cbxDecember.IsChecked = false;
         }
-        private void savePlanByClaendar(object state)
+
+
+
+      
+
+        private void Delete_Plan(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (t == null)
+                if (Convert.ToByte(lbxPlanId.SelectedItem) == 0x0)
                     return;
-                TscDataUtils.SetPlanByCalendar(t.ListPlan);
+                if (
+                    MessageBox.Show("确定要删除时基:" + Convert.ToByte(lbxPlanId.SelectedItem).ToString() + "?", "删除",
+                        MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    for (Byte planindex = 0; planindex < td.ListPlan.Count; planindex++)
+                    {
+                        if (td.ListPlan[planindex].ucId >= 30)
+                        {
+                            if (td.ListPlan[planindex].ucId == (Convert.ToByte(lbxPlanId.SelectedItem)))
+                            {
+                                td.ListPlan.RemoveAt(planindex);
+                                break;
+                            }
+                        }
+                    }
+                    lbxPlanId.Items.Remove(lbxPlanId.SelectedItem);
+
+                }
             }
+
             catch (Exception ex)
             {
-                MessageBox.Show("BaseTime: " + ex.ToString());
+                MessageBox.Show("删除月时基异常!", "时基", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
-        }
-        private void UserControl_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            try
-            {
-                ThreadPool.QueueUserWorkItem(savePlanByClaendar);
-            }catch(Exception ex)
-            {
-                MessageBox.Show("BaseTime: " + ex.ToString());
-            }
-            
         }
     }
 }

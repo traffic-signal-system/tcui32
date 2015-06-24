@@ -11,7 +11,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:apexConverters="clr-namespace:Apex.Converters;assembly=Apex"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="600" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="500" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded" Width="805">
     <apexMVVM:View.ViewModel>
         <local:ApexViewModel x:Name="viewModel" />
     </apexMVVM:View.ViewModel>
@@ -23,7 +23,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Style="{StaticResource Heading1Style}"
-            FontWeight="Normal">
+            FontWeight="Normal" Margin="0,0,0,449">
             <i:Interaction.Behaviors>
                 <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0" />
             </i:Interaction.Behaviors>
@@ -32,9 +32,31 @@
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{DynamicResource tsc_check}" VerticalAlignment="Top"/>
                 </Span>
             </TextBlock>
-            <StackPanel Height="438" HorizontalAlignment="Left" Margin="6,48,0,0" Name="tscPanel" VerticalAlignment="Top" Width="508" />
-            <Button Content="{DynamicResource tsc_flush}" Height="23" HorizontalAlignment="Left" Margin="417,16,0,0" Name="button1" VerticalAlignment="Top" Width="97" Click="button1_Click" />
-            
+            <Button Content="{DynamicResource tsc_flush}" Height="23" HorizontalAlignment="Center" Margin="130,15,10,0" Name="button1" VerticalAlignment="Top" Width="97" Click="button1_Click" />
+
+            <StackPanel Height="438" HorizontalAlignment="Left" Margin="6,48,0,0" Name="tscPanel" VerticalAlignment="Top" Width="508" >
+                <ListView x:Name="TscInfoList" AlternationCount="2" Height="430" SelectionChanged="myListView_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Background" Value="LightBlue"/>
+                            <Style.Triggers>
+                                <Trigger Property="ListView.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="80"  Header="{DynamicResource tsc_apex_id}"  DisplayMemberBinding="{Binding Id, Mode=OneWay}"/>
+                            <GridViewColumn Width="80"  Header="{DynamicResource tsc_apex_name}"  DisplayMemberBinding="{Binding Name, Mode=OneWay}"/>
+                            <GridViewColumn Width="250" Header="{DynamicResource tsc_apex_ip}"  DisplayMemberBinding="{Binding Ip, Mode=OneWay}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </StackPanel>
+
         </apexControls:ApexGrid>
     </ScrollViewer>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Apex.Controls;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ namespace tscui
         {
            // WindowState = System.Windows.WindowState.Maximized;
             InitializeComponent();
+           tb.SetResourceReference(TextBlock.TextProperty,"tscinfo");
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -24,17 +26,17 @@ namespace tscui
 
         private void maximizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = System.Windows.WindowState.Maximized;
+           // WindowState = System.Windows.WindowState.Maximized;
         }
 
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = System.Windows.WindowState.Normal;
+            WindowState = WindowState.Normal;
         }
 
         private void minimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = System.Windows.WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void borderWindowTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -121,7 +123,7 @@ namespace tscui
 
         private void zuneShell_Closed(object sender, EventArgs e)
         {
-            Console.WriteLine("zuneShell_Closed");
+           // Console.WriteLine("zuneShell_Closed");
         }
 
         private void zuneShell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -131,9 +133,11 @@ namespace tscui
             current.Kill();
         }
 
-        private void zuneShell_Activated(object sender, EventArgs e)
+
+
+        private void zuneShell_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            
+            tscstatus.Width = this.Width;
         }
       
     }

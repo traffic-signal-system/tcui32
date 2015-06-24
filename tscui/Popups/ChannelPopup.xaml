@@ -43,24 +43,8 @@
                     <Button x:Name="button_OK" Width="80" Height="28" Margin="0,0,12,0" Content="OK" />
                     <Button x:Name="button_Cancel" Width="80" Height="28" Content="CANCEL" />
                 </StackPanel>
-                <GroupBox Header="通道选择" Height="344" HorizontalAlignment="Left" Margin="2,44,0,0" Name="groupBox1" VerticalAlignment="Top" Width="167">
-                    <Grid Width="149">
-                        <StackPanel Height="321" HorizontalAlignment="Left" Margin="75,1,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="70">
-                            <RadioButton GroupName="channel" Content="C14" Name="rbnChannel14" FontSize="18" />
-                            <RadioButton GroupName="channel" Content="C15" Name="rbnChannel15" FontSize="18" />
-                            <RadioButton GroupName="channel" Content="C16" Name="rbnChannel16" FontSize="18" />
-                            <RadioButton Content="C17" FontSize="18" GroupName="channel" Name="rbnChannel17" />
-                            <RadioButton Content="C18" FontSize="18" GroupName="channel" Name="rbnChannel18" />
-                            <RadioButton Content="C19" FontSize="18" GroupName="channel" Name="rbnChannel19" />
-                            <RadioButton Content="C20" FontSize="18" GroupName="channel" Name="rbnChannel20" />
-                            <RadioButton Content="C21" FontSize="18" GroupName="channel" Name="rbnChannel21" />
-                            <RadioButton Content="C22" FontSize="18" GroupName="channel" Name="rbnChannel22" />
-                            <RadioButton Content="C23" FontSize="18" GroupName="channel" Name="rbnChannel23" />
-                            <RadioButton Content="C24" FontSize="18" GroupName="channel" Name="rbnChannel24" />
-                        </StackPanel>
-                    </Grid>
-                </GroupBox>
-                <GroupBox Header="通道属性" Height="344" HorizontalAlignment="Left" Margin="170,44,0,0" Name="groupBox2" VerticalAlignment="Top" Width="442">
+                <GroupBox Header="通道选择" Height="378" HorizontalAlignment="Left" Margin="2,44,0,0" Name="groupBox1" VerticalAlignment="Top" Width="167"/>
+                <GroupBox Header="通道属性" Height="344" HorizontalAlignment="Left" Margin="340,38,-164,0" Name="groupBox2" VerticalAlignment="Top" Width="442">
                     <Grid>
                         <StackPanel Height="224" HorizontalAlignment="Left" Margin="10,10,0,0" Name="stackPanel3" VerticalAlignment="Top" Width="200">
                             <StackPanel Height="29" Name="stackPanel4" Orientation="Horizontal" Width="200">
@@ -100,13 +84,26 @@
                     <RadioButton GroupName="channel" Content="C8" Name="rbnChannel8" FontSize="18" />
                     <RadioButton GroupName="channel" Content="C9" Name="rbnChannel9" FontSize="18" />
                     <RadioButton GroupName="channel" Content="C10" Name="rbnChannel10" FontSize="18" />
+                    <RadioButton GroupName="channel" Content="C12" x:Name="rbnChannel12" FontSize="18" RenderTransformOrigin="1.596,-1.464" />
                     <RadioButton GroupName="channel" Content="C11" Name="rbnChannel11" FontSize="18" />
-                    <RadioButton GroupName="channel" Content="C12" Name="rbnChannel12" FontSize="18" />
-                    <RadioButton GroupName="channel" Content="C13" Name="rbnChannel13" FontSize="18" />
                 </StackPanel>
+                <RadioButton GroupName="channel" Content="C13" x:Name="rbnChannel13" FontSize="18" Margin="174,393,322,-23" />
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,379" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,304" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,304" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,304" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,346" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,266" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,233" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,195" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,162" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,124" Fill="#FF2E570D" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,86" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,48" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
+                <Ellipse HorizontalAlignment="Left" Height="33" Stroke="Black" VerticalAlignment="Bottom" Width="31" Margin="240,0,0,10" Fill="#FF7AEE1A" RenderTransformOrigin="1.007,1.267"/>
             </apexControls:ApexGrid>
-            
+
         </Border>
-        
+
     </Grid>
 </UserControl>

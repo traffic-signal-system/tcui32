@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Apex.MVVM;
 using Apex.Behaviours;
 using System.Windows;
@@ -21,29 +23,35 @@ namespace tscui.Pages.Stage
         public delegate void InitStageItemToLSI();
         public delegate void DelegateInitcbxCoordination();
         public delegate void DelegateInitStageNumber();
-        TscData t;
+
+        public byte CopyedstageId;
+        TscData td;
         private void initStageItemList()
         {
-            lsi.Add(stage1);
-            lsi.Add(stage2);
-            lsi.Add(stage3);
-            lsi.Add(stage4);
-            lsi.Add(stage5);
-            lsi.Add(stage6);
-            lsi.Add(stage7);
-            lsi.Add(stage8);
-            lsi.Add(stage9);
-            lsi.Add(stage10);
-            lsi.Add(stage11);
-            lsi.Add(stage12);
-            lsi.Add(stage13);
-            lsi.Add(stage14);
-            lsi.Add(stage15);
-            lsi.Add(stage16);
+                lsi.Add(stage1);
+                lsi.Add(stage2);
+                lsi.Add(stage3);
+                lsi.Add(stage4);
+                lsi.Add(stage5);
+                lsi.Add(stage6);
+                lsi.Add(stage7);
+                lsi.Add(stage8);
+                lsi.Add(stage9);
+                lsi.Add(stage10);
+                lsi.Add(stage11);
+                lsi.Add(stage12);
+                lsi.Add(stage13);
+                lsi.Add(stage14);
+                lsi.Add(stage15);
+                lsi.Add(stage16);
+            
+                return;
+          
         }
         public static StageItem currentStage ;
         public StageView()
         {
+            td=  Utils.Utils.GetTscDataByApplicationCurrentProperties();
             InitializeComponent();
             this.Stageviewcanvas.AddHandler(Image.MouseLeftButtonDownEvent, new RoutedEventHandler(StageImageMouseLeftButton_Down));
             this.Stageviewcanvas.AddHandler(Image.MouseRightButtonDownEvent, new RoutedEventHandler(StageImageMouseRightButton_Down));
@@ -55,18 +63,16 @@ namespace tscui.Pages.Stage
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
+                
                 if (e.OriginalSource != null)
                 {
                     Image ClickImage = e.OriginalSource as Image;
-                    if (ClickImage != null)
+                    if (ClickImage != null )
                     {
                         if (currentStage != null)
                         {
-                            List<StagePattern> lsp = t.ListStagePattern;
-                            List<PhaseToDirec> lptd = t.ListPhaseToDirec;
+                            List<StagePattern> lsp = td.ListStagePattern;
+                            List<PhaseToDirec> lptd = td.ListPhaseToDirec;
                             Byte DirecNumber = 0xff;
                             string DirecName = ClickImage.Name;
 
@@ -95,6 +101,11 @@ namespace tscui.Pages.Stage
                                     northPedestrain1.Source = imageredlight1;
                                     DirecNumber = Define.NORTH_PEDESTRAIN_ONE;
                                     break;
+                                case "northPedestrain2":
+                                    currentStage.northPedestrain2.Source = imageredlight1;
+                                    northPedestrain2.Source = imageredlight1;
+                                    DirecNumber = Define.NORTH_PEDESTRAIN_TWO;
+                                    break;
                                 case "northTurn":
                                     currentStage.northTurn.Source = imageredlight;
                                     northTurn.Source = imageredlight;
@@ -110,7 +121,7 @@ namespace tscui.Pages.Stage
                                 case "WestNorthOther":
                                     currentStage.westNorthOther.Source = imageredlight;
                                     WestNorthOther.Source = imageredlight;
-                                    DirecNumber = Define.WEST_NORTH_OTHER;
+                                    DirecNumber = Define.NORTH_LEFT_STRAIGHT_RIGHT;
                                     break;
 
                                 case "eastLeft":
@@ -129,9 +140,14 @@ namespace tscui.Pages.Stage
                                     DirecNumber = Define.EAST_RIGHT;
                                     break;
                                 case "eastPedestrain1":
-                                    currentStage.eastPedestrain1.Source = imageredlight1;
+                                    currentStage.eastPedestrain1.Source = imageredlight;
                                     eastPedestrain1.Source = imageredlight;
                                     DirecNumber = Define.EAST_PEDESTRAIN_ONE;
+                                    break;
+                                case "eastPedestrain2":
+                                    currentStage.eastPedestrain2.Source = imageredlight;
+                                    eastPedestrain2.Source = imageredlight;
+                                    DirecNumber = Define.EAST_PEDESTRAIN_TWO;
                                     break;
                                 case "eastTurn":
                                     currentStage.eastTurn.Source = imageredlight1;
@@ -146,7 +162,7 @@ namespace tscui.Pages.Stage
                                 case "eastNorthOther":
                                     currentStage.eastNorthOther.Source = imageredlight1;
                                     eastNorthOther.Source = imageredlight1;
-                                    DirecNumber = Define.EAST_NORTH_OTHER;
+                                    DirecNumber = Define.EAST_LEFT_STRAIGHT_RIGHT;
                                     break;
                                 //南
                                 case "southLeft":
@@ -169,6 +185,11 @@ namespace tscui.Pages.Stage
                                     southPedestrain1.Source = imageredlight1;
                                     DirecNumber = Define.SOUTH_PEDESTRAIN_ONE;
                                     break;
+                                case "southPedestrain2":
+                                    currentStage.southPedestrain2.Source = imageredlight1;
+                                    southPedestrain2.Source = imageredlight1;
+                                    DirecNumber = Define.SOUTH_PEDESTRAIN_TWO;
+                                    break;
                                 case "southTurn":
                                     currentStage.southTurn.Source = imageredlight;
                                     southTurn.Source = imageredlight;
@@ -185,7 +206,7 @@ namespace tscui.Pages.Stage
                                 case "eastSouthOther":
                                     currentStage.eastSouthOther.Source = imageredlight;
                                     eastSouthOther.Source = imageredlight;
-                                    DirecNumber = Define.EAST_SOUTH_OTHER;
+                                    DirecNumber = Define.SOUTH_LEFT_STRAIGHT_RIGHT;
                                     break;
                                 //西
                                 case "westLeft":
@@ -208,6 +229,11 @@ namespace tscui.Pages.Stage
                                     westPedestrain1.Source = imageredlight;
                                     DirecNumber = Define.WEST_PEDESTRAIN_ONE;
                                     break;
+                                case "westPedestrain2":
+                                    currentStage.westPedestrain2.Source = imageredlight;
+                                    westPedestrain2.Source = imageredlight;
+                                    DirecNumber = Define.WEST_PEDESTRAIN_TWO;
+                                    break;
                                 case "westTurn":
                                     currentStage.westTurn.Source = imageredlight1;
                                     westTurn.Source = imageredlight1;
@@ -221,7 +247,7 @@ namespace tscui.Pages.Stage
                                 case "westSouthOther":
                                     currentStage.westSouthOther.Source = imageredlight1;
                                     westSouthOther.Source = imageredlight1;
-                                    DirecNumber = Define.WEST_SOUTH_OTHER;
+                                    DirecNumber = Define.WEST_LEFT_STRAIGHT_RIGHT;
                                     break;
                                 default:
                                     return;
@@ -229,7 +255,7 @@ namespace tscui.Pages.Stage
                             }
                             foreach (StagePattern sp in lsp)
                             {
-                                if (sp.ucStagePatternId == sldStagePatternId.Value)
+                                if (sp.ucStagePatternId == ((byte)sldStagePatternId.Value))
                                 {
                                     if (Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
                                     {
@@ -248,14 +274,16 @@ namespace tscui.Pages.Stage
                         }
                         else
                         {
-                            MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_stage_selected_stage"]);
+                            MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_stage_selected_stage"], "阶段配时", MessageBoxButton.OK, MessageBoxImage.Information);
+
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("取消方向相位放行异常!");
+                MessageBox.Show("取消方向相位放行异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
         }
 
@@ -263,9 +291,7 @@ namespace tscui.Pages.Stage
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
+                
                 if (e.OriginalSource != null)
                 {
                     Image ClickImage = e.OriginalSource as Image;
@@ -273,9 +299,9 @@ namespace tscui.Pages.Stage
                     {
                         if (currentStage != null)
                          {
-                             List<PhaseToDirec> lptd = t.ListPhaseToDirec;
-                             List<Pattern> lp = t.ListPattern;
-                             List<StagePattern> lsp = t.ListStagePattern;
+                             List<PhaseToDirec> lptd = td.ListPhaseToDirec;
+                             List<Pattern> lp = td.ListPattern;
+                             List<StagePattern> lsp = td.ListStagePattern;
                              Byte DirecNumber = 0xff;
                              string DirecName = ClickImage.Name;
                              BitmapImage imaggreenlight = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
@@ -302,6 +328,11 @@ namespace tscui.Pages.Stage
                                      northPedestrain1.Source = imagegreenlight1;
                                      DirecNumber = Define.NORTH_PEDESTRAIN_ONE;
                                      break;
+                                 case "northPedestrain2":
+                                     currentStage.northPedestrain2.Source = imagegreenlight1;
+                                     northPedestrain2.Source = imagegreenlight1;
+                                     DirecNumber = Define.NORTH_PEDESTRAIN_TWO;
+                                     break;
                                  case "northTurn":
                                      currentStage.northTurn.Source = imaggreenlight;
                                      northTurn.Source = imaggreenlight;
@@ -315,7 +346,7 @@ namespace tscui.Pages.Stage
                                  case "WestNorthOther":
                                      currentStage.westNorthOther.Source = imaggreenlight;
                                      WestNorthOther.Source = imaggreenlight;
-                                     DirecNumber = Define.WEST_NORTH_OTHER;
+                                     DirecNumber = Define.NORTH_LEFT_STRAIGHT_RIGHT;
                                      break;
 
                                  case "eastLeft":
@@ -338,6 +369,11 @@ namespace tscui.Pages.Stage
                                      eastPedestrain1.Source = imaggreenlight;
                                      DirecNumber = Define.EAST_PEDESTRAIN_ONE;
                                      break;
+                                 case "eastPedestrain2":
+                                     currentStage.eastPedestrain2.Source = imaggreenlight;
+                                     eastPedestrain2.Source = imaggreenlight;
+                                     DirecNumber = Define.EAST_PEDESTRAIN_TWO;
+                                     break;
                                  case "eastTurn":
                                      currentStage.eastTurn.Source = imagegreenlight1;
                                      eastTurn.Source = imagegreenlight1;
@@ -351,7 +387,7 @@ namespace tscui.Pages.Stage
                                  case "eastNorthOther":
                                      currentStage.eastNorthOther.Source = imagegreenlight1;
                                      eastNorthOther.Source = imagegreenlight1;
-                                     DirecNumber = Define.EAST_NORTH_OTHER;
+                                     DirecNumber = Define.EAST_LEFT_STRAIGHT_RIGHT;
                                      break;
                                  //南
                                  case "southLeft":
@@ -374,6 +410,11 @@ namespace tscui.Pages.Stage
                                      southPedestrain1.Source = imagegreenlight1;
                                      DirecNumber = Define.SOUTH_PEDESTRAIN_ONE;
                                      break;
+                                 case "southPedestrain2":
+                                     currentStage.southPedestrain2.Source = imagegreenlight1;
+                                     southPedestrain2.Source = imagegreenlight1;
+                                     DirecNumber = Define.SOUTH_PEDESTRAIN_TWO;
+                                     break;
                                  case "southTurn":
                                      currentStage.southTurn.Source = imaggreenlight;
                                      southTurn.Source = imaggreenlight;
@@ -390,7 +431,7 @@ namespace tscui.Pages.Stage
                                  case "eastSouthOther":
                                      currentStage.eastSouthOther.Source = imaggreenlight;
                                      eastSouthOther.Source = imaggreenlight;
-                                     DirecNumber = Define.EAST_SOUTH_OTHER;
+                                     DirecNumber = Define.SOUTH_LEFT_STRAIGHT_RIGHT;
                                      break;
                                  //西
                                  case "westLeft":
@@ -413,6 +454,11 @@ namespace tscui.Pages.Stage
                                      westPedestrain1.Source = imaggreenlight;
                                      DirecNumber = Define.WEST_PEDESTRAIN_ONE;
                                      break;
+                                 case "westPedestrain2":
+                                     currentStage.westPedestrain2.Source = imaggreenlight;
+                                     westPedestrain2.Source = imaggreenlight;
+                                     DirecNumber = Define.WEST_PEDESTRAIN_TWO;
+                                     break;
                                  case "westTurn":
                                      currentStage.westTurn.Source = imagegreenlight1;
                                      westTurn.Source = imagegreenlight1;
@@ -426,7 +472,7 @@ namespace tscui.Pages.Stage
                                  case "westSouthOther":
                                      currentStage.westSouthOther.Source = imagegreenlight1;
                                      westSouthOther.Source = imagegreenlight1;
-                                     DirecNumber = Define.WEST_SOUTH_OTHER;
+                                     DirecNumber = Define.WEST_LEFT_STRAIGHT_RIGHT;
                                      break;
                                  default:
                                      return;
@@ -447,7 +493,8 @@ namespace tscui.Pages.Stage
                         }
                     else
                     {
-                       MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_stage_selected_stage"]);
+                       MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_stage_selected_stage"], "阶段配时", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                   }
                     e.Handled = true;
@@ -455,7 +502,8 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("选择方向相位放行异常!");
+                MessageBox.Show("选择方向相位放行异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
         }
         
@@ -471,10 +519,9 @@ namespace tscui.Pages.Stage
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
+            td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (td == null)
             {
-                MessageBox.Show("请选择一信号机后，再切换到此界面！");
                 this.Visibility = Visibility.Hidden;
                 return;
             }
@@ -485,14 +532,14 @@ namespace tscui.Pages.Stage
             DispatcherInitStageItem();
             DispatcherInitCoordination();
             //初始化所有数据到界面上
-            initStageAttriable(t);
+         //   initStageAttriable(t);
           
            
 
         }
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-
+            lsi.Clear();
         }
         public void BigMap4SmallMap(StageItem si)
         {
@@ -540,7 +587,8 @@ namespace tscui.Pages.Stage
             catch (Exception ex)
             {
 
-                MessageBox.Show("右边小图转左边大图异常!");
+                MessageBox.Show("右边小图转左边大图异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
 
         }
@@ -563,8 +611,6 @@ namespace tscui.Pages.Stage
             try
             {
                 TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
                 List<Pattern> lp = t.ListPattern;
                 if (t.ListStagePattern.Count == 0)
                 {
@@ -587,7 +633,7 @@ namespace tscui.Pages.Stage
                         if (p.ucStagePatternId == (byte)(sldStagePatternId.Value))
                         {
                             tbxCycle.Text = p.ucCycleTime.ToString();
-                            tbxOffset.Text = p.ucOffset.ToString();
+                            tbxOffset.Value = p.ucOffset;
                             cbxCoordination.SelectedItem = p.ucCoorPhase;
                             cbxReaction.IsChecked = false;
                         }
@@ -610,7 +656,7 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
-                MessageBox.Show("获取阶段" +currentStage.lblNumber +"信息异常!");
+                MessageBox.Show("获取阶段" + currentStage.lblNumber + "信息异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
             }
 
@@ -656,37 +702,21 @@ namespace tscui.Pages.Stage
         }
         private void setPatternAndStagePattern(List<Pattern> lp ,List<StagePattern> lsp , StageItem currentStage,PhaseToDirec ptd)
         {
-            //半断是新增加stage还是，老的更新用的
+            //判断是新增加stage还是，老的更新用的
             Pattern ptemp= null;
-           // List<Pattern> lptemp = new List<Pattern>();
             bool newPattern = false;
             bool oldPattern = false;
             foreach(Pattern p in lp)
             {
-               
-                if (sldSchemeId.Value == p.ucPatternId )
+                if ((byte)(sldSchemeId.Value) == p.ucPatternId )
                 {
                     p.ucCoorPhase = Convert.ToByte(cbxCoordination.SelectedItem);
                     p.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-                    p.ucOffset = Convert.ToByte(tbxOffset.Text);
+                    p.ucOffset = Convert.ToByte(tbxOffset.Value);
                     p.ucPatternId = Convert.ToByte(sldSchemeId.Value);
                     p.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
                     oldPattern = true;
-                    //if (sldStagePatternId.Value == p.ucStagePatternId)
-                    //{
-                    //    p.ucCoorPhase = Convert.ToByte(cbxCoordination.SelectedItem);
-                    //    p.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-                    //    p.ucOffset = Convert.ToByte(tbxOffset.Text);
-                    //    p.ucPatternId = Convert.ToByte(sldSchemeId.Value);
-                    //    p.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
-                    //}
-                    //else
-                    //{
-                       
-                    //}
-                    //p.ucPatternId = Convert.ToByte(sldSchemeId.Value);
-                    //p.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
-                    //ptemp = null;
+               
                 }
                 else
                 {
@@ -701,23 +731,17 @@ namespace tscui.Pages.Stage
                     ptemp = new Pattern();
                     ptemp.ucCoorPhase = Convert.ToByte(cbxCoordination.SelectedItem);
                     ptemp.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-                    ptemp.ucOffset = Convert.ToByte(tbxOffset.Text);
+                    ptemp.ucOffset = Convert.ToByte(tbxOffset.Value);
                     ptemp.ucPatternId = Convert.ToByte(sldSchemeId.Value);
                     ptemp.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
                     lp.Add(ptemp);
                 }
                
             }
-            //if (!lp.Contains(ptemp))//这里主要 是，新的方案号需要增加。旧的方案，不用进行增加，
-            //{
-                
-            //}
-           
-            
-
+       
             foreach (StagePattern sp in lsp)
             {
-                if (sp.ucStagePatternId == sldStagePatternId.Value)
+                if (sp.ucStagePatternId == (byte)(sldStagePatternId.Value))
                 {
                     
                     if (sp.ucStageNo == Convert.ToByte(currentStage.lblNumber.Content))
@@ -729,7 +753,7 @@ namespace tscui.Pages.Stage
                         sp.ucRedTime = Convert.ToByte(sldRedTime.Value);
                         sp.ucOption = returnReactionTrueOrFalse();
                         sp.usAllowPhase = returnAllowPhase(ptd.ucPhase, sp.usAllowPhase);
-                        Console.WriteLine(sp.usAllowPhase);
+                      //  Console.WriteLine(sp.usAllowPhase);
                         break;
                     }
                     else if(sp.ucStageNo == 0)
@@ -741,7 +765,7 @@ namespace tscui.Pages.Stage
                         sp.ucRedTime = Convert.ToByte(sldRedTime.Value);
                         sp.ucOption = returnReactionTrueOrFalse();
                         sp.usAllowPhase = returnAllowPhase(ptd.ucPhase, sp.usAllowPhase);
-                        Console.WriteLine(sp.usAllowPhase);
+                      //  Console.WriteLine(sp.usAllowPhase);
                         break;
                     }
                     else
@@ -881,59 +905,137 @@ namespace tscui.Pages.Stage
             stageNumber.Content = currentStage.lblNumber.Content;
         }
         #endregion
-        private void savePattern()
+        private bool savePattern()
         {
-            List<Pattern> lp = t.ListPattern;
-            Pattern newpattern = new Pattern();
-            newpattern.ucPatternId = (byte)(sldSchemeId.Value);
-            newpattern.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-            newpattern.ucCoorPhase = Convert.ToByte(cbxCoordination.Text);
-            newpattern.ucOffset = Convert.ToByte(tbxOffset.Text);
-            newpattern.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
-            bool baddnewpattern = true;
-            foreach (Pattern p in t.ListPattern)
-             {
-                 if (p.ucPatternId == ((byte)sldSchemeId.Value))
-                 {
-                      p.ucCycleTime = newpattern.ucCycleTime;
-                      p.ucCoorPhase = newpattern.ucCoorPhase;
-                      p.ucOffset = newpattern.ucOffset;
-                      p.ucStagePatternId = newpattern.ucStagePatternId;
-                      baddnewpattern = false;
-                      break;
-                  }
-             }
-            if (baddnewpattern == true)
+            try
             {
-                MessageBox.Show("该方案不存在，新添加此方案！");
-                t.ListPattern.Add(newpattern);    
+                Pattern newpattern = new Pattern();
+                newpattern.ucPatternId = (byte)(sldSchemeId.Value);
+                newpattern.ucCycleTime = Convert.ToByte(tbxCycle.Text);
+                newpattern.ucCoorPhase = cbxCoordination.Text.Equals("")?(Byte)0x0: Convert.ToByte(cbxCoordination.Text);
+                newpattern.ucCoorPhase = newpattern.ucCoorPhase > 0xa?(Byte)0xa : newpattern.ucCoorPhase;
+                newpattern.ucOffset = Convert.ToByte(tbxOffset.Value);
+                newpattern.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
+                bool baddnewpattern = true;
+                bool bvalidstagepatternid = false;  //判断是否阶段配时阶段数为0
+                foreach (StagePattern sp in td.ListStagePattern)
+                {
+                    if (newpattern.ucStagePatternId == sp.ucStagePatternId)
+                    {
+                        if (sp.ucStageNo > 0)
+                        {
+                            bvalidstagepatternid = true;
+                            break;
+                        }
+                    }
+                }
+                if (bvalidstagepatternid == false)
+                {
+                    MessageBox.Show("该方案对应阶段配时"+(byte)sldStagePatternId.Value+"没配置放行相位,方案无法保存!\r\n须先配置放行相位","方案",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return false;
+                }
+                if (td.ListPattern !=  null)
+                {
+                    foreach (Pattern p in td.ListPattern)
+                    {
+                        if (p.ucPatternId == ((byte) sldSchemeId.Value))
+                        {
+                            p.ucCycleTime = newpattern.ucCycleTime;
+                            p.ucCoorPhase = newpattern.ucCoorPhase;
+                            p.ucOffset = newpattern.ucOffset;
+                            p.ucStagePatternId = newpattern.ucStagePatternId;
+                            baddnewpattern = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (baddnewpattern == true)
+                    {
+                        MessageBox.Show("添加新方案"+((byte)sldSchemeId.Value), "方案", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if(td.ListPattern ==null)
+                            td.ListPattern = new List<Pattern>();
+                        td.ListPattern.Add(newpattern);
+                    }
+                return true;
+
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("加入方案列表异常!", "方案", MessageBoxButton.OK,MessageBoxImage.Error);
+                return false;
+            }
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            savePattern();
-            Message msgPattern = TscDataUtils.SetPattern(t.ListPattern);
-            System.Threading.Thread.Sleep(500);
-            Message msgStagePattern = TscDataUtils.SetStagePattern(t.ListStagePattern);
-            if (!msgStagePattern.flag || !msgPattern.flag)
+          
+            if (ChkCopyStage.IsChecked == true)
             {
-                MessageBox.Show("对象：" + msgStagePattern.obj + "\n内容：" + msgStagePattern.msg);
+                bool validsourcestage = false;
+                foreach (StagePattern newsp in td.ListStagePattern)
+                {
+                    if (newsp.ucStagePatternId == (byte)(sldStagePatternId.Value) && newsp.ucStageNo > 0)
+                    {
+                        MessageBox.Show("阶段配时" + newsp.ucStagePatternId + "存在放行相位,须先清空!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                }
+                foreach (StagePattern sp in td.ListStagePattern)
+                {
+                    if (sp.ucStagePatternId == CopyedstageId && sp.ucStageNo > 0)
+                    {
+                        validsourcestage = true;
+                        break;
+                    }
+                }
+                if (validsourcestage == true)
+                {
+                       foreach (StagePattern sp in td.ListStagePattern)
+                      {
+                         if (sp.ucStagePatternId == CopyedstageId && sp.ucStageNo > 0)
+                          {
+                              foreach (StagePattern sp1 in td.ListStagePattern)
+                              {
+                                  if (sp1.ucStagePatternId == (byte) (sldStagePatternId.Value) && sp1.ucStageNo == 0)
+                                  {
+                                      sp1.ucStageNo = sp.ucStageNo;
+                                      sp1.ucGreenTime = sp.ucGreenTime;
+                                      sp1.ucRedTime = sp.ucRedTime;
+                                      sp1.ucYellowTime = sp.ucYellowTime;
+                                      sp1.usAllowPhase = sp.usAllowPhase;
+                                      sp1.ucOption = sp.ucOption;
+                                      break;
+                                  }
+
+                              }
+                          }
+                      }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("源阶段配时" + CopyedstageId + "无任何放行相位，无法复制给阶段配时" + tbkStagePatternId.Text, "阶段配时", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                
             }
-            else
-            {
-                MessageBox.Show("方案和阶段配时保存成功");
-            }
+            Message msgStagePattern = TscDataUtils.SetStagePattern(td.ListStagePattern);
+      
+            if(msgStagePattern != null)
+                MessageBox.Show(ChkCopyStage.IsChecked == true ? "复制" + msgStagePattern.msg : msgStagePattern.msg, "阶段配时", MessageBoxButton.OK, msgStagePattern.flag == true ? MessageBoxImage.Information : MessageBoxImage.Error);
+
         }
 
         private void btnRead_Click(object sender, RoutedEventArgs e)
         {
-            if (t == null)
+           
+            bool bsaveok = savePattern();
+            if (bsaveok == false)
                 return;
-            List<StagePattern> lsp = t.ListStagePattern;
-            List<Pattern> lp = t.ListPattern;
+            Message msgPattern = TscDataUtils.SetPattern(td.ListPattern);
+            if(msgPattern != null)
+                MessageBox.Show(msgPattern.msg,"方案",MessageBoxButton.OK,msgPattern.flag==true?MessageBoxImage.Information:MessageBoxImage.Error);
         }
         private void visiableStage(StagePattern sp)
         {
@@ -998,23 +1100,12 @@ namespace tscui.Pages.Stage
         /// 问题代码 ，请不要调用
         /// </summary>
         /// <param name="l"></param>
-        private void clearStagePatternByNoStageNu(List<StagePattern> l)
-        {
-            foreach(StagePattern p in l)
-            {
-                if (p.ucStageNo ==0 )
-                {
-                    l.Remove(p);
-                }
-            }
-        }
         public void initcbxCoordination()
         {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+          
+            List<PhaseToDirec> lptd = td.ListPhaseToDirec;
+            if (lptd == null)
                 return;
-            List<PhaseToDirec> lptd = t.ListPhaseToDirec;
-            
             foreach (PhaseToDirec ptd in lptd)
             {
                 if (ptd.ucPhase != 0)
@@ -1046,247 +1137,11 @@ namespace tscui.Pages.Stage
             stage16.lblNumber.Content = "16";
         }
 
-        private void initBigMapArrow()
-        {
-            List<PhaseToDirec> lptd = Utils.Utils.GetTscDataByApplicationCurrentProperties().ListPhaseToDirec;
-            if (lptd == null)
-                return;
-            foreach (PhaseToDirec ptd in lptd)
-            {
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_LEFT)
-                {
-                    northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_LEFT_STRAIGHT)
-                {
-                   // northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_LEFT_STRAIGHT_RIGHT)
-                {
-                   // northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_OTHER)
-                {
-                    northOther.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_PEDESTRAIN_ONE)
-                {
-                    northPedestrain1.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_PEDESTRAIN_TWO)
-                {
-                    northPedestrain2.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_RIGHT)
-                {
-                    northRight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_RIGHT_STRAIGHT)
-                {
-                   // northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_STRAIGHT)
-                {
-                    northStraight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.NORTH_TURN_AROUND)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                //东
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_LEFT)
-                {
-                    eastLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_LEFT_STRAIGHT)
-                {
-                    //east.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_LEFT_STRAIGHT_RIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_OTHER)
-                {
-                    eastOther.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_PEDESTRAIN_ONE)
-                {
-                    eastPedestrain1.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_PEDESTRAIN_TWO)
-                {
-                    eastPedestrain2.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_RIGHT)
-                {
-                    eastRight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_RIGHT_STRAIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_STRAIGHT)
-                {
-                    eastStraight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.EAST_TURN_AROUND)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                
-                //东
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_LEFT)
-                {
-                    southLeft.Visibility = Visibility.Hidden;
-                }
-
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_LEFT_STRAIGHT)
-                {
-                    //east.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_LEFT_STRAIGHT_RIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_OTHER)
-                {
-                    southOther.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_PEDESTRAIN_ONE)
-                {
-                    southPedestrain1.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_PEDESTRAIN_TWO)
-                {
-                    southPedestrain2.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_RIGHT)
-                {
-                    southRight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_RIGHT_STRAIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_STRAIGHT)
-                {
-                    southStraight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.SOUTH_TURN_AROUND)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                //西
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_LEFT)
-                {
-                    westLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_LEFT_STRAIGHT)
-                {
-                    //east.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_LEFT_STRAIGHT_RIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_OTHER)
-                {
-                    westOther.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_PEDESTRAIN_ONE)
-                {
-                    westPedestrain1.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_PEDESTRAIN_TWO)
-                {
-                    westPedestrain2.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_RIGHT)
-                {
-                    westRight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_RIGHT_STRAIGHT)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_STRAIGHT)
-                {
-                    westStraight.Visibility = Visibility.Hidden;
-                }
-                if (ptd.ucPhase == 0 && ptd.ucId == Define.WEST_TURN_AROUND)
-                {
-                    //northLeft.Visibility = Visibility.Hidden;
-                }
-            }
-        }
        
         /// <summary>
         /// 初始化数据
         /// </summary>
         /// <param name="t"></param>
-        private void initStageAttriable(TscData t)
-        {
-            try
-            {
-                if (t == null)
-                    return;
-                List<PhaseToDirec> lptd = t.ListPhaseToDirec;
-                List<Pattern> lp = t.ListPattern;
-                List<StagePattern> lsp = t.ListStagePattern;
-                foreach (Pattern p in lp)
-                {                    
-                    tbxCycle.Text = p.ucCycleTime.ToString();
-                    cbxCoordination.SelectedItem = p.ucCoorPhase;
-                    tbxOffset.Text = p.ucOffset.ToString();
-                    sldStagePatternId.Value = p.ucStagePatternId;
-                    foreach (StagePattern sp in lsp)
-                    {
-                        if (sp.ucStageNo != 0)
-                        {
-                            visiableStage(sp);  //stage 默认是不显示的。只有存在的情况下才显示出来。ucStageNo为0不存在。
-                            uint ap = sp.usAllowPhase;
-                            for (int i = 0; i < 32; i++)
-                            {
-                                if (((ap >> i) & 0x01) == 0x01)
-                                {
-                                    foreach (PhaseToDirec ptd in lptd)
-                                    {
-                                        if (ptd.ucPhase != 0)
-                                        {
-                                            if (ptd.ucPhase == (i + 1))
-                                            {
-                                                //初始化
-                                                InitStageDirec(ptd, sp);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            initDirecArrow(ptd, sp);
-                                        }
-                                    }
-                                }
-                            }
-
-                            sldGreenTime.Value = sp.ucGreenTime;
-                            sldYellowTime.Value = sp.ucYellowTime;
-                            sldRedTime.Value = sp.ucRedTime;
-                            cbxReaction.IsChecked = true;//sp.ucOption;
-                            // sp.ucStageNo   各个阶段编号，已经固定生成
-                            
-                        }
-                    }
-                    sldSchemeId.Value = p.ucPatternId;   //sldSchemeId有一个valuechanged事件。必需要放到其它属性之后 。不然会存在 问题
-                    break;   //第一条方案记录，及些方案数据的stagepatternid 相关的stagepattern 数据列出。 其它不进行显示
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            
-
-        }
         /// <summary>
         /// 根据方向表，可以得到哪个方向有配置相位。哪个方向没有配置相位，
         /// 根据方向表的相位字段，可以将方向隐藏起来
@@ -1295,225 +1150,151 @@ namespace tscui.Pages.Stage
         /// <param name="sp"></param>
         private void initDirecArrow(PhaseToDirec ptd, StagePattern sp)
         {
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_ONE && ptd.ucPhase == 0)
+            if (ptd == null || sp == null)
+                return;
+            byte direcValue = ptd.ucId;
+            if (ptd.ucPhase == 0)
             {
                 StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northPedestrain1.Visibility = Visibility.Hidden;
-                northPedestrain1.Visibility = Visibility.Hidden;
+                switch (direcValue)
+                {
+                    //北方
+                    case Define.NORTH_LEFT :
+                         si.northLeft.Visibility = Visibility.Hidden;
+                         northLeft.Visibility = Visibility.Hidden;
+                        break;
+                    case Define.NORTH_STRAIGHT:
+                        si.northStraight.Visibility = Visibility.Hidden;
+                        northStraight.Visibility = Visibility.Hidden;
+                        break;
+                    case Define.NORTH_RIGHT:
+                        si.northRight.Visibility = Visibility.Hidden;
+                        northRight.Visibility = Visibility.Hidden;
+                        break;
+                    case Define.NORTH_PEDESTRAIN_ONE:
+                        si.northPedestrain1.Visibility = Visibility.Hidden;
+                        northPedestrain1.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.NORTH_PEDESTRAIN_TWO:
+                        si.northPedestrain2.Visibility = Visibility.Hidden;
+                        northPedestrain2.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.NORTH_TURN_AROUND:
+                        si.northTurn.Visibility = Visibility.Hidden;
+                        northTurn.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.NORTH_OTHER:
+                        si.northOther.Visibility = Visibility.Hidden;
+                        northOther.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.NORTH_LEFT_STRAIGHT_RIGHT:
+                        si.westNorthOther.Visibility = Visibility.Hidden;
+                        WestNorthOther.Visibility = Visibility.Hidden;
+                        break;
+                    //东方
+                     case Define.EAST_LEFT:
+                        si.eastLeft.Visibility = Visibility.Hidden;
+                        eastLeft.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_STRAIGHT:
+                        si.eastStraight.Visibility = Visibility.Hidden;
+                        eastStraight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_RIGHT:
+                        si.eastRight.Visibility = Visibility.Hidden;
+                        eastRight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_PEDESTRAIN_ONE:
+                        si.eastPedestrain1.Visibility = Visibility.Hidden;
+                        eastPedestrain1.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_PEDESTRAIN_TWO:
+                        si.eastPedestrain2.Visibility = Visibility.Hidden;
+                        eastPedestrain2.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_TURN_AROUND:
+                        si.eastTurn.Visibility = Visibility.Hidden;
+                        eastTurn.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_OTHER:
+                        si.eastOther.Visibility = Visibility.Hidden;
+                        eastOther.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.EAST_LEFT_STRAIGHT_RIGHT:
+                        si.eastNorthOther.Visibility = Visibility.Hidden;
+                        eastNorthOther.Visibility = Visibility.Hidden;
+                        break;
+                    //南方
+                     case Define.SOUTH_LEFT:
+                        si.southLeft.Visibility = Visibility.Hidden;
+                        southLeft.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_STRAIGHT:
+                        si.southStraight.Visibility = Visibility.Hidden;
+                        southStraight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_RIGHT:
+                        si.southRight.Visibility = Visibility.Hidden;
+                        southRight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_PEDESTRAIN_ONE:
+                        si.southPedestrain1.Visibility = Visibility.Hidden;
+                        southPedestrain1.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_PEDESTRAIN_TWO:
+                        si.southPedestrain2.Visibility = Visibility.Hidden;
+                        southPedestrain2.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_TURN_AROUND:
+                        si.southTurn.Visibility = Visibility.Hidden;
+                        southTurn.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_OTHER:
+                        si.southOther.Visibility = Visibility.Hidden;
+                        southOther.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.SOUTH_LEFT_STRAIGHT_RIGHT:
+                        si.eastSouthOther.Visibility = Visibility.Hidden;
+                        eastSouthOther.Visibility = Visibility.Hidden;
+                        break;
+                    //西方
+                     case Define.WEST_LEFT:
+                        si.westLeft.Visibility = Visibility.Hidden;
+                        westLeft.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_STRAIGHT:
+                        si.westStraight.Visibility = Visibility.Hidden;
+                        westStraight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_RIGHT:
+                        si.westRight.Visibility = Visibility.Hidden;
+                        westRight.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_PEDESTRAIN_ONE:
+                        si.westPedestrain1.Visibility = Visibility.Hidden;
+                        westPedestrain1.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_PEDESTRAIN_TWO:
+                        si.westPedestrain2.Visibility = Visibility.Hidden;
+                        westPedestrain2.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_TURN_AROUND:
+                        si.westTurn.Visibility = Visibility.Hidden;
+                        westTurn.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_OTHER:
+                        si.westOther.Visibility = Visibility.Hidden;
+                        westOther.Visibility = Visibility.Hidden;
+                        break;
+                     case Define.WEST_LEFT_STRAIGHT_RIGHT:
+                        si.westSouthOther.Visibility = Visibility.Hidden;
+                        westSouthOther.Visibility = Visibility.Hidden;
+                        break;
+                    default:
+                        break;
+                }
             }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_TWO && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northPedestrain2.Visibility = Visibility.Hidden;
-                northPedestrain2.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.NORTH_TURN_AROUND && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.northPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-
-            }
-            if (ptd.ucId == Define.NORTH_LEFT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.northPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-
-            }
-            if (ptd.ucId == Define.NORTH_RIGHT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.northPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-
-            }
-            if (ptd.ucId == Define.NORTH_LEFT_STRAIGHT_RIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.northPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-
-            }
-            if (ptd.ucId == Define.NORTH_LEFT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northLeft.Visibility = Visibility.Hidden;
-                northLeft.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.NORTH_STRAIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northStraight.Visibility = Visibility.Hidden;
-                northStraight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.NORTH_RIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northRight.Visibility = Visibility.Hidden;
-                northRight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.NORTH_OTHER && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.northOther.Visibility = Visibility.Hidden;
-                northOther.Visibility = Visibility.Hidden;
-            }
-            // 南
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_ONE && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southPedestrain1.Visibility = Visibility.Hidden;
-                southPedestrain1.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_TWO && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southPedestrain2.Visibility = Visibility.Hidden;
-                southPedestrain2.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.SOUTH_LEFT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.southPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_LEFT_STRAIGHT_RIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.southPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_RIGHT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.southPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_LEFT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southLeft.Visibility = Visibility.Hidden;
-                southLeft.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.SOUTH_OTHER && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southOther.Visibility = Visibility.Hidden;
-                southOther.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.SOUTH_RIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southRight.Visibility = Visibility.Hidden;
-                southRight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.SOUTH_STRAIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.southStraight.Visibility = Visibility.Hidden;
-                southStraight.Visibility = Visibility.Hidden;
-            }
-            // 西
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_ONE && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westPedestrain1.Visibility = Visibility.Hidden;
-                westPedestrain1.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_TWO && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westPedestrain2.Visibility = Visibility.Hidden;
-                westPedestrain2.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.WEST_LEFT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.westPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_LEFT_STRAIGHT_RIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.westPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_RIGHT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.westPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_LEFT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westLeft.Visibility = Visibility.Hidden;
-                westLeft.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.WEST_STRAIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westStraight.Visibility = Visibility.Hidden;
-                westStraight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.WEST_RIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westRight.Visibility = Visibility.Hidden;
-                westRight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.WEST_OTHER && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.westOther.Visibility = Visibility.Hidden;
-                westOther.Visibility = Visibility.Hidden;
-            }
-
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_ONE && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastPedestrain1.Visibility = Visibility.Hidden;
-                eastPedestrain1.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_TWO && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastPedestrain2.Visibility = Visibility.Hidden;
-                eastPedestrain2.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.EAST_LEFT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.eastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_LEFT_STRAIGHT_RIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.eastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_RIGHT_STRAIGHT && ptd.ucPhase == 0)
-            {
-                //StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                //si.eastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_LEFT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastLeft.Visibility = Visibility.Hidden;
-                eastLeft.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.EAST_STRAIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastStraight.Visibility = Visibility.Hidden;
-                eastStraight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.EAST_RIGHT && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastRight.Visibility = Visibility.Hidden;
-                eastRight.Visibility = Visibility.Hidden;
-            }
-            if (ptd.ucId == Define.EAST_OTHER && ptd.ucPhase == 0)
-            {
-                StageItem si = returnStageItemObjectByStageNo(sp.ucStageNo);
-                si.eastOther.Visibility = Visibility.Hidden;
-                eastOther.Visibility = Visibility.Hidden;
-            }
-
-
-
+      
         }
         /// <summary>
         /// 通过stageno 得到stageitem对象
@@ -1650,7 +1431,7 @@ namespace tscui.Pages.Stage
                 case (Define.NORTH_OTHER):
                     si.northOther.Source = greenimage;
                     break;
-                case (Define.WEST_NORTH_OTHER):
+                case (Define.NORTH_LEFT_STRAIGHT_RIGHT):
                     si.westNorthOther.Source = greenimage;
                     break;
                   //南方
@@ -1675,7 +1456,7 @@ namespace tscui.Pages.Stage
                 case (Define.SOUTH_OTHER) :
                     si.southOther.Source = greenimage;
                     break;
-                case (Define.EAST_SOUTH_OTHER):
+                case (Define.SOUTH_LEFT_STRAIGHT_RIGHT):
                     si.eastSouthOther.Source = greenimage;
                     break;
                 //东方
@@ -1700,7 +1481,7 @@ namespace tscui.Pages.Stage
                 case (Define.EAST_OTHER):
                     si.eastOther.Source = greenimage1;
                     break;
-                case (Define.EAST_NORTH_OTHER):
+                case (Define.EAST_LEFT_STRAIGHT_RIGHT):
                     si.eastNorthOther.Source = greenimage1;
                     break;
                 //西方
@@ -1725,7 +1506,7 @@ namespace tscui.Pages.Stage
                 case (Define.WEST_OTHER):
                     si.westOther.Source = greenimage1;
                     break;
-                case (Define.WEST_SOUTH_OTHER):
+                case (Define.WEST_LEFT_STRAIGHT_RIGHT):
                     si.westSouthOther.Source = greenimage1;
                     break;
                 default:
@@ -1752,12 +1533,6 @@ namespace tscui.Pages.Stage
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new DelegateInitcbxCoordination(initcbxCoordination));
         }
        
-
-        private void StackPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ///MessageBox.Show("addd stage");
-        }
-
 
         private void hiddenStageAll()
         {
@@ -1807,10 +1582,7 @@ namespace tscui.Pages.Stage
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                if (lsi[0] == stage1)
+                if (Equals(lsi[0],stage1))
                 {
                     lsi.Reverse();
                 }
@@ -1818,8 +1590,13 @@ namespace tscui.Pages.Stage
                 {
                     if (si.Visibility == Visibility.Visible)
                     {
+                        if (MessageBox.Show("确定删除阶段"+si.lblNumber.Content+"吗?", "删除", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                        {
+                            return;
+                        }
+                       
                         si.Visibility = Visibility.Hidden;
-                        clearStageByDeleteStage(t, si);
+                        clearStageByDeleteStage(td, si);
                         bigMapInitArllowRed();
                         lsi.Reverse();
                         break;
@@ -1833,33 +1610,45 @@ namespace tscui.Pages.Stage
         }
         private void bigMapInitArllowRed()
         {
-            northLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            northOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            northRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            northStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            northPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            northPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
+            BitmapImage redlight = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+            BitmapImage redlight1 = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
+            //北方
+            northLeft.Source = redlight;
+            northOther.Source = redlight;
+            northRight.Source = redlight;
+            northStraight.Source = redlight;
+            northPedestrain1.Source = redlight1;
+            northPedestrain2.Source = redlight1;
+            northTurn.Source = redlight;
+            WestNorthOther.Source = redlight;
+            //东方
+            eastLeft.Source = redlight1;
+            eastOther.Source = redlight1;
+            eastRight.Source = redlight1;
+            eastStraight.Source = redlight1;
+            eastPedestrain1.Source = redlight;
+            eastPedestrain2.Source = redlight;
+            eastTurn.Source = redlight1;
+            eastNorthOther.Source = redlight1;
+            //南方
+            southLeft.Source = redlight;
+            southOther.Source = redlight;
+            southRight.Source = redlight;
+            southStraight.Source = redlight;
+            southPedestrain1.Source = redlight1;
+            southPedestrain2.Source = redlight1;
+            southTurn.Source = redlight;
+            eastSouthOther.Source = redlight;
+            //西方
+            westLeft.Source = redlight1;
+            westOther.Source = redlight1;
+            westRight.Source = redlight1;
+            westStraight.Source = redlight1;
+            westPedestrain1.Source = redlight;
+            westPedestrain2.Source = redlight;
+            westTurn.Source = redlight1;
+            westSouthOther.Source = redlight1;
 
-            eastLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            eastOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            eastRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            eastStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            eastPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            eastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-
-            southLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            southOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            southRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            southStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            southPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            southPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-
-            westLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            westOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            westRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            westStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            westPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            westPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
         }
         private void createStageByInitArllowRed(StageItem si)
         {
@@ -1933,13 +1722,19 @@ namespace tscui.Pages.Stage
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+               // TscData td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
                     return;
-                List<Pattern> lp = t.ListPattern;
+                else if (td.ListPattern == null)
+                {
+                    MessageBox.Show("信号机方案表为空!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+
+                List<Pattern> lp = td.ListPattern;
                 if (lp.Count == 0)
                 {
-                    MessageBox.Show("方案表加载数量为0!");
+                    MessageBox.Show("未能加载到任何合法方案!","阶段配时",MessageBoxButton.OK,MessageBoxImage.Error);
                     return;
                 }
                 foreach (Pattern p in lp)
@@ -1948,33 +1743,43 @@ namespace tscui.Pages.Stage
                     {
                         tbxCycle.Text = p.ucCycleTime.ToString();
                         cbxCoordination.SelectedItem = p.ucCoorPhase;
-                        tbxOffset.Text = p.ucOffset.ToString();
+                        tbxOffset.Value = p.ucOffset;
                         sldStagePatternId.Value = p.ucStagePatternId;
+                        sldStagePatternId.Background = Brushes.White;
+                        return;
                     }
 
                 }
-
+               // hiddenStageAll(); //当前方案号没有对应的阶段配时号
+                sldStagePatternId.Background = Brushes.DarkRed;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("加载方案表异常!");
+                MessageBox.Show("方案表加载异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         #endregion
         #region 阶段配时-切换阶段配时号
         private void sldStagePatternId_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            DisplayStageByStagePatternIdChange();
+            if (td == null)
+                return;
+            if (ChkCopyStage.IsChecked == true)
+            {
+                
+            }
+            else
+            {
+                DisplayStageByStagePatternIdChange();
+
+            }
         }
         private void DisplayStageByStagePatternIdChange()
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                List<StagePattern> lsp = t.ListStagePattern;
-                List<PhaseToDirec> lptd = t.ListPhaseToDirec;
+                List<StagePattern> lsp = td.ListStagePattern;
+                List<PhaseToDirec> lptd = td.ListPhaseToDirec;
                 //每次都要把stage清空，再由下面的进行显示 
                 hiddenStageAll();
                 foreach (StagePattern sp in lsp)
@@ -2029,22 +1834,20 @@ namespace tscui.Pages.Stage
                     currentStage = stage1;
                     foreach (StagePattern sp in lsp)
                     {
-                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) &&
-                            sp.ucStageNo == Convert.ToByte(currentStage.lblNumber.Content.ToString()))
+                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && sp.ucStageNo == Convert.ToByte(currentStage.lblNumber.Content.ToString()))
                         {
                             sldGreenTime.Value = sp.ucGreenTime;
                             sldYellowTime.Value = sp.ucYellowTime;
                             sldRedTime.Value = sp.ucRedTime;
+                            break;
                         }
                     }
                     BigMap4SmallMap(currentStage);
-
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("获取阶段配时信息异常!");
+                MessageBox.Show("获取阶段配时信息异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         #endregion
@@ -2052,117 +1855,16 @@ namespace tscui.Pages.Stage
 
 
 
-        private void SaveStagePattern(object state)
-        {
-            if (t == null)
-                return;
-            
-            Message msgPattern = TscDataUtils.SetPattern(t.ListPattern);
-            if (!msgPattern.flag)
-            {
-                MessageBox.Show( msgPattern.obj + "\n" + msgPattern.msg);
-            }
-            Message msgStagePattern = TscDataUtils.SetStagePattern(t.ListStagePattern);
-            if (!msgStagePattern.flag)
-            {
-                MessageBox.Show(msgStagePattern.obj + "\n" + msgStagePattern.msg);
-            }
-        }
-        private void sldValueChanged()
-        {
-
-            try
-            {
-                //  Thread.Sleep(500);
-                Slider sld = sldGreenTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                List<StagePattern> lsp = t.ListStagePattern;
-                foreach (StagePattern sp in lsp)
-                {
-                    if (currentStage != null)
-                    {
-                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
-                        {
-                            sp.ucGreenTime = Convert.ToByte(sld.Value);
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            try
-            {
-                //  Thread.Sleep(500);
-                Slider sld = sldYellowTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                List<StagePattern> lsp = t.ListStagePattern;
-                foreach (StagePattern sp in lsp)
-                {
-                    if (currentStage != null)
-                    {
-                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
-                        {
-                            sp.ucYellowTime = Convert.ToByte(sld.Value);
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-
-            try
-            {
-                ///   Thread.Sleep(500);
-                Slider sld = sldRedTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                List<StagePattern> lsp = t.ListStagePattern;
-                foreach (StagePattern sp in lsp)
-                {
-                    if (currentStage != null)
-                    {
-                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
-                        {
-                            sp.ucRedTime = Convert.ToByte(sld.Value);
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-           
-
-
-        }
         private void sldGreenTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             try
             {
                 //  Thread.Sleep(500);
                 Slider sld = sldGreenTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
                     return;
-                List<StagePattern> lsp = t.ListStagePattern;
+                List<StagePattern> lsp = td.ListStagePattern;
                 foreach (StagePattern sp in lsp)
                 {
                     if (currentStage != null && sldStagePatternId != null && sld!=null)
@@ -2177,7 +1879,7 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
-                  MessageBox.Show(ex.ToString());
+                  MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             
         }
@@ -2189,10 +1891,10 @@ namespace tscui.Pages.Stage
             {
                 //  Thread.Sleep(500);
                 Slider sld = sldYellowTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
                     return;
-                List<StagePattern> lsp = t.ListStagePattern;
+                List<StagePattern> lsp = td.ListStagePattern;
                 foreach (StagePattern sp in lsp)
                 {
                     if (currentStage != null && sldStagePatternId != null && sld != null)
@@ -2208,7 +1910,8 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
         }
 
@@ -2219,10 +1922,10 @@ namespace tscui.Pages.Stage
             {
                 ///   Thread.Sleep(500);
                 Slider sld = sldRedTime;
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
                     return;
-                List<StagePattern> lsp = t.ListStagePattern;
+                List<StagePattern> lsp = td.ListStagePattern;
                 foreach (StagePattern sp in lsp)
                 {
                     if (currentStage != null && sldStagePatternId != null && sld != null)
@@ -2238,11 +1941,18 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
            
         }
 
+        private void ChkCopyStage_Checked(object sender, RoutedEventArgs e)
+        {
+            CopyedstageId = (byte)(sldStagePatternId.Value);
+        }
+
+  
 
 
     }

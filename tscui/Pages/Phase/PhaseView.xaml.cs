@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Effects;
 using Apex.MVVM;
@@ -25,15 +24,13 @@ namespace tscui.Pages.Phase
     public partial class PhaseView : UserControl, IView
     {
         System.Windows.Threading.DispatcherTimer dispatcherTimer1;
-
+        private Byte rotate = 0;
+        private Image LastImage = null;
+        TscData tdData;
         public PhaseView()
         {
-            
             InitializeComponent();
             this.TrafficCanvas.AddHandler(Image.MouseLeftButtonDownEvent, new RoutedEventHandler(ImageMouseLeftButton_Down));
-           
-            
-            
         }
 
         private void ImageMouseLeftButton_Down(object sender, RoutedEventArgs e)
@@ -46,9 +43,18 @@ namespace tscui.Pages.Phase
                     if (ClickImage != null)
                     {
                         if (ClickImage.Name != "backgroundimage")
+                        {
                             DirecPhaseCombox.Text = ClickImage.ToolTip.ToString();
+                            BlurEffect newBlurEffect =
+                                new BlurEffect();
+                            newBlurEffect.Radius = 5;
+                            ClickImage.Effect = newBlurEffect;
+                            if (LastImage != null) LastImage.Effect = null;
+                            LastImage = ClickImage;
+                        }
+
+                        e.Handled = true;
                     }
-                    e.Handled = true;
                 }
             }
             catch (Exception ex)
@@ -122,51 +128,55 @@ namespace tscui.Pages.Phase
 
 
 
-        List<tscui.Pages.Music.MusicView.DirecNumer> dirnum = new List<tscui.Pages.Music.MusicView.DirecNumer>();
+        List<DirecNumer> dirnum = new List<DirecNumer>();
         private void InitDirecNumber()
         {
-            dirnum.Add(new MusicView.DirecNumer() { name = "北左", value = 1 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "北直", value = 2 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "北右", value = 4 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "北人行", value = 8 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "北调头", value = 0 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "北其他", value = 5 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西北其他", value = 0xe5 });
+            dirnum.Add(new DirecNumer() { name = "北左", value = 1 });
+            dirnum.Add(new DirecNumer() { name = "北直", value = 2 });
+            dirnum.Add(new DirecNumer() { name = "北右", value = 4 });
+            dirnum.Add(new DirecNumer() { name = "北人行", value = 8 });
+            dirnum.Add(new DirecNumer() { name = "北二次过街", value = 0x18 });
+            dirnum.Add(new DirecNumer() { name = "北调头", value = 0 });
+            dirnum.Add(new DirecNumer() { name = "北其他", value = 5 });
+            dirnum.Add(new DirecNumer() { name = "北特殊", value = 0x7 });
 
-            dirnum.Add(new MusicView.DirecNumer() { name = "东左", value = 65 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东直", value = 66 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东右", value = 68 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东人行", value = 72 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东调头", value = 0x40 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东其他", value = 69 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东北其他", value = 0x25 });
+            dirnum.Add(new DirecNumer() { name = "东左", value = 65 });
+            dirnum.Add(new DirecNumer() { name = "东直", value = 66 });
+            dirnum.Add(new DirecNumer() { name = "东右", value = 68 });
+            dirnum.Add(new DirecNumer() { name = "东人行", value = 72 });
+            dirnum.Add(new DirecNumer() { name = "东二次过街", value = 0x58 });
+            dirnum.Add(new DirecNumer() { name = "东调头", value = 0x40 });
+            dirnum.Add(new DirecNumer() { name = "东其他", value = 69 });
+            dirnum.Add(new DirecNumer() { name = "东特殊", value = 0x47 });
 
 
-            dirnum.Add(new MusicView.DirecNumer() { name = "南左", value = 129 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "南直", value = 130 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "南右", value = 132 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "南人行", value = 136 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "南调头", value = 0x80 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "南其他", value = 133 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "东南其他", value = 0x65 });
+            dirnum.Add(new DirecNumer() { name = "南左", value = 129 });
+            dirnum.Add(new DirecNumer() { name = "南直", value = 130 });
+            dirnum.Add(new DirecNumer() { name = "南右", value = 132 });
+            dirnum.Add(new DirecNumer() { name = "南人行", value = 136 });
+            dirnum.Add(new DirecNumer() { name = "南二次过街", value = 0x98 });
+            dirnum.Add(new DirecNumer() { name = "南调头", value = 0x80 });
+            dirnum.Add(new DirecNumer() { name = "南其他", value = 133 });
+            dirnum.Add(new DirecNumer() { name = "南特殊", value = 0x87 });
 
-            dirnum.Add(new MusicView.DirecNumer() { name = "西左", value = 193 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西直", value = 194 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西右", value = 196 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西人行", value = 200 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西调头", value = 0xc0 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西其他", value = 197 });
-            dirnum.Add(new MusicView.DirecNumer() { name = "西南其他", value = 0xa5 });
+            dirnum.Add(new DirecNumer() { name = "西左", value = 193 });
+            dirnum.Add(new DirecNumer() { name = "西直", value = 194 });
+            dirnum.Add(new DirecNumer() { name = "西右", value = 196 });
+            dirnum.Add(new DirecNumer() { name = "西人行", value = 200 });
+            dirnum.Add(new DirecNumer() { name = "西二次过街", value = 0xd8 });
+            dirnum.Add(new DirecNumer() { name = "西调头", value = 0xc0 });
+            dirnum.Add(new DirecNumer() { name = "西其他", value = 197 });
+            dirnum.Add(new DirecNumer() { name = "西特殊", value = 0xc7 });
         }
 
 
-        List<MusicView.ChannelPhaseOverlap> lcpo = new List<MusicView.ChannelPhaseOverlap>();
+        List<ChannelPhaseOverlap> lcpo = new List<ChannelPhaseOverlap>();
         private void InitPhaseOverlap()
         {
             for (byte a = 1; a < 33; a++)
-                lcpo.Add(new MusicView.ChannelPhaseOverlap() { id = a, name = "p" + a, isPhase = true });
+                lcpo.Add(new ChannelPhaseOverlap() { id = a, name = "p" + a, isPhase = true });
             for (byte b = 1; b < 17; b++)
-                lcpo.Add(new MusicView.ChannelPhaseOverlap() { id = b, name = "op" + b, isPhase = false });
+                lcpo.Add(new ChannelPhaseOverlap() { id = b, name = "op" + b, isPhase = false });
         }
 
         #region 设置相位按钮隐藏
@@ -249,458 +259,177 @@ namespace tscui.Pages.Phase
 
         private void LampRhshStar()
         {
-            dispatcherTimer1 = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer1 = new DispatcherTimer();
             dispatcherTimer1.Tick += new EventHandler(dispatcherTimer1_Tick);
             dispatcherTimer1.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer1.Start();
  
         }
-        private void updateRed(PhaseToDirec ptd)
+        private void UpdateLampColor(PhaseToDirec pPtd, byte colorType)
         {
-            if (ptd.ucId == Define.NORTH_LEFT)
+            if (pPtd == null)
+                return;
+            BitmapImage setBitmapImage, setBitmapImage1;
+            byte direcValue = pPtd.ucId;
+            if (colorType == Define.LAMP_RED)
             {
-                imgNorthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+                if (direcValue == Define.NORTH_PEDESTRAIN_ONE)
+                    Console.WriteLine("NORTH_PEDESTRAIN_ONE red");
+                
+                setBitmapImage = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+                setBitmapImage1 = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
             }
-            if (ptd.ucId == Define.NORTH_STRAIGHT)
+            else if (colorType == Define.LAMP_YELLOW)
             {
-                imgNorthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+                setBitmapImage = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
+                setBitmapImage1 = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
             }
-            if (ptd.ucId == Define.NORTH_RIGHT)
+            else if (colorType == Define.LAMP_GREEN)
             {
-                imgNorthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+                if (direcValue == Define.NORTH_PEDESTRAIN_ONE)
+                    Console.WriteLine("NORTH_PEDESTRAIN_ONE green");
+                setBitmapImage = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
+                setBitmapImage1 = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
             }
-            if (ptd.ucId == Define.NORTH_OTHER)
+            else
             {
-                imgNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
+                return;
             }
-            if (ptd.ucId == Define.NORTH_TURN_AROUND)
-            {
-                imgNorthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_NORTH_OTHER)
-            {
-                imgWestNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_ONE)
-            {
-                imgNorthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_TWO)
-            {
-                imgNorthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_LEFT)
-            {
-                imgEastLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_STRAIGHT)
-            {
-                imgEastStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_RIGHT)
-            {
-                imgEastRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_OTHER)
-            {
-                imgEastOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_ONE)
-            {
-                imgEastPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_TWO)
-            {
-                imgEastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.EAST_TURN_AROUND)
-            {
-                imgEastTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_NORTH_OTHER)
-            {
-                imgEastNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-
-
-            if (ptd.ucId == Define.SOUTH_LEFT)
-            {
-                imgSouthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_STRAIGHT)
-            {
-                imgSouthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_RIGHT)
-            {
-                imgSouthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_OTHER)
-            {
-                imgSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_ONE)
-            {
-                imSouthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_TWO)
-            {
-                imSouthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_TURN_AROUND)
-            {
-                imgSouthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_SOUTH_OTHER)
-            {
-                imgEastSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.WEST_LEFT)
-            {
-                imgWestLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_STRAIGHT)
-            {
-                imgWestStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_RIGHT)
-            {
-                imgWestRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_OTHER)
-            {
-                imgWestOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_ONE)
-            {
-                imgWestPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_TWO)
-            {
-                imgWestPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.WEST_TURN_AROUND)
-            {
-                imgWestTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.WEST_SOUTH_OTHER)
-            {
-                imgWestSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/redlight1.png", UriKind.Relative));
-            }
-        }
-
-        private void updateYellow(PhaseToDirec ptd)
-        {
-            if (ptd.ucId == Define.NORTH_LEFT)
-            {
-                imgNorthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_STRAIGHT)
-            {
-                imgNorthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_RIGHT)
-            {
-                imgNorthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_OTHER)
-            {
-                imgNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_ONE)
-            {
-                imgNorthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_TWO)
-            {
-                imgNorthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
+            switch (direcValue)
+            { //北方
+                case (Define.NORTH_LEFT):
+                    imgNorthLeft.Source = setBitmapImage;
+                    break;
+                case (Define.NORTH_STRAIGHT):
+                    imgNorthStraight.Source = setBitmapImage;
+                    break;
+                case (Define.NORTH_RIGHT):
+                    imgNorthRight.Source = setBitmapImage;
+                    break;
+                case (Define.NORTH_PEDESTRAIN_ONE):
+                    imgNorthPedestrain1.Source = setBitmapImage1;
+                    break;
+                case (Define.NORTH_PEDESTRAIN_TWO):
+                    imgNorthPedestrain2.Source = setBitmapImage1;
+                    break;
+                case (Define.NORTH_TURN_AROUND):
+                    imgNorthTurn.Source = setBitmapImage;
+                    break;
+                case (Define.NORTH_OTHER):
+                    imgNorthOther.Source = setBitmapImage;
+                    break;
+                case (Define.NORTH_LEFT_STRAIGHT_RIGHT):
+                    imgWestNorthOther.Source = setBitmapImage;
+                    break;
+                //东方
+                case (Define.EAST_LEFT):
+                    imgEastLeft.Source = setBitmapImage1;
+                    break;
+                case (Define.EAST_STRAIGHT):
+                    imgEastStraight.Source = setBitmapImage1;
+                    break;
+                case (Define.EAST_RIGHT):
+                    imgEastRight.Source = setBitmapImage1;
+                    break;
+                case (Define.EAST_PEDESTRAIN_ONE):
+                    imgEastPedestrain1.Source = setBitmapImage;
+                    break;
+                case (Define.EAST_PEDESTRAIN_TWO):
+                    imgEastPedestrain2.Source = setBitmapImage;
+                    break;
+                case (Define.EAST_TURN_AROUND):
+                    imgEastTurn.Source = setBitmapImage1;
+                    break;
+                case (Define.EAST_OTHER):
+                    imgEastOther.Source = setBitmapImage1;
+                    break;
+                case (Define.EAST_LEFT_STRAIGHT_RIGHT):
+                    imgEastNorthOther.Source = setBitmapImage1;
+                    break;
+                //南方
+                case (Define.SOUTH_LEFT):
+                    imgSouthLeft.Source = setBitmapImage;
+                    break;
+                case (Define.SOUTH_STRAIGHT):
+                    imgSouthStraight.Source = setBitmapImage;
+                    break;
+                case (Define.SOUTH_RIGHT):
+                    imgSouthRight.Source = setBitmapImage;
+                    break;
+                case (Define.SOUTH_PEDESTRAIN_ONE):
+                    imSouthPedestrain1.Source = setBitmapImage1;
+                    break;
+                case (Define.SOUTH_PEDESTRAIN_TWO):
+                    imSouthPedestrain2.Source = setBitmapImage1;
+                    break;
+                case (Define.SOUTH_TURN_AROUND):
+                    imgSouthTurn.Source = setBitmapImage;
+                    break;
+                case (Define.SOUTH_OTHER):
+                    imgSouthOther.Source = setBitmapImage;
+                    break;
+                case (Define.SOUTH_LEFT_STRAIGHT_RIGHT):
+                    imgEastSouthOther.Source = setBitmapImage;
+                    break;
+                //西方
+                case (Define.WEST_LEFT):
+                    imgWestLeft.Source = setBitmapImage1;
+                    break;
+                case (Define.WEST_STRAIGHT):
+                    imgWestStraight.Source = setBitmapImage1;
+                    break;
+                case (Define.WEST_RIGHT):
+                    imgWestRight.Source = setBitmapImage1;
+                    break;
+                case (Define.WEST_PEDESTRAIN_ONE):
+                    imgWestPedestrain1.Source = setBitmapImage;
+                    break;
+                case (Define.WEST_PEDESTRAIN_TWO):
+                    imgWestPedestrain2.Source = setBitmapImage;
+                    break;
+                case (Define.WEST_TURN_AROUND):
+                    imgWestTurn.Source = setBitmapImage1;
+                    break;
+                case (Define.WEST_OTHER):
+                    imgWestOther.Source = setBitmapImage1;
+                    break;
+                case (Define.WEST_LEFT_STRAIGHT_RIGHT):
+                    imgWestSouthOther.Source = setBitmapImage1;
+                    break;
             }
 
-            if (ptd.ucId == Define.NORTH_TURN_AROUND)
-            {
-                imgNorthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_NORTH_OTHER)
-            {
-                imgWestNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            
-            
-            if (ptd.ucId == Define.EAST_LEFT)
-            {
-                imgEastLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_STRAIGHT)
-            {
-                imgEastStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_RIGHT)
-            {
-                imgEastRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_OTHER)
-            {
-                imgEastOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_ONE)
-            {
-                imgEastPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_TWO)
-            {
-                imgEastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-             if (ptd.ucId == Define.EAST_TURN_AROUND)
-            {
-                imgEastTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_NORTH_OTHER)
-            {
-                imgEastNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.SOUTH_LEFT)
-            {
-                imgSouthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_STRAIGHT)
-            {
-                imgSouthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_RIGHT)
-            {
-                imgSouthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_OTHER)
-            {
-                imgSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_ONE)
-            {
-                imSouthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_TWO)
-            {
-                imSouthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_TURN_AROUND)
-            {
-                imgSouthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_SOUTH_OTHER)
-            {
-                imgEastSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            
-            
-            if (ptd.ucId == Define.WEST_LEFT)
-            {
-                imgWestLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_STRAIGHT)
-            {
-                imgWestStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_RIGHT)
-            {
-                imgWestRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_OTHER)
-            {
-                imgWestOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_ONE)
-            {
-                imgWestPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_TWO)
-            {
-                imgWestPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_TURN_AROUND)
-            {
-                imgWestTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.WEST_SOUTH_OTHER)
-            {
-                imgWestSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/yellowlight1.png", UriKind.Relative));
-            }
-
-        }
-
-        private void updateGreen(PhaseToDirec ptd)
-        {
-            if (ptd.ucId == Define.NORTH_LEFT)
-            {
-                imgNorthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_STRAIGHT)
-            {
-                imgNorthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_RIGHT)
-            {
-                imgNorthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_OTHER)
-            {
-                imgNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_ONE)
-            {
-                imgNorthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.NORTH_PEDESTRAIN_TWO)
-            {
-                imgNorthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.NORTH_TURN_AROUND)
-            {
-                imgNorthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_NORTH_OTHER)
-            {
-                imgWestNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-
-
-            if (ptd.ucId == Define.EAST_LEFT)
-            {
-                imgEastLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_STRAIGHT)
-            {
-                imgEastStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_RIGHT)
-            {
-                imgEastRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_OTHER)
-            {
-                imgEastOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_ONE)
-            {
-                imgEastPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_PEDESTRAIN_TWO)
-            {
-                imgEastPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.EAST_TURN_AROUND)
-            {
-                imgEastTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_NORTH_OTHER)
-            {
-                imgEastNorthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.SOUTH_LEFT)
-            {
-                imgSouthLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_STRAIGHT)
-            {
-                imgSouthStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_RIGHT)
-            {
-                imgSouthRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_OTHER)
-            {
-                imgSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_ONE)
-            {
-                imSouthPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_PEDESTRAIN_TWO)
-            {
-                imSouthPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.SOUTH_TURN_AROUND)
-            {
-                imgSouthTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.EAST_SOUTH_OTHER)
-            {
-                imgEastSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-
-
-
-            if (ptd.ucId == Define.WEST_LEFT)
-            {
-                imgWestLeft.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_STRAIGHT)
-            {
-                imgWestStraight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_RIGHT)
-            {
-                imgWestRight.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_OTHER)
-            {
-                imgWestOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_ONE)
-            {
-                imgWestPedestrain1.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_PEDESTRAIN_TWO)
-            {
-                imgWestPedestrain2.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight.png", UriKind.Relative));
-            }
-            if (ptd.ucId == Define.WEST_TURN_AROUND)
-            {
-                imgWestTurn.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
-
-            if (ptd.ucId == Define.WEST_SOUTH_OTHER)
-            {
-                imgWestSouthOther.Source = new BitmapImage(new Uri("/tscui;component/Resources/Images/greenlight1.png", UriKind.Relative));
-            }
         }
         private void dispatcherTimer1_Tick(object sender, EventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            List<Channel> lc = t.ListChannel;
-            List<PhaseToDirec> lptd = t.ListPhaseToDirec;
+            List<Channel> lc = tdData.ListChannel;
+            List<PhaseToDirec> lptd = tdData.ListPhaseToDirec;
            
-            if (tscui.Models.ReportTscStatus.resportSuccessFlag)
+            if (ReportTscStatus.resportSuccessFlag)
             {
-                this.workmode_label.Content = "工作模式：" + tscui.Models.ReportTscStatus.sWorkModel.ToString();
-                this.controlmode_label.Content = "控制方式：" + tscui.Models.ReportTscStatus.sControlModel.ToString();
-                this.workstatus_label.Content = "工作状态：" + tscui.Models.ReportTscStatus.sWorkStatus.ToString();
-
-                this.time_NO_label.Content = "方案号：" + tscui.Models.ReportTscStatus.iCurrentTimePattern.ToString();
-                this.run_NO_label.Content = "时段号：" + tscui.Models.ReportTscStatus.iCurrentSchedule.ToString();
-                this.lblCurrentStage.Content = "当前阶段：" + tscui.Models.ReportTscStatus.iCurrentStage.ToString();
-                 this.label_CycleTime.Content = "周期时长： " + tscui.Models.ReportTscStatus.iCycleTime.ToString();
-                 this.label_iCurrentStagePattern.Content = "阶段配时号： " + tscui.Models.ReportTscStatus.iCurrentStagePattern.ToString();
-                 this.label_iStageCount.Content = "阶段总数： " + tscui.Models.ReportTscStatus.iStageCount.ToString();
-                 this.label_iStageTotalTime.Content = "阶段总时长： " + tscui.Models.ReportTscStatus.iStageTotalTime.ToString();
-                 this.label_iStageRunTime.Content = "阶段运行时长： " + tscui.Models.ReportTscStatus.iStageRunTime.ToString();
-            List <uint> redList =   tscui.Models.ReportTscStatus.listChannelRedStatus;
-            List <uint> yellowList =   tscui.Models.ReportTscStatus.listChannelYellowStatus;
-            List <uint> greenList =   tscui.Models.ReportTscStatus.listChannelGreenStatus;
-            #region 红灯图片刷新
-            for (int i = 0; i < redList.Count; i++)
+                this.workmode_label.Content = "工作模式：" + ReportTscStatus.sWorkModel;
+                this.controlmode_label.Content = "控制方式：" + ReportTscStatus.sControlModel;
+                this.workstatus_label.Content = "工作状态：" + ReportTscStatus.sWorkStatus;
+                this.Lbl_RunPlanId.Content = "时基号：" + ReportTscStatus.iPlanId;
+                this.Lbl_RunPlanType.Content = "时基类型:" + ((ReportTscStatus.iPlanId > 30) ? "月时基" : ((ReportTscStatus.iPlanId > 20)?"周时基":"特殊月日时基"));
+                this.time_NO_label.Content = "方案号：" + ReportTscStatus.iCurrentTimePattern;
+                this.run_NO_label.Content = "时段号：" + ReportTscStatus.iCurrentSchedule;
+                this.lblCurrentStage.Content = "当前阶段：" + ReportTscStatus.iCurrentStage;
+                 this.label_CycleTime.Content = "周期时长： " + ReportTscStatus.iCycleTime;
+                 this.label_iCurrentStagePattern.Content = "阶段配时号： " + ReportTscStatus.iCurrentStagePattern;
+                 this.label_iStageCount.Content = "阶段总数： " + ReportTscStatus.iStageCount;
+                 this.label_iStageTotalTime.Content ="阶段总时长： " + ReportTscStatus.iStageTotalTime;
+                 this.label_iStageRunTime.Content = "阶段运行时长： " + ReportTscStatus.iStageRunTime;
+                 if (ReportTscStatus.sControlModel.Equals("手动") && rbnManaul.IsChecked == false && rbnSelf.IsChecked != true)
+                    rbnManaul.IsChecked = true;
+                 if (ReportTscStatus.sWorkStatus.Equals("闪光") && RadLampFlash.IsChecked == false)
+                     RadLampFlash.IsChecked = true;
+                 else if (ReportTscStatus.sWorkStatus.Equals("全红") && RadLampRed.IsChecked == false)
+                     RadLampRed.IsChecked = true;
+            List <uint> redList    =   ReportTscStatus.listChannelRedStatus;
+            List <uint> yellowList =   ReportTscStatus.listChannelYellowStatus;
+            List <uint> greenList  =   ReportTscStatus.listChannelGreenStatus;
+            #region 图片刷新
+            for (int i = 0; i < redList.Count; i++) //redList.Count == yellowList.Count == greenList.Count
             {
                 foreach (Channel c in lc)
                 {
@@ -710,12 +439,22 @@ namespace tscui.Pages.Phase
                         {
                             if (ptd.ucPhase != 0)
                             {
-                                if (ptd.ucPhase == c.ucSourcePhase)
+                                if (ptd.ucPhase == c.ucSourcePhase && c.ucType != 0x4)
                                 {
                                     if (redList[i] == 1)
                                     {
-                                        updateRed(ptd);
-                                      //  break;
+                                        UpdateLampColor(ptd,Define.LAMP_RED);
+                                         break;
+                                    }
+                                    else if(yellowList[i]==1)
+                                    {
+                                        UpdateLampColor(ptd, Define.LAMP_YELLOW);
+                                        break;
+                                    }
+                                    else if (greenList[i] == 1)
+                                    {
+                                        UpdateLampColor(ptd, Define.LAMP_GREEN);
+                                        break;
                                     }
                                 }
                                /// break;
@@ -724,12 +463,23 @@ namespace tscui.Pages.Phase
                             {
                                 if (ptd.ucOverlapPhase != 0)
                                 {
-                                    if (ptd.ucOverlapPhase == c.ucSourcePhase)
+                                    if (ptd.ucOverlapPhase == c.ucSourcePhase && c.ucType==0x4)
                                     {
                                         if(redList[i] == 1)
                                         {
-                                            updateRed(ptd);
-                                            //break;
+                                           // updateRed(ptd);
+                                            UpdateLampColor(ptd, Define.LAMP_RED);
+                                             break;
+                                        }
+                                        else if (yellowList[i] == 1)
+                                        {
+                                            UpdateLampColor(ptd, Define.LAMP_YELLOW);
+                                            break;
+                                        }
+                                        else if (greenList[i] == 1)
+                                        {
+                                            UpdateLampColor(ptd, Define.LAMP_GREEN);
+                                            break;
                                         }
                                        
                                     }
@@ -738,7 +488,7 @@ namespace tscui.Pages.Phase
                             }
                            // break;
                         }
-                       // break;
+                        break;
                     }
                     
                 }
@@ -748,23 +498,27 @@ namespace tscui.Pages.Phase
             }
             #endregion
 
-            #region 黄灯图片刷新
+            #region 刷新黄灯绿灯旧代码
+                /*
+           
             for (int i = 0; i < yellowList.Count; i++)
             {
                 foreach (Channel c in lc)
                 {
-                    if ((i+1) == c.ucId)
+                    if ((i + 1) == c.ucId)
                     {
                         foreach (PhaseToDirec ptd in lptd)
                         {
                             if (ptd.ucPhase != 0)
                             {
-                                if (ptd.ucPhase == c.ucSourcePhase)
+                                if (ptd.ucPhase == c.ucSourcePhase && c.ucType != 0x4)
                                 {
                                     if (yellowList[i] == 1)
                                     {
-                                        updateYellow(ptd);
-                                      ///  break;
+                                        // updateYellow(ptd);
+                                        UpdateLampColor(ptd, Define.LAMP_YELLOW);
+
+                                        break;
                                     }
                                 }
                             }
@@ -772,69 +526,81 @@ namespace tscui.Pages.Phase
                             {
                                 if (ptd.ucOverlapPhase != 0)
                                 {
-                                    if (ptd.ucOverlapPhase == c.ucSourcePhase)
+                                    if (ptd.ucOverlapPhase == c.ucSourcePhase && c.ucType == 0x4)
                                     {
-                                        if(yellowList[i] == 1)
-                                        { 
-                                            updateYellow(ptd);
-                                            //break;
+                                        if (yellowList[i] == 1)
+                                        {
+                                            // updateYellow(ptd);
+                                            UpdateLampColor(ptd, Define.LAMP_YELLOW);
+
+                                              break;
                                         }
                                     }
                                 }
                             }
                         }
-                       // break;
+                         break;
                     }
 
                 }
             }
 
-                #endregion
+            #endregion
 
             #region 绿灯图片刷新
             for (int i = 0; i < greenList.Count; i++)
             {
                 foreach (Channel c in lc)
                 {
-                    if ((i+1) == c.ucId)
+                    if ((i + 1) == c.ucId)
                     {
                         foreach (PhaseToDirec ptd in lptd)
                         {
                             if (ptd.ucPhase != 0)
                             {
-                                if (ptd.ucPhase == c.ucSourcePhase)
+                                if (ptd.ucPhase == c.ucSourcePhase && c.ucType != 0x4)
                                 {
                                     if (greenList[i] == 1)
                                     {
-                                        updateGreen(ptd);
-                                        //break;
+                                        // updateGreen(ptd);
+                                      //  if (i == 3)
+                                         //   Console.WriteLine("Green" + i);
+                                            UpdateLampColor(ptd, Define.LAMP_GREEN);
+
+                                         break;
                                     }
-                                    
+
                                 }
                             }
                             else
                             {
                                 if (ptd.ucOverlapPhase != 0)
                                 {
-                                    if (ptd.ucOverlapPhase == c.ucSourcePhase)
+                                    if (ptd.ucOverlapPhase == c.ucSourcePhase && c.ucType == 0x4)
                                     {
                                         if (greenList[i] == 1)
                                         {
-                                            updateGreen(ptd);
-                                            //break;
+                                            //  updateGreen(ptd);
+                                            //if (i == 3)
+                                            //    Console.WriteLine("OverGreen" + i);
+                                            //Console.WriteLine("OverlapPhase "+i);
+                                            UpdateLampColor(ptd, Define.LAMP_GREEN);
+                                             break;
                                         }
                                     }
                                 }
                             }
-                            
+
                         }
-                        //break;
+                        break;
                     }
 
                 }
 
             }
-                #endregion
+            #endregion
+*/
+        #endregion
 
             }
             
@@ -843,38 +609,28 @@ namespace tscui.Pages.Phase
            
         }
         #endregion
-        
-        private void Image_ImageFailed(object sender, System.Windows.ExceptionRoutedEventArgs e)
-        {
-            ;
-        }
-
-        private void Image_ImageFailed_1(object sender, System.Windows.ExceptionRoutedEventArgs e)
-        {
-            ;
-        }
-
+   
         private void lampRush_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
                 this.GrpDirecPhase.Visibility = Visibility.Hidden; //隐藏方向相位 信息
-                tscui.Models.ReportTscStatus reportTscStatus = new Models.ReportTscStatus();
+                //ReportTscStatus reportTscStatus = new Models.ReportTscStatus();
                 TscDataUtils.GetReportStatus();
                 LampRhshStar();
             }
             catch(Exception ex)
             {
-                MessageBox.Show("刷新当前运行状态 信息异常!");
+                MessageBox.Show("刷新当前相位运行状态异常!","相位状态",MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
             
         }
       
         private void InitPhaseToButtonByDirec()
         {
-            if (t == null)
+            if (tdData == null)
                 return;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
 
             if (DirecPhaseCombox.Items.Count == 0)//   InitDirecNumber();
             {
@@ -897,7 +653,7 @@ namespace tscui.Pages.Phase
         }
 
       
-        TscData t;
+       
         private delegate void DelegateInitPhaseToButtonByDirec();
         private void DispatcherInitPhaseToButtonByDirec(object state)
         {
@@ -905,96 +661,35 @@ namespace tscui.Pages.Phase
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
+            tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (tdData == null)
             {
-                MessageBox.Show("请选择一信号机后，再切换到此界面！");
+                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_log_selected_tsc"]);
                 this.Visibility = Visibility.Hidden;
                 return;
             }
             this.Visibility = Visibility.Visible;
             ThreadPool.QueueUserWorkItem(DispatcherInitPhaseToButtonByDirec);
-            ////InitPhaseToButtonByDirec();
-        }
-
-  
-        private void phase1_Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-
-        }
-
-        private void phase4_Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-
         }
     
-        
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Message m1 = TscDataUtils.SetPhaseToDirec(t.ListPhaseToDirec);
-           // Message m2 = TscDataUtils.SetPhase(t.ListPhase);
-            //Message m3 = TscDataUtils.SetChannel(t.ListChannel);
-            //Message m4 = TscDataUtils.SetOverlapPhase(t.ListOverlapPhase);
-
-            if (m1.flag )
-            {
-                MessageBox.Show("方向保存成功");
-            }
-            else
-            {
-                MessageBox.Show("方向保存失败！");
-            }
-        }
-
-        private void btnRead_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach(tscui.Models.Phase p in t.ListPhase)
-            {
-                //Console.WriteLine(p.ucId);
-            }
-        }
-
+    
         private void lampRush_CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            //if (tdData == null)
+            //    tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             this.GrpDirecPhase.Visibility = Visibility.Visible;
 
             dispatcherTimer1.Stop();
-            Udp.sendUdp(t.Node.sIpAddress, t.Node.iPort, Define.REPORT_TSC_STATUS_CANCEL);
+            Udp.sendUdp(tdData.Node.sIpAddress, tdData.Node.iPort, Define.REPORT_TSC_STATUS_CANCEL);
+            Udp.Close();
         }
 
-        private void savePhaseAbout(object state)
-        {
-            DateTime dt1 = DateTime.Now;
-            
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            TscDataUtils.SetPhaseToDirec(t.ListPhaseToDirec);
-            TscDataUtils.SetPhase(t.ListPhase);
-            TscDataUtils.SetChannel(t.ListChannel);
-            TscDataUtils.SetOverlapPhase(t.ListOverlapPhase);
-            DateTime dt2 = DateTime.Now;
-            TimeSpan dt3 = dt2 - dt1;
-            Console.WriteLine(dt3.TotalSeconds);
-            
-        }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                //ThreadPool.QueueUserWorkItem(savePhaseAbout);
-                
                 if(echoCountDownDispatcherTimer != null)
                 {
                     echoCountDownDispatcherTimer.Stop();
@@ -1003,11 +698,20 @@ namespace tscui.Pages.Phase
                 {
                     dispatcherTimer1.Stop();
                 }
+                if (cbxEchoCountDown.IsChecked == true)
+                {
+                    this.cbxEchoCountDown_Unchecked(this,null);
+                }
+                if (lampRush_CheckBox.IsChecked == true)
+                {
+                    this.lampRush_CheckBox_Unchecked(this,null);
+                }
                 
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Phase: "+ex.ToString());
+                MessageBox.Show(ex.ToString(), "相位异常", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
             
         }
@@ -1015,24 +719,35 @@ namespace tscui.Pages.Phase
         DispatcherTimer echoCountDownDispatcherTimer;
         private void cbxEchoCountDown_Checked(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("倒计时仅限多时段控制下正确显示,\r\n需在【外设】-【倒计时】开启旧国标四方向!", "倒计时", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            WestCntDown.Visibility  = Visibility;
+            NorthCntDown.Visibility = Visibility;
+            SouthCntDown.Visibility = Visibility;
+            EastCntDown.Visibility  = Visibility;
+            SouthCntDown.Text = "00";
+            NorthCntDown.Text = "00";
+            EastCntDown.Text  = "00";
+            WestCntDown.Text  = "00";
             TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
-            if (td == null)
-                return;
-            EchoCntDowns echoCountDown = new EchoCntDowns();
+            //EchoCntDowns echoCountDown = new EchoCntDowns();
             Udp.StartReceiveEchoCountDown();
             Udp.sendUdpEchoCountDown(td.Node.sIpAddress, Define.GBT_PORT, Define.ECHO_TSC_COUNT_DOWN);
             
-            echoCountDownDispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            echoCountDownDispatcherTimer = new DispatcherTimer();
             echoCountDownDispatcherTimer.Tick += new EventHandler(CountDownDispatcherTimer_Tick);
             echoCountDownDispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             echoCountDownDispatcherTimer.Start();
+
         }
         private void CountDownDispatcherTimer_Tick(object sender, EventArgs e)
         {
+            if (EchoCntDowns._listEhoCntDown == null) 
+                return;
             foreach(EhoCntDown ecd in EchoCntDowns._listEhoCntDown)
             {
                 ecd.usFigure--;
-                
+
                 if(ecd.Direc == 0)
                 {
                     if (ecd.Color == 0x01)
@@ -1048,6 +763,7 @@ namespace tscui.Pages.Phase
                         NorthCntDown.Foreground = new SolidColorBrush(Colors.Red);
                     }   
                     NorthCntDown.Text = "" + ecd.usFigure;
+                    continue;
                 }
                 if (ecd.Direc == 1)
                 {
@@ -1064,6 +780,7 @@ namespace tscui.Pages.Phase
                         EastCntDown.Foreground = new SolidColorBrush(Colors.Red);
                     }
                     EastCntDown.Text = "" + ecd.usFigure;
+                    continue;
                 }
                 if (ecd.Direc == 2)
                 {
@@ -1080,6 +797,7 @@ namespace tscui.Pages.Phase
                         SouthCntDown.Foreground = new SolidColorBrush(Colors.Red);
                     }
                     SouthCntDown.Text = "" + ecd.usFigure;
+                    continue;
                 }
                 if (ecd.Direc == 3)
                 {
@@ -1096,6 +814,7 @@ namespace tscui.Pages.Phase
                         WestCntDown.Foreground = new SolidColorBrush(Colors.Red);
                     }
                     WestCntDown.Text = "" + ecd.usFigure;
+                    continue;
                 }
             }
             
@@ -1104,35 +823,80 @@ namespace tscui.Pages.Phase
         private void cbxEchoCountDown_Unchecked(object sender, RoutedEventArgs e)
         {
             
-            if (t == null)
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Udp.sendUdp(t.Node.sIpAddress, t.Node.iPort, Define.ECHO_TSC_COUNT_DOWN_CANCEL);
-            echoCountDownDispatcherTimer.Stop();
-            SouthCntDown.Text = "";
-            NorthCntDown.Text = "";
-            EastCntDown.Text = "";
-            WestCntDown.Text = "";
+            if (tdData == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            Udp.sendUdp(tdData.Node.sIpAddress, tdData.Node.iPort, Define.ECHO_TSC_COUNT_DOWN_CANCEL);
+            echoCountDownDispatcherTimer.Stop();        
+            WestCntDown.Visibility = Visibility.Hidden;
+            NorthCntDown.Visibility = Visibility.Hidden;
+            SouthCntDown.Visibility = Visibility.Hidden;
+            EastCntDown.Visibility = Visibility.Hidden;
         }
 
         private void rbnManaul_Checked(object sender, RoutedEventArgs e)
         {
-            Message msg = TscDataUtils.SetCtrlMunual();
+         
+            if (ReportTscStatus.sControlModel.Equals("手动"))
+            {
+                RadLampFlash.IsEnabled = true;
+                RadLampRed.IsEnabled = true;
+            //    RadLampOff.IsEnabled = true;
+                btnNextStep.IsEnabled = true;
+                btnNextPhase.IsEnabled = true;
+                btnEast.IsEnabled = true;
+                btnNorth.IsEnabled = true;
+                btnSouth.IsEnabled = true;
+                btnWest.IsEnabled = true;
+                return;
+
+            }
+            bool bok = TscDataUtils.SetCtrlMunual();
+            if (bok)
+            {
+                RadLampFlash.IsEnabled = true;
+                RadLampRed.IsEnabled = true;
+               // RadLampOff.IsEnabled = true;
+                btnNextStep.IsEnabled = true;
+                btnNextPhase.IsEnabled = true;
+                btnEast.IsEnabled = true;
+                btnNorth.IsEnabled = true;
+                btnSouth.IsEnabled = true;
+                btnWest.IsEnabled = true;
+                MessageBox.Show("手动控制命令发送成功!", "手动控制", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("手动控制命令发送失败!", "手动控制", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
         }
-
-        private void rbnManaul_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rbnSelf_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void rbnSelf_Checked(object sender, RoutedEventArgs e)
         {
-            Message msg = TscDataUtils.SetCtrlSelf();
+          
+            if (!ReportTscStatus.sControlModel.Equals("手动"))
+            {
+                MessageBox.Show("当前非手动控制!", "手动控制", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            bool bok = TscDataUtils.SetCtrlSelf();
+            if (bok)
+            {
+                RadLampFlash.IsEnabled = false;
+                RadLampRed.IsEnabled = false;
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                MessageBox.Show("自主控制指令发送成功!","自主控制",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("自动控制指令发送失败!", "自主控制", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
           
         }
 
@@ -1140,12 +904,7 @@ namespace tscui.Pages.Phase
         {
             Message msg = TscDataUtils.SetNextStep();
         }
-
-        private void btnNextDirec_Click(object sender, RoutedEventArgs e)
-        {
-            Message msg = TscDataUtils.SetNextDirec();
-        }
-
+        
         private void btnNextPhase_Click(object sender, RoutedEventArgs e)
         {
             Message msg = TscDataUtils.SetNextPhase();
@@ -1153,51 +912,54 @@ namespace tscui.Pages.Phase
 
         private void btnNorth_Click(object sender, RoutedEventArgs e)
         {
+            btnNextStep.IsEnabled = false;
+            btnNextPhase.IsEnabled = false;
             Message msg = TscDataUtils.SetCtrlNorth();
         }
 
         private void btnEast_Click(object sender, RoutedEventArgs e)
         {
+            btnNextStep.IsEnabled = false;
+            btnNextPhase.IsEnabled = false;
             Message msg = TscDataUtils.SetCtrlEast();
         }
 
         private void btnSouth_Click(object sender, RoutedEventArgs e)
         {
+            btnNextStep.IsEnabled = false;
+            btnNextPhase.IsEnabled = false;
             Message msg = TscDataUtils.SetCtrlSouth();
         }
 
         private void btnWest_Click(object sender, RoutedEventArgs e)
         {
+            btnNextStep.IsEnabled = false;
+            btnNextPhase.IsEnabled = false;
             Message msg = TscDataUtils.SetCtrlWest();
-        }
-
-        private void bsrRoadCount_Spin(object sender, Xceed.Wpf.Toolkit.SpinEventArgs e)
-        {
-
         }
 
         private void DirecPhaseCombox_SelectChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                 {
                     return;
                 }
                 opchannels.Content = "";
                 roadcount.Content = "";
                 DirectPhaseIdCombox.SelectedIndex = -1;
-                List<PhaseToDirec> tscdirecphase = t.ListPhaseToDirec;
+                List<PhaseToDirec> tscdirecphase = tdData.ListPhaseToDirec;
 
                 foreach (PhaseToDirec direcphase in tscdirecphase)
                 {
                     if (DirecPhaseCombox.SelectedIndex == -1)
                         return;
-                    if (direcphase.ucId == ((MusicView.DirecNumer)(DirecPhaseCombox.SelectedValue)).value)
+                    if (direcphase.ucId == ((DirecNumer)(DirecPhaseCombox.SelectedValue)).value)
                     {
                         roadcount.Content = direcphase.ucRoadCnt.ToString();
-                        foreach (MusicView.ChannelPhaseOverlap cpo in lcpo)
+                        foreach (ChannelPhaseOverlap cpo in lcpo)
                         {
                             if (cpo.id == direcphase.ucPhase && cpo.isPhase == true && direcphase.ucOverlapPhase == 0)
                             {
@@ -1211,10 +973,10 @@ namespace tscui.Pages.Phase
                             }
 
                         }
-                        foreach (Channel ch in t.ListChannel)
+                        foreach (Channel ch in tdData.ListChannel)
                         {
-                            byte phaseid = ((MusicView.ChannelPhaseOverlap) (DirectPhaseIdCombox.SelectedValue)).id;
-                            bool bisphase =((MusicView.ChannelPhaseOverlap) (DirectPhaseIdCombox.SelectedValue)).isPhase;
+                            byte phaseid = ((ChannelPhaseOverlap) (DirectPhaseIdCombox.SelectedValue)).id;
+                            bool bisphase =((ChannelPhaseOverlap) (DirectPhaseIdCombox.SelectedValue)).isPhase;
                             if (phaseid == ch.ucSourcePhase)
                             {
                                 if ((bisphase == true && ch.ucType != 0x4) || (bisphase == false && ch.ucType == 0x4))
@@ -1243,10 +1005,133 @@ namespace tscui.Pages.Phase
             catch (Exception ex)
             {
 
-                MessageBox.Show("获取方向相关参数异常!");
+                MessageBox.Show("获取方向相关参数异常!","相位状态",MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch (rotate%4)
+            {
+                case 0:
+                    TrafficCanvas.RenderTransform = new RotateTransform(90);
+                    EastCntDown.RenderTransform = new RotateTransform(-90);
+                    WestCntDown.RenderTransform = new RotateTransform(-90);
+                    NorthCntDown.RenderTransform = new RotateTransform(-90);
+                    SouthCntDown.RenderTransform = new RotateTransform(-90);
+                    rotate++;
+                    break;
+                case 1:
+                    TrafficCanvas.RenderTransform = new RotateTransform(180);
+                    EastCntDown.RenderTransform = new RotateTransform(-180);
+                    WestCntDown.RenderTransform = new RotateTransform(-180);
+                    NorthCntDown.RenderTransform = new RotateTransform(-180);
+                    SouthCntDown.RenderTransform = new RotateTransform(-180);
+                    rotate++;
+                    break;
+                case 2:
+                    TrafficCanvas.RenderTransform = new RotateTransform(270);
+                    EastCntDown.RenderTransform = new RotateTransform(-270);
+                    WestCntDown.RenderTransform = new RotateTransform(-270);
+                    NorthCntDown.RenderTransform = new RotateTransform(-270);
+                    SouthCntDown.RenderTransform = new RotateTransform(-270);
+                    rotate++;
+                    break;
+                case 3:
+                    TrafficCanvas.RenderTransform = new RotateTransform(360);
+                    EastCntDown.RenderTransform = new RotateTransform(-360);
+                    WestCntDown.RenderTransform = new RotateTransform(-360);
+                    NorthCntDown.RenderTransform = new RotateTransform(-360);
+                    SouthCntDown.RenderTransform = new RotateTransform(-360);
+                    rotate++;
+                    break;
+                default:
+                    TrafficCanvas.RenderTransform = new RotateTransform(0);
+                    break;
+            }
+           
+          
+        }
+
+        private void LampFlashCheck(object sender, RoutedEventArgs e)
+        {
+
+            if (ReportTscStatus.sWorkStatus.Equals("闪光"))
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                return;
+            }
+         
+            bool bok = TscDataUtils.SetFlash();
+            if (bok)
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                MessageBox.Show("黄闪命令发送成功!", "手控", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("黄闪命令发送失败!", "手控", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LampRedCheck(object sender, RoutedEventArgs e)
+        {
+            if (ReportTscStatus.sWorkStatus.Equals("全红"))
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                return;
+            }
+            bool bok = TscDataUtils.SetRed();
+            if (bok)
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                MessageBox.Show("全红命令发送成功!", "手控", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("全红命令发送失败!", "手控", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        //private void LampOffCheck(object sender, RoutedEventArgs e)
+        //{
+        //    bool bok = TscDataUtils.SetOff();
+        //    if (bok)
+        //    {
+        //        MessageBox.Show("熄灯指令发送成功!");
+        //        btnNextStep.IsEnabled = false;
+        //        btnNextPhase.IsEnabled = false;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("熄灯指令发送失败!");
+
+        //    }
+        //}
 
 
     }

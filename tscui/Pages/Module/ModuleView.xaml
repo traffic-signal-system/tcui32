@@ -8,106 +8,157 @@
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
              xmlns:local="clr-namespace:tscui.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" Width="900">
 
     <UserControl.DataContext>
         <local:ModuleViewModel x:Name="viewModel" />
     </UserControl.DataContext>
 
-    <ScrollViewer Margin="0,4,40,4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <apexControls:ApexGrid  Margin="0,0,0,0" Rows="Auto,Auto,*,Auto" Background="{DynamicResource PopupBackgroundBrush}" >
-            <GroupBox Header="{DynamicResource tsc_module_config}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="740" Height="179">
-                <Grid>
-                    <GroupBox x:Name="gbxLamp8" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157">
-                        <CheckBox x:Name="cbxLamp8" Content="" HorizontalAlignment="Left" Margin="15,114,0,0" VerticalAlignment="Top" Width="15"/>
+    <ScrollViewer Margin="0,4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <apexControls:ApexGrid  Margin="0,0,0,0" Rows="Auto,Auto,*,Auto" Background="Transparent" Width="833" >
+            <apexControls:ApexGrid.ColumnDefinitions>
+                <ColumnDefinition Width="637*"/>
+                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="17*"/>
+            </apexControls:ApexGrid.ColumnDefinitions>
+            <GroupBox Header="总线模块" HorizontalAlignment="Left" VerticalAlignment="Top" Width="823" Height="411" Grid.ColumnSpan="4" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}">
+                <Grid Margin="0,0,-12,-12">
+                    <GroupBox x:Name="gbxMain" Header="主控板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="40">
+                        <Grid HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="427" Margin="0,0,-12,-12">
+                            <Label Content="备份主控板      地址: 0x11" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164"/>
+                            <CheckBox Content="在线" x:Name="MainBackOnline" HorizontalAlignment="Left" Margin="373,5,0,0" VerticalAlignment="Top"  IsEnabled="False"/>
+                            <Label Content="版本:" x:Name="MainBackver" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="143"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp7" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="61,0,0,0">
-                        <CheckBox x:Name="cbxLamp7" Content="" HorizontalAlignment="Left" Margin="17,113,0,0" VerticalAlignment="Top" Width="18"/>
+                    <GroupBox x:Name="gbxMain_Copy" Header="液晶控制器" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="40" Margin="0,40,0,0" >
+                        <Grid HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="427" Margin="0,0,-12,-12">
+                            <Label Content="标配控制器      地址: 0x31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164"/>
+                            <CheckBox Content="在线" x:Name="MacctrolOnline" HorizontalAlignment="Left" Margin="373,5,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Content="版本:" x:Name="Macctrolver" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="146"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp6" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="119,0,0,0">
-                        <CheckBox x:Name="cbxLamp6" Content="" HorizontalAlignment="Left" Margin="18,115,0,0" VerticalAlignment="Top" Width="18"/>
+                    <GroupBox x:Name="gbxMain_Copy1" Header="黄闪器" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="40" Margin="0,85,0,0" >
+                        <Grid HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="427" Margin="0,0,-12,-12">
+                            <Label Content="标配黄闪器      地址: 0x2E" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146"/>
+                            <CheckBox Content="在线" x:Name="FlashOnline" HorizontalAlignment="Left" Margin="374,0,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Content="版本:" x:Name="FlashVer" HorizontalAlignment="Left" Margin="210,1,0,0" VerticalAlignment="Top" Width="158"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp5" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="174,0,0,0">
-                        <CheckBox x:Name="cbxLamp5" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox x:Name="gbxMain_Copy2" Header="灯条" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="40" Margin="0,130,0,0" >
+                        <Grid HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="417" Margin="0,0,-2,-12">
+                            <Label Content="显示灯条         地址: 0x32" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164"/>
+                            <CheckBox Content="在线"  x:Name="MainBoardLedOnline" HorizontalAlignment="Left" Margin="374,6,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Content="版本:" x:Name="MainBoardLed" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="160"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp4" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="231,0,0,0">
-                        <CheckBox x:Name="cbxLamp4" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox x:Name="gbxMain_Copy3" Header="电源板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="69" Margin="0,175,0,0" >
+                        <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="427" Margin="0,0,-12,-3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="标配电源板      地址: 0x20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164"/>
+                            <CheckBox x:Name="Power1Check" Grid.Row="0" Content="在线" HorizontalAlignment="Left" Margin="374,12,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.RowSpan="2"/>
+                            <Label Grid.Row="0" x:Name="Power1Ver" Content="版本:" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="161"/>
+                            <Label Content="备用电源板      地址: 0x22" HorizontalAlignment="Left" Margin="1,24,0,0" VerticalAlignment="Top" Width="146" Grid.RowSpan="2"/>
+                            <Label Content="版本:" x:Name="Power2Ver" HorizontalAlignment="Left" Margin="210,24,0,0" VerticalAlignment="Top" Width="161" Grid.RowSpan="2"/>
+                            <CheckBox x:Name="Power2Check" Grid.Row="1" Content="在线" HorizontalAlignment="Left" Margin="374,6,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp3" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="286,0,0,0">
-                        <CheckBox x:Name="cbxLamp3" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox x:Name="gbxMain_Copy4" Header="车检板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="427" Height="140" Margin="0,249,0,0" >
+                        <Grid HorizontalAlignment="Left" Height="113"  VerticalAlignment="Top" Width="427" Margin="0,0,-12,-22">
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="Auto"  />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="检测器1           地址: 0x24" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164"/>
+                            <CheckBox Grid.Row="0" Content="在线" x:Name="Detector1Online" HorizontalAlignment="Left" Margin="376,8,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="0" Content="版本:" x:Name="Detector1Ver" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="163"/>
+                            <Label Content="检测器2          地址: 0x25" HorizontalAlignment="Left" Margin="1,25,0,0" VerticalAlignment="Top" Width="146" Grid.RowSpan="2"/>
+                            <Label Content="版本:" x:Name="Detector2Ver" HorizontalAlignment="Left" Margin="210,25,0,0" VerticalAlignment="Top" Width="163" Grid.RowSpan="2"/>
+                            <CheckBox Grid.Row="1" Content="在线" x:Name="Detector2Online" HorizontalAlignment="Left" Margin="376,3,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="2" Content="接口板1           地址: 0x29" HorizontalAlignment="Left" VerticalAlignment="Top" Width="164" Margin="0,0,0,-24" Grid.RowSpan="2"/>
+                            <CheckBox Grid.Row="2" Content="在线" x:Name="Inject1Online" HorizontalAlignment="Left" Margin="376,7,0,-22" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="2" Content="版本:" x:Name="Inject1Ver" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Width="163" Grid.RowSpan="2"/>
+                            <Label Grid.Row="3" Content="接口板2          地址: 0x2A" HorizontalAlignment="Left" Margin="1,24,0,-49" VerticalAlignment="Top" Width="146"/>
+                            <Label Grid.Row="3" Content="版本:" x:Name="Inject2Ver" HorizontalAlignment="Left" Margin="210,24,0,0" VerticalAlignment="Top" Width="163" />
+                            <CheckBox Grid.Row="3" Content="在线" x:Name="Inject2Online" HorizontalAlignment="Left" Margin="376,32,0,-47" VerticalAlignment="Top" IsEnabled="False"/>
+                        </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="gbxLamp2" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="342,0,0,0">
-                        <CheckBox x:Name="cbxLamp2" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxLamp1" Header="{DynamicResource tsc_module_lamp}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="398,0,0,0">
-                        <CheckBox x:Name="cbxLamp1" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxPower2" Header="{DynamicResource tsc_module_power}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="453,0,0,0">
-                        <CheckBox x:Name="cbxPower2" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxPower1" Header="{DynamicResource tsc_module_power}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="509,0,0,0">
-                        <CheckBox x:Name="cbxPower1" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxController" Header="{DynamicResource tsc_module_control}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="565,0,0,0">
-                        <CheckBox x:Name="cbxController" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxTouchScreen" Header="{DynamicResource tsc_module_touch}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="620,1,0,-1">
-                        <CheckBox x:Name="cbxTouchScreen" Content="" HorizontalAlignment="Left" Margin="19,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxMain" Header="{DynamicResource tsc_module_main}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="673,0,0,0">
-                        <CheckBox x:Name="cbxMain" Content="" HorizontalAlignment="Left" Margin="19,116,0,0" VerticalAlignment="Top"/>
+                    <GroupBox x:Name="gbxMain_Copy5" Header="灯驱板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="377" Height="391" Margin="432,-2,0,0">
+                        <Grid HorizontalAlignment="Left" Height="363" VerticalAlignment="Top" Width="367" Margin="0,0,-2,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="52" />
+                                <RowDefinition Height="3"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="灯驱板1   地址: 0x13" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116"/>
+                            <CheckBox Grid.Row="0" Content="在线" x:Name="Lamp1Online" HorizontalAlignment="Left" Margin="323,7,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="0" Content="版本:" x:Name="Lamp1" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Top" Width="120"/>
+                            <Label Grid.Row="1" Content="灯驱板2   地址: 0x14" HorizontalAlignment="Left" Margin="1,11,0,0" VerticalAlignment="Top" Width="120"/>
+                            <Label Grid.Row="1" Content="版本:" x:Name="Lamp2" HorizontalAlignment="Left" Margin="198,11,0,0" VerticalAlignment="Top" Width="119" />
+                            <CheckBox Grid.Row="1" Content="在线" x:Name="Lamp2Online" HorizontalAlignment="Left" Margin="323,17,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="2" Content="灯驱板3   地址: 0x15" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="0,13,0,0" />
+                            <CheckBox Grid.Row="2" Content="在线" x:Name="Lamp3Online" HorizontalAlignment="Left" Margin="323,21,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="2" Content="版本:" x:Name="Lamp3" HorizontalAlignment="Left" Margin="198,13,0,0" VerticalAlignment="Top" Width="118"/>
+                            <Label Grid.Row="3" Content="灯驱板4   地址: 0x16" HorizontalAlignment="Left" Margin="1,19,0,0" VerticalAlignment="Top" Width="120"/>
+                            <Label Grid.Row="3" Content="版本:" x:Name="Lamp4" HorizontalAlignment="Left" Margin="198,19,0,0" VerticalAlignment="Top" Width="118" />
+                            <CheckBox Grid.Row="3" Content="在线" x:Name="Lamp4Online" HorizontalAlignment="Left" Margin="324,25,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="5" Content="灯驱板5   地址: 0x17" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116" Margin="1,22,0,0"/>
+                            <CheckBox Grid.Row="5" Content="在线" x:Name="Lamp5Online" HorizontalAlignment="Left" Margin="324,29,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="5" Content="版本:" x:Name="Lamp5" HorizontalAlignment="Left" Margin="198,22,0,0" VerticalAlignment="Top" Width="118"/>
+                            <Label Content="灯驱板6   地址: 0x18" HorizontalAlignment="Left" Margin="1,21,0,0" VerticalAlignment="Top" Width="120" Grid.Row="7"/>
+                            <Label Content="版本:" x:Name="Lamp6" HorizontalAlignment="Left" Margin="198,21,0,0" VerticalAlignment="Top" Width="117" Grid.Row="7"/>
+                            <CheckBox Grid.Row="7" Content="在线" x:Name="Lamp6Online" HorizontalAlignment="Left" Margin="325,30,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="8" Content="灯驱板7   地址: 0x1A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="1,27,0,0"/>
+                            <CheckBox Grid.Row="8" Content="在线" x:Name="Lamp7Online" HorizontalAlignment="Left" Margin="325,34,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                            <Label Grid.Row="8" Content="版本:" x:Name="Lamp7" HorizontalAlignment="Left" Margin="198,27,0,0" VerticalAlignment="Top" Width="117"/>
+                            <Label Grid.Row="8" Content="灯驱板8   地址: 0x1B" HorizontalAlignment="Left" Margin="0,72,0,0" VerticalAlignment="Top" Width="120"/>
+                            <Label Grid.Row="8" Content="版本:" x:Name="Lamp8" HorizontalAlignment="Left" Margin="198,72,0,0" VerticalAlignment="Top" Width="118" />
+                            <CheckBox Grid.Row="8" Content="在线" x:Name="Lamp8Online" HorizontalAlignment="Left" Margin="324,78,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                        </Grid>
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="{DynamicResource tsc_module_config}" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="740" Height="189">
+            <Button x:Name="btnRead" Content="{DynamicResource tsc_data_refresh}" HorizontalAlignment="Left" Margin="403,570,0,0" Width="75" Click="btnRead_Click" Height="22" VerticalAlignment="Top"/>
+            <GroupBox Header="外接模块" HorizontalAlignment="Left" Margin="0,416,0,0" VerticalAlignment="Top" Height="139" Width="823" Grid.ColumnSpan="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
                 <Grid>
-                    <GroupBox x:Name="gbxDetector4" Header="{DynamicResource tsc_module_detector}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157">
-                        <CheckBox x:Name="cbxDetector4" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="触摸屏" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="730,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxDetector3" Header="{DynamicResource tsc_module_detector}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="63,0,0,0">
-                        <CheckBox x:Name="cbxDetector3" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="GPS" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="645,0,0,0" IsEnabled="False" >
+                        <CheckBox x:Name="ChkGps" Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxDetector2" Header="{DynamicResource tsc_module_detector}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="119,0,0,0">
-                        <CheckBox x:Name="cbxDetector2" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="GSM" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="558,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxDetector1" Header="{DynamicResource tsc_module_detector}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="175,0,0,0">
-                        <CheckBox x:Name="cbxDetector1" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="WIFI" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="459,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxInterface4" Header="{DynamicResource tsc_module_interface}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="233,0,0,0">
-                        <CheckBox x:Name="cbxInterface4" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="CAM" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="348,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxInterface3" Header="{DynamicResource tsc_module_interface}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="289,0,0,0">
-                        <CheckBox x:Name="cbxInterface3" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="待定" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="26,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxInterface2" Header="{DynamicResource tsc_module_interface}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="343,0,0,0">
-                        <CheckBox x:Name="cbxInterface2" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="待定" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="128,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox x:Name="gbxInterface1" Header="{DynamicResource tsc_module_interface}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="400,0,0,0">
-                        <CheckBox x:Name="cbxInterface1" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
+                    <GroupBox Header="待定" HorizontalAlignment="Left" Height="117" VerticalAlignment="Top" Width="58" Margin="237,0,0,0" IsEnabled="False" >
+                        <CheckBox Content="启用" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="46" Margin="0,77,0,0"/>
                     </GroupBox>
-                    <GroupBox Header="检测器" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="436,0,0,0" Visibility="Hidden"/>
-                    <GroupBox Header="检测器" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="493,0,0,0" Visibility="Hidden"/>
-                    <GroupBox Header="接口板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="545,0,0,0" Visibility="Hidden"/>
-                    <GroupBox Header="接口板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="597,0,0,0" Visibility="Hidden"/>
-                    <GroupBox Header="主控板" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="654,0,0,0" Visibility="Hidden"/>
-                    <GroupBox x:Name="gbxGPS" Header="{DynamicResource tsc_module_gps}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="455,0,0,0">
-                        <CheckBox x:Name="cbxGPS" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxSMS" Header="{DynamicResource tsc_module_sms}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="510,0,0,0">
-                        <CheckBox x:Name="cbxSMS" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxWIFI" Header="{DynamicResource tsc_module_wifi}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="567,0,0,0">
-                        <CheckBox x:Name="cbxWIFI" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxCAM" Header="{DynamicResource tsc_module_camere}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="621,0,0,0">
-                        <CheckBox x:Name="cbxCAM" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
-                    <GroupBox x:Name="gbxMobile" Header="{DynamicResource tsc_module_4G}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="157" Margin="673,0,0,0">
-                        <CheckBox x:Name="cbxMobile" Content="" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top"/>
-                    </GroupBox>
+
                 </Grid>
             </GroupBox>
-            <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="642,474,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click"/>
 
         </apexControls:ApexGrid>
     </ScrollViewer>

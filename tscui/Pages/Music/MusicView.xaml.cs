@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Navigation;
 using Apex.MVVM;
 using Apex.Behaviours;
 using tscui.Models;
 
-using tscui.Views;
 using System.Windows.Threading;
 using System.Threading;
 using Xceed.Wpf.Toolkit;
 using tscui.Service;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace tscui.Pages.Music
 {
@@ -24,11 +20,33 @@ namespace tscui.Pages.Music
     [View(typeof(MusicViewModel))]
     public partial class MusicView : UserControl, IView
     {
-        TscData t;
+        TscData tdData;
         int currentPhaseId = 0;
         public MusicView()
         {
             InitializeComponent();
+            this.PhaseGrid.AddHandler(Label.MouseLeftButtonDownEvent, new RoutedEventHandler(MouseLeftButton_Down));
+        }
+
+        private void MouseLeftButton_Down(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource != null)
+            {
+                Label ChannelLabel = e.OriginalSource as Label;
+                if (ChannelLabel !=  null)
+                {
+                    for (Byte index = 1; index <= 32; index++)
+                    {
+                        if (ChannelLabel.Name.Equals("lblChannel" + index))
+                        {
+                            tbxChannelId.Text = index.ToString();
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+                   
+                }
+            }
         }
 
         public void OnActivated()
@@ -63,25 +81,7 @@ namespace tscui.Pages.Music
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new DelegateOverlap(InitOverlap));
         }
 
-       
-
-        class ChannelFlash
-        {
-            public int value{ set; get; }
-            public string name{ set; get; }
-        }
-        class ChannelType
-        {
-            public int value { set; get; }
-            public string name { set; get; }
-        }
-
-        public class DirecNumer
-        {
-            public byte value { set; get; }
-            public string name { set; get; }
-
-        }
+    
         public List<DirecNumer> dirnum = new List<DirecNumer>();
         public void InitDirecNumber()
         {
@@ -89,34 +89,38 @@ namespace tscui.Pages.Music
             dirnum.Add(new DirecNumer() { name = "北直", value = 2 });
             dirnum.Add(new DirecNumer() { name = "北右", value = 4 });
             dirnum.Add(new DirecNumer() { name = "北人行", value = 8 });
+            dirnum.Add(new DirecNumer() { name = "北二次过街", value = 0x18 });
             dirnum.Add(new DirecNumer() { name = "北调头", value = 0 });
             dirnum.Add(new DirecNumer() { name = "北其他", value = 5 });
-            dirnum.Add(new DirecNumer() { name = "西北其他", value = 0xe5 });
+            dirnum.Add(new DirecNumer() { name = "北特殊", value = 0x7 });
 
             dirnum.Add(new DirecNumer() { name = "东左", value = 65 });
             dirnum.Add(new DirecNumer() { name = "东直", value = 66 });
             dirnum.Add(new DirecNumer() { name = "东右", value = 68 });
             dirnum.Add(new DirecNumer() { name = "东人行", value = 72 });
+            dirnum.Add(new DirecNumer() { name = "东二次过街", value = 0x58 });
             dirnum.Add(new DirecNumer() { name = "东调头", value = 0x40 });
             dirnum.Add(new DirecNumer() { name = "东其他", value = 69 });
-            dirnum.Add(new DirecNumer() {name = "东北其他", value = 0x25});
+            dirnum.Add(new DirecNumer() {name = "东特殊", value = 0x47});
 
 
             dirnum.Add(new DirecNumer() { name = "南左", value = 129 });
             dirnum.Add(new DirecNumer() { name = "南直", value = 130 });
             dirnum.Add(new DirecNumer() { name = "南右", value = 132 });
             dirnum.Add(new DirecNumer() { name = "南人行", value = 136 });
+            dirnum.Add(new DirecNumer() { name = "南二次过街", value = 0x98 });
             dirnum.Add(new DirecNumer() {name = "南调头", value = 0x80});
             dirnum.Add(new DirecNumer() { name = "南其他", value = 133 });
-            dirnum.Add(new DirecNumer() { name = "东南其他", value = 0x65 });
+            dirnum.Add(new DirecNumer() { name = "南特殊", value = 0x87 });
 
             dirnum.Add(new DirecNumer() { name = "西左", value = 193 });
             dirnum.Add(new DirecNumer() { name = "西直", value = 194 });
             dirnum.Add(new DirecNumer() { name = "西右", value = 196 });
             dirnum.Add(new DirecNumer() { name = "西人行", value = 200 });
+            dirnum.Add(new DirecNumer() { name = "西二次过街", value = 0xd8 });
             dirnum.Add(new DirecNumer() { name = "西调头", value = 0xc0 });
             dirnum.Add(new DirecNumer() { name = "西其他", value = 197 });
-            dirnum.Add(new DirecNumer() { name = "西南其他", value = 0xa5 });
+            dirnum.Add(new DirecNumer() { name = "西特殊", value = 0xc7 });
            
         }
 
@@ -129,11 +133,12 @@ namespace tscui.Pages.Music
             lct.Add(new ChannelType() { name = "行人", value = 3 });
             lct.Add(new ChannelType() { name = "跟随相位", value = 4 });
 
-            lcf.Add(new ChannelFlash() { name = "红灯闪(前半秒)", value = 4 });
-            lcf.Add(new ChannelFlash() { name = "红灯闪(后半秒)", value = 12 });
-            lcf.Add(new ChannelFlash() { name = "黄灯闪(前半秒)", value = 2 });
-            lcf.Add(new ChannelFlash() { name = "黄灯闪(后半秒)", value = 10 });
             lcf.Add(new ChannelFlash() { name = "未设置", value = 0 });
+            lcf.Add(new ChannelFlash() { name = "黄灯闪(前半秒亮)", value = 2 });
+            lcf.Add(new ChannelFlash() { name = "黄灯闪(后半秒亮)", value = 10 });
+            lcf.Add(new ChannelFlash() { name = "红灯闪(前半秒亮)", value = 4 });
+            lcf.Add(new ChannelFlash() { name = "红灯闪(后半秒亮)", value = 12 });
+            
 
             cbxChannelType.ItemsSource = lct;
             cbxAutoFlash.ItemsSource = lcf;
@@ -167,81 +172,43 @@ namespace tscui.Pages.Music
         private void InitOverlapPhaseType()
         {
             
-            lopt.Add(new OverlapPhaseType() { name = "其它", value = 1 });
+            lopt.Add(new OverlapPhaseType() { name = "其他", value = 1 });
             lopt.Add(new OverlapPhaseType() { name = "正常", value = 2 });
             lopt.Add(new OverlapPhaseType() { name = "最小绿灯黄灯", value = 3 });
             lopt.Add(new OverlapPhaseType() { name = "未知", value = 0 });
             cbxOperateType.ItemsSource = lopt;
 
         }
-        public List<ChannelPhaseOverlap> lcpo = new List<ChannelPhaseOverlap>();
-        public class ChannelPhaseOverlap
-        {
-            public byte id { set; get; }
-            public string name { set; get; }
-            public bool isPhase { set; get; }
-        }
 
+        public List<ChannelPhaseOverlap> lcpo = new List<ChannelPhaseOverlap>();
         public void Initpoplist()
         {
             for (byte a = 1; a < 33; a++)
                 lcpo.Add(new ChannelPhaseOverlap() { id = a, name = "p" + a, isPhase = true });
             for (byte b = 1; b < 17; b++)
                 lcpo.Add(new ChannelPhaseOverlap() { id = b, name = "op" + b, isPhase = false });
-            lcpo.Add(new ChannelPhaseOverlap() { id = 0x0, name = "00", isPhase = false });
+            lcpo.Add(new ChannelPhaseOverlap() { id = 0x0, name = "null", isPhase = false });
         }
+
         private void InitOverlap()
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
 
-            List<tscui.Models.Phase> lp = t.ListPhase;
+            List<Models.Phase> lp = tdData.ListPhase;
            
             ccbIncludePhase1.ItemsSource = lp;
             ccbCorrectPhase.ItemsSource = lp;
             
 
-            channel1.ItemsSource = lcpo;
-            channel2.ItemsSource = lcpo;
-            channel3.ItemsSource = lcpo;
-            channel4.ItemsSource = lcpo;
-            channel5.ItemsSource = lcpo;
-            channel6.ItemsSource = lcpo;
-            channel7.ItemsSource = lcpo;
-            channel8.ItemsSource = lcpo;
-            channel9.ItemsSource = lcpo;
-            channel10.ItemsSource = lcpo;
-            channel11.ItemsSource = lcpo;
-            channel12.ItemsSource = lcpo;
-            channel13.ItemsSource = lcpo;
-            channel14.ItemsSource = lcpo;
-            channel15.ItemsSource = lcpo;
-            channel16.ItemsSource = lcpo;
-            channel17.ItemsSource = lcpo;
-            channel18.ItemsSource = lcpo;
-            channel19.ItemsSource = lcpo;
-            channel20.ItemsSource = lcpo;
-            channel21.ItemsSource = lcpo;
-            channel22.ItemsSource = lcpo;
-            channel23.ItemsSource = lcpo;
-            channel24.ItemsSource = lcpo;
-            channel25.ItemsSource = lcpo;
-            channel26.ItemsSource = lcpo;
-            channel27.ItemsSource = lcpo;
-            channel28.ItemsSource = lcpo;
-            channel29.ItemsSource = lcpo;
-            channel30.ItemsSource = lcpo;
-            channel31.ItemsSource = lcpo;
-            channel32.ItemsSource = lcpo;
             DirectPhaseId.ItemsSource = lcpo; //初始化方向相位
             ChannelPhaseId.ItemsSource = lcpo;//初始化通道相位
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
+            tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (tdData == null)
             {
-                System.Windows.MessageBox.Show("请选择一信号机后，再切换到此界面！");
                 this.Visibility = Visibility.Hidden;
                 return;
             }
@@ -263,7 +230,8 @@ namespace tscui.Pages.Music
             tDispatcherInitPhaseType.Start();
             InitChannel();
             //初始化显示相位数据与通道关联
-            InitPhaseChannel();
+         //   InitPhaseChannel();
+            FreshPhaseChannelShow();
          //   InitDirecNumber();
             if (DirecCombox.Items.Count == 0)
             {
@@ -275,1001 +243,63 @@ namespace tscui.Pages.Music
 
         }
 
-        private void InitPhase(tscui.Models.Channel c)
-        {
-            if (c.ucId == 1)
-            {
-                channel1.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel1.Background = Brushes.Red;
-            }
-            else if (c.ucId == 2)
-            {
-                channel2.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel2.Background = Brushes.Red;
-            }
-            else if (c.ucId == 3)
-            {
-                channel3.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel3.Background = Brushes.Red;
-            }
-            else if (c.ucId == 4)
-            {
-                channel4.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel4.Background = Brushes.Red;
-            }
-            else if (c.ucId == 5)
-            {
-                channel5.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel5.Background = Brushes.Red;
-            }
-            else if (c.ucId == 6)
-            {
-                channel6.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel6.Background = Brushes.Red;
-            }
-            else if (c.ucId == 7)
-            {
-                channel7.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel7.Background = Brushes.Red;
-            }
-            else if (c.ucId == 8)
-            {
-                channel8.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel8.Background = Brushes.Red;
-            }
-            else if (c.ucId == 9)
-            {
-                channel9.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel9.Background = Brushes.Red;
-            }
-            else if (c.ucId == 10)
-            {
-                channel10.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel10.Background = Brushes.Red;
-            }
-            else if (c.ucId == 11)
-            {
-                channel11.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel11.Background = Brushes.Red;
-            }
-            else if (c.ucId == 12)
-            {
-                channel12.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel12.Background = Brushes.Red;
-            }
-            else if (c.ucId == 13)
-            {
-                channel13.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel13.Background = Brushes.Red;
-            }
-            else if (c.ucId == 14)
-            {
-                channel14.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel14.Background = Brushes.Red;
-            }
-            else if (c.ucId == 15)
-            {
-                channel15.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel15.Background = Brushes.Red;
-            }
-            else if (c.ucId == 16)
-            {
-                channel16.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel16.Background = Brushes.Red;
-            }
-            else if (c.ucId == 17)
-            {
-                channel17.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel17.Background = Brushes.Red;
-            }
-            else if (c.ucId == 18)
-            {
-                channel18.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel18.Background = Brushes.Red;
-            }
-            else if (c.ucId == 19)
-            {
-                channel19.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel19.Background = Brushes.Red;
-            }
-            else if (c.ucId == 20)
-            {
-                channel20.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel20.Background = Brushes.Red;
-            }
-            else if (c.ucId == 21)
-            {
-                channel21.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel21.Background = Brushes.Red;
-            }
-            else if (c.ucId == 22)
-            {
-                channel22.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel22.Background = Brushes.Red;
-            }
-            else if (c.ucId == 23)
-            {
-                channel23.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel23.Background = Brushes.Red;
-            }
-            else if (c.ucId == 24)
-            {
-                channel24.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel24.Background = Brushes.Red;
-            }
-            else if (c.ucId == 25)
-            {
-                channel25.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel25.Background = Brushes.Red;
-            }
-            else if (c.ucId == 26)
-            {
-                channel26.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel26.Background = Brushes.Red;
-            }
-            else if (c.ucId == 27)
-            {
-                channel27.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel27.Background = Brushes.Red;
-            }
-            else if (c.ucId == 28)
-            {
-                channel28.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel28.Background = Brushes.Red;
-            }
-            else if (c.ucId == 29)
-            {
-                channel29.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel29.Background = Brushes.Red;
-            }
-            else if (c.ucId == 30)
-            {
-                channel30.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel30.Background = Brushes.Red;
-            }
-            else if (c.ucId == 31)
-            {
-                channel31.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel31.Background = Brushes.Red;
-            }
-            else if (c.ucId == 32)
-            {
-                channel32.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel32.Background = Brushes.Red;
-            }
-        }
-        private void InitOverlapPhase(Channel c)
-        {
-            if (c.ucId == 1)
-            {
-                channel1.SelectedIndex = c.ucSourcePhase+0x20 - 1;
-                lblChannel1.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 2)
-            {
-                channel2.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel2.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 3)
-            {
-                channel3.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel3.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 4)
-            {
-                channel4.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel4.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 5)
-            {
-                channel5.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel5.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 6)
-            {
-                channel6.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel6.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 7)
-            {
-                channel7.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel7.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 8)
-            {
-                channel8.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel8.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 9)
-            {
-                channel9.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel9.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 10)
-            {
-                channel10.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel1.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 11)
-            {
-                channel11.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel11.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 12)
-            {
-                channel12.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel12.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 13)
-            {
-                channel13.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel13.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 14)
-            {
-                channel14.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel14.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 15)
-            {
-                channel15.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel15.Background = Brushes.Yellow;
-            }
-            else if (c.ucId == 16)
-            {
-                channel16.SelectedIndex = c.ucSourcePhase + 0x20 - 1;
-                lblChannel16.Background = Brushes.Yellow;
-            }
-        }
 
-        private void InitPedePhase(Channel c)
-        {
-            if (c.ucId == 1)
-            {
-                channel1.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel1.Background = Brushes.Green;
-            }
-            else if (c.ucId == 2)
-            {
-                channel2.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel2.Background = Brushes.Green;
-            }
-            else if (c.ucId == 3)
-            {
-                channel3.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel3.Background = Brushes.Green;
-            }
-            else if (c.ucId == 4)
-            {
-                channel4.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel4.Background = Brushes.Green;
-            }
-            else if (c.ucId == 5)
-            {
-                channel5.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel5.Background = Brushes.Green;
-            }
-            else if (c.ucId == 6)
-            {
-                channel6.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel6.Background = Brushes.Green;
-            }
-            else if (c.ucId == 7)
-            {
-                channel7.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel7.Background = Brushes.Green;
-            }
-            else if (c.ucId == 8)
-            {
-                channel8.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel8.Background = Brushes.Green;
-            }
-            else if (c.ucId == 9)
-            {
-                channel9.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel9.Background = Brushes.Green;
-            }
-            else if (c.ucId == 10)
-            {
-                channel10.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel10.Background = Brushes.Green;
-            }
-            else if (c.ucId == 11)
-            {
-                channel11.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel11.Background = Brushes.Green;
-            }
-            else if (c.ucId == 12)
-            {
-                channel12.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel12.Background = Brushes.Green;
-            }
-            else if (c.ucId == 13)
-            {
-                channel13.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel13.Background = Brushes.Green;
-            }
-            else if (c.ucId == 14)
-            {
-                channel14.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel14.Background = Brushes.Green;
-            }
-            else if (c.ucId == 15)
-            {
-                channel15.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel15.Background = Brushes.Green;
-            }
-            else if (c.ucId == 16)
-            {
-                channel16.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel16.Background = Brushes.Green;
-            }
-            else if (c.ucId == 17)
-            {
-                channel17.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel17.Background = Brushes.Green;
-            }
-            else if (c.ucId == 18)
-            {
-                channel18.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel18.Background = Brushes.Green;
-            }
-            else if (c.ucId == 19)
-            {
-                channel19.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel19.Background = Brushes.Green;
-            }
-            else if (c.ucId == 20)
-            {
-                channel20.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel20.Background = Brushes.Green;
-            }
-            else if (c.ucId == 21)
-            {
-                channel21.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel21.Background = Brushes.Green;
-            }
-            else if (c.ucId == 22)
-            {
-                channel22.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel22.Background = Brushes.Green;
-            }
-            else if (c.ucId == 23)
-            {
-                channel23.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel23.Background = Brushes.Green;
-            }
-            else if (c.ucId == 24)
-            {
-                channel24.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel24.Background = Brushes.Green;
-            }
-            else if (c.ucId == 25)
-            {
-                channel25.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel25.Background = Brushes.Green;
-            }
-            else if (c.ucId == 26)
-            {
-                channel26.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel26.Background = Brushes.Green;
-            }
-            else if (c.ucId == 27)
-            {
-                channel27.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel27.Background = Brushes.Green;
-            }
-            else if (c.ucId == 28)
-            {
-                channel28.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel28.Background = Brushes.Green;
-            }
-            else if (c.ucId == 29)
-            {
-                channel29.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel29.Background = Brushes.Green;
-            }
-            else if (c.ucId == 30)
-            {
-                channel30.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel30.Background = Brushes.Green;
-            }
-            else if (c.ucId == 31)
-            {
-                channel31.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel31.Background = Brushes.Green;
-            }
-            else if (c.ucId == 32)
-            {
-                channel32.SelectedIndex = c.ucSourcePhase - 1;
-                lblChannel32.Background = Brushes.Green;
-            }
-        }
-        public void InitPhaseChannel()
-        {
-            List<tscui.Models.Phase> phases = t.ListPhase;
-            List<tscui.Models.Channel> channels = t.ListChannel;
-            foreach (tscui.Models.Channel c in channels)
-            {
-                if(c.ucType == 1){//其它 
-
-                }else if(c.ucType ==2 ){//机动车相位
-                    InitPhase(c);
-                }else if (c.ucType ==3){ // 人行相位
-                    InitPedePhase(c);
-                }else if(c.ucType == 4){    //跟随相位
-                    InitOverlapPhase(c);
-                }
-                
-            }
-        }
-
-        private void PedestrainClearTime_Spin(object sender, Xceed.Wpf.Toolkit.SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-
-        }
-
-        private void PedestrainCrossTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrGreenTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrYellowTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrRedTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-        private void displayPhase(int pid, List<tscui.Models.Phase> lp)
-        {
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == pid)
-                {
-                    cbxPhaseType.SelectedItem = p.ucType;
-                    cbxPhaseOption.SelectedItem = p.ucOption;
-                    TextBox tbpc = (TextBox)bsrPedestrainCrossTime.Content;
-                    tbpc.Text = Convert.ToString(p.ucPedestrianGreen);
-                    TextBox tbpct = (TextBox)bsrPedestrainClearTime.Content;
-                    tbpct.Text = Convert.ToString(p.ucPedestrianClear);
-                    TextBox tbGreenFlash = (TextBox)bsrGreenFlash.Content;
-                    tbGreenFlash.Text = Convert.ToString(p.ucGreenFlash);
-                    TextBox tbMax2Time = (TextBox)bsrMax2Time.Content;
-                    tbMax2Time.Text = Convert.ToString(p.ucMaxGreen2);
-                    TextBox tbMax1Time = (TextBox)bsrMax1Time.Content;
-                    tbMax1Time.Text = Convert.ToString(p.ucMaxGreen1);
-                    TextBox tbUintDelayTime = (TextBox)bsrUintDelayTime.Content;
-                    tbUintDelayTime.Text = Convert.ToString(p.ucGreenDelayUnit);
-                    TextBox tbFixedGreenTime = (TextBox)bsrFixedGreenTime.Content;
-                    tbFixedGreenTime.Text = Convert.ToString(p.ucFixedGreen);
-                    TextBox tbMinGreenTime = (TextBox)bsrMinGreenTime.Content;
-                    tbMinGreenTime.Text = Convert.ToString(p.ucMinGreen);
-
-
-                }
-            }
-        }
-
-
-        private void bsrMax2Time_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrMax1Time_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrUintDelayTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrFixedGreenTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrMinGreenTime_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void bsrGreenFlash_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            if (e.Direction == Xceed.Wpf.Toolkit.SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            txtBox.Text = value.ToString();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-
-        }
-
-        private void tbxPedestrainCrossTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxGreenFlash_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxMax2Time_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxMax1Time_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxUintDelayTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxFixedGreenTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxMinGreenTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucPedestrianClear = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void cbxPhaseOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            ComboBox cb = sender as ComboBox;
-            PhaseOption po = (PhaseOption)cb.SelectedValue;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucType = Convert.ToByte(po.ucOption);
-                }
-            }
-        }
-        private void SetIncludePhaseToOverlapPhase(CheckComboBox ccb, int pUcId)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == pUcId)
-                {
-                    List<byte> lb = new List<byte>();
-                    foreach (Object o in ccb.SelectedItems)
-                    {
-                        tscui.Models.Phase po = (tscui.Models.Phase)o;
-                        lb.Add(po.ucId);//po.ucId
-                    }
-                    op.ucIncludePhase = lb.ToArray<byte>();
-                }
-            }
-        }
-        private void cbxPhaseType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            List<tscui.Models.Phase> lp = t.ListPhase;
-            ComboBox cb = sender as ComboBox;
-            PhaseType pt = (PhaseType)cb.SelectedValue;
-            foreach (tscui.Models.Phase p in lp)
-            {
-                if (p.ucId == currentPhaseId)
-                {
-                    p.ucType = Convert.ToByte(pt.ucType);
-                }
-            }
-        }
-        private void SetCorrectPhaseToOverlapPhase(CheckComboBox ccb, int opUcId)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == opUcId)
-                {
-                    List<byte> lb = new List<byte>();
-                    foreach (Object o in ccb.SelectedItems)
-                    {
-                        tscui.Models.Phase po = (tscui.Models.Phase)o;
-                        lb.Add(po.ucId);//po.ucId
-                    }
-                    op.ucCorrectPhase = lb.ToArray<byte>();
-                }
-            }
-        }
-       
-        private void SetOverlapPhaseToChannel(ComboBox cb, byte id)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Channel cc = (Channel)cb.SelectedValue;
-            byte cId = Convert.ToByte(cc.ucId);
-            List<Channel> lc = t.ListChannel;
-            foreach (Channel c in lc)
-            {
-                if (c.ucId == cId)
-                {
-                    c.ucSourcePhase = id;
-                }
-            }
-        }
-        private void cbxOverlapPhaseChannel1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            //string v = (string)cb.SelectedValue;
-            //string v1 = (string)cb.SelectedItem;
-            //int v2 = cb.SelectedIndex;
-            //string v11 = (string)cb.Text;
-            SetOverlapPhaseToChannel(cb, 1);
-
-        }
-
-        private void cbxOverlapPhaseChannel2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 2);
-        }
-
-        private void cbxOverlapPhaseChannel3_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 3);
-        }
-
-        private void cbxOverlapPhaseChannel4_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 4);
-        }
-
-        private void cbxOverlapPhaseChannel5_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 5);
-        }
-
-        private void cbxOverlapPhaseChannel6_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 6);
-        }
-
-        private void cbxOverlapPhaseChannel7_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 7);
-        }
-
-        private void cbxOverlapPhaseChannel8_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 8);
-        }
-
-        private void cbxOverlapPhaseChannel9_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 9);
-        }
-
-        private void cbxOverlapPhaseChannel10_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 10);
-        }
-
-        private void cbxOverlapPhaseChannel11_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 11);
-        }
-
-        private void cbxOverlapPhaseChannel12_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 12);
-        }
-
-        private void cbxOverlapPhaseChannel13_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 13);
-        }
-
-        private void cbxOverlapPhaseChannel14_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 14);
-        }
-
-        private void cbxOverlapPhaseChannel15_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 15);
-        }
-
-        private void cbxOverlapPhaseChannel16_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            SetOverlapPhaseToChannel(cb, 16);
-        }
-        private byte currentOverlapPhase = 0;
-        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == currentOverlapPhase)
-                {
-                    op.ucTailGreen = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void TextBox_SelectionChanged_1(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == currentOverlapPhase)
-                {
-                    op.ucTailYellow = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void tbxTailRed_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == currentOverlapPhase)
-                {
-                    op.ucTailRed = Convert.ToByte(tb.Text);
-                }
-            }
-        }
-
-        private void cbxOperateType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            OverlapPhaseType opt = (OverlapPhaseType)cb.SelectedValue;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            foreach (OverlapPhase op in t.ListOverlapPhase)
-            {
-                if (op.ucId == currentOverlapPhase)
-                {
-                    op.ucTailRed = Convert.ToByte(opt.value);
-                }
-            }
-        }
-        private void DisplayOverlapPhase(RadioButton rb, List<OverlapPhase> lop)
-        {
-            foreach (OverlapPhase op in lop)
-            {
-                if (op.ucId == Convert.ToByte(rb.Content))
-                {
-                    tbxTailGreen.Text = Convert.ToString(op.ucTailGreen);
-                    tbxYellowTime.Text = Convert.ToString(op.ucTailYellow);
-                    tbxRedTime.Text = Convert.ToString(op.ucTailRed);
-                    cbxOperateType.SelectedValue = op.ucOperateType;
-                }
-            }
-        }
-        private void DisplayOverlapPhase(byte id)
+        private void FreshPhaseChannelShow()
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                foreach (OverlapPhase op in t.ListOverlapPhase)
+                List<Channel> channels = tdData.ListChannel;
+                Byte ChannelId = 0x0;
+                foreach (Channel c in channels)
                 {
-                    if (id == 1)
+                    ChannelId = c.ucId;
+                    Label LblChannelShow = (Label) groupBox1.FindName("lblChannel" + ChannelId);
+                    Label LblPhaseShow = (Label) groupBox1.FindName("LblPhase" + ChannelId);
+                    if (LblChannelShow == null || LblPhaseShow == null)
+                        continue;
+                    else if (c.ucType == 1)
                     {
-                        for (int a = 0; a < op.ucIncludePhase.Length; a++)
-                        {
-                            if (op.ucIncludePhase[a] != 0)
-                            {
-                                ccbIncludePhase1.Items.Add(op.ucIncludePhase[a]);
-                            }
-                        }
-                        for (int a = 0; a < op.ucCorrectPhase.Length; a++)
-                        {
-                            if (op.ucCorrectPhase[a] != 0)
-                            {
-                                ccbCorrectPhase.Items.Add(op.ucCorrectPhase[a]);
-                            }
-                        }
-                        tbxYellowTime.Text = Convert.ToString(op.ucTailYellow);
-                        tbxRedTime.Text = Convert.ToString(op.ucTailRed);
-                        tbxTailGreen.Text = Convert.ToString(op.ucTailGreen);
-                        cbxOperateType.SelectedValue = op.ucOperateType;
+//其它 
+                        LblPhaseShow.Content = lcpo[c.ucSourcePhase - 1].name;
+                        LblChannelShow.Background = Brushes.Gray;
+                        LblPhaseShow.Foreground = Brushes.Gray;
                     }
+                    else if (c.ucType == 2)
+                    {
+//机动车相位
+                        LblPhaseShow.Content = lcpo[c.ucSourcePhase - 1].name;
+                        LblChannelShow.Background = Brushes.DarkRed;
+                        LblPhaseShow.Foreground = Brushes.DarkRed;
+                    }
+                    else if (c.ucType == 3)
+                    {
+                        // 人行相位
+                        LblPhaseShow.Content = lcpo[c.ucSourcePhase - 1].name;
+                        LblChannelShow.Background = Brushes.Green;
+                        LblPhaseShow.Foreground = Brushes.Green;
+                    }
+                    else if (c.ucType == 4)
+                    {
+                        //跟随相位
+                        LblPhaseShow.Content = lcpo[c.ucSourcePhase + 0x20 - 1].name;
+                        LblChannelShow.Background = Brushes.DarkOrange;
+                        LblPhaseShow.Foreground = Brushes.DarkOrange;
+                    }
+
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                return;
             }
 
         }
+
+
+      
+
+        private byte currentOverlapPhase = 0;
+   
         private void ClearPhaseContentById()
         {
             try
@@ -1298,20 +328,17 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                {
-                    System.Windows.MessageBox.Show("请选择一个信号机，再进行配置！");
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                     return;
-                }
                 tbxPhaseId.Background = Brushes.LightGray;
-                List<tscui.Models.Phase> phases = t.ListPhase;
+                List<Models.Phase> phases = tdData.ListPhase;
                 ClearPhaseContentById();
                 if (Byte.Parse(tbxPhaseId.Text) != 0)
                 {
                     ClearPhaseContentById();
                     pchannels.Content = "";
-                    foreach (tscui.Models.Phase p in phases)
+                    foreach (Models.Phase p in phases)
                     {
                         if (p.ucId == Byte.Parse(tbxPhaseId.Text))
                         {
@@ -1339,7 +366,7 @@ namespace tscui.Pages.Music
                                     cbxPhaseType.SelectedItem = pt;
                                 }
                             }
-                            foreach (Channel ch in t.ListChannel)
+                            foreach (Channel ch in tdData.ListChannel)
                             {
                                 if (p.ucId == ch.ucSourcePhase && ch.ucType != 0x4)
                                     pchannels.Content += ch.ucId.ToString() + " ,";
@@ -1352,14 +379,14 @@ namespace tscui.Pages.Music
                                     break;
                                 }
                             }
-                            tbxPhaseId.Background = Brushes.Red;
+                            tbxPhaseId.Background = Brushes.DarkRed;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("获取相位参数异常");
+                System.Windows.MessageBox.Show("获取相位参数异常","高级相位",MessageBoxButton.OK,MessageBoxImage.Exclamation);
             }
         }
         private void ClearOverlapContentById()
@@ -1373,15 +400,14 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                 {
-                    //  System.Windows.MessageBox.Show("请选择一台信号机后，再进行配置！");
                     return;
                 }
                 tbxOverlapPhaseId.Background = Brushes.LightGray;
-                List<tscui.Models.OverlapPhase> overlapPhases = t.ListOverlapPhase;
-                List<tscui.Models.Phase> phases = t.ListPhase;
+                List<OverlapPhase> overlapPhases = tdData.ListOverlapPhase;
+         //       List<Models.Phase> phases = tdData.ListPhase;
                 if (Byte.Parse(tbxOverlapPhaseId.Text) != 0)
                 {
                     ClearOverlapContentById();
@@ -1389,39 +415,22 @@ namespace tscui.Pages.Music
                     ccbIncludePhase1.Text = "";
                     opchannels.Content = "";
                     // DirecCombox.SelectedIndex = -1;
-                    foreach (tscui.Models.OverlapPhase op in overlapPhases)
+                    ccbIncludePhase1.SelectedItems.Clear();
+
+                    foreach (OverlapPhase op in overlapPhases)
                     {
                         if (op.ucId == Byte.Parse(tbxOverlapPhaseId.Text))
                         {
                             tbxOverlapPhaseId.Background = label11_Copy3.Background;
-                            //   List<tscui.Models.Phase> listCorrect = new List<tscui.Models.Phase>();
-
-                            for (int i = 0; i < op.ucCorrectPhaseLen; i++)
-                            {
-                                //foreach (tscui.Models.Phase phase in phases)
-                                //{
-                                //    if (op.ucCorrectPhase[i] == phase.ucId)
-                                //        listCorrect.Add(phase);
-                                //}
-                                ccbCorrectPhase.Text += op.ucCorrectPhase[i].ToString() + " ,";
-
-
-                            }
-
-                            //  ccbCorrectPhase.SelectedItemsOverride = listCorrect;
-
-                            // List<tscui.Models.Phase> listInclude = new List<tscui.Models.Phase>();
-
+                         
+                            ccbIncludePhase1.SelectedItems.Clear();
                             for (int j = 0; j < op.ucIncludePhaseLen; j++)
                             {
-                                //foreach (tscui.Models.Phase phase in phases)
-                                //{
-                                //    if (op.ucIncludePhase[j] == phase.ucId)
-                                //        listInclude.Add(phase);
-                                //    break;
-                                //}
-                                ccbIncludePhase1.Text += op.ucIncludePhase[j].ToString() + " ,";
-                                // ccbIncludePhase1.SelectedItems.Add(ccbIncludePhase1.Items[j]);
+                              
+                                ccbIncludePhase1.Text += op.ucIncludePhase[j] + " ,";
+                                
+                                ccbIncludePhase1.SelectedItems.Add(ccbIncludePhase1.Items[op.ucIncludePhase[j]-1]);
+                                
                             }
                             //  ccbIncludePhase1.SelectedItemsOverride = listInclude;
                             foreach (OverlapPhaseType opt in lopt)
@@ -1433,10 +442,10 @@ namespace tscui.Pages.Music
                                 }
                             }
                             //     for (Byte k = 0; k < t.ListOverlapPhase.Count; k++)
-                            foreach (Channel ch in t.ListChannel)
+                            foreach (Channel ch in tdData.ListChannel)
                             {
                                 if (op.ucId == ch.ucSourcePhase && ch.ucType == 0x4)
-                                    opchannels.Content += ch.ucId.ToString() + " ,";
+                                    opchannels.Content += ch.ucId+ " ,";
                             }
                             foreach (ChannelPhaseOverlap oorp in lcpo)
                             {
@@ -1447,7 +456,7 @@ namespace tscui.Pages.Music
                                 }
                             }
                             tbxTailGreen.Text = "" + op.ucTailGreen;
-                            tbxRedTime.Text = "" + op.ucTailRed;
+                            tbxRedTime.Text   = "" + op.ucTailRed;
                             tbxYellowTime.Text = "" + op.ucTailYellow;
                             break;
                         }
@@ -1456,7 +465,7 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("获取跟随相位参数异常!");
+                System.Windows.MessageBox.Show("获取跟随相位参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         private void ClearChannelContentById()
@@ -1468,13 +477,13 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                 {
                     return;
                 }
                 tbxChannelId.Background = Brushes.LightGray;
-                List<Channel> channels = t.ListChannel;
+                List<Channel> channels = tdData.ListChannel;
                 if (Convert.ToByte(tbxChannelId.Text) != 0)
                 {
                     ClearChannelContentById();
@@ -1497,7 +506,7 @@ namespace tscui.Pages.Music
                                     cbxChannelType.SelectedItem = ct;
                                     if (channel.ucType == 0x2)
                                     {
-                                        tbxChannelId.Background = Brushes.Red;
+                                        tbxChannelId.Background = Brushes.DarkRed;
                                     }
                                     else
                                     if (channel.ucType == 0x3)
@@ -1533,33 +542,27 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
+                System.Windows.MessageBox.Show("获取通道参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
-                MessageBox.Show("获取通道参数异常!");
             }
-        }
-        private void ClearDirecContentById()
-        {
-            tbxRoadCnt.Text = "0";
         }
       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                {
-                    System.Windows.MessageBox.Show("请选择一台信号机后，再进行配置！");
-                    return;
-                }
-                List<tscui.Models.Phase> phases = t.ListPhase;
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                bool bmultiselect = false;
+                List<tscui.Models.Phase> phases = tdData.ListPhase;
                 if (MultisetCheck.IsChecked == true)
                 {
                     foreach (UIElement checkbox in multisetbox.Items)
                     {
                         CheckBox phaseCheckBox = (CheckBox) checkbox;
-                        if (phaseCheckBox.IsChecked == true)
+                        if (phaseCheckBox.IsChecked == true && phaseCheckBox.Name != "AllChecks")
                         {
+                            if (bmultiselect == false)
+                                bmultiselect = true;
                             foreach (tscui.Models.Phase p in phases)
                             {
                                 if (p.ucId == Byte.Parse(phaseCheckBox.Content.ToString()))
@@ -1578,12 +581,16 @@ namespace tscui.Pages.Music
                         }
 
                     }
-
+                    if (bmultiselect == false)
+                    {
+                        System.Windows.MessageBox.Show("多选设置未选中任何相位", "高级相位", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
 
                 }
                 else
                 {
-                    foreach (tscui.Models.Phase p in phases)
+                    foreach (Models.Phase p in phases)
                     {
                         if (p.ucId == Byte.Parse(tbxPhaseId.Text))
                         {
@@ -1607,7 +614,7 @@ namespace tscui.Pages.Music
             }
             catch (Exception  ex)
             {
-                MessageBox.Show("保存相位参数异常!");
+                System.Windows.MessageBox.Show("保存相位参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         
@@ -1615,14 +622,10 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                {
-                    System.Windows.MessageBox.Show("请选择一台信号机后，再进行配置！");
-                    return;
-                }
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+           
                 bool newOverPhase = true;
-                List<OverlapPhase> overlapPhases = t.ListOverlapPhase;
+                List<OverlapPhase> overlapPhases = tdData.ListOverlapPhase;
                 OverlapPhase op = new OverlapPhase();
                 op.ucId = Byte.Parse(tbxOverlapPhaseId.Text);
                 int correctCount = ccbCorrectPhase.SelectedItems.Count;
@@ -1636,12 +639,13 @@ namespace tscui.Pages.Music
                 op.ucTailGreen = Convert.ToByte(tbxTailGreen.Text);
                 op.ucTailRed = Convert.ToByte(tbxRedTime.Text);
                 op.ucTailYellow = Convert.ToByte(tbxYellowTime.Text);
+
                 //includePhase list
                 int includeCount = ccbIncludePhase1.SelectedItems.Count;
                 byte[] bytesinclude = new byte[0x20];
                 for (int i = 0; i < includeCount; i++)
                 {
-                    bytesinclude[i] = Convert.ToByte(((tscui.Models.Phase) ccbIncludePhase1.SelectedItems[i]).ucId);
+                    bytesinclude[i] = Convert.ToByte(((Models.Phase) ccbIncludePhase1.SelectedItems[i]).ucId);
                 }
                 op.ucIncludePhase = bytesinclude;
                 op.ucIncludePhaseLen = Convert.ToByte(ccbIncludePhase1.SelectedItems.Count);
@@ -1665,14 +669,14 @@ namespace tscui.Pages.Music
                 }
                 if (newOverPhase == true)
                 {
-                    t.ListOverlapPhase.Add(op);
+                    tdData.ListOverlapPhase.Add(op);
                 }
                 Message m = TscDataUtils.SetOverlapPhase(overlapPhases);
                 System.Windows.MessageBox.Show(m.msg);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("保存跟随相位参数异常!");
+                System.Windows.MessageBox.Show("保存跟随相位参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
         }
@@ -1681,13 +685,8 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                {
-                    // System.Windows.MessageBox.Show("请选择一台信号机后，再进行配置！");
-                    return;
-                }
-                List<Channel> channels = t.ListChannel;
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                List<Channel> channels = tdData.ListChannel;
                 foreach (Channel channel in channels)
                 {
                     if (channel.ucId == Convert.ToByte(tbxChannelId.Text))
@@ -1699,8 +698,7 @@ namespace tscui.Pages.Music
                         if ((channel.ucType == 0x4 && ChannelPhaseId.SelectedIndex < 32) ||
                             (channel.ucType == 0x2 && ChannelPhaseId.SelectedIndex >= 32 && ChannelPhaseId.SelectedIndex != 48)) //48是相位号0
                         {
-
-                            System.Windows.Forms.MessageBox.Show("选择的通道类型和相位类型号不匹配");
+                            System.Windows.MessageBox.Show("选择的通道类型和相位类型号不匹配", "高级相位", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
                         break;
@@ -1708,10 +706,11 @@ namespace tscui.Pages.Music
                 }
                 Message m = TscDataUtils.SetChannel(channels);
                 System.Windows.MessageBox.Show(m.msg);
+                FreshPhaseChannelShow();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("保存通道参数异常!");
+                System.Windows.MessageBox.Show("保存通道参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
         }
@@ -1720,13 +719,9 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                {
-                    System.Windows.MessageBox.Show("请选择一台信号机后，再配置方向！");
-                    return;
-                }
-                List<PhaseToDirec> direcs = t.ListPhaseToDirec;
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            
+                List<PhaseToDirec> direcs = tdData.ListPhaseToDirec;
                 foreach (PhaseToDirec ptd in direcs)
                 {
                     if (ptd.ucId == Convert.ToByte(((DirecNumer)DirecCombox.SelectedValue).value))
@@ -1751,7 +746,9 @@ namespace tscui.Pages.Music
                                         {
                                             if (direcname.value == ptdphase.ucId)
                                             {
-                                                MessageBox.Show("该相位已经被分配到->"+ direcname.name);
+                                               // MessageBox.Show("该相位已经被分配到->"+ direcname.name);
+                                                System.Windows.MessageBox.Show("该相位已经被分配到->" + direcname.name + "\r\n请先解除" + direcname.name + "与该相位关联" + "\r\n" + direcname.name + "选择下拉列表最后00相位保存!", "高级相位", MessageBoxButton.OK, MessageBoxImage.Error);
+
                                                 return;
                                             }
                                         }
@@ -1772,7 +769,8 @@ namespace tscui.Pages.Music
                                         {
                                             if (direcname.value == ptdphase.ucId)
                                             {
-                                                MessageBox.Show("该相位已经被分配到->"+ direcname.name);
+                                                System.Windows.MessageBox.Show("该相位已经被分配到->" + direcname.name + "\r\n请先解除" + direcname.name + "与该相位关联" + "\r\n" + direcname.name + "选择下拉列表最后00相位保存!", "高级相位", MessageBoxButton.OK, MessageBoxImage.Error);
+
                                                 return;
                                             }
                                         }
@@ -1797,29 +795,11 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
-                MessageBox.Show("保存方向相位参数异常！");
+                System.Windows.MessageBox.Show("保存方向相位参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         
 
-        private void bsrDirecId_Spin(object sender, SpinEventArgs e)
-        {
-            ButtonSpinner spinner = (ButtonSpinner)sender;
-            TextBox txtBox = (TextBox)spinner.Content;
-
-            int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
-            
-            if (e.Direction == SpinDirection.Increase)
-                value++;
-            else
-                value--;
-            if (value <= 1)
-            {
-                value = 1;
-            }
-           
-            txtBox.Text = value.ToString();
-        }
 
         private void bsrRoadCount_Spin(object sender, SpinEventArgs e)
         {
@@ -2110,7 +1090,7 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("保存通道相位出错!");
+                System.Windows.MessageBox.Show("保存通道相位出错", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
@@ -2133,14 +1113,14 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                 {
                     return;
                 }
                 if (bdirecphase.IsChecked == true)
                     return;
-                List<PhaseToDirec> tscdirecphase = t.ListPhaseToDirec;
+                List<PhaseToDirec> tscdirecphase = tdData.ListPhaseToDirec;
           
                 foreach (PhaseToDirec direcphase in tscdirecphase)
                 {
@@ -2170,8 +1150,7 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("获取方向相关参数异常!");
+                System.Windows.MessageBox.Show("获取方向相关参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
@@ -2179,14 +1158,14 @@ namespace tscui.Pages.Music
         {
             try
             {
-                t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
+                tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (tdData == null)
                 {
                     return;
                 }
                 if (bdirecphase.IsChecked == true)
                     return;
-                List<PhaseToDirec> tscdirecphase = t.ListPhaseToDirec;
+                List<PhaseToDirec> tscdirecphase = tdData.ListPhaseToDirec;
 
                 DirecCombox.SelectedIndex = -1;
                 tbxRoadCnt.Text = "";
@@ -2216,11 +1195,34 @@ namespace tscui.Pages.Music
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("获取相位方向参数异常!");
+                System.Windows.MessageBox.Show("获取相位方向参数异常", "高级相位", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
 
+        }
+
+        private void allchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement checkbox in multisetbox.Items)
+            {
+                CheckBox phaseCheckBox = (CheckBox) checkbox;
+                if (phaseCheckBox.IsChecked == false && phaseCheckBox.Name != "AllChecks")
+                {
+                    phaseCheckBox.IsChecked = true;
+                }
+            }
+        }
+
+        private void allunchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement checkbox in multisetbox.Items)
+            {
+                CheckBox phaseCheckBox = (CheckBox)checkbox;
+                if (phaseCheckBox.IsChecked == true && phaseCheckBox.Name != "AllChecks")
+                {
+                    phaseCheckBox.IsChecked = false;
+                }
+            }
         }
 
       

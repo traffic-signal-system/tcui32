@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 
 namespace tscui
@@ -13,16 +10,25 @@ namespace tscui
     /// </summary>
     public partial class App : Application
     {
+      
         protected override void OnStartup(StartupEventArgs e)
         {
-           // base.OnStartup(e);
-            LoadLanguage();
+           base.OnStartup(e);
+            string Productname = System.Windows.Forms.Application.ProductName;
+            Process[] p = Process.GetProcessesByName(Productname);
+            if (p.Length > 1)
+            {
+                MessageBox.Show("程序已经在运行!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+                Environment.Exit(0);
+            }
+           System.Windows.Forms.Application.EnableVisualStyles();
+           LoadLanguage();
         }
-
+    
         private void LoadLanguage()
         {
             CultureInfo currentCultureInfo = CultureInfo.CurrentCulture;
-            //currentCultureInfo = CultureInfo.CreateSpecificCulture("zh_CN");
+           // CultureInfo currentCultureInfo = CultureInfo.CreateSpecificCulture("zh_CN");
             ResourceDictionary langRd = null;
             try
             {

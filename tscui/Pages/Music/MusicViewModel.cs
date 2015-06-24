@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Apex;
-using Apex.MVVM;
-using tscui.Models;
-using tscui.Pages;
-
+﻿using Apex.MVVM;
 namespace tscui.Pages.Music
 {
     /// <summary>
@@ -22,8 +13,6 @@ namespace tscui.Pages.Music
         public MusicViewModel()
         {
             Title = "高级相位";
-
-
         }
     }
        

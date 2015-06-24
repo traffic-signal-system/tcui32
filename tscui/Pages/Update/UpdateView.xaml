@@ -3,42 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
              xmlns:local="clr-namespace:tscui.Pages.Update"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             mc:Ignorable="d"  
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
     <!-- The view model. -->
     <UserControl.DataContext>
         <local:UpdateViewModel x:Name="viewModel" />
     </UserControl.DataContext>
-    <apexControls:ApexGrid Background="{DynamicResource PopupBackgroundBrush}" >
-        <Button x:Name="btnBakLocal" Content="备份到本机" HorizontalAlignment="Left" Margin="698,249,0,0" VerticalAlignment="Top" Width="75" Click="btnBakLocal_Click" Visibility="Hidden"/>
-        <GroupBox Header="{DynamicResource tsc_update_title}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="141" Width="800">
-            <Grid>
-                <Label Content="{DynamicResource tsc_update_selected_file}" HorizontalAlignment="Left" Margin="22,19,0,0" VerticalAlignment="Top"/>
-                <Button Content="{DynamicResource tsc_update_file_button}" HorizontalAlignment="Left" Margin="719,23,0,0" VerticalAlignment="Top" Width="45" Click="Button_Click"/>
-                <TextBox x:Name="tbxFileName" HorizontalAlignment="Left" Height="23" Margin="112,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="614" MouseDown="TextBox_MouseDown" MouseLeftButtonDown="TextBox_MouseLeftButtonDown"/>
-                <Button Content="{DynamicResource tsc_update_tsc_button}" HorizontalAlignment="Left" Margin="689,74,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_update_failed_and_reset}" HorizontalAlignment="Left" Margin="0,146,0,0" VerticalAlignment="Top" Height="98" Width="800">
-            <Grid>
-                <Button Content="{DynamicResource tsc_update_reset_button}" HorizontalAlignment="Left" Margin="683,25,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-                <TextBox x:Name="tbxIPAddr" HorizontalAlignment="Left" Height="23" Margin="441,28,0,0" TextWrapping="Wrap" Text="192.168.0.51" VerticalAlignment="Top" Width="120"/>
-                <Label Content="{DynamicResource tsc_update_reset_message}" HorizontalAlignment="Left" Margin="16,25,0,0" VerticalAlignment="Top" Width="420"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_update_database_title}" HorizontalAlignment="Left" Margin="0,249,0,0" VerticalAlignment="Top" Height="154" Width="800">
-            <Grid>
-                <Label Content="{DynamicResource tsc_update_database_file_title}" HorizontalAlignment="Left" Margin="25,31,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbxDatabase" HorizontalAlignment="Left" Height="23" Margin="109,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="624"/>
-                <Button x:Name="btnDatabaseSelected" Content="{DynamicResource tsc_update_database_file_button}" HorizontalAlignment="Left" Margin="706,31,0,0" VerticalAlignment="Top" Width="55" Click="btnDatabaseSelected_Click"/>
-                <Button x:Name="btnUpdateDatabase" Content="{DynamicResource tsc_update_database_button}" HorizontalAlignment="Left" Margin="686,86,0,0" VerticalAlignment="Top" Width="75" Click="btnUpdateDatabase_Click"/>
-            </Grid>
-        </GroupBox>
+    <apexControls:ApexGrid Background="Transparent"  >
+
+        <TextBlock HorizontalAlignment="Left" Margin="54,326,0,0" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" TextWrapping="Wrap" VerticalAlignment="Top" Height="184" Width="359" >
+            <Run FontSize="14" Text="更新程序文件或数据文件操作说明:"/>
+           <LineBreak/>
+            <LineBreak/><Run Text="1. 点击刷新按钮可显示当前信号机下程序和数据文件！"/><LineBreak/>
+            <Run Text="2. 更新操作前建议备份文件，选中列表中正确的程序或者数据文件，右键弹出菜单选择备份。备份文件名以bak结尾。如果需要恢复备份文件，右键选择备份文件弹出菜单选择恢复即可。!"/><LineBreak/>
+            <Run Foreground="Purple" Text="3. 更新操作如果需要本地上传文件，可点击上传按钮，选择要上传的程序或者数据文件，其他文件类型不支持!上传成功后需要重启信号机。"/><LineBreak/>
+            <Run Text="4. 列表文件也可右键菜单选择下载或者删除文件 。"/><LineBreak/>
+        </TextBlock>
+        <Grid HorizontalAlignment="Left" Height="326" VerticalAlignment="Top" Width="790" Margin="0,10,0,0">
+            <ListBox AlternationCount="2" x:Name="FileListBox" HorizontalAlignment="Left" Height="164" Margin="58,68,0,0" VerticalAlignment="Top" Width="351" IsManipulationEnabled="True" ContextMenuOpening="FileListBox_ContextMenuOpening">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="DownLoadFile" Header="下载" Click="DLfile_Click"/>
+                        <MenuItem x:Name="DeleteFile" Header="删除"   Click="DelFile_Click"/>
+                        <MenuItem x:Name="BackFile" Header="备份"     Click="BackFile_Click"/>
+                        <MenuItem x:Name="RecoverFile" Header="恢复"  Click="Recover_Click"/>
+                        <MenuItem x:Name="RestartTsc" Header="重启信号机"   Click="ReStart_Click"/>
+
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+            <Label Content="信号机系统文件列表                                 系统密码:" HorizontalAlignment="Left" Margin="58,39,0,0" VerticalAlignment="Top" Width="279"/>
+            <PasswordBox x:Name="Pwdbox" HorizontalAlignment="Left" Margin="337,43,0,0" VerticalAlignment="Top" Width="72" Password="root" />
+            <Button x:Name="RefreshBtnFile" Content="刷新" HorizontalAlignment="Left" Margin="58,247,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.321,0.409" Click="Button_Click"/>
+            <Button Content="上传" HorizontalAlignment="Left" Margin="158,247,0,0" VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.5,0.5" Click="UploadFile_Click"/>
+        </Grid>
     </apexControls:ApexGrid>
 
 </UserControl>
