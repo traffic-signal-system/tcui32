@@ -49,17 +49,29 @@ namespace tscui.Pages.Update
           
         }
 
+<<<<<<< HEAD
          private void UserControl_Loaded(object sender, RoutedEventArgs e)
+=======
+   private void UserControl_Loaded(object sender, RoutedEventArgs e)
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         {
             td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             if (td == null)
             {
+<<<<<<< HEAD
                 Visibility = Visibility.Hidden;
             }else
             {
                 Visibility = Visibility.Visible;
                 Button_Click(null,null);
               //  Button_Click(null,null);
+=======
+                this.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                this.Visibility = Visibility.Visible;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
         }
 
@@ -70,6 +82,7 @@ namespace tscui.Pages.Update
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
+<<<<<<< HEAD
             {
                 string ftpaddr = td.Node.sIpAddress;
                 FileListBox.Items.Clear();
@@ -84,6 +97,22 @@ namespace tscui.Pages.Update
             }
             catch (Exception ex)
             {
+=======
+            {
+                string ftpaddr = td.Node.sIpAddress;
+                FileListBox.Items.Clear();
+                List<string> ftpfilelist = new List<string>();
+                ftpfilelist = CFtp.GetFileList(ftpaddr, Pwdbox.Password);
+                if (ftpfilelist.Count == 0)
+                {
+                    return;
+                }
+                ftpfilelist.ForEach(i => { FileListBox.Items.Add(i); });
+
+            }
+            catch (Exception ex)
+            {
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
                 MessageBox.Show("文件列表显示异常!", "文件列表", MessageBoxButton.OK,
         MessageBoxImage.Exclamation);
@@ -229,16 +258,26 @@ namespace tscui.Pages.Update
         {
             try
             {
+<<<<<<< HEAD
                  MessageBoxResult queryBoxResult =  MessageBox.Show("恢复操纵将覆盖文件，并重启信号机，确定要恢复操作吗?", "文件恢复", MessageBoxButton.OKCancel,MessageBoxImage.Question);
                  if (queryBoxResult != MessageBoxResult.OK) return;string filename = FileListBox.SelectedItem.ToString();
                  //string ftpaddr = td.Node.sIpAddress;
                 if (filename.Contains("Gb.aiton."))
+=======
+                string filename = FileListBox.SelectedItem.ToString();
+                string ftpaddr = td.Node.sIpAddress;
+                if (filename.Equals("Gb.aiton.bak"))
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 {
                     Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_TSC_REVERSE);
                     this.Button_Click(null, null);
 
                 }
+<<<<<<< HEAD
                 else if (filename.Equals("GbAitonTsc.db"))
+=======
+                else if (filename.Equals("GbAitonTsc.db.bak"))
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 {
                     Udp.sendUdpNoReciveData(td.Node.sIpAddress, td.Node.iPort, Define.UPDATE_DATABASE_REVERSE);
                     this.Button_Click(null, null);

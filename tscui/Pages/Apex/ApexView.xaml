@@ -48,15 +48,24 @@
                     </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
+<<<<<<< HEAD
                             <GridViewColumn Width="100"  Header="{DynamicResource tsc_apex_id}"  DisplayMemberBinding="{Binding Id, Mode=OneWay}"/>
                             <GridViewColumn Width="100"  Header="{DynamicResource tsc_apex_name}"  DisplayMemberBinding="{Binding Name, Mode=OneWay}"/>
                             <GridViewColumn Width="308" Header="{DynamicResource tsc_apex_ip}"  DisplayMemberBinding="{Binding Ip, Mode=OneWay}"/>
+=======
+                            <GridViewColumn Width="80"  Header="{DynamicResource tsc_apex_id}"  DisplayMemberBinding="{Binding Id, Mode=OneWay}"/>
+                            <GridViewColumn Width="80"  Header="{DynamicResource tsc_apex_name}"  DisplayMemberBinding="{Binding Name, Mode=OneWay}"/>
+                            <GridViewColumn Width="250" Header="{DynamicResource tsc_apex_ip}"  DisplayMemberBinding="{Binding Ip, Mode=OneWay}"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         </GridView>
                     </ListView.View>
                 </ListView>
 
             </StackPanel>
+<<<<<<< HEAD
             <TextBox HorizontalAlignment="Left"  Background="Transparent" Name="TextIP" Height="20" FontSize="12" TextAlignment="Center"  Margin="400,50,0,0" TextWrapping="Wrap" Text="0.0.0.0" VerticalAlignment="Top" Width="112" MouseDoubleClick="Click_TscIP"/>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
         </apexControls:ApexGrid>
     </ScrollViewer>

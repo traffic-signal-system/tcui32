@@ -83,8 +83,13 @@ namespace tscui
             peripheralViewModel.Pages.Add(new CountDownViewModel() { IsSelected = true });
             peripheralViewModel.Pages.Add(new PedestrianBtnViewModel());
             peripheralViewModel.Pages.Add(new GpsViewModel());
+<<<<<<< HEAD
             peripheralViewModel.Pages.Add(new VariableSignViewModel());
             peripheralViewModel.Pages.Add(new BusPriorityViewModel());
+=======
+            peripheralViewModel.Pages.Add(new BusPriorityViewModel());
+            peripheralViewModel.Pages.Add(new VariableSignViewModel());
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             peripheralViewModel.Pages.Add(new DegradationViewModel());
 
 

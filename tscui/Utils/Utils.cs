@@ -664,8 +664,13 @@ namespace tscui.Utils
                 {
 
                     case 0x01:
+<<<<<<< HEAD
                     //   result = result + "控制方式切换";
                         result = result + "旧控制方式【" + ControlModel2String(bpara[1]) + "】,新控制方式【" + ControlModel2String(bpara[2]) + "】,";
+=======
+                        result = result + "控制方式切换";
+                        result = result + ",旧方式【" + ControlModel2String(bpara[1]) + "】,新方式【" + ControlModel2String(bpara[2]) + "】,";
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         switch (bpara[3])
                         {
                             case 0x00:
@@ -801,6 +806,7 @@ namespace tscui.Utils
                     result = result + "面板控制";
                     break;
                 case 0x0c:
+<<<<<<< HEAD
                     result = result + "时段表关灯";
                     break;
                 case 0x0d:
@@ -813,6 +819,18 @@ namespace tscui.Utils
                     break;
                 default:
                     result = result + "控制初始化";
+=======
+                    result = result + "时段关灯";
+                    break;
+                case 0x0d:
+                    result = result + "时段黄闪";
+                    break;
+                case 0x0e:
+                    result = result + "时段全红";
+                    break;
+                default:
+                    result = result + "启动未知";
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     break;
             }
             return result;

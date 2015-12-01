@@ -239,11 +239,19 @@
     <Compile Include="Pages\Power\PowerViewModel.cs" />
     <Compile Include="Pages\YelloFlash\YelloFlash.xaml.cs">
       <DependentUpon>YelloFlash.xaml</DependentUpon>
+<<<<<<< HEAD
     </Compile>
     <Compile Include="Pages\YelloFlash\YelloFlashViewModel.cs" />
     <Compile Include="Pages\OfflineDebug\OfflineDebugView.xaml.cs">
       <DependentUpon>OfflineDebugView.xaml</DependentUpon>
     </Compile>
+=======
+    </Compile>
+    <Compile Include="Pages\YelloFlash\YelloFlashViewModel.cs" />
+    <Compile Include="Pages\OfflineDebug\OfflineDebugView.xaml.cs">
+      <DependentUpon>OfflineDebugView.xaml</DependentUpon>
+    </Compile>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Compile Include="Pages\OfflineDebug\OfflineDebugViewModel.cs" />
     <Compile Include="Pages\PedestrianButton\PedestrianBtn.xaml.cs">
       <DependentUpon>PedestrianBtn.xaml</DependentUpon>
@@ -282,6 +290,13 @@
     <Compile Include="Pages\Stage\StageView.xaml.cs">
       <DependentUpon>StageView.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Pages\BusPriority\BusPriority.xaml.cs">
+      <DependentUpon>BusPriority.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BusPriority\BusPriorityViewModel.cs" />
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Compile Include="Popups\ChannelPopup.xaml.cs">
       <DependentUpon>ChannelPopup.xaml</DependentUpon>
     </Compile>
@@ -324,10 +339,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
     <Page Include="Pages\BusPriority\BusPriority.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Page Include="Pages\Collision\CollisionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +380,7 @@
     </Page>
     <Page Include="Pages\YelloFlash\YelloFlash.xaml">
       <Generator>MSBuild:Compile</Generator>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\OfflineDebug\OfflineDebugView.xaml">
@@ -375,6 +394,21 @@
     <Page Include="Pages\TscStatus\TscStatusView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+=======
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OfflineDebug\OfflineDebugView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PedestrianButton\PedestrianBtn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TscStatus\TscStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     </Page>
     <Page Include="Pages\Module\ModuleView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -428,10 +462,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BusPriority\BusPriority.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+<<<<<<< HEAD
+=======
     <Page Include="Popups\ChannelPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Page Include="Popups\GbtError.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -561,9 +602,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\background.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\ModelAttribute.png" />

@@ -147,7 +147,10 @@ namespace tscui.Pages.Schedules
                 if (td == null)
                     return;
                 rowvisibleflag = 0;
+<<<<<<< HEAD
                 scheduleDataGrid.ItemsSource = null;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 scheduleDataGrid.ItemsSource = initSchedule2DataGrid(td.ListSchedule);
             }
             catch (Exception ex)
@@ -175,7 +178,11 @@ namespace tscui.Pages.Schedules
             if (m.flag)
             {
                 MessageBox.Show("时段保存成功！", "时段保存", MessageBoxButton.OK, MessageBoxImage.Information);
+<<<<<<< HEAD
                 sldScheduleId_ValueChanged(this,null);
+=======
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             else
             {
@@ -186,13 +193,18 @@ namespace tscui.Pages.Schedules
 
         private void scheduleDataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
+<<<<<<< HEAD
          //   e.Row.Header = e.Row.GetIndex() + 1;
             e.Row.Header = "-";
+=======
+            e.Row.Header = e.Row.GetIndex() + 1;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             Schedule currentrowSchedule = e.Row.Item as Schedule;
             if (currentrowSchedule != null)
             {
                 byte result = currentrowSchedule.ucEventId;
                 if (result == 0)
+<<<<<<< HEAD
                 {
                     rowvisibleflag += 1;
                     e.Row.Header = "+";
@@ -202,7 +214,12 @@ namespace tscui.Pages.Schedules
             if (rowvisibleflag >= 2 && currentrowSchedule.ucEventId == 0)
             {
                 e.Row.Visibility = Visibility.Collapsed;
+=======
+                    rowvisibleflag += 1;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
+            if (rowvisibleflag >= 2 && currentrowSchedule.ucEventId ==0)
+                e.Row.Visibility = Visibility.Collapsed;
         }
 
         private void scheduleDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -213,7 +230,13 @@ namespace tscui.Pages.Schedules
                 if (currentrowSchedule != null)
                 {
                     byte result = currentrowSchedule.ucEventId;
+<<<<<<< HEAD
                   //  if(result ==0x0)return ;
+=======
+                    //MessageBox.Show(result+"");
+                    if (result == 0)
+                        currentrowSchedule.ucEventId = 0x10;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
                 if ((e.Row.GetIndex() + 1) <= scheduleDataGrid.Items.Count)
                 {
@@ -237,7 +260,11 @@ namespace tscui.Pages.Schedules
                 Schedule currentrowSchedule = scheduleDataGrid.SelectedItem as Schedule;
                 if (currentrowSchedule == null || currentrowSchedule.ucEventId == 0x0)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("删除子时段号非0!");
+=======
+                    MessageBox.Show("请先选择一个非0时段序号!");
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     return;
                 }
                 if (
@@ -257,6 +284,7 @@ namespace tscui.Pages.Schedules
             {
                 MessageBox.Show("时段序号删除异常!");
             }
+<<<<<<< HEAD
         }
 
 
@@ -285,6 +313,10 @@ namespace tscui.Pages.Schedules
         }
 
 
+=======
+        }
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     }
     public class ScheduleCtrl
     {

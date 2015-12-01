@@ -16,7 +16,11 @@ namespace tscui
         {
            // WindowState = System.Windows.WindowState.Maximized;
             InitializeComponent();
+<<<<<<< HEAD
             tb.SetResourceReference(TextBlock.TextProperty,"tscinfo");
+=======
+           tb.SetResourceReference(TextBlock.TextProperty,"tscinfo");
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -24,6 +28,13 @@ namespace tscui
             Close();
         }
 
+<<<<<<< HEAD
+=======
+        private void maximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+           // WindowState = System.Windows.WindowState.Maximized;
+        }
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
@@ -104,12 +115,24 @@ namespace tscui
 
         private void zuneShell_Closed(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+=======
+           // Console.WriteLine("zuneShell_Closed");
+        }
+
+        private void zuneShell_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Console.WriteLine("zuneShell_Closing");
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             Process current = Process.GetCurrentProcess();
             current.Kill();
         }
 
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
 
         private void zuneShell_SizeChanged(object sender, SizeChangedEventArgs e)

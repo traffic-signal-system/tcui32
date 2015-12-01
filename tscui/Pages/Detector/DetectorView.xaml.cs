@@ -12,7 +12,10 @@ using tscui.Service;
 using System.Threading;
 using System.Windows.Threading;
 using System.Windows.Media;
+<<<<<<< HEAD
 using Visifire.Charts;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
 namespace tscui.Pages.Detector
 {
@@ -30,6 +33,7 @@ namespace tscui.Pages.Detector
 
         public DetectorView()
         {
+<<<<<<< HEAD
             try
             {
                 td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
@@ -44,6 +48,12 @@ namespace tscui.Pages.Detector
             {
                 MessageBox.Show("加载检测器配置异常!", "检测器", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+=======
+            td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            InitializeComponent();
+            this.Deteccanvas.AddHandler(TextBlock.MouseLeftButtonDownEvent, new RoutedEventHandler(MouseLeftButton_Down));
+            this.Deteccanvas.AddHandler(TextBlock.MouseRightButtonDownEvent,new RoutedEventHandler(MouseRightButton_Down));
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             //   MessageBox.Show("Construct");
         }
 
@@ -51,11 +61,24 @@ namespace tscui.Pages.Detector
         {
             try
             {
+<<<<<<< HEAD
                 if (e.OriginalSource != null)
+=======
+                TextBlock tb = e.OriginalSource as TextBlock;
+                if (tb == null || tb.Text.Equals(""))
+                {
+                    return;
+                }
+
+                byte id = Convert.ToByte(tb.Text);
+                List<Models.Detector> ld = td.ListDetector;
+                foreach (Models.Detector d in ld)
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 {
                     TextBlock tb = e.OriginalSource as TextBlock;
                     if (tb == null || tb.Text.Equals(""))
                     {
+<<<<<<< HEAD
                         return;
                     }
 
@@ -70,6 +93,12 @@ namespace tscui.Pages.Detector
                             tb.Background = Brushes.Transparent;
                             return;
                         }
+=======
+                        d.ucPhaseId = 0x00;
+                        tb.Text = "";
+                        tb.Background = Brushes.Transparent;
+                        return;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     }
                 }
             }
@@ -85,7 +114,10 @@ namespace tscui.Pages.Detector
             {
                 if (e.OriginalSource != null)
                 {
+<<<<<<< HEAD
                     string detecid = "";
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     TextBlock tb = e.OriginalSource as TextBlock;
                     if (tb == null)
                     {
@@ -96,6 +128,7 @@ namespace tscui.Pages.Detector
                         MessageBox.Show("配置前须取消车辆检测监控!", "检测器", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
+<<<<<<< HEAD
                     detecid = tb.Text;
                     if (!detecid.Equals(""))
                     {
@@ -103,6 +136,11 @@ namespace tscui.Pages.Detector
                     }
                     //ApexBroker.GetShell().ShowPopup(new DetectorPopup());
                     ApexBroker.GetShell().ShowPopup(new DetectorItem(DecBoard1Online, DecBoard2Online, InjecBoard1Online,
+=======
+                    //ApexBroker.GetShell().ShowPopup(new DetectorPopup());
+                    ApexBroker.GetShell()
+                        .ShowPopup(new DetectorItem(DecBoard1Online, DecBoard2Online, InjecBoard1Online,
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                             InjecBoard2Online));
                     int i = Utils.Utils.GetSelectedDetector();
                     if (i == 0)
@@ -399,7 +437,11 @@ namespace tscui.Pages.Detector
                         }
                         tb.Text = i.ToString();
                         SetDetector(i, DetectorDirect, DetectorIndex);
+<<<<<<< HEAD
                         SelectedDetectorId.SelectedValue = tb.Text;// displayOneDetector(i);
+=======
+                        displayOneDetector(i);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         //  MessageBox.Show("添加检测器" + DetectorIndex.ToString());
                     }
                     e.Handled = true;
@@ -694,7 +736,11 @@ namespace tscui.Pages.Detector
         /// <param name="type"></param>
         public void SetDetector(int i, byte direc, int type)
         {
+<<<<<<< HEAD
             Models.Detector d = new Models.Detector();
+=======
+            tscui.Models.Detector d = new Models.Detector();
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             bool newDetector = true;
             List<Models.Detector> ld = td.ListDetector;
             foreach (Models.Detector det in ld)
@@ -723,11 +769,19 @@ namespace tscui.Pages.Detector
                 d.ucPhaseId = GetPhaseIdByDirec(direc);
                 d.ucDetFlag = GetDetFlag(type, direc);
                 d.ucDirect = GetDirecByte(direc);
+<<<<<<< HEAD
               //  d.ucValidTime = Byte.Parse("0"); //Convert.ToByte(tbkVaildTime.Text); 
                // d.ucOptionFlag = GetOptionByCheckbox();
              //   d.usSaturationFlow = 0;
              //   d.ucSaturationOccupy = 0;
              //   newDetector = true;
+=======
+                d.ucValidTime = Byte.Parse("0"); //Convert.ToByte(tbkVaildTime.Text); 
+                d.ucOptionFlag = GetOptionByCheckbox();
+                d.usSaturationFlow = 0;
+                d.ucSaturationOccupy = 0;
+                newDetector = true;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 ld.Add(d);
             }
         }
@@ -747,8 +801,14 @@ namespace tscui.Pages.Detector
                 {
                     if (id == d.ucDetectorId)
                     {
+<<<<<<< HEAD
                         SelectedDetectorId.SelectedValue = d.ucDetectorId.ToString();
                         tbkPhaseId.Text = Convert.ToString(d.ucPhaseId);byte detf = d.ucDetFlag;
+=======
+                        tbkPhaseId.Text = Convert.ToString(d.ucPhaseId);
+                        /***********暂时没用到************
+                        byte detf = d.ucDetFlag;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         if ((detf & 0x10) == 0x10)
                         {
                             rbnStategy.IsChecked = true;
@@ -793,6 +853,7 @@ namespace tscui.Pages.Detector
                         else
                         {
                             cbxCarType.IsChecked = false;
+<<<<<<< HEAD
                         }
                         if ((opt & 0x02) == 0x02)
                         {
@@ -836,6 +897,53 @@ namespace tscui.Pages.Detector
                             cbxQueun.IsChecked = false;
                         }
                        break;
+=======
+                        }
+                        if ((opt & 0x02) == 0x02)
+                        {
+                            cbxKeyRoad.IsChecked = true;
+                        }
+                        else
+                        {
+                            cbxKeyRoad.IsChecked = false;
+                        }
+                        if ((opt & 0x04) == 0x04)
+                        {
+
+                            cbxFlow.IsChecked = true;
+                        }
+                        else
+                        {
+                            cbxFlow.IsChecked = false;
+                        }
+                        if ((opt & 0x08) == 0x08)
+                        {
+                            cbxOccupancy.IsChecked = true;
+                        }
+                        else
+                        {
+                            cbxOccupancy.IsChecked = false;
+                        }
+                        if ((opt & 0x10) == 0x10)
+                        {
+                            cbxSpeed.IsChecked = true;
+                        }
+                        else
+                        {
+                            cbxSpeed.IsChecked = false;
+                        }
+                        if ((opt & 0x20) == 0x20)
+                        {
+                            cbxQueun.IsChecked = true;
+                        }
+                        else
+                        {
+                            cbxQueun.IsChecked = false;
+                        }
+                        ***********暂时没用到************/
+
+                        break;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     }
 
                 }
@@ -874,10 +982,13 @@ namespace tscui.Pages.Detector
             try
             {
                 allDetecotr.Clear();
+<<<<<<< HEAD
                 if (GetParamPerTime.IsChecked == true)
                     GetParamPerTime.IsChecked = false;
                 if (ChkCarmonitor.IsChecked == true)
                     ChkCarmonitor.IsChecked = false;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 //     ThreadPool.QueueUserWorkItem(SaveDetector);
             }
             catch (Exception ex)
@@ -994,7 +1105,10 @@ namespace tscui.Pages.Detector
         //}
 
         private DispatcherTimer checkDispatcherTimer;
+<<<<<<< HEAD
         private DispatcherTimer DetecParmasGetTimer;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
         #region 检测通道是否正常闪烁切换标记，用于检测器，接口板无此检测
 
@@ -1254,8 +1368,11 @@ namespace tscui.Pages.Detector
                         chkedcar.ChkBoarddNo = (id > 16) ?((id > 32)?((id>64)?"接口板2":"接口板1"):"检测器板2"):"检测器板1";
                         chkedcar.ChkChannel = id;
                         chkedcar.CheckedTime = DateTime.Now.ToString("MM-dd HH:mm:ss");
+<<<<<<< HEAD
                         if( Listcheckcar.Items.Count >500)
                              Listcheckcar.Items.Clear();
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         Listcheckcar.Items.Add(chkedcar);
                     }
                 }
@@ -1726,7 +1843,12 @@ namespace tscui.Pages.Detector
             {
                 MessageBox.Show(m.msg,m.obj,MessageBoxButton.OK,MessageBoxImage.Information);
             }
+<<<<<<< HEAD
             else{
+=======
+            else
+            {
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 MessageBox.Show(m.msg, m.obj, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             SelectedDetectorId.ItemsSource = null;
@@ -1970,8 +2092,14 @@ namespace tscui.Pages.Detector
            
             checkDispatcherTimer = new DispatcherTimer();
             checkDispatcherTimer.Tick += new EventHandler(CheckedDispatcherTimer_Tick);
+<<<<<<< HEAD
             checkDispatcherTimer.Interval = new TimeSpan(0,0,0,1); //500ms refresh
            checkDispatcherTimer.Start();
+=======
+            checkDispatcherTimer.Interval = new TimeSpan(0,0,0,0,500); //500ms refresh
+           
+            checkDispatcherTimer.Start();
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -1979,6 +2107,7 @@ namespace tscui.Pages.Detector
             checkDispatcherTimer.Stop();
             Udp.sendUdpCheckCar(td.Node.sIpAddress, td.Node.iPort, Define.DETECTOR_DISABLED_STATUS_TABLE);
             Udp.CloseCheckCar();
+<<<<<<< HEAD
 
         }
 
@@ -2131,7 +2260,14 @@ namespace tscui.Pages.Detector
                 }
 
             }
+=======
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
 
+        private void Listcheckcar_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Listcheckcar.Items.Clear();
+        }
     }
 }

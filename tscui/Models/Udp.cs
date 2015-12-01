@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -197,11 +200,7 @@ namespace tscui.Models
         /// <summary>
         /// 直接用SOCKET来进行UDP的发送和接收
         /// 此功能不关注发送到信号机后的返回数据，只对发送是否成功进行判断
-        /// </summary>
-        /// <param name="ipstr"></param>
-        /// <param name="port"></param>
-        /// <param name="hex"></param>
-        /// <returns></returns>
+      
         public static bool sendUdpNoReciveData(string ipstr, int port, byte[] hex)
         {
             int recv;
@@ -211,8 +210,7 @@ namespace tscui.Models
             {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Parse(ipstr), port);
                 server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                // string str = "Hello Server!";
-                //bytes = System.Text.Encoding.ASCII.GetBytes(str);
+              
                 server.SendTimeout = 4000;
                 server.ReceiveTimeout = 4000;
                 server.SendTo(hex, ip);
@@ -220,9 +218,12 @@ namespace tscui.Models
                 EndPoint Remote = (EndPoint)(sender);
                 //server.Bind(sender);
                 recv = server.ReceiveFrom(bytes, ref Remote);
+<<<<<<< HEAD
              //    Console.WriteLine("Message received from {0}", Remote.ToString());
                 //str = System.Text.Encoding.ASCII.GetString(bytes, 0, recv);
              //   Console.WriteLine("Message: " + bytes[0]);
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 server.Close();
                 server = null;
                 if (bytes[0] == 134)

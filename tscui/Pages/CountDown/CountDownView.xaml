@@ -83,6 +83,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <ComboBox  x:Name="CbxCntDown" HorizontalAlignment="Left" Margin="98,18,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="CbxCntDown_SelectionChanged" SelectedIndex="6">
+<<<<<<< HEAD
                 <ListBoxItem Content="通讯式(国标GAT508-2004)四方向倒计时"/>
                 <ListBoxItem Content="通讯式(国标GAT508-2004)相位配置倒计时"/>
                 <ListBoxItem Content="触发(闪断)式倒计时"/>
@@ -90,6 +91,15 @@
                 <ListBoxItem Content="通讯式(国标GAT508-2014)方向配置倒计时"/>
                 <ListBoxItem Content="通讯式(国标GAT508-2014)四方向倒计时"/>
                 <ListBoxItem Content="未知配置"/>
+=======
+                <ListBoxItem Content="通讯式倒计时(旧国标)四方向"/>
+                <ListBoxItem Content="通讯式倒计时(旧国标)相位配置"/>
+                <ListBoxItem Content="触发(闪断)式倒计时"/>
+                <ListBoxItem Content="学习(跟随)式倒计时"/>
+                <ListBoxItem Content="通讯式倒计时(新国标)方向配置"/>
+                <ListBoxItem Content="通讯式倒计时(新国标)四方向"/>
+                <ListBoxItem Content="未知"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             </ComboBox>
             <Label Content="倒计时类型:" HorizontalAlignment="Left" Margin="6,16,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.762,0.423"/>
             <Button x:Name="BtnSave" Content="设置" HorizontalAlignment="Left" Height="27" Margin="419,16,0,0" VerticalAlignment="Top" Width="75" Click="CountDownSet_Click"/>

@@ -1,5 +1,8 @@
 ﻿
+<<<<<<< HEAD
 using System.Collections.Generic;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 using Apex.MVVM;
 
 namespace tscui.Pages.Schedules

@@ -222,7 +222,11 @@
     <sys:String x:Key="tsc_module_4G">4G</sys:String>
     <sys:String x:Key="tsc_phase_edit">进入设置模式</sys:String>
     <sys:String x:Key="tsc_phase_mode">灯组显示模式</sys:String>
+<<<<<<< HEAD
     <sys:String x:Key="tsc_phase_countdown">国标GAT508-2004通讯倒计时显示</sys:String>
+=======
+    <sys:String x:Key="tsc_phase_countdown">RS485倒计时显示</sys:String>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <sys:String x:Key="tsc_phase_lamp_open">显示灯组开启</sys:String>
     <sys:String x:Key="tsc_phase_args">参数监视</sys:String>
     <sys:String x:Key="tsc_phase_info">相位信息</sys:String>
@@ -375,7 +379,11 @@
     <sys:String x:Key="tsc_log_value">日志内容</sys:String>
     <sys:String x:Key="tsc_log_del">清空信号机日志</sys:String>
     <sys:String x:Key="tsc_log_local">加载本地日志</sys:String>
+<<<<<<< HEAD
     <sys:String x:Key="tsc_log_export">导出日志</sys:String>
+=======
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
 
     <sys:String x:Key="dic_degradation_off">关灯</sys:String>

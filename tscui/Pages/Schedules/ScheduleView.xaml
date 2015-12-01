@@ -9,6 +9,7 @@
 
     <!-- The View creates its own ViewModel, so set the ViewModel 
     to a new instance of the ViewModel class. -->
+<<<<<<< HEAD
    
     <Grid Margin="0,45,0,0" >
         <DataGrid  HorizontalAlignment="Left" AlternationCount="2" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="scheduleDataGrid" VerticalAlignment="Top" Height="516" Width="870" Margin="10,30,0,0" HorizontalGridLinesBrush="#FF533B3B" RowBackground="#FF63C379" LoadingRow="scheduleDataGrid_LoadingRow" RowEditEnding="scheduleDataGrid_RowEditEnding">
@@ -22,6 +23,27 @@
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Id"  Header="{DynamicResource tsc_schedule_id}" Binding="{Binding ucEventId}" Width="90" SortDirection="Ascending" IsReadOnly="True" CanUserSort="False"/>
+=======
+    <apexMVVM:View.ViewModel>
+        <local:ScheduleViewModel x:Name="scheduleViewModel" />
+    </apexMVVM:View.ViewModel>
+    <Grid Margin="0,45,0,0">
+        <DataGrid  HorizontalAlignment="Left" AlternationCount="2" CanUserAddRows="False" AutoGenerateColumns="False" x:Name="scheduleDataGrid" VerticalAlignment="Top" Height="516" Width="870" Margin="10,30,0,0" HorizontalGridLinesBrush="#FF533B3B" RowBackground="#FF63C379" LoadingRow="scheduleDataGrid_LoadingRow" RowEditEnding="scheduleDataGrid_RowEditEnding">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="ScheduleContext" Header="删除" Click="Delete_ScheduleId"/>
+                </ContextMenu>
+            
+            </DataGrid.ContextMenu>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="ToolTipService.ToolTip"   
+            Value="时段序号非0时不能重复,最大48" />
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Id"  Header="{DynamicResource tsc_schedule_id}" Binding="{Binding ucEventId}" Width="90" SortDirection="Ascending" CanUserSort="False"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 <DataGridTemplateColumn Header="{DynamicResource tsc_schedule_time}" Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -43,6 +65,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+<<<<<<< HEAD
                 <DataGridComboBoxColumn x:Name="cbxucCtrl" Width="220" Header="{DynamicResource tsc_schedule_control_mode}" IsReadOnly="False"  SelectedValueBinding="{Binding ucCtrl}"  CanUserSort="False">
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
@@ -65,6 +88,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <GroupBox Header="{Binding Title}" HorizontalAlignment="Left" Margin="10,-47,0,0" VerticalAlignment="Top" Height="52" Width="870" Grid.ColumnSpan="3">
+=======
+                <DataGridComboBoxColumn x:Name="cbxucCtrl" Width="220" Header="{DynamicResource tsc_schedule_control_mode}" IsReadOnly="False" SelectedValueBinding="{Binding ucCtrl}" SelectedValuePath="value" DisplayMemberPath="name" CanUserSort="False"/>
+                <DataGridComboBoxColumn x:Name="ucTimePatternId"  Width="*" Header="{DynamicResource tsc_schedule_partten_sheme}"  SelectedValueBinding="{Binding ucTimePatternId}"  SelectedValuePath="ucPatternId" DisplayMemberPath="ucPatternId" CanUserSort="False">
+             </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Header="{DynamicResource tsc_schedule_title}" HorizontalAlignment="Left" Margin="10,-47,0,0" VerticalAlignment="Top" Height="52" Width="870" Grid.ColumnSpan="3">
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             <Grid>
                 <Slider HorizontalAlignment="Left" x:Name="sldScheduleId" Margin="4,4,0,0" Value="1" SmallChange="1" Minimum="1" Maximum="16"  IsSnapToTickEnabled="True" VerticalAlignment="Top" Width="749" TickPlacement="BottomRight" AutoToolTipPlacement="BottomRight" ValueChanged="sldScheduleId_ValueChanged"/>
                 <TextBlock x:Name="tbkScheduleId" HorizontalAlignment="Left" Margin="754,6,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sldScheduleId,Path=Value}" VerticalAlignment="Top" Width="25" Background="{DynamicResource ZuneColor1Brush}" />

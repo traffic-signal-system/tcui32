@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Apex.MVVM;
@@ -632,7 +633,7 @@ namespace tscui.Pages.Stage
                         if (p.ucStagePatternId == (byte)(sldStagePatternId.Value))
                         {
                             tbxCycle.Text = p.ucCycleTime.ToString();
-                            tbxOffset.Text = p.ucOffset.ToString();
+                            tbxOffset.Value = p.ucOffset;
                             cbxCoordination.SelectedItem = p.ucCoorPhase;
                             cbxReaction.IsChecked = false;
                         }
@@ -711,7 +712,7 @@ namespace tscui.Pages.Stage
                 {
                     p.ucCoorPhase = Convert.ToByte(cbxCoordination.SelectedItem);
                     p.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-                    p.ucOffset = Convert.ToByte(tbxOffset.Text);
+                    p.ucOffset = Convert.ToByte(tbxOffset.Value);
                     p.ucPatternId = Convert.ToByte(sldSchemeId.Value);
                     p.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
                     oldPattern = true;
@@ -730,7 +731,7 @@ namespace tscui.Pages.Stage
                     ptemp = new Pattern();
                     ptemp.ucCoorPhase = Convert.ToByte(cbxCoordination.SelectedItem);
                     ptemp.ucCycleTime = Convert.ToByte(tbxCycle.Text);
-                    ptemp.ucOffset = Convert.ToByte(tbxOffset.Text);
+                    ptemp.ucOffset = Convert.ToByte(tbxOffset.Value);
                     ptemp.ucPatternId = Convert.ToByte(sldSchemeId.Value);
                     ptemp.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
                     lp.Add(ptemp);
@@ -938,6 +939,7 @@ namespace tscui.Pages.Stage
         private bool savePattern()
         {
             try
+<<<<<<< HEAD
             {
               // List<Pattern> lp = t.ListPattern;
                 Pattern newpattern = new Pattern();
@@ -994,6 +996,63 @@ namespace tscui.Pages.Stage
             catch (Exception ex)
             {
                 MessageBox.Show("方案保存异常!", "方案", MessageBoxButton.OK,MessageBoxImage.Error);
+=======
+            {
+                Pattern newpattern = new Pattern();
+                newpattern.ucPatternId = (byte)(sldSchemeId.Value);
+                newpattern.ucCycleTime = Convert.ToByte(tbxCycle.Text);
+                newpattern.ucCoorPhase = cbxCoordination.Text.Equals("")?(Byte)0x0: Convert.ToByte(cbxCoordination.Text);
+                newpattern.ucCoorPhase = newpattern.ucCoorPhase > 0xa?(Byte)0xa : newpattern.ucCoorPhase;
+                newpattern.ucOffset = Convert.ToByte(tbxOffset.Value);
+                newpattern.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
+                bool baddnewpattern = true;
+                bool bvalidstagepatternid = false;  //判断是否阶段配时阶段数为0
+                foreach (StagePattern sp in td.ListStagePattern)
+                {
+                    if (newpattern.ucStagePatternId == sp.ucStagePatternId)
+                    {
+                        if (sp.ucStageNo > 0)
+                        {
+                            bvalidstagepatternid = true;
+                            break;
+                        }
+                    }
+                }
+                if (bvalidstagepatternid == false)
+                {
+                    MessageBox.Show("该方案对应阶段配时"+(byte)sldStagePatternId.Value+"没配置放行相位,方案无法保存!\r\n须先配置放行相位","方案",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return false;
+                }
+                if (td.ListPattern !=  null)
+                {
+                    foreach (Pattern p in td.ListPattern)
+                    {
+                        if (p.ucPatternId == ((byte) sldSchemeId.Value))
+                        {
+                            p.ucCycleTime = newpattern.ucCycleTime;
+                            p.ucCoorPhase = newpattern.ucCoorPhase;
+                            p.ucOffset = newpattern.ucOffset;
+                            p.ucStagePatternId = newpattern.ucStagePatternId;
+                            baddnewpattern = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (baddnewpattern == true)
+                    {
+                        MessageBox.Show("添加新方案"+((byte)sldSchemeId.Value), "方案", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if(td.ListPattern ==null)
+                            td.ListPattern = new List<Pattern>();
+                        td.ListPattern.Add(newpattern);
+                    }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("加入方案列表异常!", "方案", MessageBoxButton.OK,MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 return false;
             }
         }
@@ -1774,7 +1833,7 @@ namespace tscui.Pages.Stage
                     {
                         tbxCycle.Text = p.ucCycleTime.ToString();
                         cbxCoordination.SelectedItem = p.ucCoorPhase;
-                        tbxOffset.Text = p.ucOffset.ToString();
+                        tbxOffset.Value = p.ucOffset;
                         sldStagePatternId.Value = p.ucStagePatternId;
                         sldStagePatternId.Background = Brushes.White;
                         return;
@@ -1870,7 +1929,10 @@ namespace tscui.Pages.Stage
                             sldGreenTime.Value = sp.ucGreenTime;
                             sldYellowTime.Value = sp.ucYellowTime;
                             sldRedTime.Value = sp.ucRedTime;
+<<<<<<< HEAD
                             //ChkIgnoreStage.IsChecked = (sp.ucOption & 0x2) == 0x2 ? true : false;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                             break;
                         }
                     }
@@ -1907,6 +1969,7 @@ namespace tscui.Pages.Stage
                         }
                     }
                 }
+<<<<<<< HEAD
 
             }
             catch (Exception ex)
@@ -1982,13 +2045,27 @@ namespace tscui.Pages.Stage
         private void ChkCopyStage_Checked(object sender, RoutedEventArgs e)
         {
             CopyedstageId = (byte)(sldStagePatternId.Value);
+=======
+
+            }
+            catch (Exception ex)
+            {
+                  MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
+<<<<<<< HEAD
                
+=======
+                //  Thread.Sleep(500);
+                Slider sld = sldYellowTime;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
                 if (td == null)
                     return;
@@ -2007,7 +2084,12 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 return;
+=======
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
 
         }
@@ -2016,7 +2098,12 @@ namespace tscui.Pages.Stage
         {
             try
             {
+<<<<<<< HEAD
 
+=======
+                ///   Thread.Sleep(500);
+                Slider sld = sldRedTime;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
                 if (td == null)
                     return;
@@ -2035,10 +2122,21 @@ namespace tscui.Pages.Stage
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 return;
+=======
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
         }
 
+        private void ChkCopyStage_Checked(object sender, RoutedEventArgs e)
+        {
+            CopyedstageId = (byte)(sldStagePatternId.Value);
+        }
+
+  
 
 
     }

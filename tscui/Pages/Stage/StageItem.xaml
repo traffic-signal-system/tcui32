@@ -8,7 +8,7 @@
     <Grid>
         <Canvas Width="170" Height="175" Background="White" x:Name="StageItemsCanvas">
             <Image ToolTip ="路口基准图小" HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="170" Source="/tscui;component/Resources/Images/back20130627.jpg"/>
-            <Image x:Name="northLeft" Canvas.Left="78" Canvas.Top="133" Height="20" RenderOptions.BitmapScalingMode="Linear" Source="/tscui;component/Resources/Images/redlight.png" Width="6">
+            <Image x:Name="northLeft" Canvas.Left="78" Canvas.Top="133" Height="20"  Source="/tscui;component/Resources/Images/redlight.png" Width="6">
 
             </Image>
             <Image x:Name="eastPedestrain1" Canvas.Left="124" Canvas.Top="57" Height="20"  Source="/tscui;component/Resources/Images/redlight.png" Width="6">

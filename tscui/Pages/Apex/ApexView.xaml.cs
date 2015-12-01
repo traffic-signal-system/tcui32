@@ -63,7 +63,11 @@ namespace tscui.Pages.Apex
             Node node = new Node(ti.Ip, ti.Name, ti.Version, ti.Port);
             td.Node = node;
             Application.Current.Resources["tscinfo"] = "当前信号机IP地址:" + ti.Ip + "       端口号:" + ti.Port + "       版本:" + ti.Version;
+<<<<<<< HEAD
             Application.Current.Properties[Define.TSC_DATA] = td;
+=======
+            Application.Current.Properties[Define.TSC_DATA] = td; 
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             // 对选中的信号机进行数据库生成
           //  SQLiteHelper.CreateDB("c:\\"+ti.Ip + ".db");
@@ -72,47 +76,73 @@ namespace tscui.Pages.Apex
                 td.ListSchedule = TscDataUtils.GetSchedule();
                 if (td.ListSchedule == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("信号机时段表加载失败,信号机参数加载中断退出!","信号机",MessageBoxButton.OK,MessageBoxImage.Error);
                     Application.Current.Properties[Define.TSC_DATA] = null;
 
                     return;
+=======
+                    MessageBox.Show("信号机时段表加载为空!","信号机",MessageBoxButton.OK,MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("时段表加载异常,数据库加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 return;
+=======
+                MessageBox.Show("时段表数据加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
                 td.ListPlan = TscDataUtils.GetPlan();
                 if (td.ListPlan == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("信号机时基表加载失败,参数加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Application.Current.Properties[Define.TSC_DATA] = null;
                     return;
+=======
+                    MessageBox.Show("信号机时基表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("时基表加载异常,参数加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 return;
+=======
+                MessageBox.Show("信号机时基表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
                 td.ListModule = TscDataUtils.GetModule();
+<<<<<<< HEAD
                 if (td.ListModule == null)
                 {
                     MessageBox.Show("信号机模块表加载失败!", "信号机", MessageBoxButton.OK, MessageBoxImage.Warning);                 
                 }
+=======
+              
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             catch (Exception ex)
             {
 
+<<<<<<< HEAD
                 MessageBox.Show("模块表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+=======
+                MessageBox.Show("信号机模块表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             }
             try
@@ -120,17 +150,25 @@ namespace tscui.Pages.Apex
                 td.ListPhase = TscDataUtils.GetPhase();
                 if (td.ListPhase == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("信号机相位表加载异常,参数加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Application.Current.Properties[Define.TSC_DATA] = null;
                     return;
+=======
+                    MessageBox.Show("信号机相位表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("相位表加载异常,数据库加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 return;
+=======
+                MessageBox.Show("信号机相位表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
@@ -145,12 +183,17 @@ namespace tscui.Pages.Apex
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("相位冲突表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
+=======
+                MessageBox.Show("信号机相位冲突表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
                 td.ListDetector = TscDataUtils.GetDetector();
+<<<<<<< HEAD
                 if (td.ListDetector == null)
                 {
                     MessageBox.Show("信号机网络异常,检查网络!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -162,6 +205,13 @@ namespace tscui.Pages.Apex
             catch (Exception ex)
             {
                 MessageBox.Show("检测器表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+=======
+             
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机检测器/接口板表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             }
             try
@@ -169,17 +219,27 @@ namespace tscui.Pages.Apex
                 td.ListChannel = TscDataUtils.GetChannel();
                 if (td.ListChannel == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("信号机网络异常,检查网络!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Application.Current.Properties[Define.TSC_DATA] = null;
                     return;
+=======
+                    MessageBox.Show("信号机通道表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+                   
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("通道表加载异常,数据库加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 return;
+=======
+                MessageBox.Show("信号机通道表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
@@ -187,37 +247,56 @@ namespace tscui.Pages.Apex
 
                 if (td.ListPattern == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("方案表加载为空!!!", "信号机", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                //     Application.Current.Properties[Define.TSC_DATA] = null;
              //       return;
+=======
+                  MessageBox.Show("信号机方案表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+             
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("方案表加载异常!!!", "信号机", MessageBoxButton.OK, MessageBoxImage.Warning);
 
           //      return;
+=======
+                MessageBox.Show("信号机方案表加载异常!!!", "信号机", MessageBoxButton.OK, MessageBoxImage.Warning);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
                 td.ListStagePattern = TscDataUtils.GetStagePattern();
                 if (td.ListStagePattern == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("阶段配时表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
                    // Application.Current.Properties[Define.TSC_DATA] = null;
                    // return;
+=======
+                     MessageBox.Show("信号机阶段配时表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("阶段表加载异常,数据库加载中断退出!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
               //  return;
+=======
+                MessageBox.Show("信号机阶段表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
                 td.ListOverlapPhase = TscDataUtils.GetOverlapPhase();
+<<<<<<< HEAD
                 if (td.ListOverlapPhase == null)
                 {
                     MessageBox.Show("跟随相位表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -229,6 +308,13 @@ namespace tscui.Pages.Apex
             catch (Exception ex)
             {
                 MessageBox.Show("跟随相位表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+=======
+          
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机跟随相位表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             }
             try
@@ -236,21 +322,30 @@ namespace tscui.Pages.Apex
                 td.ListPhaseToDirec = TscDataUtils.GetPhaseToDirec();
                 if (td.ListPhaseToDirec == null)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("信号机网络异常,检查网络!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Application.Current.Properties[Define.TSC_DATA] = null;
                     return;
+=======
+                    MessageBox.Show("信号机方向相位表加载为空!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show("方向表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+=======
+                MessageBox.Show("信号机方向相位表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
                 return;
             }
             try
             {
                 td.ListLampCheck = TscDataUtils.GetLampCheck();
+<<<<<<< HEAD
                 if (td.ListLampCheck == null)
                 {
                     MessageBox.Show("信号机网络异常,检查网络!", "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -263,6 +358,21 @@ namespace tscui.Pages.Apex
             {
                 MessageBox.Show("灯泡检测表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
+=======
+           
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机灯泡检测表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            try
+            {
+                td.ListCntDownDev = TscDataUtils.GetCntDown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机倒计时配置表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             try
             {
@@ -279,9 +389,12 @@ namespace tscui.Pages.Apex
             {
                 MessageBox.Show("闪断式倒计时表加载异常!", "信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
+<<<<<<< HEAD
             }
 
           //  currentTI = null;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
         public void RunThreadRecevie()
         {
@@ -375,6 +488,10 @@ namespace tscui.Pages.Apex
             catch (Exception ext)
             {
                 MessageBox.Show("网络广播出现问题,请检测网络!" + ext.Message, "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             
         }
@@ -474,6 +591,7 @@ namespace tscui.Pages.Apex
             //{
             //    InitTscData(currentTI);
             //}
+<<<<<<< HEAD
         }
 
         private void Click_TscIP(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -486,7 +604,11 @@ namespace tscui.Pages.Apex
             }
             TscInfo tscInfo = new TscInfo("99", "Tsc32", TextIP.Text, "V329999", 5435);
             TscInfoList.Items.Add(tscInfo);            
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
+    
+
     
 
     }

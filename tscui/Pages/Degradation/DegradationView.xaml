@@ -15,7 +15,11 @@
         <local:DegradationViewModel x:Name="viewModel" />
     </UserControl.DataContext>
 
+<<<<<<< HEAD
     <ScrollViewer Margin="0,4,40,4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Visibility="Visible">
+=======
+    <ScrollViewer Margin="0,4,40,4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Visibility="Hidden">
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         <apexControls:ApexGrid Margin="40,0,0,0"
         Rows="Auto,Auto,Auto,Auto,Auto,Auto,Auto" >
         

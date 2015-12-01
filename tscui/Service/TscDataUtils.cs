@@ -1337,6 +1337,7 @@ namespace tscui.Service
             return lb;
         }
 
+<<<<<<< HEAD
         /// 返回检测器板的工作类型
         public static Byte GetDetecBdWorkType(Node n,Byte DetecBdIndex)
         {
@@ -1385,6 +1386,8 @@ namespace tscui.Service
 
 
 
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         /// <summary>
         /// 设置相位方向 表
         /// </summary>
@@ -1572,8 +1575,11 @@ namespace tscui.Service
             return null;
         }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         /// <summary>
         /// 取得信号机的模块数据信息
         /// </summary>

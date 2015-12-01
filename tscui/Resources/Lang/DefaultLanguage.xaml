@@ -377,7 +377,10 @@
     <sys:String x:Key="tsc_log_value">Content</sys:String>
     <sys:String x:Key="tsc_log_del">Clear Log</sys:String>
     <sys:String x:Key="tsc_log_local">Load local Log</sys:String>
+<<<<<<< HEAD
     <sys:String x:Key="tsc_log_export">Export log</sys:String>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
     <sys:String x:Key="dic_degradation_off">Off</sys:String>
     <sys:String x:Key="dic_degradation_flashing">Yellow Flash</sys:String>

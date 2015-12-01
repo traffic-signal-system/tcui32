@@ -247,12 +247,15 @@
                 </GroupBox>
                 <CheckBox Content="勾选" x:Name="ChkBoxSlot1Grade" Margin="789,159,0,0" VerticalAlignment="Top" Height="21" Width="43" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" AllowDrop="True" HorizontalAlignment="Left"/>
                 <CheckBox Content="勾选" x:Name="ChkBoxSlot1GradeData" Margin="789,244,0,0" VerticalAlignment="Top" Height="21" Width="43" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" AllowDrop="True" HorizontalAlignment="Left"/>
+<<<<<<< HEAD
                 <ComboBox x:Name="DecWorkTypeCbx1" HorizontalAlignment="Left" Margin="790,112,0,0" VerticalAlignment="Top" Width="55" SelectedIndex="0">
                     <ComboBoxItem>默认</ComboBoxItem>
                     <ComboBoxItem>脉冲</ComboBoxItem>
                     <ComboBoxItem>存在</ComboBoxItem>
                 </ComboBox>
                 <Label x:Name="WorkTypeLabel1" Content="工作方式:" HorizontalAlignment="Left" Margin="788,82,-14,0" VerticalAlignment="Top" Width="66"/>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             </Grid>
         </GroupBox>
         <GroupBox Header="{DynamicResource tsc_adv_detector_title}" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,594,0,-1" VerticalAlignment="Top" Height="7" Width="817" RenderTransformOrigin="0.5,0.5">
@@ -371,7 +374,11 @@
                 <GroupBox Header="13" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="173" Width="49" Margin="594,-3,0,0">
                     <Grid Margin="0,-5,0,5">
                         <Slider x:Name="sldDetector213" HorizontalAlignment="Left" VerticalAlignment="Top" Width="36" Height="121" AutoToolTipPlacement="BottomRight" Orientation="Vertical" TickPlacement="Both" IsSnapToTickEnabled="True" Maximum="16" Margin="0,5,0,0" Minimum="1"/>
+<<<<<<< HEAD
                         <Label Content="{Binding Value, ElementName=sldDetector213}" HorizontalAlignment="Left" Margin="4,130,0,-9" VerticalAlignment="Top" Width="27" />
+=======
+                        <Label Content="{Binding Value, ElementName=sldDetector213}" HorizontalAlignment="Left" Margin="4,130,0,-9" VerticalAlignment="Top" Width="27" Height="30"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="14" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="173" Width="49" Margin="643,-3,0,0">
@@ -527,6 +534,7 @@
                 </GroupBox>
                 <CheckBox Content="勾选" x:Name="ChkBoxSlot2Grade" Margin="792,153,-32,0" VerticalAlignment="Top" Height="21" Width="43" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" AllowDrop="True" HorizontalAlignment="Left"/>
                 <CheckBox Content="勾选" x:Name="ChkBoxSlot2GradeData" Margin="792,243,-32,0" VerticalAlignment="Top" Height="21" Width="43" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" AllowDrop="True" HorizontalAlignment="Left"/>
+<<<<<<< HEAD
                 <Label x:Name="WorkTypeLabel12" Content="工作方式:" HorizontalAlignment="Left" Margin="788,68,-42,0" VerticalAlignment="Top" Width="65"/>
                 <ComboBox x:Name="DecWorkTypeCbx2" HorizontalAlignment="Left" Margin="793,98,-32,0" VerticalAlignment="Top" Width="55" SelectedIndex="0">
                     <ComboBoxItem>默认</ComboBoxItem>
@@ -534,6 +542,8 @@
                     <ComboBoxItem>存在</ComboBoxItem>
                 </ComboBox>
 
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             </Grid>
         </GroupBox>
         <Label Content="如果检测器设置界面不可用,则表示该检测器板不存在或者无法通信。保存或读取配置参数需先勾选对应检测器项框!" HorizontalAlignment="Left" Margin="4,562,0,0" VerticalAlignment="Top" Width="634" Height="29"/>
