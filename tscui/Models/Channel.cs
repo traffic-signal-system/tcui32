@@ -34,4 +34,29 @@ namespace tscui.Models
         }
 
     }
+
+
+    class ChannelFlash
+    {
+        public int value { set; get; }
+        public string name { set; get; }
+    }
+    class ChannelType
+    {
+        public int value { set; get; }
+        public string name { set; get; }
+    }
+
+    public class DirecNumer
+    {
+        public byte value { set; get; }
+        public string name { set; get; }
+
+    }
+    public class ChannelPhaseOverlap
+    {
+        public byte id { set; get; }
+        public string name { set; get; }
+        public bool isPhase { set; get; }
+    }
 }

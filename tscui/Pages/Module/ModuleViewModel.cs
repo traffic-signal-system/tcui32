@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Apex;
-using Apex.MVVM;
-using tscui.Models;
+﻿using Apex.MVVM;
 using tscui.Pages;
+using tscui.Pages.Music;
 
 namespace tscui.ViewModels
 {
@@ -22,9 +16,6 @@ namespace tscui.ViewModels
         public ModuleViewModel()
         {
             Title = (string)App.Current.Resources.MergedDictionaries[3]["tsc_menu_module"];
-
-          
-
         }
 
     }

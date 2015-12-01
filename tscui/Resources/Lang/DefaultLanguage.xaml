@@ -19,7 +19,7 @@
     <sys:String x:Key="tsc_adv_lamp_broad5">TurnAroundLamp</sys:String>
     <sys:String x:Key="tsc_adv_lamp_broad6">OtherLamp1</sys:String>
     <sys:String x:Key="tsc_adv_lamp_broad7">OtherLamp2</sys:String>
-    <sys:String x:Key="tsc_adv_lamp_broad8">Two-Step-CrossLamp</sys:String>
+    <sys:String x:Key="tsc_adv_lamp_broad8">Two-Step-Cross</sys:String>
     <sys:String x:Key="tsc_adv_channel1">Channel1</sys:String>
     <sys:String x:Key="tsc_adv_channel2">Channel2</sys:String>
     <sys:String x:Key="tsc_adv_channel3">Channel3</sys:String>
@@ -87,6 +87,10 @@
     <sys:String x:Key="tsc_list">The Tsc List</sys:String>
     <sys:String x:Key="tsc_time_id">Time</sys:String>
     <sys:String x:Key="tsc_time_schedule">Schedule</sys:String>
+    <sys:String x:Key="tsc_time_schedule_save">ScheduleSave</sys:String>
+    <sys:String x:Key="tsc_SchedulePlan_save">SchedulePlanSave</sys:String>
+
+
     <sys:String x:Key="tsc_time_month">Month</sys:String>
     <sys:String x:Key="tsc_time_jan">jan</sys:String>
     <sys:String x:Key="tsc_time_Dec">Dec</sys:String>
@@ -102,10 +106,11 @@
     <sys:String x:Key="tsc_time_mar">mar</sys:String> 
     <sys:String x:Key="tsc_time_feb">feb</sys:String>
     <sys:String x:Key="tsc_detector_check">Check</sys:String>
-    <sys:String x:Key="tsc_time_save">save</sys:String> 
-    <sys:String x:Key="tsc_time_read">read</sys:String>
-
-
+    
+ 
+    <sys:String x:Key="tsc_pattern_save">Save Pattern</sys:String>
+    <sys:String x:Key="tsc_stagepattern_save">Save StagePattern</sys:String>
+    
     <sys:String x:Key="tsc_direc_title">Direc Config</sys:String>
     <sys:String x:Key="tsc_direc_id">Direc Id</sys:String>
     <sys:String x:Key="tsc_direc_roadcount">Road Count</sys:String>
@@ -126,7 +131,10 @@
     
     <sys:String x:Key="tsc_week_id">Plan</sys:String>
     <sys:String x:Key="tsc_lightcheck_hardware">Open Lamp Check Light(hardware)</sys:String>
-    <sys:String x:Key="tsc_lightcheck_software">Open Lamp Check When Start Tsc</sys:String>
+    <sys:String x:Key="tsc_lightcheck_software">Open LampCheck(Soft Switch)</sys:String>
+    <sys:String x:Key="tsc_lightcheck_software_close">Close LampCheck(Soft Switch)</sys:String>
+
+
     <sys:String x:Key="tsc_lightcheck_select">please selected a tsc ,and check you network</sys:String>
     <sys:String x:Key="tsc_lightcheck_close_success">close light check success when start tsc</sys:String>
     <sys:String x:Key="tsc_lightcheck_close_faile">close light check error when start tsc</sys:String>
@@ -211,6 +219,7 @@
     <sys:String x:Key="tsc_detector_options">Options：</sys:String>
     <sys:String x:Key="tsc_detector_saturate_flow">Saturate Flow：</sys:String>
     <sys:String x:Key="tsc_detector_vaild_time">Vaild Time：</sys:String>
+    <sys:String x:Key="tsc_detector_id">DetectorId：</sys:String>
     <sys:String x:Key="tsc_detector_saturated_occupancy">Saturate Occupancy：</sys:String>
     <sys:String x:Key="tsc_adv_detector_title">Detector Config</sys:String>
     <sys:String x:Key="tsc_log_reread">Read Log ......</sys:String>
@@ -239,8 +248,11 @@
     <sys:String x:Key="tsc_phase_run_time">Run Time：</sys:String>
     <sys:String x:Key="tsc_phase_current_stage">Current Stage：</sys:String>
     <sys:String x:Key="tsc_phase_stage">Scheme</sys:String>
-    <sys:String x:Key="tsc_phase_stagepattern">Pattern Scheme：</sys:String>
-    <sys:String x:Key="tsc_phase_stage_run">Run Scheme：</sys:String>
+    <sys:String x:Key="tsc_phase_stagepattern">PatternScheme：</sys:String>
+    <sys:String x:Key="tsc_phase_stage_run">RunScheme：</sys:String>
+    <sys:String x:Key="tsc_phase_planid">PlanId：</sys:String>
+    <sys:String x:Key="tsc_phase_planstype">PlanType：</sys:String>
+
     <sys:String x:Key="tsc_phase_cycle">Cycle Info</sys:String>
     <sys:String x:Key="tsc_phase_cycle_time">Cycle TIme：</sys:String>
     <sys:String x:Key="tsc_phase_work_model">Work Mode</sys:String>
@@ -282,7 +294,8 @@
     <sys:String x:Key="tsc_apex_id">ID</sys:String>
     <sys:String x:Key="tsc_apex_name">Name</sys:String>
     <sys:String x:Key="tsc_apex_ip">IP Address</sys:String>
-    
+    <sys:String x:Key="tsc_network_config">NetWork Config</sys:String>
+
     <sys:String x:Key="tsc_lightcheck_all">All</sys:String>
     <sys:String x:Key="tsc_apex_network">Please connect Controller</sys:String>
     <sys:String x:Key="msg_apex_16_32_no_match">Tsc just has 16 phase ,the protocal is not match!</sys:String>
@@ -311,7 +324,7 @@
     <sys:String x:Key="msg_update_success">upgrade success!</sys:String>
     <sys:String x:Key="msg_update_reset_success">unupgrade success!</sys:String>
     <sys:String x:Key="msg_update_reset_failed">unupgrade failed!</sys:String>
-
+    <sys:String x:Key="tsc_lightcheck_switch">Physics Switch</sys:String>
 
     <sys:String x:Key="tsc_menu_tsc_list">TSC LIST</sys:String>
     <sys:String x:Key="tsc_menu_basetime_month">Month</sys:String>
@@ -340,7 +353,9 @@
     <sys:String x:Key="tsc_menu_basetime">BaseTime</sys:String>
     <sys:String x:Key="tsc_menu_otherdevice">Peripheral</sys:String>
     <sys:String x:Key="tsc_menu_system">System</sys:String>
-    
+    <sys:String x:Key="tsc_menu_offline">Offline</sys:String>
+
+
     <sys:String x:Key="dic_schedule_self_control">Self Run</sys:String>
     <sys:String x:Key="dic_schedule_off">Off</sys:String>
     <sys:String x:Key="dic_schedule_flashing">Yellow Flash</sys:String>
@@ -353,20 +368,36 @@
     <sys:String x:Key="dic_schedule_hd_control">Brightness</sys:String>
     <sys:String x:Key="dic_schedule_no_fun">No Function</sys:String>
     <sys:String x:Key="dic_schedule_no_special">No Special</sys:String>
+    <sys:String x:Key="dic_schedule_PreAnalysis">PreAnalysis</sys:String>
+
     <sys:String x:Key="tsc_log_headertooltip">Log Info</sys:String>
     <sys:String x:Key="tsc_log_id">ID</sys:String>
     <sys:String x:Key="tsc_log_type">Type</sys:String>
     <sys:String x:Key="tsc_log_time">Date</sys:String>
     <sys:String x:Key="tsc_log_value">Content</sys:String>
+    <sys:String x:Key="tsc_log_del">Clear Log</sys:String>
+    <sys:String x:Key="tsc_log_local">Load local Log</sys:String>
+    <sys:String x:Key="tsc_log_export">Export log</sys:String>
 
     <sys:String x:Key="dic_degradation_off">Off</sys:String>
     <sys:String x:Key="dic_degradation_flashing">Yellow Flash</sys:String>
     <sys:String x:Key="dic_degradation_allred">All Red</sys:String>
     <sys:String x:Key="dic_degradation_schedule">Schedule</sys:String>
     <sys:String x:Key="dic_degradation_reaction">Reaction</sys:String>
+    <sys:String x:Key="dic_schedule_secondreaction">SecondReaction</sys:String>
+
     <sys:String x:Key="dic_degradation_main_coordination">Main Coordination</sys:String>
     <sys:String x:Key="dic_degradation_self">Self Optimize</sys:String>
     <sys:String x:Key="dic_degradation_manual">Manual</sys:String>
     <sys:String x:Key="dic_degradation_online">Online</sys:String>
     <sys:String x:Key="dic_degradation_line">Main Line</sys:String>
+
+    <sys:String x:Key="tsc_restart">Rstart</sys:String>
+    <sys:String x:Key="tsc_restart_desc">TscRestart</sys:String>
+    
+    <sys:String x:Key="tsc_time_save">Save</sys:String>
+    <sys:String x:Key="tsc_data_refresh">Refresh</sys:String>
+    <sys:String x:Key="tsc_time_read">Query</sys:String>
+
+
 </ResourceDictionary>

@@ -28,9 +28,10 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.4.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -91,11 +92,19 @@
   <PropertyGroup>
     <StartupObject>tscui.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Apex">
       <HintPath>..\..\tsc32_dll\Apex.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="devcomponents.wpf.controls, Version=7.1.0.14, Culture=neutral, PublicKeyToken=ff0069e61369d6d6, processorArchitecture=MSIL" />
+    <Reference Include="devcomponents.wpf.metro, Version=7.1.0.14, Culture=neutral, PublicKeyToken=ff0069e61369d6d6, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.WpfEditors, Version=7.1.0.14, Culture=neutral, PublicKeyToken=ff0069e61369d6d6, processorArchitecture=MSIL" />
+    <Reference Include="devcomponents.wpfribbon, Version=7.1.0.14, Culture=neutral, PublicKeyToken=ff0069e61369d6d6, processorArchitecture=MSIL" />
+    <Reference Include="devcomponents.wpfschedule, Version=7.1.0.14, Culture=neutral, PublicKeyToken=ff0069e61369d6d6, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions">
       <HintPath>..\..\tsc32_dll\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -106,6 +115,8 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.94.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\..\tsc32_dll\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
@@ -124,10 +135,13 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="WPFToolkit">
       <HintPath>..\..\tsc32_dll\WPFToolkit.dll</HintPath>
     </Reference>
     <Reference Include="WPFVisifire.Charts">
@@ -172,6 +186,7 @@
     <Compile Include="Models\EhoCntDown.cs" />
     <Compile Include="Models\EventLog.cs" />
     <Compile Include="Models\EventType.cs" />
+    <Compile Include="Models\ITscMonStatus.cs" />
     <Compile Include="Models\LampCheck.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Module.cs" />
@@ -188,12 +203,17 @@
     <Compile Include="Models\System.cs" />
     <Compile Include="Models\DetectData.cs" />
     <Compile Include="Models\TscData.cs" />
+    <Compile Include="Models\TscMonStatus.cs" />
     <Compile Include="Models\VariableSign.cs" />
     <Compile Include="Models\VehicleStat.cs" />
     <Compile Include="Pages\BaseTime\SeasonTimeView.xaml.cs">
       <DependentUpon>SeasonTimeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseTime\SeasonTimeViewModel.cs" />
+    <Compile Include="Pages\BusPriority\BusPriority.xaml.cs">
+      <DependentUpon>BusPriority.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BusPriority\BusPriorityViewModel.cs" />
     <Compile Include="Pages\Collision\CollisionItem.xaml.cs">
       <DependentUpon>CollisionItem.xaml</DependentUpon>
     </Compile>
@@ -201,9 +221,38 @@
       <DependentUpon>ConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Config\ConfigViewModel.cs" />
-    <Compile Include="Pages\LoadingMask\LoadingMask.xaml.cs">
-      <DependentUpon>LoadingMask.xaml</DependentUpon>
+    <Compile Include="Pages\Calendar2\Calendar2View.xaml.cs">
+      <DependentUpon>Calendar2View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Calendar2\Calendar2ViewModel.cs" />
+    <Compile Include="Pages\Detector\DetectorItem.xaml.cs">
+      <DependentUpon>DetectorItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Gps\GpsView.xaml.cs">
+      <DependentUpon>GpsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Gps\GpsViewModel.cs" />
+    <Compile Include="Pages\Phase\Singleton1.cs" />
+    <Compile Include="Pages\Power\PowerView.xaml.cs">
+      <DependentUpon>PowerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Power\PowerViewModel.cs" />
+    <Compile Include="Pages\YelloFlash\YelloFlash.xaml.cs">
+      <DependentUpon>YelloFlash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\YelloFlash\YelloFlashViewModel.cs" />
+    <Compile Include="Pages\OfflineDebug\OfflineDebugView.xaml.cs">
+      <DependentUpon>OfflineDebugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OfflineDebug\OfflineDebugViewModel.cs" />
+    <Compile Include="Pages\PedestrianButton\PedestrianBtn.xaml.cs">
+      <DependentUpon>PedestrianBtn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PedestrianButton\PedestrianBtnViewModel.cs" />
+    <Compile Include="Pages\TscStatus\TscStatusView.xaml.cs">
+      <DependentUpon>TscStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TscStatus\TscStatusViewModel.cs" />
     <Compile Include="Pages\Module\ModuleView.xaml.cs">
       <DependentUpon>ModuleView.xaml</DependentUpon>
     </Compile>
@@ -230,11 +279,11 @@
     <Compile Include="Pages\Stage\StageItem.xaml.cs">
       <DependentUpon>StageItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Stage\StageView.xaml.cs">
+      <DependentUpon>StageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\ChannelPopup.xaml.cs">
       <DependentUpon>ChannelPopup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Popups\DetectorPopup.xaml.cs">
-      <DependentUpon>DetectorPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Popups\GbtError.xaml.cs">
       <DependentUpon>GbtError.xaml</DependentUpon>
@@ -253,6 +302,7 @@
     <Compile Include="Service\ByteUtils.cs" />
     <Compile Include="Service\EchoCountDownService.cs" />
     <Compile Include="Service\CheckCarService.cs" />
+    <Compile Include="Service\FtpHelp.cs" />
     <Compile Include="Service\GBT_20999_Utils.cs" />
     <Compile Include="Service\RuntasticHeartRate.cs" />
     <Compile Include="Service\TscDataUtils.cs" />
@@ -274,9 +324,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Calendar\CalendarView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\BusPriority\BusPriority.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Collision\CollisionItem.xaml">
       <SubType>Designer</SubType>
@@ -294,9 +344,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LoadingMask\LoadingMask.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\Calendar2\Calendar2View.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Detector\DetectorItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Gps\GpsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Power\PowerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\YelloFlash\YelloFlash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OfflineDebug\OfflineDebugView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PedestrianButton\PedestrianBtn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TscStatus\TscStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Module\ModuleView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -342,10 +420,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ThePages\ThePagesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\Update\UpdateView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -357,10 +431,6 @@
     <Page Include="Popups\ChannelPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Popups\DetectorPopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Popups\GbtError.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -379,8 +449,13 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="App.ico" />
+    <None Include="Models\Gb.aiton" />
     <None Include="Resources\Icon1.ico" />
     <Resource Include="fama.ico" />
+    <Resource Include="Resources\Images\refresh.png" />
+    <Resource Include="Resources\Images\file.png" />
+    <Resource Include="Resources\Images\time_clock.png" />
+    <Resource Include="Resources\Images\Gps.png" />
     <Content Include="Resources\Lang\zh-CN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,15 +473,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Popups\ExamplePopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Music\MusicView.xaml">
+    <Page Include="Pages\AdvancePhases\AdvancePhasesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -437,10 +508,6 @@
       <DependentUpon>BaseTimeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseTime\BaseTimeViewModel.cs" />
-    <Compile Include="Pages\Calendar\CalendarView.xaml.cs">
-      <DependentUpon>CalendarView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Calendar\CalendarViewModel.cs" />
     <Compile Include="Pages\Collision\CollisionView.xaml.cs">
       <DependentUpon>CollisionView.xaml</DependentUpon>
     </Compile>
@@ -461,34 +528,24 @@
       <DependentUpon>PhaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Phase\PhaseViewModel.cs" />
-    <Compile Include="Pages\Stage\StageView.xaml.cs">
-      <DependentUpon>StageView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Stage\StageViewModel.cs" />
-    <Compile Include="Pages\ThePages\ThePagesView.xaml.cs">
-      <DependentUpon>ThePagesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ThePages\ThePagesViewModel.cs" />
     <Compile Include="Pages\Update\UpdateView.xaml.cs">
       <DependentUpon>UpdateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Update\UpdateViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Pages\Music\MusicViewModel.cs" />
+    <Compile Include="Pages\AdvancePhases\AdvancesPhaseModel.cs" />
     <Compile Include="Pages\PageViewModel.cs" />
     <Compile Include="Pages\DetectorAdvanced\DetectorAdvancedViewModel.cs" />
     <Compile Include="Pages\VariableSign\VariableSignView.xaml.cs">
       <DependentUpon>VariableSignView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VariableSign\VariableSignViewModel.cs" />
-    <Compile Include="Popups\ExamplePopup.xaml.cs">
-      <DependentUpon>ExamplePopup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Music\MusicView.xaml.cs">
-      <DependentUpon>MusicView.xaml</DependentUpon>
+    <Compile Include="Pages\AdvancePhases\AdvancePhasesView.xaml.cs">
+      <DependentUpon>AdvancePhasesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DetectorAdvanced\DetectorAdvancedView.xaml.cs">
       <DependentUpon>DetectorAdvancedView.xaml</DependentUpon>
@@ -718,20 +775,11 @@
     <None Include="doc\WPF_TSC_UI_P_用户手册_V1.0.pdf" />
     <None Include="doc\Wpf配置软件开发.docx" />
     <None Include="packages.config" />
-    <None Include="Resources\Images\conflicts.psd" />
-    <None Include="Resources\Images\eastgreenrsl.psd" />
-    <None Include="Resources\Images\northgreenl.psd" />
-    <None Include="Resources\Images\northgreenr.psd" />
-    <None Include="Resources\Images\southgreenrs.psd" />
-    <None Include="Resources\Images\westgreenl.psd" />
-    <None Include="Resources\Images\westgreensl.psd" />
-    <None Include="Resources\Images\未标题-1.psd" />
-    <None Include="Resources\Images\未标题-2.psd" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

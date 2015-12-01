@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Apex.MVVM;
-using tscui.ViewModels;
-
-namespace tscui.Pages.Update
+﻿namespace tscui.Pages.Update
 {
     /// <summary>
     /// The TheShellViewModel ViewModel class.
@@ -25,9 +17,5 @@ namespace tscui.Pages.Update
            ///ShowPopupCommand = new Command(() => { });
         }
 
-        /// <summary>
-        /// Gets the show popup command.
-        /// </summary>
-       // public Command ShowPopupCommand { get; private set; }
     }
 }

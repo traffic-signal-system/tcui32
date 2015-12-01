@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Apex.MVVM;
 using tscui.ViewModels;
 using Apex.Behaviours;
@@ -25,8 +16,14 @@ namespace tscui.Views
     [View(typeof(DetectorAdvancedViewModel))]
     public partial class DetectorAdvancedView : UserControl, IView
     {
+        private TscData tscData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+        private TscData td;
+
+        private bool DecBoard1Online;
+        private bool DecBoard2Online;
         public DetectorAdvancedView()
         {
+            td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             InitializeComponent();
         }
 
@@ -42,116 +39,188 @@ namespace tscui.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            #region 灵敏度等级设置
-            
-            byte[] se = new byte[16];
-            byte sen1 = Convert.ToByte(sldDetector1.Value);
-            byte sen2 = Convert.ToByte(sldDetector2.Value);
-            se[0] = (byte)(sen1 | sen2 << 4);
-
-            byte sen3 = Convert.ToByte(sldDetector3.Value);
-            byte sen4 = Convert.ToByte(sldDetector4.Value);
-            se[1] = (byte)(sen3 | sen4 << 4);
-
-            byte sen5 = Convert.ToByte(sldDetector5.Value);
-            byte sen6 = Convert.ToByte(sldDetector6.Value);
-            se[2] = (byte)(sen5 | sen6 << 4);
-
-            byte sen7 = Convert.ToByte(sldDetector7.Value);
-            byte sen8 = Convert.ToByte(sldDetector8.Value);
-            se[3] = (byte)(sen7 | sen8 << 4);
-
-            byte sen9 = Convert.ToByte(sldDetector9.Value);
-            byte sen10 = Convert.ToByte(sldDetector10.Value);
-            se[4] = (byte)(sen9 | sen10 << 4);
-
-            byte sen11 = Convert.ToByte(sldDetector11.Value);
-            byte sen12 = Convert.ToByte(sldDetector12.Value);
-            se[5] = (byte)(sen11 | sen12 << 4);
-
-            byte sen13 = Convert.ToByte(sldDetector13.Value);
-            byte sen14 = Convert.ToByte(sldDetector14.Value);
-            se[6] = (byte)(sen13 | sen14 << 4);
-
-            byte sen15 = Convert.ToByte(sldDetector15.Value);
-            byte sen16 = Convert.ToByte(sldDetector16.Value);
-            se[7] = (byte)(sen15 | sen16 << 4);
-
-            byte sen21 = Convert.ToByte(sldDetector21.Value);
-            byte sen22 = Convert.ToByte(sldDetector22.Value);
-            se[8] = (byte)(sen21 | sen22 << 4);
-
-            byte sen23 = Convert.ToByte(sldDetector23.Value);
-            byte sen24 = Convert.ToByte(sldDetector24.Value);
-            se[9] = (byte)(sen23 | sen24 << 4);
-
-            byte sen25 = Convert.ToByte(sldDetector25.Value);
-            byte sen26 = Convert.ToByte(sldDetector26.Value);
-            se[10] = (byte)(sen25 | sen26 << 4);
-
-            byte sen27 = Convert.ToByte(sldDetector27.Value);
-            byte sen28 = Convert.ToByte(sldDetector28.Value);
-            se[11] = (byte)(sen27 | sen28 << 4);
-
-            byte sen29 = Convert.ToByte(sldDetector29.Value);
-            byte sen210 = Convert.ToByte(sldDetector210.Value);
-            se[12] = (byte)(sen29 | sen210 << 4);
-
-            byte sen211 = Convert.ToByte(sldDetector211.Value);
-            byte sen212 = Convert.ToByte(sldDetector212.Value);
-            se[13] = (byte)(sen211 | sen212 << 4);
-
-            byte sen213 = Convert.ToByte(sldDetector213.Value);
-            byte sen214 = Convert.ToByte(sldDetector214.Value);
-            se[14] = (byte)(sen213 | sen214 << 4);
-            byte sen215 = Convert.ToByte(sldDetector215.Value);
-            byte sen216 = Convert.ToByte(sldDetector216.Value);
-            se[15] = (byte)(sen215 | sen216 << 4);
-
-            Message m = TscDataUtils.SetSensitivityAdv(se, t.Node);
-
-            #endregion
-
-            #region 灵敏度数值设置
-            byte lv1 = Convert.ToByte(tbxLv1.Text);
-            byte lv2 = Convert.ToByte(tbxLv2.Text);
-            byte lv3 = Convert.ToByte(tbxLv3.Text);
-            byte lv4 = Convert.ToByte(tbxLv4.Text);
-            byte lv5 = Convert.ToByte(tbxLv5.Text);
-            byte lv6 = Convert.ToByte(tbxLv6.Text);
-            byte lv7 = Convert.ToByte(tbxLv7.Text);
-            byte[] bdg1 = {lv1,lv2,lv3,lv4,lv5,lv6,lv7};
-            Message m1 = TscDataUtils.SetSensityvityDig1(bdg1, t.Node);
-            Message m2 = TscDataUtils.SetSensityvityDig4(bdg1, t.Node);
-            byte lv8 = Convert.ToByte(tbxLv8.Text);
-            byte lv9 = Convert.ToByte(tbxLv9.Text);
-            byte lv10 = Convert.ToByte(tbxLv10.Text);
-            byte lv11 = Convert.ToByte(tbxLv11.Text);
-            byte lv12 = Convert.ToByte(tbxLv12.Text);
-            byte lv13 = Convert.ToByte(tbxLv13.Text);
-            byte lv14 = Convert.ToByte(tbxLv14.Text);
-            byte[] bdg2 = { lv8, lv9, lv10, lv11, lv12, lv13, lv14 };
-            Message m3 = TscDataUtils.SetSensityvityDig2(bdg2, t.Node);
-            Message m4 = TscDataUtils.SetSensityvityDig5(bdg2, t.Node);
-            byte lv15 = Convert.ToByte(tbxLv15.Text);
-            byte lv16 = Convert.ToByte(tbxLv16.Text);
-            byte[] bdg3 = { lv15, lv16};
-            Message m5 = TscDataUtils.SetSensityvityDig3(bdg3, t.Node);
-            Message m6 = TscDataUtils.SetSensityvityDig6(bdg3, t.Node);
-
-            #endregion
-
-
-            if (m.flag && m1.flag && m2.flag && m3.flag && m4.flag && m5.flag && m6.flag)
+            try
             {
-                MessageBox.Show("保存操作成功");
+                #region 检测器板1&2灵敏度等级和数值设
+             
+                string result = ""; //设置结果
+                if (ChkBoxSlot1Grade.IsChecked == true)
+                {
+                    byte[] BytesSlot1Garde = new byte[8];
+                    BytesSlot1Garde[0] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector1.Value - 1)) | ((Convert.ToByte(sldDetector2.Value - 1)) << 4));
+                    BytesSlot1Garde[1] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector3.Value - 1)) | ((Convert.ToByte(sldDetector4.Value - 1)) << 4));
+                    BytesSlot1Garde[2] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector5.Value - 1)) | ((Convert.ToByte(sldDetector6.Value - 1)) << 4));
+                    BytesSlot1Garde[3] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector7.Value - 1)) | ((Convert.ToByte(sldDetector8.Value - 1)) << 4));
+                    BytesSlot1Garde[4] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector9.Value - 1)) | ((Convert.ToByte(sldDetector10.Value - 1)) << 4));
+                    BytesSlot1Garde[5] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector11.Value - 1)) |
+                             ((Convert.ToByte(sldDetector12.Value - 1)) << 4));
+                    BytesSlot1Garde[6] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector13.Value - 1)) |
+                             ((Convert.ToByte(sldDetector14.Value - 1)) << 4));
+                    BytesSlot1Garde[7] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector15.Value - 1)) |
+                             ((Convert.ToByte(sldDetector16.Value - 1)) << 4));
+                    bool bSendOk = TscDataUtils.SetDecBoardSensitivityAdv(BytesSlot1Garde, td.Node, 0x0);
+                    if (DecWorkTypeCbx1.SelectedIndex != 0x0)
+                    {
+                        Byte DecWorkType = (Byte)(DecWorkTypeCbx1.SelectedIndex - 1);
+                        bool bSendOk2 = TscDataUtils.SetDetecBdWorkType(td.Node, 0x0, DecWorkType);
+                      if(bSendOk2 ==true)
+                          result += "检测器板1工作方式设置成功!\r\n";
+                      else
+                          result += "检测器板1工作方式设置失败!\r\n";
+                    }
+
+                    if (bSendOk == true)
+                        result += "检测器板1通道灵敏度等级设置成功!\r\n";
+                    else
+                        result += "检测器板1通道灵敏度等级设置失败!\r\n";
+                }
+                if (ChkBoxSlot1GradeData.IsChecked == true)
+                {
+                    byte[] BytesSlot1GrateData1to7 = new[]
+                    {
+                        Convert.ToByte(Slot1GradeLv1.Value), Convert.ToByte(Slot1GradeLv2.Value),
+                        Convert.ToByte(Slot1GradeLv3.Value), Convert.ToByte(Slot1GradeLv4.Value),
+                        Convert.ToByte(Slot1GradeLv5.Value), Convert.ToByte(Slot1GradeLv6.Value),
+                        Convert.ToByte(Slot1GradeLv7.Value)
+                    };
+                    Message m1to7 = TscDataUtils.SetSensityvityDig1(BytesSlot1GrateData1to7, td.Node);
+
+                    byte[] BytesSlot1GrateData8to14 = new[]
+                    {
+                        Convert.ToByte(Slot1GradeLv8.Value), Convert.ToByte(Slot1GradeLv9.Value),
+                        Convert.ToByte(Slot1GradeLv10.Value), Convert.ToByte(Slot1GradeLv11.Value),
+                        Convert.ToByte(Slot1GradeLv12.Value), Convert.ToByte(Slot1GradeLv13.Value),
+                        Convert.ToByte(Slot1GradeLv14.Value)
+                    };
+                    Message m8to14 = TscDataUtils.SetSensityvityDig2(BytesSlot1GrateData8to14, td.Node);
+
+
+                    byte[] BytesSlot1GrateData15to16 = new[]
+                    {Convert.ToByte(Slot1GradeLv15.Value), Convert.ToByte(Slot1GradeLv16.Value)};
+                    Message m15to16 = TscDataUtils.SetSensityvityDig3(BytesSlot1GrateData15to16, td.Node);
+                    if (m1to7.flag && m8to14.flag && m15to16.flag)
+                    {
+                        result += "检测器板1灵敏度等级数值设置成功!\r\n";
+                    }
+                    else
+                    {
+                        result += "检测器板1灵敏度等级数值设置失败!\r\n";
+                    }
+
+                }
+                if (ChkBoxSlot2Grade.IsChecked == true)
+                {
+                    byte[] BytesSlot2Garde = new byte[8];
+                    BytesSlot2Garde[0] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector21.Value - 1)) |
+                             ((Convert.ToByte(sldDetector22.Value - 1)) << 4));
+                    BytesSlot2Garde[1] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector23.Value - 1)) |
+                             ((Convert.ToByte(sldDetector24.Value - 1)) << 4));
+                    BytesSlot2Garde[2] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector25.Value - 1)) |
+                             ((Convert.ToByte(sldDetector26.Value - 1)) << 4));
+                    BytesSlot2Garde[3] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector27.Value - 1)) |
+                             ((Convert.ToByte(sldDetector28.Value - 1)) << 4));
+                    BytesSlot2Garde[4] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector29.Value - 1)) |
+                             ((Convert.ToByte(sldDetector210.Value - 1)) << 4));
+                    BytesSlot2Garde[5] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector211.Value - 1)) |
+                             ((Convert.ToByte(sldDetector212.Value - 1)) << 4));
+                    BytesSlot2Garde[6] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector213.Value - 1)) |
+                             ((Convert.ToByte(sldDetector214.Value - 1)) << 4));
+                    BytesSlot2Garde[7] =
+                        (byte)
+                            ((Convert.ToByte(sldDetector215.Value - 1)) |
+                             ((Convert.ToByte(sldDetector216.Value - 1)) << 4));
+                    if (DecWorkTypeCbx2.SelectedIndex != 0x0)
+                    {
+                        Byte DecWorkType = (Byte)(DecWorkTypeCbx2.SelectedIndex - 1);
+                        bool bSendOk2 = TscDataUtils.SetDetecBdWorkType(td.Node, 0x0, DecWorkType);
+                        if (bSendOk2 == true)
+                            result += "检测器板2工作方式设置成功!\r\n";
+                        else
+                            result += "检测器板2工作方式设置失败!\r\n";
+                    }
+                    bool bSendOk = TscDataUtils.SetDecBoardSensitivityAdv(BytesSlot2Garde, td.Node, 0x1);
+                    if (bSendOk == true)
+                        result += "检测器板2通道灵敏度等级设置成功!\r\n";
+                    else
+                        result += "检测器板2通道灵敏度等级设置失败!\r\n";
+                }
+                if (ChkBoxSlot2GradeData.IsChecked == true)
+                {
+                    byte[] BytesSlot2GrateData1to7 = new[]
+                    {
+                        Convert.ToByte(Slot2GradeLv1.Value), Convert.ToByte(Slot2GradeLv2.Value),
+                        Convert.ToByte(Slot2GradeLv3.Value), Convert.ToByte(Slot2GradeLv4.Value),
+                        Convert.ToByte(Slot2GradeLv5.Value), Convert.ToByte(Slot2GradeLv6.Value),
+                        Convert.ToByte(Slot2GradeLv7.Value)
+                    };
+                    Message m1to7 = TscDataUtils.SetSensityvityDig4(BytesSlot2GrateData1to7, td.Node);
+
+                    byte[] BytesSlot2GrateData8to14 = new[]
+                    {
+                        Convert.ToByte(Slot2GradeLv8.Value), Convert.ToByte(Slot2GradeLv9.Value),
+                        Convert.ToByte(Slot2GradeLv10.Value), Convert.ToByte(Slot2GradeLv11.Value),
+                        Convert.ToByte(Slot2GradeLv12.Value), Convert.ToByte(Slot2GradeLv13.Value),
+                        Convert.ToByte(Slot2GradeLv14.Value)
+                    };
+                    Message m8to14 = TscDataUtils.SetSensityvityDig5(BytesSlot2GrateData8to14, td.Node);
+
+
+                    byte[] BytesSlot2GrateData15to16 = new[]
+                    {Convert.ToByte(Slot2GradeLv15.Value), Convert.ToByte(Slot2GradeLv16.Value)};
+                    Message m15to16 = TscDataUtils.SetSensityvityDig6(BytesSlot2GrateData15to16, td.Node);
+                    if (m1to7.flag && m8to14.flag && m15to16.flag)
+                    {
+                        result += "检测器板1灵敏度数值设置成功!\r\n";
+                    }
+                    else
+                    {
+                        result += "检测器板1灵敏度数值设置失败!\r\n";
+                    }
+
+                }
+                if (result.Equals(""))
+                    MessageBox.Show("未选勾选需要配置的检测器板项目!","检测器高级参数",MessageBoxButton.OK,MessageBoxImage.Error);
+                    
+                else
+                   MessageBox.Show(result, "检测器高级参数", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+                #endregion
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("保存操作失败");
+                MessageBox.Show("设置检测器灵敏度参数异常", "检测器高级参数", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
 
         }
@@ -160,52 +229,141 @@ namespace tscui.Views
         {
             try
             {
-                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-                if (t == null)
-                    return;
-                List<byte> lb = TscDataUtils.GetSensitivityAdv11(t.Node);
-                sldDetector1.Value = lb[5];
-                sldDetector2.Value = lb[6];
-                sldDetector3.Value = lb[7];
-                sldDetector4.Value = lb[8];
-                sldDetector5.Value = lb[9];
-                sldDetector6.Value = lb[10];
-                sldDetector7.Value = lb[11];
-                sldDetector8.Value = lb[12];
-                List<byte> lb12 = TscDataUtils.GetSensitivityAdv12(t.Node);
-                sldDetector9.Value = lb12[5];
-                sldDetector10.Value = lb12[6];
-                sldDetector11.Value = lb12[7];
-                sldDetector12.Value = lb12[8];
-                sldDetector13.Value = lb12[9];
-                sldDetector14.Value = lb12[10];
-                sldDetector15.Value = lb12[11];
-                sldDetector16.Value = lb12[12];
+                if (ChkBoxSlot1Grade.IsChecked == false && ChkBoxSlot1GradeData.IsChecked == false
+                    && ChkBoxSlot2Grade.IsChecked == false && ChkBoxSlot2GradeData.IsChecked == false)
+                {
+                    MessageBox.Show("请勾选检测器板查询参数项", "检测器高级参数", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                List<byte> lb21 = TscDataUtils.GetSensitivityAdv21(t.Node);
-                sldDetector21.Value = lb21[5];
-                sldDetector22.Value = lb21[6];
-                sldDetector23.Value = lb21[7];
-                sldDetector24.Value = lb21[8];
-                sldDetector25.Value = lb21[9];
-                sldDetector26.Value = lb21[10];
-                sldDetector27.Value = lb21[11];
-                sldDetector28.Value = lb21[12];
+                }
+                if (ChkBoxSlot1Grade.IsChecked == true)
+                {
+                    List<byte> lb = TscDataUtils.GetSensitivityAdv11(td.Node);
+                    sldDetector1.Value = lb[5] + 1;
+                    sldDetector2.Value = lb[6] + 1;
+                    sldDetector3.Value = lb[7] + 1;
+                    sldDetector4.Value = lb[8] + 1;
+                    sldDetector5.Value = lb[9] + 1;
+                    sldDetector6.Value = lb[10] + 1;
+                    sldDetector7.Value = lb[11] + 1;
+                    sldDetector8.Value = lb[12] + 1;
+                    List<byte> lb12 = TscDataUtils.GetSensitivityAdv12(td.Node);
+                    sldDetector9.Value = lb12[5] + 1;
+                    sldDetector10.Value = lb12[6] + 1;
+                    sldDetector11.Value = lb12[7] + 1;
+                    sldDetector12.Value = lb12[8] + 1;
+                    sldDetector13.Value = lb12[9] + 1;
+                    sldDetector14.Value = lb12[10] + 1;
+                    sldDetector15.Value = lb12[11] + 1;
+                    sldDetector16.Value = lb12[12] + 1;
+                    DecWorkTypeCbx1.SelectedIndex = TscDataUtils.GetDetecBdWorkType(td.Node,0);
+                }
+                if (ChkBoxSlot2Grade.IsChecked == true)
+                {
+                    List<byte> lb21 = TscDataUtils.GetSensitivityAdv21(td.Node);
+                    sldDetector21.Value = lb21[5] + 1;
+                    sldDetector22.Value = lb21[6] + 1;
+                    sldDetector23.Value = lb21[7] + 1;
+                    sldDetector24.Value = lb21[8] + 1;
+                    sldDetector25.Value = lb21[9] + 1;
+                    sldDetector26.Value = lb21[10] + 1;
+                    sldDetector27.Value = lb21[11] + 1;
+                    sldDetector28.Value = lb21[12] + 1;
 
-                List<byte> lb22 = TscDataUtils.GetSensitivityAdv22(t.Node);
-                sldDetector29.Value = lb22[5];
-                sldDetector210.Value = lb22[6];
-                sldDetector211.Value = lb22[7];
-                sldDetector212.Value = lb22[8];
-                sldDetector213.Value = lb22[9];
-                sldDetector214.Value = lb22[10];
-                sldDetector215.Value = lb22[11];
-                sldDetector216.Value = lb22[12];
+                    List<byte> lb22 = TscDataUtils.GetSensitivityAdv22(td.Node);
+                    sldDetector29.Value = lb22[5] + 1;
+                    sldDetector210.Value = lb22[6] + 1;
+                    sldDetector211.Value = lb22[7] + 1;
+                    sldDetector212.Value = lb22[8] + 1;
+                    sldDetector213.Value = lb22[9] + 1;
+                    sldDetector214.Value = lb22[10] + 1;
+                    sldDetector215.Value = lb22[11] + 1;
+                    sldDetector216.Value = lb22[12] + 1;
+                    DecWorkTypeCbx2.SelectedIndex = TscDataUtils.GetDetecBdWorkType(td.Node, 1);
+                }
+
+                if (ChkBoxSlot1GradeData.IsChecked == true)
+                {
+                    List<byte> lbSlot1SentiAdvData1t07 = TscDataUtils.GetSensitivityAdvData1to7(td.Node);
+                    Slot1GradeLv1.Value = lbSlot1SentiAdvData1t07[5];
+                    Slot1GradeLv2.Value = lbSlot1SentiAdvData1t07[6];
+                    Slot1GradeLv3.Value = lbSlot1SentiAdvData1t07[7];
+                    Slot1GradeLv4.Value = lbSlot1SentiAdvData1t07[8];
+                    Slot1GradeLv5.Value = lbSlot1SentiAdvData1t07[9];
+                    Slot1GradeLv6.Value = lbSlot1SentiAdvData1t07[10];
+                    Slot1GradeLv7.Value = lbSlot1SentiAdvData1t07[11];
+
+                    List<byte> lbSlot1SentiAdvData8t014 = TscDataUtils.GetSensitivityAdvData8to14(td.Node);
+                    Slot1GradeLv8.Value = lbSlot1SentiAdvData8t014[5];
+                    Slot1GradeLv9.Value = lbSlot1SentiAdvData8t014[6];
+                    Slot1GradeLv10.Value = lbSlot1SentiAdvData8t014[7];
+                    Slot1GradeLv11.Value = lbSlot1SentiAdvData8t014[8];
+                    Slot1GradeLv12.Value = lbSlot1SentiAdvData8t014[9];
+                    Slot1GradeLv13.Value = lbSlot1SentiAdvData8t014[10];
+                    Slot1GradeLv14.Value = lbSlot1SentiAdvData8t014[11];
+
+                    List<byte> lbSlot1SentiAdvData15t016 = TscDataUtils.GetSensitivityAdvData15to16(td.Node);
+                    Slot1GradeLv15.Value = lbSlot1SentiAdvData15t016[5];
+                    Slot1GradeLv16.Value = lbSlot1SentiAdvData15t016[6];
+
+                }
+               if (ChkBoxSlot2GradeData.IsChecked == true)
+              {
+                  List<byte> lbSlot2SentiAdvData1t07 = TscDataUtils.Get2SensitivityAdvData1to7(td.Node);
+                  Slot2GradeLv1.Value = lbSlot2SentiAdvData1t07[5];
+                  Slot2GradeLv2.Value = lbSlot2SentiAdvData1t07[6];
+                  Slot2GradeLv3.Value = lbSlot2SentiAdvData1t07[7];
+                  Slot2GradeLv4.Value = lbSlot2SentiAdvData1t07[8];
+                  Slot2GradeLv5.Value = lbSlot2SentiAdvData1t07[9];
+                  Slot2GradeLv6.Value = lbSlot2SentiAdvData1t07[10];
+                  Slot2GradeLv7.Value = lbSlot2SentiAdvData1t07[11];
+
+                  List<byte> lbSlot2SentiAdvData8t014 = TscDataUtils.Get2SensitivityAdvData8to14(td.Node);
+                  Slot2GradeLv8.Value = lbSlot2SentiAdvData8t014[5];
+                  Slot2GradeLv9.Value = lbSlot2SentiAdvData8t014[6];
+                  Slot2GradeLv10.Value = lbSlot2SentiAdvData8t014[7];
+                  Slot2GradeLv11.Value = lbSlot2SentiAdvData8t014[8];
+                  Slot2GradeLv12.Value = lbSlot2SentiAdvData8t014[9];
+                  Slot2GradeLv13.Value = lbSlot2SentiAdvData8t014[10];
+                  Slot2GradeLv14.Value = lbSlot2SentiAdvData8t014[11];
+
+                  List<byte> lbSlot2SentiAdvData15t016 = TscDataUtils.Get2SensitivityAdvData15to16(td.Node);
+                  Slot2GradeLv15.Value = lbSlot2SentiAdvData15t016[5];
+                  Slot2GradeLv16.Value = lbSlot2SentiAdvData15t016[6];
+              }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读取检测器参数异常!");
+                MessageBox.Show("读取检测器灵敏度参数异常", "检测器高级参数", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
+
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+            if (tscData == null)
+            {
+                this.Visibility = Visibility.Hidden;
+                return;
+            }
+            else
+            {
+                this.Visibility = Visibility.Visible;
+            }
+            byte[] queryver = new byte[5] { 0x80, 0xf9, 0x0, 0xff, 0x0 };
+            queryver[2] = 0x5;
+            queryver[4] = 0x0;
+            byte[] result6 = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, queryver);
+            if (result6.Length == 0xa)
+                DecBoard1Online = ((result6[5] != 0) ? true : false);
+
+            queryver[4] = 0x1;
+            byte[] result7 = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, queryver);
+            if (result7.Length == 0xa)
+                DecBoard2Online = ((result7[5] != 0) ? true : false);
+            Slot1Grp.IsEnabled = DecBoard1Online;
+            Slot2Grp.IsEnabled = DecBoard2Online;
 
         }
     }

@@ -6,110 +6,49 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              x:Class="tscui.Pages.Phase.PhaseView"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded" IsEnabled="True"  Unloaded="UserControl_Unloaded">
+             mc:Ignorable="d" Loaded="UserControl_Loaded"  Unloaded="UserControl_Unloaded" Height="621" Width="839">
 
-
-    <UserControl.Resources>
-        <ControlTemplate x:Key="GlassButton" TargetType="{x:Type Button}">
-            <ControlTemplate.Resources>
-                <Storyboard x:Key="Timeline1">
-                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                        <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
-                    </DoubleAnimationUsingKeyFrames>
-                </Storyboard>
-                <Storyboard x:Key="Timeline2">
-                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="glow" Storyboard.TargetProperty="(UIElement.Opacity)">
-                        <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
-                    </DoubleAnimationUsingKeyFrames>
-                </Storyboard>
-            </ControlTemplate.Resources>
-            <Border BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="4,4,4,4">
-                <Border x:Name="border" Background="#7F000000" BorderBrush="#FF000000" BorderThickness="1,1,1,1" CornerRadius="4,4,4,4">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.507*"/>
-                            <RowDefinition Height="0.493*"/>
-                        </Grid.RowDefinitions>
-                        <Border Opacity="0" HorizontalAlignment="Stretch" x:Name="glow" Width="Auto" Grid.RowSpan="2" CornerRadius="4,4,4,4">
-                            <Border.Background>
-                                <RadialGradientBrush>
-                                    <RadialGradientBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="1.702" ScaleY="2.243"/>
-                                            <SkewTransform AngleX="0" AngleY="0"/>
-                                            <RotateTransform Angle="0"/>
-                                            <TranslateTransform X="-0.368" Y="-0.152"/>
-                                        </TransformGroup>
-                                    </RadialGradientBrush.RelativeTransform>
-                                    <GradientStop Color="#B28DBDFF" Offset="0"/>
-                                    <GradientStop Color="#008DBDFF" Offset="1"/>
-                                </RadialGradientBrush>
-                            </Border.Background>
-                        </Border>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Grid.RowSpan="2"/>
-                        <Border HorizontalAlignment="Stretch" Margin="0,0,0,0" x:Name="shine" Width="Auto" CornerRadius="4,4,0,0">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.494,0.889" StartPoint="0.494,0.028">
-                                    <GradientStop Color="#99FFFFFF" Offset="0"/>
-                                    <GradientStop Color="#33FFFFFF" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
-                    </Grid>
-                </Border>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Opacity" TargetName="shine" Value="0.4"/>
-                    <Setter Property="Background" TargetName="border" Value="#CC000000"/>
-                    <Setter Property="Visibility" TargetName="glow" Value="Visible"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource Timeline1}"/>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard x:Name="Timeline2_BeginStoryboard" Storyboard="{StaticResource Timeline2}"/>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </UserControl.Resources>
-
-
-    <!-- The View creates its own ViewModel, so set the ViewModel 
-    to a new instance of the ViewModel class. -->
     <!--<apexMVVM:View.ViewModel>
         <local:PhaseViewModel x:Name="ViewModel" />
     </apexMVVM:View.ViewModel>-->
-
     <apexControls:ApexGrid >
         <apexControls:ApexGrid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="0*" />
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="174"/>
         </apexControls:ApexGrid.ColumnDefinitions>
-        <Canvas Background="White" x:Name="TrafficCanvas">
+        <Canvas Background="Transparent" x:Name="TrafficCanvas" Grid.Column="0" Margin="0,0,303,0" RenderTransformOrigin="1,0.5" Grid.ColumnSpan="2">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
             <!-- 背景图-->
-            <Image  x:Name="backgroundimage" Source="/tscui;component/Resources/Images/back20130627.jpg" Width="790" Height="600" ImageFailed="Image_ImageFailed_1" HorizontalAlignment="Left" Canvas.Top="1"/>
+            <Image  x:Name="backgroundimage" Source="/tscui;component/Resources/Images/back20130627.jpg" Width="600" Height="600"  HorizontalAlignment="Left" Canvas.Top="1"/>
 
             <!--北方向 -->
 
             <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="376" Canvas.Top="77" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgSouthTurn" ToolTip="南调头">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="352" Canvas.Top="77" x:Name="imgSouthRight" ToolTip="南右" StretchDirection="DownOnly">
-                
+
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image x:Name="imgSouthLeft" Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="303" Canvas.Top="77" ImageFailed="Image_ImageFailed" ToolTip="南左">
+            <Image x:Name="imgSouthLeft" Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="303" Canvas.Top="77" ToolTip="南左">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <!-- 东方向的-->
@@ -117,17 +56,20 @@
             <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="325" x:Name="imgWestStraight" ToolTip="西直">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.7" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Source="/tscui;component/Resources/Images/nolight1.png"   Width="54" Height="23" Canvas.Left="471" Canvas.Top="349" x:Name="imgWestRight" ToolTip="西右">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.7" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
 
             </Image>
             <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="373" x:Name="imgWestTurn" ToolTip="西调头">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.7" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
 
@@ -135,213 +77,279 @@
             <Image Canvas.Left="328" Canvas.Top="77" Height="54" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgSouthStraight" ToolTip="南直">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="76" Canvas.Top="229" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastRight" ToolTip="西右">
+            <Image Canvas.Left="76" Canvas.Top="229" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastRight" ToolTip="东右">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image x:Name="imgWestLeft" ToolTip="西左" Canvas.Left="471" Canvas.Top="302" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="29" Canvas.Top="115" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/redlight.png" Width="0">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="248" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthStraight" ToolTip="北直">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="270" Canvas.Top="472" Height="54" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthLeft" ImageFailed="phase4_Image_ImageFailed" ToolTip="北左">
+            <Image Canvas.Left="270" Canvas.Top="472" Height="54" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthLeft"  ToolTip="北左">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="201" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthTurn" ImageFailed="phase1_Image_ImageFailed" ToolTip="北调头">
+            <Image Canvas.Left="201" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthTurn"  ToolTip="北调头">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="225" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthRight" ToolTip="北右">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <CheckBox Canvas.Left="490" Canvas.Top="29" Content="{DynamicResource tsc_phase_countdown}" Height="19" x:Name="cbxEchoCountDown" Width="97" Checked="cbxEchoCountDown_Checked" Unchecked="cbxEchoCountDown_Unchecked"/>
-            <CheckBox Canvas.Left="491" Canvas.Top="51"  Content="{DynamicResource tsc_phase_lamp_open}" Height="17" x:Name="lampRush_CheckBox" Width="97" Checked="lampRush_CheckBox_Checked" Unchecked="lampRush_CheckBox_Unchecked" />
             <Image Canvas.Left="76" Canvas.Top="205" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastTurn" ToolTip="东调头">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="76" Canvas.Top="251" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastStraight" ToolTip="东直">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image x:Name="imgEastLeft" ToolTip="东左" Canvas.Left="76" Canvas.Top="274" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="225" Canvas.Top="143" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgNorthPedestrain1" ToolTip="北人行">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="321" Canvas.Top="140" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgNorthPedestrain2" Visibility="Hidden" ToolTip="北二次过街">
+            <Image Canvas.Left="321" Canvas.Top="143" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgNorthPedestrain2"  ToolTip="北二次过街">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Canvas.Left="321" Canvas.Top="436" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imSouthPedestrain1" ToolTip="南人行">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="225" Canvas.Top="435" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imSouthPedestrain2" Visibility="Hidden" ToolTip="南二次过街">
+            <Image Canvas.Left="225" Canvas.Top="437" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imSouthPedestrain2"  ToolTip="南二次过街">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="437" Canvas.Top="229" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgEastPedestrain1" ToolTip="东人行">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="437" Canvas.Top="318" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgEastPedestrain2" Visibility="Hidden" ToolTip="东二次过街">
+            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="437" Canvas.Top="318" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgEastPedestrain2"  ToolTip="东二次过街">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="141" Canvas.Top="229" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgWestPedestrain2" Visibility="Hidden" ToolTip="西二次过街">
+            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="141" Canvas.Top="229" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgWestPedestrain2"  ToolTip="西二次过街">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="141" Canvas.Top="318" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgWestPedestrain1" ToolTip="西人行">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <TextBlock x:Name="EastCntDown" Canvas.Left="167" TextWrapping="Wrap" Canvas.Top="232" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <TextBlock x:Name="SouthCntDown" Canvas.Left="352" TextWrapping="Wrap" Canvas.Top="174" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontWeight="Bold" FontFamily="Quartz MS"/>
-            <TextBlock x:Name="WestCntDown" Canvas.Left="376" TextWrapping="Wrap" Canvas.Top="375" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <TextBlock x:Name="NorthCntDown" Canvas.Left="225" TextWrapping="Wrap" Canvas.Top="404" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <TextBlock x:Name="WestNorthCntDown" Canvas.Left="167" TextWrapping="Wrap" Canvas.Top="206" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <TextBlock x:Name="WestSouthCntDown" Canvas.Left="204" TextWrapping="Wrap" Canvas.Top="401" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <TextBlock x:Name="EastSouthCntDown" Canvas.Left="204" TextWrapping="Wrap" Canvas.Top="404" Height="26" Foreground="#FFEE0F0F" Width="50" FontSize="24" FontFamily="Quartz MS" FontWeight="Bold"/>
-            <Image Canvas.Left="76" Canvas.Top="151" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastNorthOther" ToolTip="东北其他">
+            <TextBlock x:Name="EastCntDown" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="169"  Canvas.Top="238" Height="30" Foreground="#FFEE0F0F" Width="30" FontSize="20" FontFamily="Quartz MS" FontWeight="Bold" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}" Visibility="Hidden"/>
+            <TextBlock x:Name="SouthCntDown" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="336"  Canvas.Top="170" Height="30" Foreground="#FFEE0F0F" Width="30" FontSize="20" FontWeight="Bold" FontFamily="Quartz MS" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}" Visibility="Hidden"/>
+            <TextBlock x:Name="WestCntDown" TextAlignment="Center" VerticalAlignment="Center"  RenderTransformOrigin="0.5,0.5" Canvas.Left="401"  Canvas.Top="333" Height="30" Foreground="#FFEE0F0F" Width="30" FontSize="20" FontFamily="Quartz MS" FontWeight="Bold" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"  Visibility="Hidden"/>
+            <TextBlock x:Name="NorthCntDown" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="236"  Canvas.Top="403" Height="30" Foreground="#FFEE0F0F" Width="30" FontSize="20" FontFamily="Quartz MS" FontWeight="Bold" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}" Visibility="Hidden"/>
+            <Image Canvas.Left="76" Canvas.Top="176" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastNorthOther" ToolTip="东特殊">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="76" Canvas.Top="176" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastOther" ToolTip="东其他">
+            <Image Canvas.Left="76" Canvas.Top="151" Height="23" Source="/tscui;component/Resources/Images/nolight1.png" Width="54" FlowDirection="RightToLeft" x:Name="imgEastOther" ToolTip="东其他">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.5" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="149" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgWestNorthOther" ImageFailed="phase1_Image_ImageFailed" ToolTip="西北其他">
+            <Image Canvas.Left="174" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgWestNorthOther"  ToolTip="北特殊">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Canvas.Left="174" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthOther" ImageFailed="phase1_Image_ImageFailed" ToolTip="北其他">
+            <Image Canvas.Left="149" Canvas.Top="472" Height="54" Panel.ZIndex="1" Source="/tscui;component/Resources/Images/nolight.png" Width="23" x:Name="imgNorthOther"  ToolTip="北其他">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="426" x:Name="imgWestSouthOther" ToolTip="西南其他">
+            <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="402" x:Name="imgWestSouthOther" ToolTip="西特殊">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.7" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="402" x:Name="imgWestOther" ToolTip="西其他">
+            <Image Source="/tscui;component/Resources/Images/nolight1.png" Width="54" Height="23" Canvas.Left="471" Canvas.Top="426" x:Name="imgWestOther" ToolTip="西其他">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.7" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="429" Canvas.Top="77" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgEastSouthOther" ToolTip="东南其他"  >
+            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="404" Canvas.Top="77" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgEastSouthOther" ToolTip="南特殊"  >
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="404" Canvas.Top="77" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgSouthOther"  ToolTip="南其他">
+            <Image Source="/tscui;component/Resources/Images/nolight.png" Width="23" Height="54" Canvas.Left="429" Canvas.Top="77" RenderOptions.BitmapScalingMode="Linear" VerticalAlignment="Bottom" x:Name="imgSouthOther"  ToolTip="南其他">
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
+                    <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
-            <GroupBox Header="{DynamicResource tsc_direc_title}" Canvas.Left="406" Canvas.Top="445" Height="155" Width="191" x:Name="GrpDirecPhase">
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="181" Height="143" Margin="3,-14,-5,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="17*"/>
-                        <RowDefinition Height="128*"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="{DynamicResource tsc_direc_id}" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" Height="27" Grid.Row="1"/>
-                    <Label Content="{DynamicResource tsc_direc_roadcount}" HorizontalAlignment="Left" Margin="6,27,0,0" VerticalAlignment="Top" Height="25" Grid.Row="1"/>
-                    <ComboBox x:Name="DirecPhaseCombox" Text="方向"  DisplayMemberPath="name" SelectedValue="value" HorizontalAlignment="Left" Margin="82,10,0,0" VerticalAlignment="Top" Width="92" Height="26"  Grid.RowSpan="2" SelectionChanged="DirecPhaseCombox_SelectChanged" IsReadOnly="True"/>
-                    <Label Content="{DynamicResource tsc_adv_phase_id}" Height="28" x:Name="label9_Copy" HorizontalAlignment="Left" Width="57" VerticalAlignment="Top" Margin="7,55,0,0" Grid.Row="1" />
-                    <ComboBox DisplayMemberPath="name" SelectedValue="id"  HorizontalAlignment="Left" Margin="82,57,0,0" VerticalAlignment="Top" Width="95" x:Name="DirectPhaseIdCombox"  Grid.Row="1" Height="26" IsReadOnly="True" IsEnabled="False"/>
-                    <Label Content="{DynamicResource tsc_adv_channel_id}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,89,0,0" Grid.Row="1" Width="47"/>
-                    <Label Content="" x:Name="opchannels" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95" Height="28" Margin="82,88,0,0" Grid.Row="1" BorderThickness="1" Background="#FFEEC4E0"/>
-                    <Label Content="" x:Name="roadcount" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="95" Height="28" Margin="82,24,0,0" Grid.Row="1" BorderThickness="1" Background="#FFEEC4E0"/>
-
-                </Grid>
-            </GroupBox>
         </Canvas>
-        <GroupBox Header="{DynamicResource tsc_phase_args}" x:Name="groupBox1" FontWeight="Bold"  FontSize="18"  Margin="607,-14,0,12" HorizontalAlignment="Left" Width="183"/>
-        <Grid Height="588" HorizontalAlignment="Left" Margin="607,0,0,0" x:Name="grid1" VerticalAlignment="Top" Width="183">
-            <GroupBox Header="{DynamicResource tsc_phase_info}" x:Name="groupBox2" Width="162"  Margin="14,261,0,162" HorizontalAlignment="Left">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40*" />
-                        <ColumnDefinition Width="110*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{DynamicResource tsc_phase_current}" Margin="5,7,-15,0" x:Name="label_iCurrentStagePattern" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="160" />
-                    <Label Content="{DynamicResource tsc_phase_total}" Margin="5,32,-1,0" x:Name="label_iStageCount" Height="28" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="146" />
-                    <Label Content="{DynamicResource tsc_phase_phase_time}" Margin="4,86,0,0" x:Name="label_iStageTotalTime" Height="24" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="146" />
-                    <Label Content="{DynamicResource tsc_phase_run_time}" Margin="4,113,0,0" x:Name="label_iStageRunTime" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="146" />
-                    <Label Content="{DynamicResource tsc_phase_current_stage}" Margin="5,59,-1,0" x:Name="lblCurrentStage" Grid.ColumnSpan="2" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="146" />
-                </Grid>
-            </GroupBox>
-            <GroupBox Canvas.Left="613" Canvas.Top="321" Header="{DynamicResource tsc_phase_stage}" Margin="14,120,0,0" x:Name="groupBox3" Width="162" Height="82" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Grid>
-                    <Label Content="{DynamicResource tsc_phase_stagepattern}" Margin="6,31,13,0" x:Name="time_NO_label" Height="27" VerticalAlignment="Top" />
-                    <Label Content="{DynamicResource tsc_phase_stage_run}" Margin="6,6,13,0" x:Name="run_NO_label" VerticalAlignment="Top" />
-                </Grid>
-            </GroupBox>
-            <GroupBox Canvas.Left="613" Canvas.Top="321" Header="{DynamicResource tsc_phase_cycle}" Height="52" Margin="14,206,0,0" x:Name="groupBox4" VerticalAlignment="Top" Width="162" HorizontalAlignment="Left">
-                <Grid HorizontalAlignment="Left" Width="150">
-                    <Label Content="{DynamicResource tsc_phase_cycle_time}" Margin="5,5,28,0" VerticalAlignment="Top" x:Name="label_CycleTime" />
-                </Grid>
-            </GroupBox>
-            <GroupBox Canvas.Left="613" Canvas.Top="321" Header="{DynamicResource tsc_phase_work_model}" Height="101" Margin="14,15,0,0" x:Name="groupBox5" VerticalAlignment="Top" Width="162" HorizontalAlignment="Left">
-                <Grid>
-                    <Label Content="{DynamicResource tsc_phase_work_state}" Margin="6,48,0,6" x:Name="workstatus_label" HorizontalAlignment="Left" Width="134" />
-                    <Label Content="{DynamicResource tsc_phase_control_model}" Margin="6,24,0,0" x:Name="controlmode_label" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" />
-                    <Label Content="{DynamicResource tsc_phase_workmodel}" x:Name="workmode_label" Margin="6,-2,0,56" HorizontalAlignment="Left" Width="134" />
-                </Grid>
-            </GroupBox>
-            <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="18,560,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click" Visibility="Visible"/>
-            <Button x:Name="btnSave" Content="{DynamicResource tsc_time_save}" HorizontalAlignment="Left" Margin="98,560,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
-        </Grid>
-        <GroupBox Header="{DynamicResource tsc_phase_munual}" HorizontalAlignment="Left" Margin="622,423,0,0" VerticalAlignment="Top" Width="159" Height="134">
-            <Grid HorizontalAlignment="Left" Height="116" Margin="-3,0,-12,-10" VerticalAlignment="Top" Width="158">
-                <RadioButton x:Name="rbnManaul" Content="{DynamicResource tsc_phase_munual_mode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="rbnManaul_Checked" Unchecked="rbnManaul_Unchecked"/>
-                <RadioButton x:Name="rbnSelf" Content="{DynamicResource tsc_phase_self_mode}" HorizontalAlignment="Left" Margin="94,10,0,0" VerticalAlignment="Top" Unchecked="rbnSelf_Unchecked" Checked="rbnSelf_Checked"/>
-                <Button x:Name="btnNextStep" Content="{DynamicResource tsc_phase_next_step}" HorizontalAlignment="Left" Margin="9,34,0,0" VerticalAlignment="Top" Width="59" Click="btnNextStep_Click"/>
-                <Button x:Name="btnNextPhase" Content="{DynamicResource tsc_phase_next_phase}" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="58" Click="btnNextPhase_Click"/>
-                <Button x:Name="btnNextDirec" Content="{DynamicResource tsc_phase_next_direc}" HorizontalAlignment="Left" Margin="73,34,0,0" VerticalAlignment="Top" Width="60" Click="btnNextDirec_Click"/>
-                <Button x:Name="btnNorth" Content="{DynamicResource tsc_phase_north}" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="26" Click="btnNorth_Click"/>
-                <Button x:Name="btnEast" Content="{DynamicResource tsc_phase_east}" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" Width="23" Click="btnEast_Click"/>
-                <Button x:Name="btnSouth" Content="{DynamicResource tsc_phase_south}" HorizontalAlignment="Left" Margin="78,85,0,0" VerticalAlignment="Top" Width="26" Click="btnSouth_Click"/>
-                <Button x:Name="btnWest" Content="{DynamicResource tsc_phase_west}" HorizontalAlignment="Left" Margin="111,85,0,0" VerticalAlignment="Top" Width="26" Click="btnWest_Click"/>
+        <CheckBox  Content="{DynamicResource tsc_phase_countdown}" Grid.Column="1" Margin="420,10,10,587" x:Name="cbxEchoCountDown" Checked="cbxEchoCountDown_Checked" Unchecked="cbxEchoCountDown_Unchecked" />
+        <CheckBox  Content="{DynamicResource tsc_phase_lamp_open}" Grid.Column="1" Margin="420,34,10,568" Height="19" x:Name="lampRush_CheckBox" Checked="lampRush_CheckBox_Checked" Unchecked="lampRush_CheckBox_Unchecked" />
+        <Button ToolTip="旋转方向"  Grid.Column="1" Margin="277,281,279,296" Click="Button_Click">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/tscui;component/Resources/Images/refresh.png" TileMode="Tile"/>
+            </Button.OpacityMask>
+        </Button>
+
+        <GroupBox Header="方向信息" x:Name="GrpDirecPhase" Grid.Column="1" Margin="420,464,15,21">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="156" Height="128" Margin="0,-13,-2,-2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="128*"/>
+                </Grid.RowDefinitions>
+                <Label Content="{DynamicResource tsc_direc_id}" HorizontalAlignment="Left" Margin="6,11,0,0" VerticalAlignment="Top" Height="27" Grid.RowSpan="2"/>
+                <Label Content="{DynamicResource tsc_direc_roadcount}" HorizontalAlignment="Left" Margin="6,23,0,0" VerticalAlignment="Top" Height="25" Grid.Row="1"/>
+                <ComboBox x:Name="DirecPhaseCombox" Text="方向"  DisplayMemberPath="name"  SelectedValue="value" HorizontalAlignment="Left" Margin="82,12,0,0" VerticalAlignment="Top" Width="77" Height="25"  Grid.RowSpan="2" SelectionChanged="DirecPhaseCombox_SelectChanged" IsReadOnly="True" IsEditable="True" IsEnabled="False" FontWeight="Black"/>
+                <Label Content="{DynamicResource tsc_adv_phase_id}" Height="27" x:Name="label9_Copy" HorizontalAlignment="Left" Width="57" VerticalAlignment="Top" Margin="7,51,0,0" Grid.Row="1" />
+                <ComboBox DisplayMemberPath="name" SelectedValue="id"  HorizontalAlignment="Left" Margin="82,51,0,0" VerticalAlignment="Top" Width="77" x:Name="DirectPhaseIdCombox"  Grid.Row="1" Height="25" IsReadOnly="True" IsEnabled="False"/>
+                <Label Content="{DynamicResource tsc_adv_channel_id}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,78,0,0" Grid.Row="1" Width="47" Height="25"/>
+                <Label Content="" x:Name="opchannels" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="77" Height="25" Margin="82,80,0,0" Grid.Row="1" BorderThickness="1" Background="#FFEEC4E0"/>
+                <Label Content="" x:Name="roadcount" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="77" Height="25" Margin="82,23,0,0" Grid.Row="1" BorderThickness="1" Background="#FFEEC4E0"/>
+
             </Grid>
+        </GroupBox>
+        <GroupBox Header="{DynamicResource tsc_phase_args}" x:Name="groupBox1"  FontSize="16"  Margin="20,0,-59,19" HorizontalAlignment="Left" Width="214"  Grid.Column="2">
+            <Grid Height="578" HorizontalAlignment="Left" Margin="0,0,-36,0" x:Name="grid1" VerticalAlignment="Top" Width="204" >
+                <GroupBox Header="{DynamicResource tsc_phase_info}" x:Name="groupBox2" Width="204"  Margin="0,250,0,163" HorizontalAlignment="Left" FontSize="14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*" />
+                            <ColumnDefinition Width="110*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{DynamicResource tsc_phase_current}" Margin="5,2,0,0" x:Name="label_iCurrentStagePattern" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="177" FontSize="12" Height="26" />
+                        <Label Content="{DynamicResource tsc_phase_total}" Margin="5,31,0,0" x:Name="label_iStageCount" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="177" FontSize="12" />
+                        <Label Content="{DynamicResource tsc_phase_phase_time}" Margin="5,87,0,0" x:Name="label_iStageTotalTime" Height="29" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="177" FontSize="12"  />
+                        <Label Content="{DynamicResource tsc_phase_run_time}" Margin="5,117,0,-9" x:Name="label_iStageRunTime" Grid.ColumnSpan="2" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" FontSize="12"  />
+
+                        <Grid Height="47" Name="GridPreAndlysis" Visibility="Hidden" Margin="55,50,-26,33" Grid.Column="1">
+                            <Path Data="M12.166999,0.5 L143.167,0.5 C145.92843,0.50000003 148.167,2.7385762 148.167,5.5 L148.167,30.5 C148.167,33.261425 145.92843,35.5 143.167,35.5 L12.166999,35.5 11.81918,35.482437 11.834001,35.5 C10.619751,36.16069 10.9795,36.5625 8.1912529,37.482075 5.4030061,38.401646 3.063751,40.272026 0.5,41.667 2.2780275,39.667053 4.7294998,37 5.8340837,35.66716 6.662521,34.66753 6.9629115,32.753006 7.1582331,31.348595 L7.1991105,31.052473 7.1928148,31.011221 C7.1757442,30.843136 7.1669998,30.672588 7.1669995,30.5 L7.1669995,17.25 7.1669995,5.5 C7.1669998,2.7385762 9.405576,0.50000003 12.166999,0.5 z" Stretch="Fill" Stroke="#FF32E767" UseLayoutRounding="False" Margin="0,0,21,0">
+                                <Path.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+
+                                        <GradientStop Color="#FFACABE9" Offset="0.747"/>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+
+                            <TextBlock x:Name="PopText" Height="27" FontSize="10" TextWrapping="Wrap" Text="动态最小绿：10  动态最大绿：50"  HorizontalAlignment="Center" VerticalAlignment="Center"  Width="85" TextAlignment="Center" Margin="5,10,21,10"/>
+                        </Grid>
+
+                        <Label Content="{DynamicResource tsc_phase_current_stage}" Margin="5,59,0,0" x:Name="lblCurrentStage" Grid.ColumnSpan="2" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" FontSize="12" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="{DynamicResource tsc_phase_stage}" Margin="0,106,0,0" x:Name="groupBox3" Width="204" Height="82" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14">
+                    <Grid>
+                        <Label Content="{DynamicResource tsc_phase_stagepattern}" Margin="63,29,16,0" x:Name="time_NO_label" Height="27" VerticalAlignment="Top" FontSize="12" />
+                        <Label Content="{DynamicResource tsc_phase_stage_run}" Margin="-3,29,84,0" x:Name="run_NO_label" VerticalAlignment="Top" FontSize="12" />
+                        <Label Content="{DynamicResource tsc_phase_planid}" Margin="-3,3,84,0" x:Name="Lbl_RunPlanId" VerticalAlignment="Top" FontSize="12" />
+                        <Label Content="{DynamicResource tsc_phase_planstype}" Margin="63,3,-12,0" x:Name="Lbl_RunPlanType" Height="27" VerticalAlignment="Top"  FontSize="12" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox  Header="{DynamicResource tsc_phase_cycle}" Height="52" Margin="0,193,0,0" x:Name="groupBox4" VerticalAlignment="Top" Width="204" HorizontalAlignment="Left" FontSize="14">
+                    <Grid HorizontalAlignment="Left" Width="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="19*"/>
+                            <ColumnDefinition Width="131*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{DynamicResource tsc_phase_cycle_time}" Margin="5,0,10,0" VerticalAlignment="Top" x:Name="label_CycleTime" FontSize="12" Grid.ColumnSpan="2" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="{DynamicResource tsc_phase_work_model}" Height="101" x:Name="groupBox5" VerticalAlignment="Top" Width="204" HorizontalAlignment="Left" FontSize="14" FontWeight="Normal">
+                    <Grid>
+                        <Label Content="{DynamicResource tsc_phase_work_state}" Margin="5,24,0,22" x:Name="workstatus_label" HorizontalAlignment="Left" Width="177" FontSize="12" FontWeight="Normal" />
+                        <Label Content="{DynamicResource tsc_phase_control_model}" Margin="5,53,0,-11" x:Name="controlmode_label"  HorizontalAlignment="Left" Width="187" FontSize="12" FontWeight="Normal" />
+                        <Label Content="{DynamicResource tsc_phase_workmodel}"  Margin="5,-2,0,41" x:Name="workmode_label" HorizontalAlignment="Left" Width="187" FontSize="12" FontWeight="Normal" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="{DynamicResource tsc_phase_munual}" ToolTip="手控模式需勾选显示灯组开启" HorizontalAlignment="Left" Margin="0,420,0,0" VerticalAlignment="Top" Width="204" Height="158" FontSize="14" >
+                    <Grid HorizontalAlignment="Left" Margin="-3,0,-2,0" Width="187">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="44*"/>
+                            <ColumnDefinition Width="32*"/>
+                            <ColumnDefinition Width="51*"/>
+                            <ColumnDefinition Width="31*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28*"/>
+                            <RowDefinition Height="31*"/>
+                            <RowDefinition Height="73*"/>
+                        </Grid.RowDefinitions>
+                        <RadioButton x:Name="rbnManaul" IsEnabled="{Binding ElementName=lampRush_CheckBox, Path=IsChecked}" Content="{DynamicResource tsc_phase_munual_mode}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="rbnManaul_Checked"  FontSize="12" Grid.ColumnSpan="2" Height="16" Width="74"/>
+                        <RadioButton x:Name="rbnSelf" IsEnabled="{Binding ElementName=lampRush_CheckBox, Path=IsChecked}" Content="{DynamicResource tsc_phase_self_mode}" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top"  Checked="rbnSelf_Checked" FontSize="12" Grid.Column="2" Grid.ColumnSpan="2" Height="16" Width="75"/>
+                        <Button x:Name="btnNextStep" Content="{DynamicResource tsc_phase_next_step}" HorizontalAlignment="Left" Margin="9,5,0,0" VerticalAlignment="Top" Width="71" Click="btnNextStep_Click" FontSize="12" Grid.Row="2" Grid.ColumnSpan="2" IsEnabled="False" Height="22"/>
+                        <Button x:Name="btnNextPhase" Content="{DynamicResource tsc_phase_next_phase}" HorizontalAlignment="Left" Margin="22,5,0,0" VerticalAlignment="Top" Width="75" Click="btnNextPhase_Click" FontSize="12" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="False" Height="22"/>
+                        <Button x:Name="btnNorth" Content="{DynamicResource tsc_phase_north}" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="26" Click="btnNorth_Click" FontSize="12" Grid.Row="2" IsEnabled="False" Height="22"/>
+                        <Button x:Name="btnEast" Content="{DynamicResource tsc_phase_east}" HorizontalAlignment="Left" Margin="6,41,0,0" VerticalAlignment="Top" Width="26" Click="btnEast_Click" FontSize="12" Grid.Row="2" Grid.Column="1" IsEnabled="False" Height="22"/>
+                        <Button x:Name="btnSouth" Content="{DynamicResource tsc_phase_south}" HorizontalAlignment="Left" Margin="14,41,0,0" VerticalAlignment="Top" Width="26" Click="btnSouth_Click" FontSize="12" Grid.Row="2" Grid.Column="2" IsEnabled="False" Height="22"/>
+                        <Button x:Name="btnWest" Content="{DynamicResource tsc_phase_west}" HorizontalAlignment="Left" Margin="1,41,0,0" VerticalAlignment="Top" Width="26" Click="btnWest_Click" FontSize="12" Grid.Row="2" Grid.Column="3" IsEnabled="False" Height="22"/>
+                        <Grid HorizontalAlignment="Left" Height="21" Margin="0,10,-9,0" VerticalAlignment="Top" Width="167" Grid.Row="1" Grid.ColumnSpan="4">
+                            <RadioButton x:Name="RadLampFlash" Content="黄闪" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="60" Checked="LampFlashCheck" IsEnabled="False"/>
+                            <RadioButton x:Name="RadLampRed" Content="全红" HorizontalAlignment="Left" Margin="111,0,-12,0" VerticalAlignment="Top" Width="68" Checked="LampRedCheck" IsEnabled="False"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+
+
+            </Grid>
+
         </GroupBox>
     </apexControls:ApexGrid>
 </UserControl>

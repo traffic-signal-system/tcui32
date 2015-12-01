@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using tscui.Models;
-
 namespace tscui.Service
 {
     class GBT_20999_Utils
     {
-        public GBT_20999_Utils(byte [] gb20099_byte,int len)
+        public GBT_20999_Utils(byte[] gb20099_byte, int len)
         {
             //System.Windows.MessageBox.Show("20999");
             if (len == 4)
@@ -43,6 +39,10 @@ namespace tscui.Service
                     break;
                 case 0x88: //本地时间
                     break;
+                case 0xf5:
+                    SetTscMonStatus(newbyte); //物理状态监测
+                    TscMonStatus.resportTscStatusFlag = true;
+                    break;
                 case 0xf7: //主动上报命令定制
                     break;
                 case 0xf8://信号机扩展状态
@@ -68,43 +68,50 @@ namespace tscui.Service
         }
         public  void SetReportStatus(byte[] byt)
         {
-           
-            if (!CheckGBT(byt, "主动上报"))
+            try
             {
-                
-            }
-            byte b1 = new byte();
-            byte b2 = new byte();
-            byte b3 = new byte();
-            b1 = byt[3];
-            b2 = byt[3];
-            b3 = byt[3];
-            string workModel = Utils.Utils.ReportStatusWorkModel(b1);
-            string workStatus = Utils.Utils.ReportStatusWorkStatus(b2);
-            string controlMode = Utils.Utils.ReportStatusControlMode(b3); 
-            ReportTscStatus.sControlModel = controlMode;
-            ReportTscStatus.sWorkModel = workModel;
-            ReportTscStatus.sWorkStatus = workStatus;
-            ReportTscStatus.iCurrentSchedule = Convert.ToInt32(byt[4]);
-            ReportTscStatus.iCurrentTimePattern = Convert.ToInt32(byt[5]);
-            ReportTscStatus.iCurrentStagePattern = Convert.ToInt32(byt[6]);
-            //ReportTscStatus.iCurrentStage = Convert.ToInt32
-            ReportTscStatus.iStageCount = Convert.ToInt32(byt[7]);//当前周期几个阶段
-            ReportTscStatus.iCurrentStage = Convert.ToInt32(byt[8]); //当前阶段号
-            ReportTscStatus.iStageTotalTime = Convert.ToInt32(byt[9]);//当前阶段总时长
-            ReportTscStatus.iStageRunTime = Convert.ToInt32(byt[10]); //当前相位运行时间
-            //ReportTscStatus.iCycleTime = Convert.ToInt32(byt[27]); //周期
-            byte[] channelRedStatus = { byt[11], byt[12], byt[13], byt[14] }; //红灯
-            ReportTscStatus.listChannelRedStatus = Utils.Utils.ReportStatusLampStatus(channelRedStatus);
-            byte[] channelYellowStatus = { byt[15], byt[16], byt[17], byt[18] };//黄灯
-            ReportTscStatus.listChannelYellowStatus = Utils.Utils.ReportStatusLampStatus(channelYellowStatus);
-            byte[] channelGreenStatus = { byt[19], byt[20], byt[21], byt[22] };//绿灯
-            ReportTscStatus.listChannelGreenStatus = Utils.Utils.ReportStatusLampStatus(channelGreenStatus);
-            byte[] channelFlashStatus = { byt[23], byt[24], byt[25], byt[26] };//黄闪
-            ReportTscStatus.listChannelFlashStatus = Utils.Utils.ReportStatusLampStatus(channelFlashStatus);
-            ReportTscStatus.iCycleTime = byt[27];
 
-          
+                byte b1 = new byte();
+                byte b2 = new byte();
+                byte b3 = new byte();
+                b1 = byt[3];
+                b2 = byt[3];
+                b3 = byt[3];
+                string workModel = Utils.Utils.ReportStatusWorkModel(b1);
+                string workStatus = Utils.Utils.ReportStatusWorkStatus(b2);
+                string controlMode = Utils.Utils.ReportStatusControlMode(b3);
+                ReportTscStatus.sControlModel = controlMode;
+                ReportTscStatus.sWorkModel = workModel;
+                ReportTscStatus.sWorkStatus = workStatus;
+                ReportTscStatus.iCurrentSchedule = Convert.ToInt32(byt[4]);
+                ReportTscStatus.iCurrentTimePattern = Convert.ToInt32(byt[5]);
+                ReportTscStatus.iCurrentStagePattern = Convert.ToInt32(byt[6]);
+                //ReportTscStatus.iCurrentStage = Convert.ToInt32
+                ReportTscStatus.iStageCount = Convert.ToInt32(byt[7]); //当前周期几个阶段
+                ReportTscStatus.iCurrentStage = Convert.ToInt32(byt[8]); //当前阶段号
+                ReportTscStatus.iStageTotalTime = Convert.ToInt32(byt[9]); //当前阶段总时长
+                ReportTscStatus.iStageRunTime = Convert.ToInt32(byt[10]); //当前相位运行时间
+              //  Console.WriteLine(ReportTscStatus.iStageRunTime);
+                //ReportTscStatus.iCycleTime = Convert.ToInt32(byt[27]); //周期
+                byte[] channelRedStatus = {byt[11], byt[12], byt[13], byt[14]}; //红灯
+                ReportTscStatus.listChannelRedStatus = Utils.Utils.ReportStatusLampStatus(channelRedStatus);
+                byte[] channelYellowStatus = {byt[15], byt[16], byt[17], byt[18]}; //黄灯
+                ReportTscStatus.listChannelYellowStatus = Utils.Utils.ReportStatusLampStatus(channelYellowStatus);
+                byte[] channelGreenStatus = {byt[19], byt[20], byt[21], byt[22]}; //绿灯
+                ReportTscStatus.listChannelGreenStatus = Utils.Utils.ReportStatusLampStatus(channelGreenStatus);
+                byte[] channelFlashStatus = {byt[23], byt[24], byt[25], byt[26]}; //黄闪
+                ReportTscStatus.listChannelFlashStatus = Utils.Utils.ReportStatusLampStatus(channelFlashStatus);
+                ReportTscStatus.iCycleTime = byt[27];
+                ReportTscStatus.iPlanId = byt[28];
+                ReportTscStatus.DynamicMinGreenTime = byt[29];
+                ReportTscStatus.DynamicMaxGreenTime = byt[30];
+
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+
         }
 
         public static bool CheckGBT(byte[] b, string fun)
@@ -113,27 +120,27 @@ namespace tscui.Service
             {
                 if (b[1] == 0x05)
                 {
-                    Console.WriteLine(fun + ":国标通信协议错误类型中的其它错误原因！");
+                   // Console.WriteLine(fun + ":国标通信协议错误类型中的其它错误原因！");
                     return false;
                 }
                 else if (b[1] == 0x01)
                 {
-                    Console.WriteLine(fun + ":国标通信协议错误类型中的消息长度太长！");
+                   // Console.WriteLine(fun + ":国标通信协议错误类型中的消息长度太长！");
                     return false;
                 }
                 else if (b[1] == 0x02)
                 {
-                    Console.WriteLine(fun + ":国标通信协议错误类型中的消息类型错误！");
+                  //  Console.WriteLine(fun + ":国标通信协议错误类型中的消息类型错误！");
                     return false;
                 }
                 else if (b[1] == 0x03)
                 {
-                    Console.WriteLine(fun + ":国标通信协议错误类型中的消息设置对象值超出规定的范围！");
+                  //  Console.WriteLine(fun + ":国标通信协议错误类型中的消息设置对象值超出规定的范围！");
                     return false;
                 }
                 else if (b[1] == 0x04)
                 {
-                    Console.WriteLine(fun + ":国标通信协议错误类型中的消息长度太短！");
+                 //   Console.WriteLine(fun + ":国标通信协议错误类型中的消息长度太短！");
                     return false;
                 }
                 else
@@ -145,6 +152,32 @@ namespace tscui.Service
 
             return true;
 
+        }
+        public void SetTscMonStatus(byte[] byt)
+        {
+
+            TscMonStatus.StrongVoltage = byt[17];
+            TscMonStatus.WeakVoltage = byt[18];
+            TscMonStatus.BusVoltage = byt[19];
+
+            TscMonStatus.FrontDoor = byt[3];
+            TscMonStatus.BackDoor = byt[4];
+            TscMonStatus.LocalLight = byt[5];
+            TscMonStatus.LocalAlarm = byt[6];
+
+            TscMonStatus.Humidity = byt[8];
+            TscMonStatus.Temperature = byt[7];
+
+            TscMonStatus.RemoteExport1 = byt[9];
+            TscMonStatus.RemoteExport2 = byt[10];
+            TscMonStatus.RemoteInput1 = byt[11];
+            TscMonStatus.RemoteInput2 = byt[12];
+
+            TscMonStatus.Heater = byt[13];
+            TscMonStatus.Radiator = byt[14];
+            TscMonStatus.MachineVibration = byt[15];
+            TscMonStatus.PSC = byt[16];
+            // MessageBox.Show(TscMonStatus.Heater.ToString());
         }
     }
 }

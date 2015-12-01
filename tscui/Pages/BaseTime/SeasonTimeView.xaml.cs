@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
 using Apex.MVVM;
 using System.Windows;
 using tscui.Models;
-using System.Collections;
-using Apex;
-using tscui.Views;
 using tscui.Service;
 using System.Threading;
 
@@ -19,14 +15,10 @@ namespace tscui.Pages.BaseTime
     [View(typeof(SeasonTimeViewModel))]
     public partial class SeasonTimeView : UserControl
     {
+        TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
         public SeasonTimeView()
         {
             InitializeComponent();
-        }
-
-        private void Allday_IsEnabledChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
-        {
-
         }
 
         private void Allday_Checked(object sender, System.Windows.RoutedEventArgs e)
@@ -51,7 +43,7 @@ namespace tscui.Pages.BaseTime
             Saturday.IsChecked = false;
             Sunday.IsChecked = false;
         }
-        TscData td;
+      
 
         private void initWeekdayDisplay(byte weekday)
         {
@@ -141,34 +133,45 @@ namespace tscui.Pages.BaseTime
         {
             try
             {
-                td = (TscData)Application.Current.Properties[Define.TSC_DATA];
-                if (td == null)
-                    return;
-                initScheduleId();
+               // td = (TscData)Application.Current.Properties[Define.TSC_DATA];
                 if (td == null)
                 {
+                    this.Visibility = Visibility.Hidden;
                     return;
                 }
+                else
+                {
+                    this.Visibility = Visibility.Visible;
+                }
+                initScheduleId();
+             
                 List<Plan> lp = td.ListPlan;
+                List<byte> lb = new List<byte>();
+                List<Schedule> ls = td.ListSchedule;
+                foreach (Schedule s in ls)
+                {
+                    if (!lb.Contains(s.ucId) && s.ucEventId != 0 && s.ucEventId != 0)
+                    {
+                        lb.Add(s.ucId);
+                    }
+                }
+                cbxScheduleId.ItemsSource = lb;
                 foreach(Plan p in lp)
                 {
                     //如果没有数据不会进入
                     if (p.ucId>=21 && p.ucId <=30)
                     {
-                        ///Summer.IsChecked = true;
                         lbxPlanId.Items.Add(p.ucId);
-                        //initWeekdayDisplay(p.ucWeekFlag);
-
+                        lbxPlanId.SelectedIndex = 0x0;
                     }
                     
                 }
-
-
-                cbxScheduleId.SelectedItem = (byte)1;
+               
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("加载周时基异常!","时基",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+               
                 //ApexBroker.GetShell().ShowPopup(new FailePopup());
             }
         }
@@ -185,7 +188,6 @@ namespace tscui.Pages.BaseTime
                 {
                     if (!(p.ucId == i) && !lbxPlanId.Items.Contains(Convert.ToByte(i)))
                     {
-                        
                         p1.ucId = Convert.ToByte(i);
                         p1.ucScheduleId = 1;
                         p1.usMonthFlag = 0;
@@ -218,7 +220,7 @@ namespace tscui.Pages.BaseTime
                     cbxScheduleId.SelectedItem = p.ucScheduleId;
                     byte weekday =p.ucWeekFlag;
                     initWeekdayDisplay(weekday);
-                    //Allday.IsChecked = false;
+                    break;
                 }
             }
         }
@@ -233,6 +235,7 @@ namespace tscui.Pages.BaseTime
                 if (p.ucId == Convert.ToByte(lbxPlanId.SelectedItem))
                 {
                     p.ucScheduleId = Convert.ToByte(cbxScheduleId.SelectedItem);
+                    break;
                 }
             }
         }
@@ -248,6 +251,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x02);
+                    break;
                 }
             }
         }
@@ -263,6 +267,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xfc);
+                    break;
                 }
             }
         }
@@ -289,6 +294,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x04);
+                    break;
                 }
             }
         }
@@ -304,6 +310,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x08);
+                    break;
                 }
             }
         }
@@ -319,6 +326,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x10);
+                    break;
                 }
             }
         }
@@ -334,6 +342,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x20);
+                    break;
                 }
             }
         }
@@ -349,6 +358,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x40);
+                    break;
                 }
             }
         }
@@ -364,6 +374,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag | 0x80);
+                    break;
                 }
             }
         }
@@ -379,6 +390,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xfa);
+                    break;
                 }
             }
         }
@@ -394,6 +406,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xf6);
+                    break;
                 }
             }
         }
@@ -409,6 +422,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xee);
+                    break;
                 }
             }
         }
@@ -424,6 +438,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xde);
+                    break;
                 }
             }
         }
@@ -439,6 +454,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0xbe);
+                    break;
                 }
             }
         }
@@ -454,6 +470,7 @@ namespace tscui.Pages.BaseTime
                 {
 
                     p.ucWeekFlag = (byte)(p.ucWeekFlag & 0x7e);
+                    break;
                 }
             }
         }
@@ -470,15 +487,37 @@ namespace tscui.Pages.BaseTime
                     p.ulDayFlag = 4294967294;
                 }
             }
-            
+            for (Byte planIndex = 0; planIndex < td.ListPlan.Count; planIndex++)
+            {
+                if (td.ListPlan[planIndex].ucId >= 21 && td.ListPlan[planIndex].ucId <= 30)
+                {
+
+                    if (td.ListPlan[planIndex].ucWeekFlag == 0x0)
+                    {
+                        for (Byte lbxplanidx = 0; lbxplanidx < lbxPlanId.Items.Count; lbxplanidx++)
+                        {
+                            if (td.ListPlan[planIndex].ucId == Convert.ToByte(lbxPlanId.Items[lbxplanidx]))
+                            {
+                                lbxPlanId.Items.RemoveAt(lbxplanidx);
+                                break;
+                            }
+                        }
+                        td.ListPlan.RemoveAt(planIndex);
+                        --planIndex;
+                    }
+
+                }
+            }
             bool m = TscDataUtils.SetPlanByWeekend(td.Node.sIpAddress, td.Node.iPort, lp);
             if (m)
             {
-                MessageBox.Show("保存成功");
+                MessageBox.Show("按周时基保存成功!", "时基", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             else
             {
-                MessageBox.Show("保存成功");
+                MessageBox.Show("周时基保存失败!", "时基", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
         /// <summary>
@@ -487,19 +526,27 @@ namespace tscui.Pages.BaseTime
         /// <param name="state"></param>
         private void SavePlan(object state)
         {
-            if (td == null)
-                return;
-            List<Plan> lp = td.ListPlan;
-            foreach (Plan p in lp)
-            {
-                if (p.ucId >= 21 && p.ucId <= 30)
-                {
-                    p.usMonthFlag = 8190;
-                    p.ulDayFlag = 4294967294;
-                }
-            }
+            //if (td == null)
+            //    return;
+            //List<Plan> lp = td.ListPlan;
+            //foreach (Plan p in lp)
+            //{
+            //    if (p.ucId >= 21 && p.ucId <= 30)
+            //    {
+            //        p.usMonthFlag = 8190;
+            //        p.ulDayFlag = 4294967294;
+            //    }
+            //}
+            //for (Byte planIndex = 0; planIndex < td.ListPlan.Count; planIndex++)
+            //{
+            //    if (td.ListPlan[planIndex].ucId >= 21 && td.ListPlan[planIndex].ucId <=30)
+            //    {
+            //        if (td.ListPlan[planIndex].ucWeekFlag == 0x0)
+            //            td.ListPlan.Remove(td.ListPlan[planIndex]);
+            //    }
+            //}
 
-            TscDataUtils.SetPlanByWeekend(td.Node.sIpAddress, td.Node.iPort, lp);
+            //TscDataUtils.SetPlanByWeekend(td.Node.sIpAddress, td.Node.iPort, lp);
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -508,15 +555,48 @@ namespace tscui.Pages.BaseTime
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
+            //try
+            //{ 
+            //     ThreadPool.QueueUserWorkItem(SavePlan);
+            //}
+            //catch (Exception ex)
+            //{
+            //    ;//  MessageBox.Show("SeasonTime: " + ex.ToString());
+            //}
+        }
+
+    
+
+        private void Delete_Plan(object sender, RoutedEventArgs e)
+        {
             try
-            { 
-            ThreadPool.QueueUserWorkItem(SavePlan);
+            {
+                if (Convert.ToByte(lbxPlanId.SelectedItem) == 0x0)
+                    return;
+                if (
+                    MessageBox.Show("确定要删除时基:" + Convert.ToByte(lbxPlanId.SelectedItem).ToString() + "?", "删除",
+                        MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    for (Byte planindex = 0; planindex < td.ListPlan.Count; planindex++)
+                    {
+                        if (td.ListPlan[planindex].ucId >= 21 && td.ListPlan[planindex].ucId <= 30)
+                        {
+                            if (td.ListPlan[planindex].ucId == (Convert.ToByte(lbxPlanId.SelectedItem)))
+                            {
+                                td.ListPlan.RemoveAt(planindex);
+                                break;
+                            }
+                        }
+                    }
+                    lbxPlanId.Items.Remove(lbxPlanId.SelectedItem);
+
+                }
             }
+
             catch (Exception ex)
             {
-                MessageBox.Show("SeasonTime: " + ex.ToString());
+                MessageBox.Show("删除周时基异常!", "时基", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            //SavePlan();
         }
     }
 }

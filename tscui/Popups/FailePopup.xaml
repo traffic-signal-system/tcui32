@@ -7,7 +7,6 @@
              xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
              xmlns:my="clr-namespace:Apex.Behaviours;assembly=Apex"
-             xmlns:local="clr-namespace:tscui.Pages.ThePages"
              mc:Ignorable="d" 
              Height="300" Width="400" >
     <Grid Margin="20">

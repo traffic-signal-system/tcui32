@@ -2722,16 +2722,21 @@ namespace tscui.Pages.Collision
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (t == null)
+            {
+                this.Visibility = Visibility.Hidden;
+                return;
+            }
+            else
+            {
+                this.Visibility = Visibility.Visible;
+            }
             initCollisionItemList();     /// 这个必需放在最前面，以便将初始化collision的数组。后面的几个方法都用到了此数组
             hiddenCollision();
             //将当前collision 设置为第一个collisionItem
             currentCollision = collision1;
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if(t == null)
-            {
-                return;
-            }
+         
             Thread tCollisionId = new Thread(DispatcherInitCollisionId);
             tCollisionId.IsBackground = true;
             tCollisionId.Start();

@@ -5,12 +5,13 @@ using System.Text;
 
 namespace tscui.Models
 {
-    class Define
+    internal class Define
     {
         /// <summary>
         /// 信号机相关端口配置常量
         /// </summary>
-        public static int BROADCAST_PORT = 8808;//8808
+        public static int BROADCAST_PORT = 8808; //8808
+
         public static int GBT_PORT = 5435;
         public static string TSC_DATA = "tscData";
         public static string TSC_INFO = "CurrentTsc";
@@ -19,42 +20,56 @@ namespace tscui.Models
         public static string SELECTED_PHASE_OVERLAP_TYPE = "Phase_OverlapPhase";
         public static string SELECTED_PHASE_OVERLAP_TYPE_PHASE = "Type_Phase";
         public static string SELECTED_PHASE_OVERLAP_TYPE_OVERLAPPHASE = "Type_OverlapPhase";
+
         #region 联网相关
+
         /// <summary>
         /// 心跳相关配置常数
         /// </summary>
-        
+
         public static int RUNTASTIC_HEART_RATE_TIME = 5000;
+
         public static bool RUN_THREAD_FLAG = false;
+
         /// <summary>
         /// *****************************联网降级相关配置常量***************************************
         /// </summary>
-        public static byte[] DEGRADATION_UTC = { 0x82, 0xE4, 0x00, 0x01 };
-        public static byte[] SEND_DEGRADATION_MODE_ONE = { 0x81, 0xbc, 0x00, 0x01 };
-        public static byte[] SEND_DEGRADATION_MODE_TWO = { 0x81, 0xbc, 0x00, 0x02 };
-        public static byte[] SEND_DEGRADATION_MODE_THREE = { 0x81, 0xbc, 0x00, 0x03 };
-        public static byte[] SEND_DEGRADATION_MODE_FOUR = { 0x81, 0xbc, 0x00, 0x04 };
-        public static byte[] SEND_DEGRADATION_MODE_SIX = { 0x81, 0xbc, 0x00, 0x06 };
-        public static byte[] SEND_DEGRADATION_MODE_SEVEN = { 0x81, 0xbc, 0x00, 0x07 };
-        public static byte[] SEND_DEGRADATION_MODE_EIGHT = { 0x81, 0xbc, 0x00, 0x08 };
-        public static byte[] SEND_DEGRADATION_MODE_NINE = { 0x81, 0xbc, 0x00, 0x09 };
-        public static byte[] SEND_DEGRADATION_MODE_TEN = { 0x81, 0xbc, 0x00, 0x0a };
-        public static byte[] SEND_DEGRADATION_MODE_ELEVEN = { 0x81, 0xbc, 0x00, 0x0b };
-        public static byte[] SEND_DEGRADATION_MODE_TWELVE = { 0x81, 0xbc, 0x00, 0x0c };
-        public static byte[] SEND_DEGRADATION_MODE_THREETH = { 0x81, 0xbc, 0x00, 0x0d };
-        public static byte[] SEND_DEGRADATION_MODE_FOURTH = { 0x81, 0xbc, 0x00, 0x0e };
-        public static byte[] SEND_DEGRADATION_MODEL_FIVE = { 0x91, 0xbc, 0x00, 0x05, 0xbd, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+        public static byte[] DEGRADATION_UTC = {0x81, 0xE4, 0x00, 0x01};
+
+        public static byte[] SEND_DEGRADATION_MODE_ONE = {0x81, 0xbc, 0x00, 0x01};
+        public static byte[] SEND_DEGRADATION_MODE_TWO = {0x81, 0xbc, 0x00, 0x02};
+        public static byte[] SEND_DEGRADATION_MODE_THREE = {0x81, 0xbc, 0x00, 0x03};
+        public static byte[] SEND_DEGRADATION_MODE_FOUR = {0x81, 0xbc, 0x00, 0x04};
+        public static byte[] SEND_DEGRADATION_MODE_SIX = {0x81, 0xbc, 0x00, 0x06};
+        public static byte[] SEND_DEGRADATION_MODE_SEVEN = {0x81, 0xbc, 0x00, 0x07};
+        public static byte[] SEND_DEGRADATION_MODE_EIGHT = {0x81, 0xbc, 0x00, 0x08};
+        public static byte[] SEND_DEGRADATION_MODE_NINE = {0x81, 0xbc, 0x00, 0x09};
+        public static byte[] SEND_DEGRADATION_MODE_TEN = {0x81, 0xbc, 0x00, 0x0a};
+        public static byte[] SEND_DEGRADATION_MODE_ELEVEN = {0x81, 0xbc, 0x00, 0x0b};
+        public static byte[] SEND_DEGRADATION_MODE_TWELVE = {0x81, 0xbc, 0x00, 0x0c};
+        public static byte[] SEND_DEGRADATION_MODE_THREETH = {0x81, 0xbc, 0x00, 0x0d};
+        public static byte[] SEND_DEGRADATION_MODE_FOURTH = {0x81, 0xbc, 0x00, 0x0e};
+
+        public static byte[] SEND_DEGRADATION_MODEL_FIVE =
+        {
+            0x91, 0xbc, 0x00, 0x05, 0xbd, 0x00, 0x05, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        };
+
         /// <summary>
         /// *****************************联网降级相关配置常量***************************************
         /// </summary>        
+
         #endregion
 
 
         #region GBT20999 国标中相关对应对象
+
         /// <summary>
         /// ******************GBT20999 国标中相关对应对象************************************************
         /// </summary>
         public static byte SET_REQUEST_RESPONSE = 0x81;
+
         public static byte SET_REQUEST_NO_RESPONSE = 0x82;
         public static byte GET_REQUEST = 0x80;
         public static byte SELF_REPORT = 0x83;
@@ -71,59 +86,66 @@ namespace tscui.Models
         /// 模块表参数部分
         /// </summary>
         public static byte MODULE = 0x85;
-        public static byte[] GET_MODULE = { 0x80, MODULE, 0x00 };
-        public static byte[] SET_MODULE_RESPONSE = { 0x81, MODULE, 0x00 };
-        public static byte[] SET_MODULE_NO_RESPONSE = { 0x82, MODULE, 0x00 };
+
+        public static byte[] GET_MODULE = {0x80, MODULE, 0x00};
+        public static byte[] SET_MODULE_RESPONSE = {0x81, MODULE, 0x00};
+        public static byte[] SET_MODULE_NO_RESPONSE = {0x82, MODULE, 0x00};
 
         /// <summary>
         /// 公共配置部分
         /// </summary>
         public static byte PUBLIC_TIME_PUBLIC_TIME = 0x86;
+
         public static byte PUBLIC_TIME_TIME_ZONE = 0x87;
-        public static byte PUBLIC_TIME_LOCAL_TIME =0x88;
-        public static byte PUBLIC_TIME_PLAN_MAX=0x89;
+        public static byte PUBLIC_TIME_LOCAL_TIME = 0x88;
+        public static byte PUBLIC_TIME_PLAN_MAX = 0x89;
         public static byte PUBLIC_TIME_SCHEDULE_MAX = 0x8a;
         public static byte PUBLIC_TIME_SCHEDULE_EVENTID_MAX = 0x8b;
         public static byte PUBLIC_TIME_ACTIVITY_SCHEDULE_ID = 0x8c;
+
         /// <summary>
         /// 时基表参数部分
         /// </summary>
         public static byte PLAN = 0x8d;
-        public static byte[] GET_PLAN = { GET_REQUEST, PLAN, 0x00 };
-        public static byte[] SET_PLAN_RESPONSE = { SET_REQUEST_RESPONSE, PLAN, 0x00 };
-        public static byte[] SET_PLAN_NO_RESPONSE = { SET_REQUEST_NO_RESPONSE, PLAN, 0x00 };
+
+        public static byte[] GET_PLAN = {GET_REQUEST, PLAN, 0x00};
+        public static byte[] SET_PLAN_RESPONSE = {SET_REQUEST_RESPONSE, PLAN, 0x00};
+        public static byte[] SET_PLAN_NO_RESPONSE = {SET_REQUEST_NO_RESPONSE, PLAN, 0x00};
         public static int PLAN_BYTE_SIZE = 9;
 
         /// <summary>
         /// 时段表相关部分
         /// </summary>
-        public static byte SCHEDULE =  0x8E ;
-        public static byte[] GET_SCHEDULE = { GET_REQUEST, 0x8E, 0x00 };
-        public static byte[] SET_SCHEDULE_RESPONSE = { SET_REQUEST_RESPONSE, 0x8E, 0x00 };
-        public static byte[] SET_SCHEDULE_NO_RESPONSE = { SET_REQUEST_NO_RESPONSE, 0x8E, 0x00 };
+        public static byte SCHEDULE = 0x8E;
+
+        public static byte[] GET_SCHEDULE = {GET_REQUEST, 0x8E, 0x00};
+        public static byte[] SET_SCHEDULE_RESPONSE = {SET_REQUEST_RESPONSE, 0x8E, 0x00};
+        public static byte[] SET_SCHEDULE_NO_RESPONSE = {SET_REQUEST_NO_RESPONSE, 0x8E, 0x00};
         public static int SCHEDULE_BYTE_SIZE = 8;
         public static int SCHEDULE_RESULT_LEN = 16;
         public static int SCHEDULE_EVENT_RESULT_LEN = 48;
         //日志类型最大行
-        public static byte REPORT_MAX_EVT_TYPE = 0x8F ;
+        public static byte REPORT_MAX_EVT_TYPE = 0x8F;
         //日志最大行
-        public static byte REPORT_MAX_LOG =  0x90 ;
+        public static byte REPORT_MAX_LOG = 0x90;
 
         /// <summary>
         /// 日志类型参数部分
         /// </summary>
         public static byte EVENT_TYPE = 0x91;
-        public static byte[] GET_EVENT_TYPE = { 0x80, EVENT_TYPE, 0x00 };
-        public static byte[] SET_EVENT_TYPE_RESPONSE = { 0x81, EVENT_TYPE, 0x00 };
-        public static byte[] SET_EVENT_TYPE_NO_RESPONSE = { 0x82, EVENT_TYPE, 0x00 };
+
+        public static byte[] GET_EVENT_TYPE = {0x80, EVENT_TYPE, 0x00};
+        public static byte[] SET_EVENT_TYPE_RESPONSE = {0x81, EVENT_TYPE, 0x00};
+        public static byte[] SET_EVENT_TYPE_NO_RESPONSE = {0x82, EVENT_TYPE, 0x00};
         //public static int EVENT_TYPE_BYTE_SIZE = 10;
         /// <summary>
         /// 日志参数部分
         /// </summary>
         public static byte EVENT_LOG = 0x92;
-        public static byte[] GET_EVENT_LOG = { 0x80, EVENT_LOG, 0x00 };
-        public static byte[] SET_EVENT_LOG_RESPONSE = { 0x80, EVENT_LOG, 0x00 };
-        public static byte[] SET_EVENT_LOG_NO_RESPONSE = { 0x80, EVENT_LOG, 0x00 };
+
+        public static byte[] GET_EVENT_LOG = {0x80, EVENT_LOG, 0x00};
+        public static byte[] SET_EVENT_LOG_RESPONSE = {0x80, EVENT_LOG, 0x00};
+        public static byte[] SET_EVENT_LOG_NO_RESPONSE = {0x80, EVENT_LOG, 0x00};
         public static int EVENT_LOG_BYTE_SIZE = 10;
         //相位表最大行数据
         public static byte PHASE_MAX = 0x93;
@@ -134,21 +156,23 @@ namespace tscui.Models
         /// <summary>
         /// 模块表参数部分
         /// </summary>
-        public static byte PHASE =  0x95 ;
-        public static byte[] GET_PHASE = { 0x80, PHASE, 0x00 };
-        public static byte[] SET_PHASE_RESPONSE = { 0x81, PHASE, 0x00 };
-        public static byte[] SET_PHASE_NO_RESPONSE = { 0x82, PHASE, 0x00 };
+        public static byte PHASE = 0x95;
+
+        public static byte[] GET_PHASE = {0x80, PHASE, 0x00};
+        public static byte[] SET_PHASE_RESPONSE = {0x81, PHASE, 0x00};
+        public static byte[] SET_PHASE_NO_RESPONSE = {0x82, PHASE, 0x00};
         public static int PAHSE_BYTE_SIZE = 12;
         public static byte PHASE_OUTPUT_STATE = 0x96;
-       
+
         /// <summary>
         /// 相位冲突部分
         /// </summary>
         public static byte COLLISION = 0x97;
-        public static byte[] GET_COLLISION = { 0x80, COLLISION, 0x00 };
-        public static byte[] SET_COLLISION_RESPONSE = { 0x81, COLLISION, 0x00 };
-        public static byte[] SET_COLLISION_NO_RESPONSE = { 0x82, COLLISION, 0x00 };
-        public static int COLLISION_BYTE_SIZE = 5;  //原国标为3个字节，进行扩展到5个字节，第1个表示ID，第2 到5个表示32位表示的冲突，
+
+        public static byte[] GET_COLLISION = {0x80, COLLISION, 0x00};
+        public static byte[] SET_COLLISION_RESPONSE = {0x81, COLLISION, 0x00};
+        public static byte[] SET_COLLISION_NO_RESPONSE = {0x82, COLLISION, 0x00};
+        public static int COLLISION_BYTE_SIZE = 5; //原国标为3个字节，进行扩展到5个字节，第1个表示ID，第2 到5个表示32位表示的冲突，
         public static int GBT20999_COLLISION_BYTE_SIZE = 3;
 
         /// <summary>
@@ -156,6 +180,7 @@ namespace tscui.Models
         /// </summary>
         // 检测器最大表，包括行人按钮
         public static byte DETECTOR_MAX = 0x98;
+
         // 检测器状态组最大表
         public static byte DETECTOR_STATE_GROUP_MAX = 0x99;
         //检测器流水号，每个采集周期顺序加1，循环计数
@@ -170,27 +195,32 @@ namespace tscui.Models
         public static byte DETECTOR_PULSE_GATHER_CYCLE = 0x9e;
         //检测器表
         public static byte DETECTOR = 0x9f;
-        public static byte[] GET_DETECTOR = { 0x80, 0x9f, 0x00 };
-        public static byte[] SET_DETECTOR_RESPONSE = { 0x81, DETECTOR, 0x00 };
-        public static byte[] SET_DETECTOR_NO_RESPONSE = { 0x82, DETECTOR, 0x00 };
+        public static byte[] GET_DETECTOR = {0x80, 0x9f, 0x00};
+        public static byte[] SET_DETECTOR_RESPONSE = {0x81, DETECTOR, 0x00};
+        public static byte[] SET_DETECTOR_NO_RESPONSE = {0x82, DETECTOR, 0x00};
         public static int DETECTOR_BYTE_SIZE = 9;
         public static int DETECTOR_RESULT_LEN = 32;
+
         /// <summary>
         /// 检测器状态表部分
         /// </summary>
         public static byte DETECTOR_STATE = 0xa0;
+
         public static int DETECTOR_STATE_BYTE_SIZE = 3;
         public static int DETECTOR_STATE_BYTE_LEN = 8;
+
         /// <summary>
         /// 交通检测流量数据表
         /// </summary>
         public static byte DETECT_DATA = 0xa1;
+
         public static int DETECT_DATA_BYTE_SIZE = 7;
 
         /// <summary>
         /// 检测器报警表
         /// </summary>
         public static byte DETECT_ALERT = 0xa2;
+
         //检测器报警表的字节长度
         public static int DETECT_ALERT_BYTE_SIZE = 3;
 
@@ -224,23 +254,25 @@ namespace tscui.Models
         /// </summary>
         //最大通道
         public static byte CHANNEL_MAX = 0xae;
+
         public static byte CHANNEL_STATE_GROUP = 0xaf;
-        public static byte CHANNEL =  0xb0 ;
-        public static byte[] GET_CHANNEL = { 0x80, CHANNEL, 0x00 };
-        public static byte[] SET_CHANNEL_RESPONSE = { 0x81, CHANNEL, 0x00 };
-        public static byte[] SET_CHANNEL_NO_RESPONSE = { 0x82, CHANNEL, 0x00 };
+        public static byte CHANNEL = 0xb0;
+        public static byte[] GET_CHANNEL = {0x80, CHANNEL, 0x00};
+        public static byte[] SET_CHANNEL_RESPONSE = {0x81, CHANNEL, 0x00};
+        public static byte[] SET_CHANNEL_NO_RESPONSE = {0x82, CHANNEL, 0x00};
         public static int CHANNEL_BYTE_SIZE = 4;
 
         /// <summary>
         /// 通道状态表
         /// </summary>
         public static byte CHANNEL_STATUS = 0xb1;
-        
+
         /// <summary>
         /// 控制相关参数
         /// </summary>
         //配时方案数
         public static byte TIMEPATTERN_COUNT = 0xb2;
+
         //最大阶段配时表数
         public static byte STAGETIME_MAX = 0xb3;
         //最大阶段数
@@ -273,19 +305,21 @@ namespace tscui.Models
         /// 配时方案表参数
         /// </summary>
         public static byte PATTERN = 0xc0;
-        public static byte[] GET_PATTERN = { 0x80, PATTERN, 0x00 };
-        public static byte[] SET_PATTERN_RESPONSE = { 0x81, PATTERN, 0x00 };
-        public static byte[] SET_PATTERN_NO_RESPONSE = { 0x82, PATTERN, 0x00 };
-        public static int PATTERN_BYTE_SIZE= 5;
+
+        public static byte[] GET_PATTERN = {0x80, PATTERN, 0x00};
+        public static byte[] SET_PATTERN_RESPONSE = {0x81, PATTERN, 0x00};
+        public static byte[] SET_PATTERN_NO_RESPONSE = {0x82, PATTERN, 0x00};
+        public static int PATTERN_BYTE_SIZE = 5;
 
         /// <summary>
         /// 阶段配时表参数
         /// </summary>
         public static byte STAGEPATTERN = 0xc1;
-        public static byte[] GET_STAGEPATTERN = { 0x80, STAGEPATTERN, 0x00 };
-        public static byte[] SET_STAGEPATTERN_RESPONSE = { 0x81, STAGEPATTERN, 0x00 };
-        public static byte[] SET_STAGEPATTERN_NO_RESPONSE = { 0x82, STAGEPATTERN, 0x00 };
-        public static int STAGEPATTERN_BYTE_SIZE = 10;   //原国标中是8个字节， 其中AllowPhase为2个字节。改成32个位，四个字节。10个字节
+
+        public static byte[] GET_STAGEPATTERN = {0x80, STAGEPATTERN, 0x00};
+        public static byte[] SET_STAGEPATTERN_RESPONSE = {0x81, STAGEPATTERN, 0x00};
+        public static byte[] SET_STAGEPATTERN_NO_RESPONSE = {0x82, STAGEPATTERN, 0x00};
+        public static int STAGEPATTERN_BYTE_SIZE = 10; //原国标中是8个字节， 其中AllowPhase为2个字节。改成32个位，四个字节。10个字节
         public static int STAGE_PATTERN_BYTE_SIZE_16 = 8;
 
 
@@ -297,7 +331,7 @@ namespace tscui.Models
         //两个字节长度数据，信号机基地址，如果 是多路口信号机，则代表基地址，每个路口有一个序号，从0开始
         public static byte ROAD_TSC_BASE_ADDRESS = 0xc4;
         //路口数量，每个路口有一个信号机地址=信号机地址+序号
-        public static byte ROAD_COUNT = 0xc5; 
+        public static byte ROAD_COUNT = 0xc5;
 
 
         /// <summary>
@@ -305,105 +339,190 @@ namespace tscui.Models
         /// </summary> 
         //最大跟随相位
         public static byte OVERLAPPHASE_MAX = 0xc6;
+
         //最大跟随相位状态表行数
         public static byte OVERLAPPHASE_STATUS_MAX = 0xc7;
+
         /// <summary>
         /// 跟随相位部分
         /// </summary>
         public static byte OVERLAPPHASE = 0xc8;
-        public static byte[] GET_OVERLAPPHASE = { 0x80, OVERLAPPHASE, 0x00 };
-        public static byte[] SET_OVERLAPPHASE_RESPONSE = { 0x81, OVERLAPPHASE, 0x00 };
-        public static byte[] SET_OVERLAPPHASE_NO_RESPONSE = { 0x82, OVERLAPPHASE, 0x00 };
-        public static int OVERLAPPHASE_BYTE_SIZE = 71;      //原国标为39个字节，改成71，现在将包含相位与修正相位增加一倍。变成16-》32，
+
+        public static byte[] GET_OVERLAPPHASE = {0x80, OVERLAPPHASE, 0x00};
+        public static byte[] SET_OVERLAPPHASE_RESPONSE = {0x81, OVERLAPPHASE, 0x00};
+        public static byte[] SET_OVERLAPPHASE_NO_RESPONSE = {0x82, OVERLAPPHASE, 0x00};
+        public static int OVERLAPPHASE_BYTE_SIZE = 71; //原国标为39个字节，改成71，现在将包含相位与修正相位增加一倍。变成16-》32，
         public static int GBT20999_OVERLAPPHASE_BYTE_SIZE = 39;
         //跟随相位状态组表
         public static byte OVERLAPPHASE_STATUS = 0xc9;
         //跟随相位状态表字节长度
         public static int OVERLAPPHASE_STATUS_BYTE_SIZE = 4;
+
         /// <summary>
         /// ******************GBT20999 国标中相关对应对象************************************************
         /// </summary> 
-#endregion
+
+        #endregion
+
         #region 扩展相关对应对象
+
         /// <summary>
         /// ******************扩展相关对应对象************************************************
         /// </summary> 
         /// 
         public static byte REPORT = 0xf7;
+
         //信号机状态上报
-        public static byte[] REPORT_TSC_STATUS = { SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xF8, 0x00, 0x0A };
+        public static byte[] REPORT_TSC_STATUS = {SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xF8, 0x00, 0x0A};
         //信号机状态上报取消
-        public static byte[] REPORT_TSC_STATUS_CANCEL = { SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xF8, 0x00, 0x00 };
+        public static byte[] REPORT_TSC_STATUS_CANCEL = {SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xF8, 0x00, 0x00};
         //切入手动控制
-        public static byte[] CTRL_MUNUAL = { SET_REQUEST_RESPONSE, 0xB7, 0x00, 0x0A };
+        public static byte[] CTRL_MUNUAL = {SET_REQUEST_RESPONSE, 0xB7, 0x00, 0x0A};
         //切换自动控制
-        public static byte[] CTRL_SELF = { SET_REQUEST_RESPONSE, 0xB6, 0x00, 0x00 };
+        public static byte[] CTRL_SELF = {SET_REQUEST_RESPONSE, 0xB6, 0x00, 0x00};
         //下一步，如果最后一个字节为1-255的，显示指定步伐
-        public static byte[] CTRL_NEXTSTEP_STATUS = { SET_REQUEST_RESPONSE, 0xBA, 0x00, 0x00 };
+        public static byte[] CTRL_NEXTSTEP_STATUS = {SET_REQUEST_RESPONSE, 0xBA, 0x00, 0x00};
         //下一步，如果最后一个字节为1-255的，跳步到指定步伐
-        public static byte[] CTRL_NEXTSTEP = { SET_REQUEST_RESPONSE, STEP_COMMAND, 0x00, 0x00 };
+        public static byte[] CTRL_NEXTSTEP = {SET_REQUEST_RESPONSE, STEP_COMMAND, 0x00, 0x00};
         //下一相位
-        public static byte[] CTRL_NEXTPHASE = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x01,0x00 };
+        public static byte[] CTRL_NEXTPHASE = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x01, 0x00};
         //下一方向
-        public static byte[] CTRL_NEXTDIREC = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x02, 0x00 };
+        public static byte[] CTRL_NEXTDIREC = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x02, 0x00};
+        //黄闪
+        public static byte[] CTRL_FLASH = { SET_REQUEST_RESPONSE, 0xB6, 0x0, 0xfe };
+        //全红
+        public static byte[] CTRL_RED = { SET_REQUEST_RESPONSE, 0xB6, 0x0, 0xfd };
+        //熄灯
+        public static byte[] CTRL_OFF = { SET_REQUEST_RESPONSE, 0xB6, 0x0, 0xff };
+
+
         //北方向
-        public static byte[] CTRL_NORTH = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x01 };
+        public static byte[] CTRL_NORTH = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x01};
         //东方向
-        public static byte[] CTRL_EAST = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x02 };
+        public static byte[] CTRL_EAST = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x02};
         //南方向
-        public static byte[] CTRL_SOUTH = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x03 };
+        public static byte[] CTRL_SOUTH = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x03};
         //西方向
-        public static byte[] CTRL_WEST = { SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x04 };
+        public static byte[] CTRL_WEST = {SET_REQUEST_RESPONSE, 0xf2, 0x00, 0x03, 0x04};
         //校时
-        public static byte[] TSC_DEV_TIMING = { SET_REQUEST_RESPONSE, 0xf6, 0x01 };
+        public static byte[] TSC_DEV_TIMING = {SET_REQUEST_RESPONSE, 0xf6, 0x01};
         //生成序列号
-        public static byte[] BUILD_SN = { SET_REQUEST_RESPONSE, 0xE4, 0x00, 0x02 };
+        public static byte[] BUILD_SN = {SET_REQUEST_RESPONSE, 0xE4, 0x00, 0x02};
         //查询各个模块的状态 
-        public static byte[] MODULE_EVERYONE_STATUS = { GET_REQUEST, 0xf9, 0x00 };
+        public static byte[] MODULE_EVERYONE_STATUS = {GET_REQUEST, 0xf9, 0x00};
         //控制模块相关信息读取，如电压，温度
-        public static byte[] GET_CONTROLLER_STATUS = { GET_REQUEST, 0xf5, 0x00 };
+        public static byte[] GET_CONTROLLER_STATUS = {GET_REQUEST, 0xf5, 0x00};
 
         public static byte HARDWAVE_FLASH = 0xe1;
         public static byte RATE_RATIO_BYTE = 0x03;
-        public static byte[] SET_HARDWAVE_FLASH = { SET_REQUEST_RESPONSE, HARDWAVE_FLASH, 00, RATE_RATIO_BYTE };
-       
+        public static byte[] SET_HARDWAVE_FLASH = {SET_REQUEST_RESPONSE, HARDWAVE_FLASH, 00, RATE_RATIO_BYTE};
+
 
         #region 方向对象
+
         /// <summary>
         /// 方向相关的参数
         /// </summary>
         public static byte PHASE_DIREC = 0xfa;
-        public static byte[] GET_PHASE_DIREC = { 0x80, PHASE_DIREC, 0x00 };
-        public static byte[] SET_PHASE_DIREC_RESPONSE = { 0x81, PHASE_DIREC, 0x00 };
-        public static byte[] SET_PHASE_DIREC_NO_RESPONSE = { 0x82, PHASE_DIREC, 0x00 };
+        public static byte[] GET_PHASE_DIREC = {0x80, PHASE_DIREC, 0x00};
+        public static byte[] SET_PHASE_DIREC_RESPONSE = {0x81, PHASE_DIREC, 0x00};
+        public static byte[] SET_PHASE_DIREC_NO_RESPONSE = {0x82, PHASE_DIREC, 0x00};
         public static int PHASE_DIREC_BYTE_SIZE = 4;
+
         #endregion
+
         #region 灯泡检测相关定义
+
         public static byte LAMP_CHECK = 0xff;
-        public static byte[] GET_LAMP_CHECK = { GET_REQUEST, LAMP_CHECK, 0x00 };
-        public static byte[] SET_LAMP_CHECK_RESPONSE = { SET_REQUEST_RESPONSE, LAMP_CHECK, 0x00 };
-        public static byte[] SET_LAMP_CHECK_NO_RESPONE = { SET_REQUEST_NO_RESPONSE, LAMP_CHECK, 0x00 };
+        public static byte[] GET_LAMP_CHECK = {GET_REQUEST, LAMP_CHECK, 0x00};
+        public static byte[] SET_LAMP_CHECK_RESPONSE = {SET_REQUEST_RESPONSE, LAMP_CHECK, 0x00};
+        public static byte[] SET_LAMP_CHECK_NO_RESPONE = {SET_REQUEST_NO_RESPONSE, LAMP_CHECK, 0x00};
         public static int LAMP_CHECK_BYTE_SIZE = 2;
 
         public static byte LAMP_BLOCK_CHECK_COLLISION = 0xe3;
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x01 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x02 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x03 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x04 };
 
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x00,0x0a };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x01,0x0a };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x02,0x0a };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x03,0x0a };
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION =
+        {
+            SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00,
+            0x03
+        };
 
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x00,0x05 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x01, 0x05 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x02, 0x05 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK = { SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x03, 0x05 };
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE =
+        {
+            SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION,
+            0x00, 0x03, 0x01
+        };
 
-        public static byte[] SET_LAMP_BLOCK_CHECK_OPEN = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x0a, 0x01 };
-        public static byte[] SET_LAMP_BLOCK_CHECK_CLOSE = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x0a, 0x00 };
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO =
+        {
+            SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION,
+            0x00, 0x03, 0x02
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE =
+        {
+            SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION,
+            0x00, 0x03, 0x03
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR =
+        {
+            SET_REQUEST_RESPONSE, LAMP_BLOCK_CHECK_COLLISION,
+            0x00, 0x03, 0x04
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x00, 0x0a
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x01, 0x0a
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x02, 0x0a
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x03, 0x0a
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x00, 0x05
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x01, 0x05
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x02, 0x05
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK =
+        {
+            SET_REQUEST_RESPONSE,
+            LAMP_BLOCK_CHECK_COLLISION, 0x00, 0x03, 0x03, 0x05
+        };
+
+        public static byte[] SET_LAMP_BLOCK_CHECK_OPEN = {SET_REQUEST_RESPONSE, 0xf6, 0x0a, 0x01};
+        public static byte[] SET_LAMP_BLOCK_CHECK_CLOSE = {SET_REQUEST_RESPONSE, 0xf6, 0x0a, 0x00};
+        public static byte[] GET_LAMP_BLOCK_CHECK_STATUS = { GET_REQUEST, 0xf6, 0x0a};
+
 
 
         #endregion
@@ -412,28 +531,43 @@ namespace tscui.Models
 
         public static byte OPTION = 0xf6;
         public static byte PSC_TSC = 0x03;
-        public static byte PSC = 0x01;   // 一次过街
-        public static byte TSC = 0x00;  //TSC模式
+        public static byte PSC = 0x01; // 一次过街
+        public static byte TSC = 0x00; //TSC模式
         public static byte PSC_2 = 0x02; //二次过街
-        public static byte[] SET_PSC_1 = { SET_REQUEST_RESPONSE, OPTION, PSC_TSC, PSC, 0x01, 0x02, 0x00 };
-        public static byte[] SET_PSC_2 = { SET_REQUEST_RESPONSE, OPTION, PSC_TSC, PSC_2, 0x01, 0x02, 0x03 };
-        public static byte[] SET_TSC = { SET_REQUEST_RESPONSE, OPTION, PSC_TSC, TSC, 0x00, 0x00, 0x00 };
+        public static byte[] SET_PSC_1 = {SET_REQUEST_RESPONSE, OPTION, PSC_TSC, PSC, 0x01, 0x02, 0x00};
+        public static byte[] SET_PSC_2 = {SET_REQUEST_RESPONSE, OPTION, PSC_TSC, PSC_2, 0x01, 0x02, 0x03};
+        public static byte[] SET_TSC = {SET_REQUEST_RESPONSE, OPTION, PSC_TSC, TSC, 0x00, 0x00, 0x00};
 
-        public static byte[] SET_PSC_1_GREEN_TIME = { SET_REQUEST_RESPONSE, 0xc1, 0x84, 0x01, 0x02, 0x14 };
-        public static byte[] SET_PSC_2_GREEN_TIME = { SET_REQUEST_RESPONSE, 0xc1, 0x84, 0x01, 0x03, 0x14 };
+        public static byte[] SET_PSC_1_GREEN_TIME = {SET_REQUEST_RESPONSE, 0xc1, 0x84, 0x01, 0x02, 0x14};
+        public static byte[] SET_PSC_2_GREEN_TIME = {SET_REQUEST_RESPONSE, 0xc1, 0x84, 0x01, 0x03, 0x14};
+
         #endregion
 
         #region 倒计时开关
+
         /// <summary>
         /// 倒计时开关
         /// </summary>
         public static byte COUNT_DOWN = 0xf6;
-        public static byte[] SET_COUNT_DOWN_CLOSE = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x00, 0x03 };
-        public static byte[] SET_COUNT_DOWN_OPEN_15 = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x01 };
-        public static byte[] SET_COUNT_DOWN_OPEN_8 = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x02 };
-        public static byte[] SET_COUNT_DOWN_OPEN_NORMAL = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x03 };
+
+        public static byte[] SET_COUNT_DOWN_CLOSE = {SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x00, 0x03};
+        public static byte[] SET_COUNT_DOWN_OPEN_15 = {SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x01};
+        public static byte[] SET_COUNT_DOWN_OPEN_8 = {SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x02};
+        public static byte[] SET_COUNT_DOWN_OPEN_NORMAL = {SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x01, 0x03};
+        public static byte[] SET_COUNT_DOWN_OPEN_NEWGB = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x03, 0x03 };
+        public static byte[] SET_COUNT_DOWN_OPEN_NEWGB4D = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x04, 0x03 };
+
+        public static byte[] SET_COUNT_DOWN_FLASHBREAK = {SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x02, 0x03};
+        public static byte[] SET_COUNT_DOWN_OPEN_NORMAL_PHASE = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x09, 0x05, 0x03 };
+
+        public static byte[] SET_COUNT_DOWN_FLASHBREAKTIME = { SET_REQUEST_RESPONSE, COUNT_DOWN, 0x11, 0xB};
+
+
+
         #endregion
+
         #region 扩展对象的记录长度定义
+
         public static int COLLISION_RESULT_LENGTH = 32;
         public static int PLAN_RESULT_LEN = 40;
         public static int CHANNEL_RESULT_LEN = 32;
@@ -444,10 +578,13 @@ namespace tscui.Models
         public static int PHASE_DIREC_RESULT_LEN = 80;
         public static int PHASE_BYTE_SIZE = 12;
         public static int PHASE_RESULT_LEN = 32;
+
         #endregion
+
         #region ////方向和转向定义
+
         //北
-        public const byte NORTH_TURN_AROUND = 0x00;  //调头
+        public const byte NORTH_TURN_AROUND = 0x00; //调头
         public const byte NORTH_LEFT = 0x01;
         public const byte NORTH_STRAIGHT = 0x02;
         public const byte NORTH_LEFT_STRAIGHT = 0x03;
@@ -459,7 +596,7 @@ namespace tscui.Models
         public const byte NORTH_PEDESTRAIN_ONE = 0x08;
         public const byte NORTH_PEDESTRAIN_TWO = 0x18;
         //东北
-        public const byte EAST_NORTH_TURN_AROUND = 0x20;  //调头
+        public const byte EAST_NORTH_TURN_AROUND = 0x20; //调头
         public const byte EAST_NORTH_LEFT = 0x21;
         public const byte EAST_NORTH_STRAIGHT = 0x22;
         public const byte EAST_NORTH_LEFT_STRAIGHT = 0x23;
@@ -470,7 +607,7 @@ namespace tscui.Models
         public const byte EAST_NORTH_PEDESTRAIN_ONE = 0x28;
         public const byte EAST_NORTH_PEDESTRAIN_TWO = 0x38;
         //东
-        public const byte EAST_TURN_AROUND = 0x40;  //调头
+        public const byte EAST_TURN_AROUND = 0x40; //调头
         public const byte EAST_LEFT = 0x41;
         public const byte EAST_STRAIGHT = 0x42;
         public const byte EAST_LEFT_STRAIGHT = 0x43;
@@ -481,7 +618,7 @@ namespace tscui.Models
         public const byte EAST_PEDESTRAIN_ONE = 0x48;
         public const byte EAST_PEDESTRAIN_TWO = 0x58;
         //东南
-        public const byte EAST_SOUTH_TURN_AROUND = 0x60;  //调头
+        public const byte EAST_SOUTH_TURN_AROUND = 0x60; //调头
         public const byte EAST_SOUTH_LEFT = 0x61;
         public const byte EAST_SOUTH_STRAIGHT = 0x62;
         public const byte EAST_SOUTH_LEFT_STRAIGHT = 0x63;
@@ -492,7 +629,7 @@ namespace tscui.Models
         public const byte EAST_SOUTH_PEDESTRAIN_ONE = 0x68;
         public const byte EAST_SOUTH_PEDESTRAIN_TWO = 0x78;
         //南
-        public const byte SOUTH_TURN_AROUND = 0x80;  //调头
+        public const byte SOUTH_TURN_AROUND = 0x80; //调头
         public const byte SOUTH_LEFT = 0x81;
         public const byte SOUTH_STRAIGHT = 0x82;
         public const byte SOUTH_LEFT_STRAIGHT = 0x83;
@@ -503,7 +640,7 @@ namespace tscui.Models
         public const byte SOUTH_PEDESTRAIN_ONE = 0x88;
         public const byte SOUTH_PEDESTRAIN_TWO = 0x98;
         //西南
-        public const byte WEST_SOUTH_TURN_AROUND = 0xa0;  //调头
+        public const byte WEST_SOUTH_TURN_AROUND = 0xa0; //调头
         public const byte WEST_SOUTH_LEFT = 0xa1;
         public const byte WEST_SOUTH_STRAIGHT = 0xa2;
         public const byte WEST_SOUTH_LEFT_STRAIGHT = 0xa3;
@@ -514,7 +651,7 @@ namespace tscui.Models
         public const byte WEST_SOUTH_PEDESTRAIN_ONE = 0xa8;
         public const byte WEST_SOUTH_PEDESTRAIN_TWO = 0xb8;
         //西方
-        public const byte WEST_TURN_AROUND = 0xc0;  //调头
+        public const byte WEST_TURN_AROUND = 0xc0; //调头
         public const byte WEST_LEFT = 0xc1;
         public const byte WEST_STRAIGHT = 0xc2;
         public const byte WEST_LEFT_STRAIGHT = 0xc3;
@@ -525,7 +662,7 @@ namespace tscui.Models
         public const byte WEST_PEDESTRAIN_ONE = 0xc8;
         public const byte WEST_PEDESTRAIN_TWO = 0xd8;
         //西北
-        public const byte WEST_NORTH_TURN_AROUND = 0xe0;  //调头
+        public const byte WEST_NORTH_TURN_AROUND = 0xe0; //调头
         public const byte WEST_NORTH_LEFT = 0xe1;
         public const byte WEST_NORTH_STRAIGHT = 0xe2;
         public const byte WEST_NORTH_LEFT_STRAIGHT = 0xe3;
@@ -537,7 +674,9 @@ namespace tscui.Models
         public const byte WEST_NORTH_PEDESTRAIN_TWO = 0xf8;
 
         #endregion
+
         #region 相位冲突设置过程中的定义
+
         public static uint COLLISION_1_PHASE = 1;
         public static uint COLLISION_2_PHASE = 2;
         public static uint COLLISION_3_PHASE = 4;
@@ -605,63 +744,202 @@ namespace tscui.Models
         public static uint COLLISION_30_PHASE_0 = 3758096383;
         public static uint COLLISION_31_PHASE_0 = 3221225471;
         public static uint COLLISION_32_PHASE_0 = 2147483647;
+
         #endregion
 
         #region 倒计时对象
+
         public static byte CNTDOWNDEV = 0xf1;
-        public static byte[] GET_CNTDOWNDEV = {GET_REQUEST,CNTDOWNDEV,0x00};
-        public static byte[] SET_CNTDOWNDEV_RESPONSE = { SET_REQUEST_RESPONSE, CNTDOWNDEV, 0x00 };
-        public static byte[] SET_CNTDOWNDEV_NO_RESPONSE = { SET_REQUEST_NO_RESPONSE, CNTDOWNDEV, 0x00 };
+        public static byte[] GET_CNTDOWNDEV = {GET_REQUEST, CNTDOWNDEV, 0x00};
+        public static byte[] SET_CNTDOWNDEV_RESPONSE = {SET_REQUEST_RESPONSE, CNTDOWNDEV, 0x00};
+        public static byte[] SET_CNTDOWNDEV_NO_RESPONSE = {SET_REQUEST_NO_RESPONSE, CNTDOWNDEV, 0x00};
         public static int CNTDOWNDEV_BYTE_SIZE = 8;
         public static int CNTDOWNDEV_RESULT_LEN = 32;
+
         #endregion
+
         #region 检测器功能设置
+
         /// <summary>
         /// 检测器功能设置
         /// </summary>
         ///                                                                                 对象个数         时间间隔,必需大于500ms 
-        public static byte[] DETECTOR_STATUS_TABLE = { SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xa0, 0x00, 0x05 };
-        public static byte[] DETECTOR_DISABLED_STATUS_TABLE = { SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xa0, 0x00, 0x00 };
+        public static byte[] DETECTOR_STATUS_TABLE = {SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xa0, 0x00, 0x05};
+
+        public static byte[] DETECTOR_DISABLED_STATUS_TABLE =
+        {
+            SET_REQUEST_RESPONSE, REPORT, 0x00, 0x01, 0xa0, 0x00,0x00
+        };
 
 
         public static byte OSCILLATOR_FREQUENCY_SENSITIVITY = 0xe2;
-        public static byte[] DETECTOR_SENSITIVITY = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0b, 0x00 };
-        public static byte[] DETECTOR_SENSITIVITY_1_1_8 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0b, 0x00 };
-        public static byte[] DETECTOR_SENSITIVITY_1_9_16 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0c, 0x00 };
-        public static byte[] DETECTOR_SENSITIVITY_2_1_8 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0b, 0x01 };
-        public static byte[] DETECTOR_SENSITIVITY_2_9_16 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0c, 0x01 };
+
+        public static byte[] DETECTOR_SENSITIVITY =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x0b,0x00
+        };
+
+        public static byte[] DETECTOR_SENSITIVITY_1_1_8 =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,0x0b, 0x00
+        };
+
+        public static byte[] DETECTOR_SENSITIVITY_1_9_16 =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,0x0c, 0x00
+        };
+
+        public static byte[] DETECTOR_SENSITIVITY_2_1_8 =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x0b, 0x01
+        };
+
+        public static byte[] DETECTOR_SENSITIVITY_2_9_16 =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x0c, 0x01
+        };
+
         public static byte OSCILLATOR_FREQUENCY = 0x19;
-        public static byte[] DETECTOR_OSCILLATOR_FREQUENCY = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, OSCILLATOR_FREQUENCY, 0x00 };
+
+        public static byte[] DETECTOR_OSCILLATOR_FREQUENCY =
+        {
+            SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY,
+            0x00, OSCILLATOR_FREQUENCY, 0x00
+        };
+
         public static int DETECTOR_SENSITIVITY_BYTE_SIZE = 11;
-        public static byte[] GET_DETECTOR_SENSITIVITY_1_1_8 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x05, 0x00 };
-        public static byte[] GET_DETECTOR_SENSITIVITY_1_9_16 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x06, 0x00 };
-        public static byte[] GET_DETECTOR_SENSITIVITY_2_1_8 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x05, 0x01 };
-        public static byte[] GET_DETECTOR_SENSITIVITY_2_9_16 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x06, 0x01 };
-        public static byte[] GET_DETECTOR_OSCILLATOR_FREQUENCY_1 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x18, 0x00 };
-        public static byte[] GET_DETECTOR_OSCILLATOR_FREQUENCY_2 = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x18, 0x01 };
+
+        public static byte[] GET_DETECTOR_SENSITIVITY_1_1_8 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x05,
+            0x00
+        };
+
+        public static byte[] GET_DETECTOR_SENSITIVITY_1_9_16 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x06, 0x00
+        };
+
+        public static byte[] GET_DETECTOR_SENSITIVITY_2_1_8 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x05,
+            0x01
+        };
+
+        public static byte[] GET_DETECTOR_SENSITIVITY_2_9_16 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x06, 0x01
+        };
+
+        public static byte[] GET_DETECTOR_OSCILLATOR_FREQUENCY_1 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x18, 0x00
+        };
+
+        public static byte[] GET_DETECTOR_OSCILLATOR_FREQUENCY_2 =
+        {
+            GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00,
+            0x18, 0x01
+        };
+
         //灵敏度数值设置
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_1_7 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x15, 0x00 };
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_8_14 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x16, 0x00 };
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_15_16 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x17, 0x00 };
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_1_7 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x15, 0x01 };
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_8_14 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x16, 0x01 };
-        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_15_16 = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x17, 0x01 };
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_1_7 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x15, 0x00
+        };
+
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_8_14 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x16, 0x00
+        };
+
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_1_15_16 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x17, 0x00
+        };
+
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_1_7 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x15, 0x01
+        };
+
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_8_14 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x16, 0x01
+        };
+
+        public static byte[] SET_DETECTOR_SENSITYVITY_DIG_2_15_16 =
+        {
+            SET_REQUEST_RESPONSE,
+            OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x17, 0x01
+        };
+
+        //灵敏度数值读取
+        public static byte[] GET_DETECTOR_SENSITYVITY_DIG_1_1_7 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x12, 0x00
+        };
+
+        public static byte[] GET_DETECTOR_SENSITYVITY_DIG_1_8_14 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x13, 0x00
+        };
+
+        public static byte[] GET_DETECTOR_SENSITYVITY_DIG_1_15_16 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x14, 0x00
+        };
+
+        public static byte[] GET_DETECTOR_SENSITYVITY_DIG_2_1_7 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x12, 0x01
+        };
+
+        public static byte[]GET_DETECTOR_SENSITYVITY_DIG_2_8_14 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x13, 0x01
+        };
+
+        public static byte[] GET_DETECTOR_SENSITYVITY_DIG_2_15_16 =
+        {
+            GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x14, 0x01
+        };
+
+        public static byte[] GET_DETECTORBD1_WORKTYPE = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x0 };
+        public static byte[] GET_DETECTORBD2_WORKTYPE = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x1 };
+
+        public static byte[] SET_DETECTORBD1_WORKTYPE = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x0,0x0 };
+        public static byte[] SET_DETECTORBD2_WORKTYPE = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x1,0x0 };
         #endregion
+
         #region 信号机通信及控制
+
         //查看信号机当前的状态。温度，湿度等
-        public static byte[] TSC_MONITOR_STAUTS = { GET_REQUEST, 0xff, 0x00 };
-        
-        public static byte[] TSC_CONTROL_REBOOT = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00,0x01 };
-        public static byte[] TSC_CONTROL_SELF_CHECK = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x02 };
-        public static byte[] TSC_CONTROL_UPDATE = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x04 };
-        public static byte[] TSC_CONTROL_RESET_PROGRAM = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x08 };
-        public static byte[] TSC_CONTROL_CLEAR_SERIOUSNESS_EVENT = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x10 };
-        public static byte[] TSC_CONTROL_CLEAR_EVENT = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x20 };
-        public static byte[] TSC_CONTROL_DELETE_STATISTICS = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x40 };
-        public static byte[] TSC_CONTROL_DELETE_LOG = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x80 };
-        public static byte[] TSC_CONTROL_COMMUNICATION = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x01, 0x00 };
-        public static byte[] TSC_CONTROL_EXTEND = { SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x80, 0x00 };
+        public static byte[] TSC_MONITOR_STAUTS = {GET_REQUEST, 0xff, 0x00};
+
+        public static byte[] TSC_CONTROL_REBOOT = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x01};
+        public static byte[] TSC_CONTROL_SELF_CHECK = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x02};
+        public static byte[] TSC_CONTROL_UPDATE = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x04};
+        public static byte[] TSC_CONTROL_RESET_PROGRAM = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x08};
+        public static byte[] TSC_CONTROL_CLEAR_SERIOUSNESS_EVENT = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x10};
+        public static byte[] TSC_CONTROL_CLEAR_EVENT = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x20};
+        public static byte[] TSC_CONTROL_DELETE_STATISTICS = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x40};
+        public static byte[] TSC_CONTROL_DELETE_LOG = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x00, 0x80};
+        public static byte[] TSC_CONTROL_COMMUNICATION = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x01, 0x00};
+        public static byte[] TSC_CONTROL_EXTEND = {SET_REQUEST_RESPONSE, 0xf6, 0x01, 0x80, 0x00};
+
         #endregion
+
         #region //检测器类型
 
         public static byte DETECTOR_TYPE_STATEGY_BUS = 0x14;
@@ -683,31 +961,59 @@ namespace tscui.Models
         public static byte DETECTOR_TYPE_REACTION_BIKE = 0x42;
         public static byte DETECTOR_TYPE_TACTICS_BIKE = 0x22;
         public static byte DETECTOR_TYPE_REQUEST_BIKE = 0x82;
+
         #endregion
 
 
 
         #region 倒计时相关
-        public static byte[] ECHO_TSC_COUNT_DOWN = { SET_REQUEST_RESPONSE, 0xe6, 0x00, 0x01 };
-        public static byte[] ECHO_TSC_COUNT_DOWN_CANCEL = { SET_REQUEST_RESPONSE, 0xe6, 0x00, 0x00 };
+
+        public static byte[] ECHO_TSC_COUNT_DOWN = {SET_REQUEST_RESPONSE, 0xe6, 0x00, 0x01};
+        public static byte[] ECHO_TSC_COUNT_DOWN_CANCEL = {SET_REQUEST_RESPONSE, 0xe6, 0x00, 0x00};
         public static int ECHO_COUNT_DOWN_BYTE_SIZE = 5;
         public static int ECHO_COUNT_DOWN_RESULT_LEN = 8;
+        public static byte[] GET_TSC_COUNT_DOWN = { GET_REQUEST,0xf6, 0x09 };
+        public static byte[] GET_TSC_BAUDRATE = { GET_REQUEST, 0xf6, 0x10 };  //波特率获取
+        public static byte[] GET_TSC_FLASHBRAKTIME = { GET_REQUEST, 0xf6, 0x11 };
+
         #endregion
+
         #region 升级程序
-        public static byte[] UPDATE_TSC_START = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x01 };
-        public static byte[] UPDATE_TSC_FINISH = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x02 };
-        public static byte[] UPDATE_TSC_REVERSE = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x03 };
+
+        public static byte[] UPDATE_TSC_START = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x01};
+        public static byte[] UPDATE_TSC_FINISH = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x02};
+        public static byte[] UPDATE_TSC_REVERSE = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x03};
         //public static byte[] UPDATE_TSC_REVERSE = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x04, 0x03 };
         public static string FTP_NAME = "root";
-        public static string FTP_PASSWD = "aiton";
+        public static string FTP_PASSWD = "root";
 
-        public static byte[] UPDATE_DATABASE_START = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x01 };
-        public static byte[] UPDATE_DATABASE_FINISH = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x02 };
-        public static byte[] UPDATE_DATABASE_REVERSE = { SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x03 };
+        public static byte[] UPDATE_DATABASE_START = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x01};
+        public static byte[] UPDATE_DATABASE_FINISH = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x02};
+        public static byte[] UPDATE_DATABASE_REVERSE = {SET_REQUEST_RESPONSE, 0xe4, 0x00, 0x05, 0x03};
+
         #endregion
 
-        #region
-        
+        #region 灯色
+
+        public const byte LAMP_RED = 0x0;
+        public const byte LAMP_YELLOW = 0x1;
+        public const byte LAMP_GREEN = 0x2;
+
+        #endregion
+
+        #region 电源板
+
+        public static byte[] POWER_CFG_GET ={GET_REQUEST,0xe7 ,0x0,0x3};
+
+         #endregion
+        #region GPS
+        public static byte[] OPEN_GPS = { SET_REQUEST_RESPONSE, 0xF6, 0x0D, 0x1 };
+        public static byte[] CLOSE_GPS = { SET_REQUEST_RESPONSE, 0xF6, 0x0D, 0x0 };
+
+        public static byte[] GETOPENCLOSE_GPS = { GET_REQUEST, 0xF6, 0x0D};
+        public static byte[] GETINTERAL_GPS = { GET_REQUEST, 0xF6, 0x0B};
+
+        public static byte[] FORCEADJ_GPS = { SET_REQUEST_RESPONSE, 0xE4, 0x0, 0x7 };
         #endregion
         #endregion
     }

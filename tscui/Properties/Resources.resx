@@ -121,6 +121,9 @@
     <value>信号机配置软件</value>
   </data>
   <data name="app_ver" xml:space="preserve">
-    <value>V2.2</value>
+    <value>V2.4</value>
+  </data>
+  <data name="tscipinfo" xml:space="preserve">
+    <value>0.0.0.0</value>
   </data>
 </root>

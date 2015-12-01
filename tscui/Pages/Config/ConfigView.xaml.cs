@@ -1,61 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Net;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Threading;
 using Apex.MVVM;
 using Apex.Behaviours;
 using tscui.Models;
 using System.Windows;
 using tscui.Service;
 using System.Threading;
-using System.Windows.Input;
-using System.IO;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace tscui.Pages.Config
 {
     /// <summary>
     /// Interaction logic for VariableSignView.xaml
     /// </summary>
-    [View(typeof(ConfigViewModel))]
-    public partial class ConfigView : UserControl,IView
+    [View(typeof (ConfigViewModel))]
+    public partial class ConfigView : UserControl, IView
     {
-        private delegate void ShowDateTimingCallBack();
-        private ShowDateTimingCallBack timingCallBack;
-        Thread TimingThread;
-        private void ShowTimeToDateTime()
-        {
-            DateTime dt = DateTime.Now;
-            dtpTiming.Value = dt;
-        }
-        private void updateTime()
-        {
-            while (true)
-            {
-                dtpTiming.Dispatcher.Invoke(timingCallBack);
-            }
-        }
-        public void RunThreadTiming()
-        {
-            try
-            {
+        private TscData tdData;
+        private DispatcherTimer showDispatcherTimer;
+        private Thread TimingThread;
 
-                TimingThread = new Thread(updateTime);
-                TimingThread.IsBackground = true;
-                TimingThread.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_config_network_err"] + ":\n" + ex.ToString());
-            }
-        }
+
         public ConfigView()
         {
             InitializeComponent();
-            timingCallBack = new ShowDateTimingCallBack(ShowTimeToDateTime);
+            tdData = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            showDispatcherTimer = new DispatcherTimer();
+            showDispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            showDispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            showDispatcherTimer.Start();
         }
-         public void OnActivated()
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            dtpTiming.Value = DateTime.Now;
+        }
+
+        public void OnActivated()
+        {
             SlideFadeInBehaviour.DoSlideFadeIn(this);
         }
 
@@ -63,180 +51,31 @@ namespace tscui.Pages.Config
         {
             //throw new NotImplementedException();
         }
-        TscData t;
+
         /// <summary>
         /// 显示检测器的灵敏度
         /// </summary>
-        public void displayDetectorSensitivity()
-        {
 
-            //int level1 = TscDataUtils.GetDetectorSensitivityOneBorad1_8();
-            //int level2 = TscDataUtils.GetDetectorSensitivityOneBorad9_16();
-            //int level3 = TscDataUtils.GetDetectorSensitivityTwoBorad1_8();
-            //int level4 = TscDataUtils.GetDetectorSensitivityTwoBorad9_16();
-            //sldSensitivity.Value = level1;
-        }
-        
-        public void displayDetectorOscillatorFrequency()
-        {
-            //int level = TscDataUtils.GetDetectorOscillatorFrequency1();
-            //sldOscillatorFrequency.Value = level;
-        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if(t == null)
+            if (tdData == null)
             {
+                MessageBox.Show((string) App.Current.Resources.MergedDictionaries[3]["msg_log_selected_tsc"]);
+                this.Visibility = Visibility.Hidden;
                 return;
-            }
-            //显示检测器的灵敏度
-            displayDetectorSensitivity();
-            displayDetectorOscillatorFrequency();
-            RunThreadTiming();
-        }
-
-
-        private void txtHighHumidity_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            if (!Utils.Utils.isNumberic(e.Text)) 
-            {  
-               e.Handled = true;  
-           }  
-            else 
-                 e.Handled = false;  
-        }
-
-        private void txtHighHumidity_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)  
-                 e.Handled = true;  
-
-        }
-
-        private void txtHighHumidity_Pasting(object sender, DataObjectPastingEventArgs e)
-        {
-            if (e.DataObject.GetDataPresent(typeof(String))) 
-            {  
-                String text = (String)e.DataObject.GetData(typeof(String));
-                 if (!Utils.Utils.isNumberic(text)) 
-                 { 
-                     e.CancelCommand(); 
-                 } 
-             }  
-             else 
-            {
-                e.CancelCommand();
-            }  
-        }
-
-        private void rbnLampCheckOpen_Checked(object sender, RoutedEventArgs e)
-        {
-          
-        }
-
-        private void rbnLampCheckClose_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void cbxCountDown_Checked(object sender, RoutedEventArgs e)
-        {
-            rbnNormalCountDown.IsEnabled = true;
-            rbnPauseCountDown.IsEnabled = true;
-            rbn15CountDown.IsEnabled = true;
-        }
-
-        private void cbxCountDown_Unchecked(object sender, RoutedEventArgs e)
-        {
-            rbnNormalCountDown.IsEnabled = false;
-            rbnPauseCountDown.IsEnabled = false;
-            rbn15CountDown.IsEnabled = false;
-        }
-
-        private void btnCountDown_Click(object sender, RoutedEventArgs e)
-        {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            string result = "";
-            if ((bool)cbxCountDown.IsChecked)
-            {
-                if ((bool)rbn15CountDown.IsChecked)
-                {
-                    bool b1 = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.SET_COUNT_DOWN_OPEN_15);
-                    if (b1)
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_15_success"];
-                    }
-                    else
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_15_failed"]; 
-                    }
-                }
-                else if ((bool)rbnNormalCountDown.IsChecked)
-                {
-                    bool b2 = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.SET_COUNT_DOWN_OPEN_NORMAL);
-                    if (b2)
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_success"]; 
-                    }
-                    else
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_failed"]; 
-                    }
-                }
-                else if((bool)rbnPauseCountDown.IsChecked)
-                {
-                    bool b3 = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.SET_COUNT_DOWN_OPEN_8);
-                    
-                    if (b3)
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_8_success"]; 
-                    }
-                    else
-                    {
-                        result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_8_failed"]; 
-                    }
-                }
             }
             else
             {
-                bool b4 = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.SET_COUNT_DOWN_CLOSE);
-                if (b4)
-                {
-                    result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_close_success"]; 
-                }
-                else
-                {
-                    result = (string)App.Current.Resources.MergedDictionaries[3]["msg_config_countdown_close_failed"]; 
-                }
+                this.Visibility = Visibility.Visible;
+
             }
-            MessageBox.Show(result);
+            //显示检测器的灵敏度
+            ip.Text = tdData.Node.sIpAddress;
+            //RunThreadTiming();
         }
 
-        private void sldSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            byte se = Convert.ToByte(sldSensitivity.Value);
-            if (DetectorBorad1.IsChecked == true)
-            {
-                TscDataUtils.SetSensitivity(1,se,t.Node);
-            }
-            else if(DetectorBorad2.IsChecked == true)
-            {
-                TscDataUtils.SetSensitivity(2, se, t.Node);
-            }
-        }
 
-        private void sldOscillatorFrequency_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            TscDataUtils.SetOscillatorFrequency(Convert.ToByte(sldOscillatorFrequency.Value), t.Node);
-        }
+
 
         private void dtpTiming_Loaded(object sender, RoutedEventArgs e)
         {
@@ -245,52 +84,175 @@ namespace tscui.Pages.Config
 
         private void btnTiming_Click(object sender, RoutedEventArgs e)
         {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            DateTime dt = (DateTime)dtpTiming.Value;
-            TscDataUtils.Timing(dt,t.Node);
-        }
+            DateTime dt = (DateTime) dtpTiming.Value;
+            bool bok = TscDataUtils.Timing(dt, tdData.Node);
+            if (!bok)
+                MessageBox.Show("校时失败，检查IP地址！", "校时", MessageBoxButton.OK, MessageBoxImage.Error);
 
-        private void btnControllerStatusRead_Click(object sender, RoutedEventArgs e)
-        {
-            t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            if (t == null)
-                return;
-            byte[] ba = TscDataUtils.GetControllerStatus(t.Node);
-            byte[] bt = {ba[3],ba[4]};
-            tbkTemperature.Text = Convert.ToString(System.BitConverter.ToInt16(bt, 0));
-            byte bd = ba[5];
-            tbkDoorStatus.Text = Utils.Utils.devMonitorDescDoor(bd);
-            byte[] bv = { ba[6], ba[7] };
-            tbkVoltage.Text = Convert.ToString(System.BitConverter.ToInt16(bv,0));
-            byte bpt = ba[8];
-            tbkPowerType.Text = Utils.Utils.devMonitorDescPowerType(bpt);
-        }
-
-        private void btnLampCheck_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnLampCheckSave_Click(object sender, RoutedEventArgs e)
-        {
-            if(rbnLampCheckOpen.IsChecked == true)
-            {
-                if (TscDataUtils.SetLampCheckOpenALL(null))
-                    MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_config_lamp_check_open"]);
-                else
-                    MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_config_lamp_check_open_err"]);
-            }
             else
+                MessageBox.Show("校时命令发送成功！", "校时", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+        private void bRstartTsc_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                if (TscDataUtils.SetLampCheckCloseALL(null))
-                    MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_config_lamp_check_close"]);
+                byte[] mybyte = new byte[5];
+                mybyte[0] = 0x81;
+                mybyte[1] = 0xf6;
+                mybyte[2] = 0x1;
+                mybyte[3] = 0x0;
+                mybyte[4] = 0x1;
+                bool bRstart = Udp.sendUdpNoReciveData(tdData.Node.sIpAddress, tdData.Node.iPort, mybyte);
+                if (!bRstart)
+                {
+                    MessageBox.Show("重启命令发送失败！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 else
-                    MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_config_lamp_check_close_err"]);
+                {
+                    Application.Current.Properties[Define.TSC_DATA] = null;
+                    Application.Current.Resources["tscinfo"] = "当前信号机IP地址:000.000.000.000      端口号:0000       版本:0000";
+                    MessageBox.Show("重启命令发送成功！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("系统重启命令发送异常！", "重启信号机", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
-  
+        private void bNetWorkConfig_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                if ((!Utils.Utils.bIp(ip.Text) && ip.Text != String.Empty) ||
+                    (!Utils.Utils.bIp(netmask.Text) && netmask.Text != String.Empty) ||
+                    (!Utils.Utils.bIp(gateway.Text) && gateway.Text != String.Empty))
+                {
+                    MessageBox.Show("请检查网络参数格式设置是否正确！", "网络配置", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                byte[] netparams = new byte[7] {0x81, 0xf6, 0x0, 0x0, 0x0, 0x0, 0x0};
+
+                if (ip.Text.Trim() != String.Empty)
+                {
+                    IPAddress newip = IPAddress.Parse(ip.Text);
+                    byte[] tmpip = newip.GetAddressBytes();
+                    netparams[2] = 0x6;
+                    netparams[3] = tmpip[0];
+                    netparams[4] = tmpip[1];
+                    netparams[5] = tmpip[2];
+                    netparams[6] = tmpip[3];
+                    Udp.sendUdpNoReciveData(tdData.Node.sIpAddress, Define.GBT_PORT, netparams);
+                    //  Thread.Sleep(300);
+
+                }
+                if (netmask.Text.Trim() != String.Empty)
+                {
+                    IPAddress newip = IPAddress.Parse(netmask.Text);
+                    byte[] tmpip = newip.GetAddressBytes();
+                    netparams[2] = 0x7;
+                    netparams[3] = tmpip[0];
+                    netparams[4] = tmpip[1];
+                    netparams[5] = tmpip[2];
+                    netparams[6] = tmpip[3];
+                    Udp.sendUdpNoReciveData(tdData.Node.sIpAddress, Define.GBT_PORT, netparams);
+                    //  Thread.Sleep(300);
+
+                }
+                if (gateway.Text.Trim() != String.Empty)
+                {
+                    IPAddress newip = IPAddress.Parse(gateway.Text);
+                    byte[] tmpip = newip.GetAddressBytes();
+                    netparams[2] = 08;
+                    netparams[3] = tmpip[0];
+                    netparams[4] = tmpip[1];
+                    netparams[5] = tmpip[2];
+                    netparams[6] = tmpip[3];
+                    Udp.sendUdpNoReciveData(tdData.Node.sIpAddress, Define.GBT_PORT, netparams);
+                    // Thread.Sleep(300);
+
+                }
+                MessageBox.Show("网络参数已提交,重启信号机生效！", "网络配置", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("网络参数提交异常！", "网络配置", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void bInitTsc_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult msgBoxResult = MessageBox.Show("确定要重置信号机数据吗?", "数据重置", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if (msgBoxResult == MessageBoxResult.No)
+                    return;
+                bool bok = Udp.sendUdpNoReciveData(tdData.Node.sIpAddress, tdData.Node.iPort,
+                    Define.UPDATE_DATABASE_START);
+                if (bok)
+                {
+                    MessageBox.Show("信号机数据重置命令发送成功,请重启信号机!", "数据重置", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.bRstartTsc_Click(this, null);
+                }
+                else
+                {
+                    MessageBox.Show("信号机数据重置命令发送失败!", "数据重置", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机数据重置命令发送异常!", "数据重置", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void UserControl_UnLoaded(object sender, RoutedEventArgs e)
+        {
+            showDispatcherTimer.Stop();
+            showDispatcherTimer = null;
+        }
+
+        private void manualtime_checked(object sender, RoutedEventArgs e)
+        {
+            showDispatcherTimer.Stop();
+        }
+
+        private void manualtime_unchecked(object sender, RoutedEventArgs e)
+        {
+            showDispatcherTimer.Start();
+        }
+
+        private void btnGetTime_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (tdData == null)
+                    return;
+                Int32 localtimesec = TscDataUtils.GetTime(0, tdData.Node);
+                if (localtimesec != 0)
+                {
+                    if (Manualchk.IsChecked == false)
+                        Manualchk.IsChecked = true;
+                    DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0);
+                    dtpTiming.Value = dt.AddSeconds(localtimesec - 8*3600);
+                    MessageBox.Show("信号机时间获取成功!", "信号机时间", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机时间获取异常!", "信号机时间", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+
+        }
+
+        
     }
 }

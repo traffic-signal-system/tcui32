@@ -3,24 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
              xmlns:local="clr-namespace:tscui.Pages.Log"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
-    
-    <!-- The view model. -->
-    <UserControl.DataContext>
-        <local:LogsViewModel x:Name="viewModel" />
-    </UserControl.DataContext>
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="splLog_Loaded1">
 
-    
-        <apexControls:ApexGrid Margin="0,0,0,0"
+    <!-- The view model. -->
+
+
+
+    <apexControls:ApexGrid Margin="0,0,0,0"
         Rows="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Width="800">
-        <StackPanel Height="545" HorizontalAlignment="Left" Name="splLog" VerticalAlignment="Top" Width="800" Loaded="splLog_Loaded" Margin="0,0,0,0">
+        <StackPanel Height="545" HorizontalAlignment="Left" Name="splLog" VerticalAlignment="Top" Width="800"  Margin="0,0,0,0">
+
+
             <Button x:Name="btnGetLog" Content="{DynamicResource tsc_log_reread}" Click="btnGetLog_Click"/>
+            <ListView x:Name="Loglistview" AlternationCount="2" Height="494">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="LightBlue"/>
+                        <Style.Triggers>
+                            <Trigger Property="ListView.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="ListViewLogId" Width="55" Header="日志编号" local:ListViewHelper.SortProperty="ucEventId" DisplayMemberBinding="{Binding ucEventId, Mode=OneWay}"/>
+                        <GridViewColumn x:Name="ListViewLogType" Width="Auto"  Header="日志类型" local:ListViewHelper.SortProperty="sEventType" DisplayMemberBinding="{Binding sEventType, Mode=OneWay}"/>
+                        <GridViewColumn x:Name="ListViewLogTime" Width="Auto" Header="日志时间" local:ListViewHelper.SortProperty="ulEventTime"  DisplayMemberBinding="{Binding ulEventTime, Mode=OneWay}"/>
+                        <GridViewColumn x:Name="ListViewLogContent" Width="Auto" Header="日志内容" DisplayMemberBinding="{Binding sEventDesc, Mode=OneWay}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
+        <Button Content="{DynamicResource tsc_log_del}" HorizontalAlignment="Left" Margin="130,550,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click"/>
+        <Button Content="{DynamicResource tsc_log_local}" HorizontalAlignment="Left" Margin="363,550,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click_1"/>
+        <Button Content="{DynamicResource tsc_log_export}" HorizontalAlignment="Left" Margin="588,550,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click_ExportLog"/>
     </apexControls:ApexGrid>
 
 </UserControl>

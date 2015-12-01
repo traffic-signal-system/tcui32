@@ -5,42 +5,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tscui.Pages.BaseTime"
              xmlns:apexMVVM="clr-namespace:Apex.MVVM;assembly=Apex"
-             xmlns:apexCommands="clr-namespace:Apex.Commands;assembly=Apex"
-             xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
-             xmlns:apexConverters="clr-namespace:Apex.Converters;assembly=Apex"
+             xmlns:controls="clr-namespace:Apex.Controls;assembly=Apex"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              mc:Ignorable="d" 
-             d:DesignHeight="500" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:my="clr-namespace:Apex.Behaviours;assembly=Apex" Loaded="UserControl_Loaded" Width="700" Unloaded="UserControl_Unloaded">
-
+             d:DesignHeight="500"  Width="700" Loaded="UserControl_Loaded" Unloaded="UserControl_Unloaded">
 
     <!-- The View creates its own ViewModel, so set the ViewModel 
     to a new instance of the ViewModel class. -->
     <apexMVVM:View.ViewModel>
         <local:SeasonTimeViewModel x:Name="seasonTimeViewModel" />
     </apexMVVM:View.ViewModel>
+    <controls:ApexGrid Margin="-85,0,0,10">
+        <Grid >
+            <GroupBox Header="{DynamicResource tsc_week_week}" Height="329" HorizontalAlignment="Left" Margin="179,10,0,0" Name="groupBox3" VerticalAlignment="Top" Width="501">
+                
+                <Grid Margin="0,0,0,43">
+                    <!--<i:Interaction.Behaviors>
+                        <behaviours:SlideFadeInBehaviour BeginTime="0:0:0" />
+                    </i:Interaction.Behaviors>-->
+                    <CheckBox  Content="{DynamicResource tsc_week_thu}" Height="16" HorizontalAlignment="Left" Margin="64,108,0,0" x:Name="Thursday" VerticalAlignment="Top" Checked="Thursday_Checked" Unchecked="Thursday_Unchecked" />
+                    <CheckBox  Content="{DynamicResource tsc_week_sat}" Height="16" HorizontalAlignment="Left" Margin="351,108,0,0" x:Name="Saturday" VerticalAlignment="Top" Checked="Saturday_Checked" Unchecked="Saturday_Unchecked" />
+                    <CheckBox  Content="{DynamicResource tsc_week_sun}" Height="16" HorizontalAlignment="Left" Margin="64,166,0,0" x:Name="Sunday" VerticalAlignment="Top" Checked="Sunday_Checked" Unchecked="Sunday_Unchecked" />
+                    <CheckBox Content="{DynamicResource tsc_week_wed}" Height="16" HorizontalAlignment="Left" Margin="351,55,0,0" x:Name="Wednesday" VerticalAlignment="Top" Checked="Wednesday_Checked" Unchecked="Wednesday_Unchecked" />
+                    <CheckBox  Content="{DynamicResource tsc_week_fir}" Height="16" HorizontalAlignment="Left" Margin="199,108,0,0" x:Name="Friday" VerticalAlignment="Top" Checked="Friday_Checked" Unchecked="Friday_Unchecked" />
+                    <CheckBox  Content="{DynamicResource tsc_week_tus}" Height="16" HorizontalAlignment="Left" Margin="199,55,0,0" x:Name="Tuesday" VerticalAlignment="Top" Checked="Tuesday_Checked" Unchecked="Tuesday_Unchecked" />
+                    <CheckBox Content="{DynamicResource tsc_week_mon}" Height="16" HorizontalAlignment="Left" Margin="64,55,0,0" x:Name="Monday" VerticalAlignment="Top" Checked="Monday_Checked" Unchecked="Monday_Unchecked" />
+                    <CheckBox Content="{DynamicResource tsc_week_all}" Height="16" HorizontalAlignment="Left" Margin="199,166,0,0" x:Name="Allday" VerticalAlignment="Top" Unchecked="Allday_Unchecked"  Checked="Allday_Checked"  />
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="{DynamicResource tsc_week_id}" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="329" Width="174">
+                <Grid>
+                    <ListBox  x:Name="lbxPlanId" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Height="307" MouseLeftButtonDown="lbxPlanId_MouseLeftButtonDown" SelectionChanged="lbxPlanId_SelectionChanged"   BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" >
 
-    <Grid>
-        <GroupBox Header="{DynamicResource tsc_week_week}" Height="243" HorizontalAlignment="Left" Margin="189,10,0,0" Name="groupBox3" VerticalAlignment="Top" Width="461">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Name="cmi2" Header="删除" Click="Delete_Plan"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
 
-            <Grid>
-                <CheckBox  Content="{DynamicResource tsc_week_thu}" Height="16" HorizontalAlignment="Left" Margin="64,108,0,0" x:Name="Thursday" VerticalAlignment="Top" Checked="Thursday_Checked" Unchecked="Thursday_Unchecked" />
-                <CheckBox  Content="{DynamicResource tsc_week_sat}" Height="16" HorizontalAlignment="Left" Margin="351,108,0,0" x:Name="Saturday" VerticalAlignment="Top" Checked="Saturday_Checked" Unchecked="Saturday_Unchecked" />
-                <CheckBox  Content="{DynamicResource tsc_week_sun}" Height="16" HorizontalAlignment="Left" Margin="64,166,0,0" x:Name="Sunday" VerticalAlignment="Top" Checked="Sunday_Checked" Unchecked="Sunday_Unchecked" />
-                <CheckBox Content="{DynamicResource tsc_week_wed}" Height="16" HorizontalAlignment="Left" Margin="351,55,0,0" x:Name="Wednesday" VerticalAlignment="Top" Checked="Wednesday_Checked" Unchecked="Wednesday_Unchecked" />
-                <CheckBox  Content="{DynamicResource tsc_week_fir}" Height="16" HorizontalAlignment="Left" Margin="199,108,0,0" x:Name="Friday" VerticalAlignment="Top" Checked="Friday_Checked" Unchecked="Friday_Unchecked" />
-                <CheckBox  Content="{DynamicResource tsc_week_tus}" Height="16" HorizontalAlignment="Left" Margin="199,55,0,0" x:Name="Tuesday" VerticalAlignment="Top" Checked="Tuesday_Checked" Unchecked="Tuesday_Unchecked" />
-                <CheckBox Content="{DynamicResource tsc_week_mon}" Height="16" HorizontalAlignment="Left" Margin="64,55,0,0" x:Name="Monday" VerticalAlignment="Top" Checked="Monday_Checked" Unchecked="Monday_Unchecked" />
-                <CheckBox Content="{DynamicResource tsc_week_all}" Height="16" HorizontalAlignment="Left" Margin="199,166,0,0" x:Name="Allday" VerticalAlignment="Top" Unchecked="Allday_Unchecked"  Checked="Allday_Checked" IsEnabledChanged="Allday_IsEnabledChanged" />
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_week_id}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="316" Width="174">
-            <Grid>
-                <ListBox x:Name="lbxPlanId" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Height="289" MouseLeftButtonDown="lbxPlanId_MouseLeftButtonDown" SelectionChanged="lbxPlanId_SelectionChanged"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="{DynamicResource tsc_week_schedule}" HorizontalAlignment="Left" Margin="189,258,0,0" VerticalAlignment="Top" Height="68" Width="152">
-            <ComboBox x:Name="cbxScheduleId" HorizontalAlignment="Left" Height="27" Margin="5,10,-12,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxScheduleId_SelectionChanged"/>
-        </GroupBox>
-        <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="412,287,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click" Visibility="Hidden"/>
-        <Button x:Name="btnSave" Content="{DynamicResource tsc_time_save}" HorizontalAlignment="Left" Margin="539,287,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
-    </Grid>
+                   
+                </Grid>
+            </GroupBox>
+            <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="412,287,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click" Visibility="Hidden"/>
+            <Button x:Name="btnSave" Content="{DynamicResource tsc_SchedulePlan_save}" HorizontalAlignment="Left" Margin="6,416,0,0" VerticalAlignment="Top" Height="25" Width="75" Click="btnSave_Click"/>
+            <GroupBox Header="{DynamicResource tsc_week_schedule}" HorizontalAlignment="Left" Margin="0,344,0,0" VerticalAlignment="Top" Height="50" Width="174">
+                <ComboBox x:Name="cbxScheduleId" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="155" SelectionChanged="cbxScheduleId_SelectionChanged"/>
+            </GroupBox>
+            <TextBlock HorizontalAlignment="Left" Margin="189,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="501" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"><Run FontSize="14" Text="周时基操作说明:"/><LineBreak/><Run Text="1. 时基编号框显示的是按周时基号，时基号范围21-30，优先级为②！"/><LineBreak/><Run Text="2. 添加新时基须在时基列表框空白处单击鼠标生成新时基号，然后选择右边框的周参数。选中某条时基号后单击鼠标右键可删除选中时基。"/><LineBreak/>
+                            <Run Foreground="Purple" Text="3. 如果时基编号框对应的时基编号的周参数没有选择任何周则该时基号能予保存。"/><LineBreak/>
+                             <Run Text="4. 修改完该页所有时基后点击一次保存即可。"/><LineBreak/>
+
+            </TextBlock>
+        </Grid>
+    </controls:ApexGrid>
 </UserControl>

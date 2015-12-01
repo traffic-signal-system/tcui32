@@ -14,11 +14,11 @@
             <Image x:Name="eastPedestrain1" Canvas.Left="124" Canvas.Top="57" Height="20"  Source="/tscui;component/Resources/Images/redlight.png" Width="6">
 
             </Image>
-            <Image x:Name="eastPedestrain2" Canvas.Left="124" Canvas.Top="89" Height="20"  Visibility ="Hidden" Source="/tscui;component/Resources/Images/redlight.png" Width="6">
+            <Image x:Name="eastPedestrain2" Canvas.Left="124" Canvas.Top="89" Height="20"   Source="/tscui;component/Resources/Images/redlight.png" Width="6">
 
             </Image>
             <Image x:Name="westPedestrain1" Canvas.Left="40" Canvas.Top="89" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6"></Image>
-            <Image x:Name="westPedestrain2" Canvas.Left="40" Canvas.Top="60" Height="20"  Visibility ="Hidden" Source="/tscui;component/Resources/Images/redlight.png" Width="6"></Image>
+            <Image x:Name="westPedestrain2" Canvas.Left="40" Canvas.Top="60" Height="20"   Source="/tscui;component/Resources/Images/redlight.png" Width="6"></Image>
             <Image x:Name="northStraight" Canvas.Left="71" Canvas.Top="133" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6">
 
             </Image>
@@ -43,11 +43,11 @@
             <Image x:Name="southPedestrain1" Canvas.Left="94" Canvas.Top="124" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20">
 
             </Image>
-            <Image x:Name="southPedestrain2" Canvas.Left="62" Canvas.Top="124" Height="6" Visibility ="Hidden" Source="/tscui;component/Resources/Images/redlight1.png" Width="20">
+            <Image x:Name="southPedestrain2" Canvas.Left="62" Canvas.Top="124" Height="6"  Source="/tscui;component/Resources/Images/redlight1.png" Width="20">
 
             </Image>
             <Image x:Name="northPedestrain1" Canvas.Left="61" Canvas.Top="41" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"></Image>
-            <Image x:Name="northPedestrain2" Canvas.Left="93" Canvas.Top="41" Height="6" Visibility ="Hidden" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"></Image>
+            <Image x:Name="northPedestrain2" Canvas.Left="93" Canvas.Top="41" Height="6"  Source="/tscui;component/Resources/Images/redlight1.png" Width="20"></Image>
             <Image x:Name="eastStraight" Canvas.Left="15" Canvas.Top="71" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20">
 
             </Image>
@@ -73,15 +73,15 @@
 
             </Image>
             <Label x:Name="lblNumber" Content="1" Canvas.Left="75" Canvas.Top="72" Foreground="{DynamicResource ZuneColor1Brush}" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" RenderTransformOrigin="0.714,0.538"/>
-            <Image x:Name="southOther" Canvas.Left="120" Canvas.Top="13" Height="20"  Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
-            <Image x:Name="eastSouthOther" Canvas.Left="134" Canvas.Top="13" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
-            <Image x:Name="westNorthOther" Canvas.Left="30" Canvas.Top="133" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
-            <Image x:Name="northOther" Canvas.Left="44" Canvas.Top="133" Height="20" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="NearestNeighbor" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
+            <Image x:Name="southOther" Canvas.Left="134" Canvas.Top="13" Height="20"  Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
+            <Image x:Name="eastSouthOther" Canvas.Left="120" Canvas.Top="13" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
+            <Image x:Name="westNorthOther" Canvas.Left="44" Canvas.Top="133" Height="20" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
+            <Image x:Name="northOther" Canvas.Left="30" Canvas.Top="133" Height="20" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="NearestNeighbor" Source="/tscui;component/Resources/Images/redlight.png" Width="6"/>
 
-            <Image x:Name="eastOther" Canvas.Left="15" Canvas.Top="45" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
-            <Image x:Name="eastNorthOther" Canvas.Left="15" Canvas.Top="32" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
-            <Image x:Name="westOther" Canvas.Left="133" Canvas.Top="119" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
-            <Image x:Name="westSouthOther" Canvas.Left="133" Canvas.Top="131" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
+            <Image x:Name="eastOther" Canvas.Left="15" Canvas.Top="32" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
+            <Image x:Name="eastNorthOther" Canvas.Left="15" Canvas.Top="45" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
+            <Image x:Name="westOther" Canvas.Left="133" Canvas.Top="131" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
+            <Image x:Name="westSouthOther" Canvas.Left="133" Canvas.Top="119" Height="6" Source="/tscui;component/Resources/Images/redlight1.png" Width="20"/>
         </Canvas>
     </Grid>
 </UserControl>

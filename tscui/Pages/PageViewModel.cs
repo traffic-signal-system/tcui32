@@ -14,12 +14,10 @@ namespace tscui.Pages
         public void OnDeselected()
         {
         }
-
         /// <summary>
         /// The NotifyingProperty for the Title property.
         /// </summary>
-        private readonly NotifyingProperty TitleProperty =
-          new NotifyingProperty("Title", typeof(string), default(string));
+        private readonly NotifyingProperty TitleProperty =new NotifyingProperty("Title", typeof(string), default(string));
 
         /// <summary>
         /// Gets or sets Title.
@@ -34,8 +32,7 @@ namespace tscui.Pages
         /// <summary>
         /// The NotifyingProperty for the IsSelected property.
         /// </summary>
-        private readonly NotifyingProperty IsSelectedProperty =
-          new NotifyingProperty("IsSelected", typeof(bool), default(bool));
+        private readonly NotifyingProperty IsSelectedProperty =new NotifyingProperty("IsSelected", typeof(bool), default(bool));
 
         /// <summary>
         /// Gets or sets IsSelected.
@@ -50,8 +47,7 @@ namespace tscui.Pages
         /// <summary>
         /// The Pages observable collection.
         /// </summary>
-        private readonly ObservableCollection<PageViewModel> PagesProperty =
-          new ObservableCollection<PageViewModel>();
+        private readonly ObservableCollection<PageViewModel> PagesProperty =new ObservableCollection<PageViewModel>();
 
         /// <summary>
         /// Gets the Pages observable collection.
@@ -65,8 +61,7 @@ namespace tscui.Pages
         /// <summary>
         /// The NotifyingProperty for the ActivePage property.
         /// </summary>
-        private readonly NotifyingProperty ActivePageProperty =
-          new NotifyingProperty("ActivePage", typeof(PageViewModel), default(PageViewModel));
+        private readonly NotifyingProperty ActivePageProperty = new NotifyingProperty("ActivePage", typeof(PageViewModel), default(PageViewModel));
 
         /// <summary>
         /// Gets or sets ActivePage.

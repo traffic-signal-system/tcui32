@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using tscui.Models;
 using System.Windows;
 using System.IO;
-
 namespace tscui.Service
 {
-    class TscDataUtils
+    internal class TscDataUtils
     {
         public static int GetDetectorSensitivityOneBorad1_8()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             byte[] result = Udp.recvUdp(t.Node.sIpAddress, t.Node.iPort, Define.GET_DETECTOR_SENSITIVITY_1_1_8);
             int level = Convert.ToInt32(result[5]);
-            
+
             return level;
         }
 
@@ -34,6 +32,7 @@ namespace tscui.Service
             msg.obj = "SetNextDirec";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
@@ -49,6 +48,7 @@ namespace tscui.Service
             msg.obj = "SetCtrlNorth";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
@@ -64,6 +64,7 @@ namespace tscui.Service
             msg.obj = "SetCtrlEast";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
@@ -79,6 +80,7 @@ namespace tscui.Service
             msg.obj = "SetCtrlSouth";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
@@ -94,6 +96,7 @@ namespace tscui.Service
             msg.obj = "SetCtrlWest";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
@@ -109,13 +112,57 @@ namespace tscui.Service
             msg.obj = "SetNextPhase";
             return msg;
         }
+
+        /// <summary>
+        /// 切换到手动控制后，黄闪
+        /// </summary>
+        /// <returns></returns>
+        public static bool SetFlash()
+        {
+
+            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_FLASH);
+            //Message msg = new Message();
+            //msg.flag = result;
+            //msg.msg = "下一相位";
+            //msg.obj = "SetNextPhase";
+            return result;
+        }
+
+        /// <summary>
+        /// 切换到手动控制后，黄闪
+        /// </summary>
+        /// <returns></returns>
+        public static bool SetRed()
+        {
+
+            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_RED);
+            //Message msg = new Message();
+            //msg.flag = result;
+            //msg.msg = "下一相位";
+            //msg.obj = "SetNextPhase";
+            return result;
+        }
+
+        public static bool SetOff()
+        {
+
+            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_OFF);
+            //Message msg = new Message();
+            //msg.flag = result;
+            //msg.msg = "下一相位";
+            //msg.obj = "SetNextPhase";
+            return result;
+        }
         /// <summary>
         /// 切换到手动控制后，下一步代操作
         /// </summary>
         /// <returns></returns>
         public static Message SetNextStep()
         {
-            
+
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_NEXTSTEP);
             Message msg = new Message();
@@ -124,6 +171,7 @@ namespace tscui.Service
             msg.obj = "SetNextStep";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制后，指定步代操作
         /// </summary>
@@ -140,34 +188,37 @@ namespace tscui.Service
             msg.obj = "SetNextStepByNum";
             return msg;
         }
+
         /// <summary>
         /// 切换到手动控制
         /// </summary>
         /// <returns></returns>
-        public static Message SetCtrlMunual()
+        public static bool SetCtrlMunual()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_MUNUAL);
-            Message msg = new Message();
-            msg.flag = result;
-            msg.msg = "切换手动控制";
-            msg.obj = "SetCtrlMunual";
-            return msg;
+            //Message msg = new Message();
+            //msg.flag = result;
+            //msg.msg = "切换手动控制";
+            //msg.obj = "SetCtrlMunual";
+            return result;
         }
+
         /// <summary>
         /// 切换到自主控制
         /// </summary>
         /// <returns></returns>
-        public static Message SetCtrlSelf()
+        public static bool SetCtrlSelf()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, Define.CTRL_SELF);
-            Message msg = new Message();
-            msg.flag = result;
-            msg.msg = "切换自动控制";
-            msg.obj = "SetCtrlSelf";
-            return msg;
+            //Message msg = new Message();
+            //msg.flag = result;
+            //msg.msg = "切换自动控制";
+            //msg.obj = "SetCtrlSelf";
+            return result;
         }
+
         public static int GetDetectorSensitivityOneBorad9_16()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
@@ -176,6 +227,7 @@ namespace tscui.Service
 
             return level;
         }
+
         public static int GetDetectorOscillatorFrequency1()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
@@ -183,6 +235,7 @@ namespace tscui.Service
             int level = Convert.ToInt32(result[5]);
             return level;
         }
+
         public static int GetDetectorOscillatorFrequency2()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
@@ -190,6 +243,7 @@ namespace tscui.Service
             int level = Convert.ToInt32(result[5]);
             return level;
         }
+
         public static int GetDetectorSensitivityTwoBorad1_8()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
@@ -198,6 +252,7 @@ namespace tscui.Service
 
             return level;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -210,6 +265,7 @@ namespace tscui.Service
 
             return level;
         }
+
         public static string SetTsc(Node node)
         {
             bool boolTsc = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, Define.SET_TSC);
@@ -224,13 +280,14 @@ namespace tscui.Service
             }
             return result;
         }
+
         public static string SetOnePsc(Node node, int greentime)
         {
             bool boolPsc1 = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, Define.SET_PSC_1);
             //string str = dudOnePSC.Text;
-           // int greentime = int.Parse(str);
+            // int greentime = int.Parse(str);
             byte[] psc1greentime = Define.SET_PSC_1_GREEN_TIME;
-            psc1greentime[5] = (byte)greentime;
+            psc1greentime[5] = (byte) greentime;
             bool boolPsc1time = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, psc1greentime);
             string result = "PSC模块切换：";
             if (boolPsc1)
@@ -251,6 +308,7 @@ namespace tscui.Service
             }
             return result;
         }
+
         /// <summary>
         /// 设置二次过街，
         /// </summary>
@@ -261,16 +319,16 @@ namespace tscui.Service
         public static string SetTwoPsc(Node node, int greentime1, int greentime2)
         {
             bool boolPsc2 = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, Define.SET_PSC_2);
-           // string str1 = dudOnePSC.Text;
+            // string str1 = dudOnePSC.Text;
             //int greentime1 = int.Parse(str1);
             byte[] psc1greentime = Define.SET_PSC_1_GREEN_TIME;
-            psc1greentime[5] = (byte)greentime1;
+            psc1greentime[5] = (byte) greentime1;
             bool boolPsc1time = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, psc1greentime);
 
             //string str2 = dudTwoPSC.Text;
             //int greentime2 = int.Parse(str2);
             byte[] psc2greentime = Define.SET_PSC_2_GREEN_TIME;
-            psc2greentime[5] = (byte)greentime2;
+            psc2greentime[5] = (byte) greentime2;
             bool boolPsc2time = Udp.sendUdpNoReciveData(node.sIpAddress, node.iPort, psc2greentime);
             string result = "PSC模块切换：";
             if (boolPsc2)
@@ -299,6 +357,7 @@ namespace tscui.Service
             }
             return result;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡不检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -317,13 +376,15 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK);
             if (b1)
 
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡不检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -342,12 +403,14 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK);
             if (b1)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡不检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -366,12 +429,14 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK);
             if (b1)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡不检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -390,12 +455,14 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK);
             if (b1)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡不检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -417,18 +484,23 @@ namespace tscui.Service
             bool b2 = false;
             bool b3 = false;
             bool b4 = false;
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_NO_CHECK);
             if (b1)
-                b2 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK);
+                b2 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                    Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_NO_CHECK);
             if (b2)
-                b3 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK);
+                b3 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                    Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_NO_CHECK);
             if (b3)
-                b4 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK);
+                b4 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                    Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_NO_CHECK);
             if (b4)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -447,12 +519,14 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK);
             if (b1)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -471,13 +545,15 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_CHECK);
             if (b1)
 
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -496,13 +572,15 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK);
             if (b1)
 
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -521,13 +599,15 @@ namespace tscui.Service
             {
                 ipaddress = Utils.Utils.GetTscIpAddress();
             }
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,
+                Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK);
             if (b1)
 
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 对指定IP地址进行灯泡检测设置,不是本公司的产品,请指定IP地址
         /// 如果IP地址没有指定,会读取WPF中的信号机IP
@@ -549,18 +629,19 @@ namespace tscui.Service
             bool b2 = false;
             bool b3 = false;
             bool b4 = false;
-            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK);
+            bool b1 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,Define.SET_LAMP_BLOCK_CHECK_COLLISION_ONE_CHECK);
             if (b1)
                 b2 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_TWO_CHECK);
             if (b2)
-                b3 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK);
+                b3 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,Define.SET_LAMP_BLOCK_CHECK_COLLISION_THREE_CHECK);
             if (b3)
-                b4 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT, Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK);
+                b4 = Udp.sendUdpNoReciveData(ipaddress, Define.GBT_PORT,Define.SET_LAMP_BLOCK_CHECK_COLLISION_FOUR_CHECK);
             if (b4)
                 return true;
             else
                 return false;
         }
+
         /// <summary>
         /// 取得所有的方向对应相位的数据
         /// </summary>
@@ -570,14 +651,19 @@ namespace tscui.Service
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             byte[] byt;
             byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE_DIREC);
-            if (!CheckGBT(byt, "相位与方向关系"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE_DIREC);
+                return null;
             }
+            //if (!CheckGBT(byt, "相位与方向关系"))
+            //{
+            //    byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE_DIREC);
+            //}
             List<PhaseToDirec> llc = new List<PhaseToDirec>();
-            byte[] pdArray = new byte[Convert.ToInt32(byt[3]) * Define.PHASE_DIREC_BYTE_SIZE];
-            Array.Copy(byt, 4, pdArray, 0, Convert.ToInt32(byt[3]) * Define.PHASE_DIREC_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(pdArray, Convert.ToInt32(byt[3]), Define.PHASE_DIREC_BYTE_SIZE);
+            byte[] pdArray = new byte[Convert.ToInt32(byt[3])*Define.PHASE_DIREC_BYTE_SIZE];
+            Array.Copy(byt, 4, pdArray, 0, Convert.ToInt32(byt[3])*Define.PHASE_DIREC_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(pdArray, Convert.ToInt32(byt[3]),
+                Define.PHASE_DIREC_BYTE_SIZE);
             PhaseToDirec lc;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
@@ -590,6 +676,7 @@ namespace tscui.Service
             }
             return llc;
         }
+
         public static Message SetTiming(DateTime dt)
         {
             Message m = new Message();
@@ -605,54 +692,56 @@ namespace tscui.Service
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
             bool b = false;
-            if(count >0)
+            if (count > 0)
             {
-               b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
+                b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
             }
-           if(b == true)
-           {
-               m.flag = true;
-               m.msg = "校时成功！";
-               m.obj = "Timing";
-           }
-           else
-           {
-               m.flag = true;
-               m.msg = "校时失败！";
-               m.obj = "Timing";
-           }
+            if (b == true)
+            {
+                m.flag = true;
+                m.msg = "校时成功！";
+                m.obj = "Timing";
+            }
+            else
+            {
+                m.flag = true;
+                m.msg = "校时失败！";
+                m.obj = "Timing";
+            }
             return m;
         }
+
         /// <summary>
         /// 设置震荡频率
         /// </summary>
         /// <param name="sf"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static Message SetOscillatorFrequency(byte sf ,Node n)
+        public static Message SetOscillatorFrequency(byte sf, Node n)
         {
             Message m = new Message();
             byte[] hex = new byte[Define.DETECTOR_OSCILLATOR_FREQUENCY.Length + 4];
             Stream s = new MemoryStream();
             s.Write(Define.DETECTOR_OSCILLATOR_FREQUENCY, 0, Define.DETECTOR_OSCILLATOR_FREQUENCY.Length);
             byte sfc = sf;
-            sfc = (byte)(sf | sfc << 2);
-            sfc = (byte)(sf | sfc << 2);
-            sfc = (byte)(sf | sfc << 2);
+            sfc = (byte) (sf | sfc << 2);
+            sfc = (byte) (sf | sfc << 2);
+            sfc = (byte) (sf | sfc << 2);
             s.WriteByte(sfc);
             s.WriteByte(sfc);
             s.WriteByte(sfc);
             s.WriteByte(sfc);
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
-            if(count>0)
+            if (count > 0)
             {
-                
-                    Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
-              
+
+                Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
+
             }
             return m;
         }
+
         /// <summary>
         /// 检测器灵敏度数值第一块板1-7通道
         /// </summary>
@@ -664,12 +753,12 @@ namespace tscui.Service
             Message m = new Message();
             byte[] hex = new byte[Define.SET_DETECTOR_SENSITYVITY_DIG_1_1_7.Length + 7];
             Stream s = new MemoryStream();
-            s.Write(Define.SET_DETECTOR_SENSITYVITY_DIG_1_1_7,0,Define.SET_DETECTOR_SENSITYVITY_DIG_1_1_7.Length);
-            s.Write(b,0,b.Length);
+            s.Write(Define.SET_DETECTOR_SENSITYVITY_DIG_1_1_7, 0, Define.SET_DETECTOR_SENSITYVITY_DIG_1_1_7.Length);
+            s.Write(b, 0, b.Length);
             s.Position = 0;
-            int count = s.Read(hex,0,hex.Length);
+            int count = s.Read(hex, 0, hex.Length);
             bool bl = false;
-            if (count> 0)
+            if (count > 0)
             {
                 bl = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
             }
@@ -687,6 +776,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器灵敏度数值第一块板8-14通道
         /// </summary>
@@ -721,6 +811,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器灵敏度数值第一块板15-16通道
         /// </summary>
@@ -790,6 +881,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器灵敏度数值第二块板8-14通道
         /// </summary>
@@ -824,6 +916,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器灵敏度数值第二块板15-16通道
         /// </summary>
@@ -858,6 +951,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 得到当前设备的状态
         /// </summary>
@@ -867,14 +961,15 @@ namespace tscui.Service
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             DevMonitor dm = new DevMonitor();
             byte[] ba = Udp.recvUdp(t.Node.sIpAddress, t.Node.iPort, Define.TSC_MONITOR_STAUTS);
-            byte[] temp = {ba[3],ba[4]};
-            dm.temperature = System.BitConverter.ToUInt16(temp,0);
+            byte[] temp = {ba[3], ba[4]};
+            dm.temperature = System.BitConverter.ToUInt16(temp, 0);
             dm.door = ba[5];
-            byte[] vo = {ba[6],ba[7]};
+            byte[] vo = {ba[6], ba[7]};
             dm.voltage = System.BitConverter.ToUInt16(vo, 0);
             dm.powerType = ba[8];
             return dm;
         }
+
         /// <summary>
         /// 设置检测器灵敏 度
         /// </summary>
@@ -882,7 +977,7 @@ namespace tscui.Service
         /// <param name="se"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static Message SetSensitivity(int borad, byte se,Node n)
+        public static Message SetSensitivity(int borad, byte se, Node n)
         {
             Message m = new Message();
 
@@ -890,7 +985,7 @@ namespace tscui.Service
             Stream s = new MemoryStream();
             s.Write(Define.DETECTOR_SENSITIVITY, 0, Define.DETECTOR_SENSITIVITY.Length);
             byte sen = se;
-            sen = (byte)(sen | se << 4);
+            sen = (byte) (sen | se << 4);
 
             s.WriteByte(sen);
             s.WriteByte(sen);
@@ -898,7 +993,7 @@ namespace tscui.Service
             s.WriteByte(sen);
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
-            if(count > 0)
+            if (count > 0)
             {
                 if (borad == 1)
                 {
@@ -920,9 +1015,10 @@ namespace tscui.Service
                     // Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
                 }
             }
-            
+
             return m;
         }
+
         /// <summary>
         /// 检测器第一块板 1- 8通道设置方法
         /// </summary>
@@ -943,7 +1039,7 @@ namespace tscui.Service
             s.WriteByte(se[3]);
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
-            if(count > 0)
+            if (count > 0)
             {
                 hex[3] = 0x0b;
                 hex[4] = 0x00;
@@ -963,6 +1059,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器第一块板 9- 16通道设置方法
         /// </summary>
@@ -1003,6 +1100,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器第二块板 1- 8通道设置方法
         /// </summary>
@@ -1043,6 +1141,7 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 检测器第二块板 9- 16通道设置方法
         /// </summary>
@@ -1083,36 +1182,33 @@ namespace tscui.Service
             }
             return m;
         }
-        /// <summary>
-        /// 设置检测器灵敏 度
-        /// </summary>
-        /// <param name="borad"></param>
-        /// <param name="se"></param>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        public static Message SetSensitivityAdv(byte[] se, Node n)
-        {
-            Message m = new Message();
 
-            byte[] hex11 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
-            byte[] hex12 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
-            byte[] hex21 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
-            byte[] hex22 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
+        /// <summary>
+        /// 设置检测器灵敏度等级
+        public static bool SetDecBoardSensitivityAdv(byte[] se, Node n,byte slotindex)
+        {
+            bool bSendOk = false;
+
+            byte[] SensitivityHexData1to8 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
+            byte[] SensitivityHexData9to16 = new byte[Define.DETECTOR_SENSITIVITY.Length + 4];
+
             Stream s11 = new MemoryStream();
             s11.Write(Define.DETECTOR_SENSITIVITY, 0, Define.DETECTOR_SENSITIVITY.Length);
-            
+
 
             s11.WriteByte(se[0]);
             s11.WriteByte(se[1]);
             s11.WriteByte(se[2]);
             s11.WriteByte(se[3]);
             s11.Position = 0;
-            int count11 = s11.Read(hex11, 0, hex11.Length);
+            int count11 = s11.Read(SensitivityHexData1to8, 0, SensitivityHexData1to8.Length);
             if (count11 > 0)
             {
-                    hex11[3] = 0x0b;
-                    hex11[4] = 0x00;
-                    Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex11);
+                SensitivityHexData1to8[3] = 0x0b;
+                SensitivityHexData1to8[4] = slotindex;
+                 bSendOk =  Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, SensitivityHexData1to8);
+                if (bSendOk == false)
+                    return false;
             }
             Stream s12 = new MemoryStream();
             s12.Write(Define.DETECTOR_SENSITIVITY, 0, Define.DETECTOR_SENSITIVITY.Length);
@@ -1122,47 +1218,19 @@ namespace tscui.Service
             s12.WriteByte(se[7]);
             s12.Position = 0;
 
-            int count12 = s12.Read(hex12, 0, hex12.Length);
-            if(count12>0)
+            int count12 = s12.Read(SensitivityHexData9to16, 0, SensitivityHexData9to16.Length);
+            if (count12 > 0)
             {
-                hex12[3] = 0x0c;
-                hex12[4] = 0x00;
-                Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex12);
+                SensitivityHexData9to16[3] = 0x0c;
+                SensitivityHexData9to16[4] = slotindex;
+                bSendOk = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, SensitivityHexData9to16);
+                if (bSendOk == false)
+                    return false;
             }
 
-            Stream s21 = new MemoryStream();
-            s21.Write(Define.DETECTOR_SENSITIVITY, 0, Define.DETECTOR_SENSITIVITY.Length);
-            s21.WriteByte(se[8]);
-            s21.WriteByte(se[9]);
-            s21.WriteByte(se[10]);
-            s21.WriteByte(se[11]);
-            s21.Position = 0;
-
-            int count21 = s21.Read(hex21, 0, hex21.Length);
-            if (count21 > 0)
-            {
-                hex21[3] = 0x0b;
-                hex21[4] = 0x01;
-                Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex21);
-            }
-
-            Stream s22 = new MemoryStream();
-            s22.Write(Define.DETECTOR_SENSITIVITY, 0, Define.DETECTOR_SENSITIVITY.Length);
-            s22.WriteByte(se[12]);
-            s22.WriteByte(se[13]);
-            s22.WriteByte(se[14]);
-            s22.WriteByte(se[15]);
-            s22.Position = 0;
-
-            int count22 = s22.Read(hex22, 0, hex22.Length);
-            if (count22 > 0)
-            {
-                hex22[3] = 0x0c;
-                hex22[4] = 0x01;
-                Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex22);
-            }
-            return m;
+            return bSendOk;
         }
+
         /// <summary>
         /// 返回检测器灵敏度等级1-8通道
         /// </summary>
@@ -1171,11 +1239,12 @@ namespace tscui.Service
         public static List<byte> GetSensitivityAdv11(Node n)
         {
             List<byte> lb = new List<byte>();
-            byte[] ba = Udp.recvUdp(n.sIpAddress,n.iPort,Define.GET_DETECTOR_SENSITIVITY_1_1_8);
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITIVITY_1_1_8);
             lb = ba.ToList<byte>();
             return lb;
 
         }
+
         /// <summary>
         /// 返回检测器灵敏度等级9-16通道
         /// </summary>
@@ -1189,6 +1258,7 @@ namespace tscui.Service
             return lb;
 
         }
+
         /// <summary>
         /// 返回检测器灵敏度等级2块1-8通道
         /// </summary>
@@ -1202,6 +1272,7 @@ namespace tscui.Service
             return lb;
 
         }
+
         /// <summary>
         /// 返回检测器灵敏度等级2块1-8通道
         /// </summary>
@@ -1215,6 +1286,105 @@ namespace tscui.Service
             return lb;
 
         }
+
+        /// 返回检测器板1 灵敏度等级1-7数值
+        public static List<byte> GetSensitivityAdvData1to7(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_1_1_7);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+        /// 返回检测器板1 灵敏度等级8-14数值
+        public static List<byte> GetSensitivityAdvData8to14(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_1_8_14);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+        /// 返回检测器板1 灵敏度等级15-16数值
+        public static List<byte> GetSensitivityAdvData15to16(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_1_15_16);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+
+        /// 返回检测器板2 灵敏度等级1-7数值
+        public static List<byte> Get2SensitivityAdvData1to7(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_2_1_7);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+        /// 返回检测器板2 灵敏度等级8-14数值
+        public static List<byte> Get2SensitivityAdvData8to14(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_2_8_14);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+        /// 返回检测器板2 灵敏度等级15-16数值
+        public static List<byte> Get2SensitivityAdvData15to16(Node n)
+        {
+            List<byte> lb = new List<byte>();
+            byte[] ba = Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTOR_SENSITYVITY_DIG_2_15_16);
+            lb = ba.ToList<byte>();
+            return lb;
+        }
+
+        /// 返回检测器板的工作类型
+        public static Byte GetDetecBdWorkType(Node n,Byte DetecBdIndex)
+        {
+            try
+            {
+                 List<byte> lb = new List<byte>();
+                if(DetecBdIndex == 0x0)//检测器板1
+                  lb=  (Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTORBD1_WORKTYPE)).ToList<byte>();
+                else if(DetecBdIndex == 0x1)//检测器板2
+                  lb=  (Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTORBD1_WORKTYPE)).ToList<byte>();
+                if (lb.Count == 0x6 && lb[5]<0x2)
+                    return (Byte)(lb[5]+1);
+                else
+                    return 0;
+               
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        //设置检测器板工作类型
+        public static bool SetDetecBdWorkType(Node n, Byte DetecBdIndex ,Byte WorkType)
+        {
+            try
+            {
+                bool SetResult = false;
+                if (DetecBdIndex == 0x0)//检测器板1
+                {
+                    (Define.SET_DETECTORBD1_WORKTYPE)[Define.SET_DETECTORBD1_WORKTYPE.Length - 1] = WorkType;
+                    SetResult = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, Define.SET_DETECTORBD1_WORKTYPE);
+                }
+                else if (DetecBdIndex == 0x1)//检测器板2
+                {
+                    (Define.SET_DETECTORBD2_WORKTYPE)[Define.SET_DETECTORBD2_WORKTYPE.Length - 1] = WorkType;
+                   SetResult = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, Define.SET_DETECTORBD2_WORKTYPE);
+                }
+                return SetResult;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+
+
         /// <summary>
         /// 设置相位方向 表
         /// </summary>
@@ -1225,10 +1395,10 @@ namespace tscui.Service
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             Message msg = new Message();
             //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.PHASE_DIREC_BYTE_SIZE * Define.PHASE_DIREC_RESULT_LEN + Define.SET_PHASE_DIREC_RESPONSE.Length+1];
+            byte[] hex =new byte[Define.PHASE_DIREC_BYTE_SIZE*lptd.Count + Define.SET_PHASE_DIREC_RESPONSE.Length +1];
             Stream s = new MemoryStream();
             s.Write(Define.SET_PHASE_DIREC_RESPONSE, 0, Define.SET_PHASE_DIREC_RESPONSE.Length);
-            s.WriteByte(Convert.ToByte(Define.PHASE_DIREC_RESULT_LEN));
+            s.WriteByte(Convert.ToByte(lptd.Count)); //修改为实际方向数
             foreach (PhaseToDirec ptd in lptd)
             {
                 byte id = ptd.ucId;
@@ -1261,6 +1431,7 @@ namespace tscui.Service
 
             return msg;
         }
+
         /// <summary>
         /// 取得所有的灯泡检测数据
         /// </summary>
@@ -1268,34 +1439,43 @@ namespace tscui.Service
         public static List<LampCheck> GetLampCheck()
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-
+            if (t == null)
+                return null;
             byte[] byt;
             byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_LAMP_CHECK);
-            if (!CheckGBT(byt, "主动上报"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_LAMP_CHECK);
+                return null;
             }
+            //if (!CheckGBT(byt, "主动上报"))
+            //{
+            //    byt = Udp.recvUdp(t.Node.sIpAddress, Define.GBT_PORT, Define.GET_LAMP_CHECK);
+            //}
             List<LampCheck> llc = new List<LampCheck>();
-            byte[] lampCheckArray = new byte[Convert.ToInt32(byt[3]) * Define.LAMP_CHECK_BYTE_SIZE];
-            Array.Copy(byt, 4, lampCheckArray, 0, Convert.ToInt32(byt[3]) * Define.LAMP_CHECK_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(lampCheckArray, Convert.ToInt32(byt[3]), Define.LAMP_CHECK_BYTE_SIZE);
+            byte[] lampCheckArray = new byte[Convert.ToInt32(byt[3])*Define.LAMP_CHECK_BYTE_SIZE];
+            Array.Copy(byt, 4, lampCheckArray, 0, Convert.ToInt32(byt[3])*Define.LAMP_CHECK_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(lampCheckArray, Convert.ToInt32(byt[3]),
+                Define.LAMP_CHECK_BYTE_SIZE);
             LampCheck lc;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
                 lc = new LampCheck();
                 lc.ucId = twoArray[i, 0];
                 lc.ucFlag = twoArray[i, 1];
-               
+
                 llc.Add(lc);
             }
             return llc;
         }
+
         public static Message SetHardWaveFlash(byte[] bytes)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (t == null)
+                return null;
             Message msg = new Message();
             byte[] setBytes = ByteUtils.concatByteArray(Define.SET_HARDWAVE_FLASH, bytes);
-            bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress,t.Node.iPort,setBytes);
+            bool result = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, setBytes);
             if (result == true)
             {
                 msg.flag = true;
@@ -1317,51 +1497,72 @@ namespace tscui.Service
         /// <returns></returns>
         public static void GetReportStatus()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
 
             Udp.StartReceive();
             Udp.sendUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.REPORT_TSC_STATUS);
         }
+
         /// <summary>
         /// 取得所有日志信息
         /// </summary>
         /// <returns></returns>
         public static List<EventLog> GetEventLog()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
-            byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_EVENT_LOG);
-            if (!CheckGBT(byt, "事件日志"))
+            try
             {
+                TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+                if (td == null)
+                    return null;
+                byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_EVENT_LOG);
+                if (!CheckGBT(byt, "事件日志"))
+                {
+                    return null;
+                }
+                List<EventLog> listPhase = new List<EventLog>();
+                if (byt.Length == 4)
+                    return listPhase;
+                //取得)
+                byte[] eventLogArray = new byte[Convert.ToInt32(byt[6])*Define.EVENT_LOG_BYTE_SIZE];
+                Array.Copy(byt, 7, eventLogArray, 0, Convert.ToInt32(byt[6])*Define.EVENT_LOG_BYTE_SIZE);
+                byte[,] twoArray = ByteUtils.oneArray2TwoArray(eventLogArray, Convert.ToInt32(byt[6]),
+                    Define.EVENT_LOG_BYTE_SIZE);
+                EventLog obj;
+                for (int i = 0; i < Convert.ToInt32(byt[6]); i++)
+                {
+                    obj = new EventLog();
+                    obj.ucEvtType = twoArray[i, 1];
+                    obj.ucEventId = twoArray[i, 0];
+                    obj.ulHappenTime =
+                        (uint)
+                            ((twoArray[i, 2] << 24) + (twoArray[i, 3] << 16) + (twoArray[i, 4] << 8) + twoArray[i, 5]);
+                    obj.ulEvtValue =
+                        (uint)
+                            ((twoArray[i, 6] << 24) + (twoArray[i, 7] << 16) + (twoArray[i, 8] << 8) + twoArray[i, 9]);
+                    obj.ulEventTime = Utils.Utils.ConvertIntDateTime(obj.ulHappenTime).ToString();
+                    obj.sEventType = Utils.Utils.EventType2String(obj.ucEvtType);
+                    obj.sEventDesc = Utils.Utils.EventDesc2String(obj.ulEvtValue, obj.ucEvtType);
+                    listPhase.Add(obj);
+                }
+
+                return listPhase;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("日志加载为空");
                 return null;
             }
-            List<EventLog> listPhase = new List<EventLog>();
-            //取得)
-            byte[] eventLogArray = new byte[Convert.ToInt32(byt[6]) * Define.EVENT_LOG_BYTE_SIZE];
-            Array.Copy(byt, 7, eventLogArray, 0, Convert.ToInt32(byt[6]) * Define.EVENT_LOG_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(eventLogArray, Convert.ToInt32(byt[6]), Define.EVENT_LOG_BYTE_SIZE);
-            EventLog obj;
-            for (int i = 0; i < Convert.ToInt32(byt[6]); i++)
-            {
-                obj = new EventLog();
-                obj.ucEvtType = twoArray[i, 1];
-                obj.ucEventId = twoArray[i, 0];
-                obj.ulHappenTime = (uint)((twoArray[i, 2] << 24) + (twoArray[i, 3] << 16) + (twoArray[i, 4] << 8) + twoArray[i, 5]);
-                obj.ulEvtValue = (uint)((twoArray[i, 6] << 24) + (twoArray[i, 7] << 16) + (twoArray[i, 8] << 8) + twoArray[i, 9]);
-                obj.ulEventTime = Utils.Utils.ConvertIntDateTime(obj.ulHappenTime).ToString();
-                obj.sEventType = Utils.Utils.EventType2String(obj.ucEvtType);
-                obj.sEventDesc = Utils.Utils.EventDesc2String(obj.ulEvtValue, obj.ucEvtType);
-                listPhase.Add(obj);
-            }
-
-            return listPhase;
         }
+
         /// <summary>
         /// 取得事件日志对象的所有 数据，
         /// </summary>
         /// <returns></returns>
         public static List<EventType> GetEventType()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+            if (td == null)
+                return null;
             byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_EVENT_TYPE);
             if (!CheckGBT(byt, "事件类型"))
             {
@@ -1370,23 +1571,32 @@ namespace tscui.Service
             List<EventType> listPlan = new List<EventType>();
             return null;
         }
+
+
+
         /// <summary>
         /// 取得信号机的模块数据信息
         /// </summary>
         /// <returns></returns>
         public static List<Module> GetModule()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+            if (td == null)
+                return null;
             //取得所有字节数组
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_MODULE);
-            if (!CheckGBT(byt, "模块"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_MODULE);
+                return null;
             }
+            //if (!CheckGBT(byt, "模块"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_MODULE);
+            //}
             //去除协议部分
-            byte[] moduleArray = new byte[byt.Length-4];
-            Array.Copy(byt,4,moduleArray,0,moduleArray.Length);
+            byte[] moduleArray = new byte[byt.Length - 4];
+            Array.Copy(byt, 4, moduleArray, 0, moduleArray.Length);
 
             List<Module> listModule = new List<Module>();
             List<int> everySetLength = new List<int>();
@@ -1406,7 +1616,7 @@ namespace tscui.Service
                 int version = Convert.ToInt32(moduleArray[devNode + company + model + 3 + count + idcount]);
                 int typecount = 1;
                 //最后 加上4， 是因为，有四个字段的字节长度属性，并不是真正的数据
-                int all = idcount + devNode + company + model + version + typecount+4;
+                int all = idcount + devNode + company + model + version + typecount + 4;
                 byte[] oneSetByteArray = new byte[all];
                 Array.Copy(moduleArray, count, oneSetByteArray, 0, all);
                 everyByteArray.Add(oneSetByteArray);
@@ -1414,13 +1624,13 @@ namespace tscui.Service
 
             }
             //主要是将每一条记录的数组独立出来一个数据并放到集合中，等待处理
-            
+
             //foreach (int one in everySetLength)
             //{
             //    byte[] oneSetByteArray = new byte[one];
             //    Array.Copy(moduleArray, count, oneSetByteArray, 0, one);
-                
-                
+
+
             //}
 
 
@@ -1460,7 +1670,7 @@ namespace tscui.Service
                 {
                     bModel[l] = ba[idCount + devNodeCount + companyCount + l];
                 }
-                string sModel= System.Text.Encoding.ASCII.GetString(bModel);
+                string sModel = System.Text.Encoding.ASCII.GetString(bModel);
                 module.sModel = sModel;
 
                 byte[] bVersion = new byte[versionCount];
@@ -1476,8 +1686,8 @@ namespace tscui.Service
 
                 listModule.Add(module);
             }
-            
-          
+
+
             return listModule;
         }
 
@@ -1487,7 +1697,7 @@ namespace tscui.Service
         /// <returns></returns>
         public static List<AdapterPara> GetAdapterPara()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CHANNEL);
             if (!CheckGBT(byt, "适配参数"))
             {
@@ -1518,17 +1728,23 @@ namespace tscui.Service
         /// <returns></returns>
         public static List<Phase> GetPhase()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+            if (td == null)
+                return null;
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE);
-            if (!CheckGBT(byt, "相位"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE);
+                return null;
             }
+            //if (!CheckGBT(byt, "相位"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PHASE);
+            //}
             List<Phase> listPhase = new List<Phase>();
             //取得)
-            byte[] phaseArray = new byte[Convert.ToInt32(byt[3]) * Define.PAHSE_BYTE_SIZE];
-            Array.Copy(byt, 4, phaseArray, 0, Convert.ToInt32(byt[3]) * Define.PAHSE_BYTE_SIZE);
+            byte[] phaseArray = new byte[Convert.ToInt32(byt[3])*Define.PAHSE_BYTE_SIZE];
+            Array.Copy(byt, 4, phaseArray, 0, Convert.ToInt32(byt[3])*Define.PAHSE_BYTE_SIZE);
             byte[,] twoArray = ByteUtils.oneArray2TwoArray(phaseArray, Convert.ToInt32(byt[3]), Define.PAHSE_BYTE_SIZE);
             Phase phase;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
@@ -1546,17 +1762,20 @@ namespace tscui.Service
                 phase.ucType = twoArray[i, 9];
                 phase.ucOption = twoArray[i, 10];
                 phase.ucExtend = twoArray[i, 11];
-                
+
                 listPhase.Add(phase);
             }
             return listPhase;
         }
+
         public static Message SetPhase(List<Phase> lp)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+            if (t == null)
+                return null;
             Message msg = new Message();
             //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.PHASE_BYTE_SIZE * Define.PHASE_RESULT_LEN + Define.SET_PHASE_RESPONSE.Length + 1];
+            byte[] hex = new byte[Define.PHASE_BYTE_SIZE*Define.PHASE_RESULT_LEN + Define.SET_PHASE_RESPONSE.Length + 1];
             Stream s = new MemoryStream();
             s.Write(Define.SET_PHASE_RESPONSE, 0, Define.SET_PHASE_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(Define.PHASE_RESULT_LEN));
@@ -1611,7 +1830,7 @@ namespace tscui.Service
 
         public static List<CntDownDev> GetCntDownDev()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CNTDOWNDEV);
             if (!CheckGBT(byt, "倒计时"))
             {
@@ -1621,13 +1840,14 @@ namespace tscui.Service
 
             return lcdd;
         }
+
         /// <summary>
         /// 返回所有的相位屏障数据
         /// </summary>
         /// <returns></returns>
         public static List<Collision> GetCollision16()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_COLLISION);
             if (!CheckGBT(byt, "绿冲突"))
             {
@@ -1635,57 +1855,69 @@ namespace tscui.Service
             }
             List<Collision> listCollision = new List<Collision>();
             //取得)
-            byte[] collisionArray = new byte[Convert.ToInt32(byt[3]) * Define.GBT20999_COLLISION_BYTE_SIZE];
-            Array.Copy(byt, 4, collisionArray, 0, Convert.ToInt32(byt[3]) * Define.GBT20999_COLLISION_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(collisionArray, Convert.ToInt32(byt[3]), Define.GBT20999_COLLISION_BYTE_SIZE);
+            byte[] collisionArray = new byte[Convert.ToInt32(byt[3])*Define.GBT20999_COLLISION_BYTE_SIZE];
+            Array.Copy(byt, 4, collisionArray, 0, Convert.ToInt32(byt[3])*Define.GBT20999_COLLISION_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(collisionArray, Convert.ToInt32(byt[3]),
+                Define.GBT20999_COLLISION_BYTE_SIZE);
             Collision collision;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
                 collision = new Collision();
                 collision.ucPhaseId = twoArray[i, 0];
-                collision.ucCollisionFlag = (uint)((twoArray[i, 1] << 8) + twoArray[i, 2]);
+                collision.ucCollisionFlag = (uint) ((twoArray[i, 1] << 8) + twoArray[i, 2]);
 
                 listCollision.Add(collision);
             }
             return listCollision;
         }
+
         /// <summary>
         /// 返回所有的相位屏障数据
         /// </summary>
         /// <returns></returns>
         public static List<Collision> GetCollision()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_COLLISION);
-            if (!CheckGBT(byt, "绿冲突"))
+            if (byt == null || byt.Length == 0x3)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_COLLISION);
+                return null;
             }
+            //if (!CheckGBT(byt, "绿冲突"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_COLLISION);
+            //}
             List<Collision> listCollision = new List<Collision>();
             //取得)
-            byte[] collisionArray = new byte[Convert.ToInt32(byt[3]) * Define.COLLISION_BYTE_SIZE];
-            Array.Copy(byt, 4, collisionArray, 0, Convert.ToInt32(byt[3]) * Define.COLLISION_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(collisionArray, Convert.ToInt32(byt[3]), Define.COLLISION_BYTE_SIZE);
+            byte[] collisionArray = new byte[Convert.ToInt32(byt[3])*Define.COLLISION_BYTE_SIZE];
+            Array.Copy(byt, 4, collisionArray, 0, Convert.ToInt32(byt[3])*Define.COLLISION_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(collisionArray, Convert.ToInt32(byt[3]),
+                Define.COLLISION_BYTE_SIZE);
             Collision collision;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
                 collision = new Collision();
                 collision.ucPhaseId = twoArray[i, 0];
-                collision.ucCollisionFlag = (uint)((twoArray[i, 1] << 24) + (twoArray[i, 2] << 16) + (twoArray[i, 3] << 8) + twoArray[i, 4]);
+                collision.ucCollisionFlag =
+                    (uint) ((twoArray[i, 1] << 24) + (twoArray[i, 2] << 16) + (twoArray[i, 3] << 8) + twoArray[i, 4]);
 
                 listCollision.Add(collision);
             }
             return listCollision;
         }
+
         public static Message SetCollision(List<Collision> lc)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             Message msg = new Message();
             //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.COLLISION_BYTE_SIZE*Define.COLLISION_RESULT_LENGTH+Define.SET_COLLISION_RESPONSE.Length + 1];
+            byte[] hex =
+                new byte[
+                    Define.COLLISION_BYTE_SIZE*Define.COLLISION_RESULT_LENGTH + Define.SET_COLLISION_RESPONSE.Length + 1
+                    ];
             Stream s = new MemoryStream();
-            s.Write(Define.SET_COLLISION_RESPONSE,0,Define.SET_COLLISION_RESPONSE.Length);
+            s.Write(Define.SET_COLLISION_RESPONSE, 0, Define.SET_COLLISION_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(Define.COLLISION_RESULT_LENGTH));
             foreach (Collision c in lc)
             {
@@ -1697,7 +1929,7 @@ namespace tscui.Service
             }
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
-            if (count > 0 )
+            if (count > 0)
             {
                 bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
                 if (b)
@@ -1713,16 +1945,17 @@ namespace tscui.Service
                     msg.obj = "Collision";
                 }
             }
-            
+
             return msg;
         }
-        public static bool CheckGBT(byte[] b,string fun)
+
+        public static bool CheckGBT(byte[] b, string fun)
         {
             if (b[0] == 0x86)
             {
                 if (b[1] == 0x05)
                 {
-                    MessageBox.Show(fun+":国标通信协议错误类型中的其它错误原因！");
+                    MessageBox.Show(fun + ":国标通信协议错误类型中的其它错误原因！");
                     return false;
                 }
                 else if (b[1] == 0x01)
@@ -1751,54 +1984,61 @@ namespace tscui.Service
                     return false;
                 }
             }
-            
+
             return true;
-         
+
         }
+
         /// <summary>
         /// 返回检测器的所有数据
         /// </summary>
         /// <returns></returns>
-        public static List<Detector> GetDetector()
+        public static List<Models.Detector> GetDetector()
         {
-             TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_DETECTOR);
-            if (!CheckGBT(byt, "检测器"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_DETECTOR);
+                return null;
             }
-            List<Detector> listDetector = new List<Detector>();
+            //if (!CheckGBT(byt, "检测器"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_DETECTOR);
+            //}
+            List<Models.Detector> listDetector = new List<Models.Detector>();
             //取得)
-            byte[] detectorArray = new byte[Convert.ToInt32(byt[3]) * Define.DETECTOR_BYTE_SIZE];
-            Array.Copy(byt, 4, detectorArray, 0, Convert.ToInt32(byt[3]) * Define.DETECTOR_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(detectorArray, Convert.ToInt32(byt[3]), Define.DETECTOR_BYTE_SIZE);
-            Detector detector;
+            byte[] detectorArray = new byte[Convert.ToInt32(byt[3])*Define.DETECTOR_BYTE_SIZE];
+            Array.Copy(byt, 4, detectorArray, 0, Convert.ToInt32(byt[3])*Define.DETECTOR_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(detectorArray, Convert.ToInt32(byt[3]),
+                Define.DETECTOR_BYTE_SIZE);
+            Models.Detector detector;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
-                detector = new Detector();
+                detector = new Models.Detector();
                 detector.ucDetectorId = twoArray[i, 0];
                 detector.ucPhaseId = twoArray[i, 1];
                 detector.ucDetFlag = twoArray[i, 2];
                 detector.ucDirect = twoArray[i, 3];
                 detector.ucValidTime = twoArray[i, 4];
                 detector.ucOptionFlag = twoArray[i, 5];
-                detector.usSaturationFlow = (short)((twoArray[i, 6] << 8) + twoArray[i, 7]);
+                detector.usSaturationFlow = (short) ((twoArray[i, 6] << 8) + twoArray[i, 7]);
                 detector.ucSaturationOccupy = twoArray[i, 8];
                 listDetector.Add(detector);
             }
             return listDetector;
         }
-        public static Message SetDetector(List<Detector> ld)
+
+        public static Message SetDetector(List<Models.Detector> ld)
         {
             Message msg = new Message();
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.DETECTOR_BYTE_SIZE*ld.Count + Define.SET_DETECTOR_RESPONSE.Length +1];
+            byte[] hex = new byte[Define.DETECTOR_BYTE_SIZE*ld.Count + Define.SET_DETECTOR_RESPONSE.Length + 1];
             Stream s = new MemoryStream();
-            s.Write(Define.SET_DETECTOR_RESPONSE,0,Define.SET_DETECTOR_RESPONSE.Length);
+            s.Write(Define.SET_DETECTOR_RESPONSE, 0, Define.SET_DETECTOR_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(ld.Count));
-            foreach (Detector d in ld)
+            foreach (Models.Detector d in ld)
             {
                 byte id = d.ucDetectorId;
                 s.WriteByte(id);
@@ -1826,31 +2066,36 @@ namespace tscui.Service
                 if (b)
                 {
                     msg.flag = true;
-                    msg.msg = "发送检测器数据成功！";
-                    msg.obj = "Detector";
+                    msg.msg = "配置数据发送成功！";
+                    msg.obj = "车检配置";
                 }
                 else
                 {
                     msg.flag = false;
-                    msg.msg = "发送检测器数据失败！";
-                    msg.obj = "Detector";
+                    msg.msg = "配置数据发送失败！";
+                    msg.obj = "车检配置";
                 }
             }
-            
+
             return msg;
         }
+
         /// <summary>
         /// 返回所有的时基表数据
         /// </summary>
         /// <returns></returns>
         public static List<Plan> GetPlan()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PLAN);
-            if (!CheckGBT(byt, "时基"))
+            //if (!CheckGBT(byt, "时基"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PLAN);
+            //}
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PLAN);
+                return null;
             }
             List<Plan> listPlan = new List<Plan>();
             //取得)
@@ -1862,57 +2107,60 @@ namespace tscui.Service
             {
                 plan = new Plan();
                 plan.ucId = twoArray[i, 0];
-                plan.usMonthFlag = (ushort)((twoArray[i, 1] << 8) + twoArray[i, 2]);//<<是移位符  21930;
+                plan.usMonthFlag = (ushort) ((twoArray[i, 1] << 8) + twoArray[i, 2]); //<<是移位符  21930;
                 plan.ucWeekFlag = twoArray[i, 3];
-                plan.ulDayFlag = (uint)((twoArray[i, 4] << 24) + (twoArray[i, 5] << 16) + (twoArray[i, 6] << 8) + twoArray[i, 7]);
+                plan.ulDayFlag =
+                    (uint) ((twoArray[i, 4] << 24) + (twoArray[i, 5] << 16) + (twoArray[i, 6] << 8) + twoArray[i, 7]);
                 plan.ucScheduleId = twoArray[i, 8];
                 listPlan.Add(plan);
             }
             return listPlan;
         }
-       public static Message SetPlanByCalendar(List<Plan> lp)
+
+        public static Message SetPlanByCalendar(List<Plan> lp)
         {
             Message m = new Message();
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            byte[] hex = new byte[Define.PLAN_BYTE_SIZE * lp.Count + Define.SET_PLAN_RESPONSE.Length + 1];
+            byte[] hex = new byte[Define.PLAN_BYTE_SIZE*lp.Count + Define.SET_PLAN_RESPONSE.Length + 1];
             Stream s = new MemoryStream();
             s.Write(Define.SET_PLAN_RESPONSE, 0, Define.SET_PLAN_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(lp.Count));
-           foreach (Plan p in lp)
-           {
-               byte id = p.ucId;
-               s.WriteByte(id);
-               byte[] month = System.BitConverter.GetBytes(p.usMonthFlag);
-               month = month.Reverse().ToArray();
-               s.Write(month, 0, month.Length);
-               byte week = p.ucWeekFlag;
-               s.WriteByte(week);
-               byte[] day = System.BitConverter.GetBytes(p.ulDayFlag);
-               day = day.Reverse().ToArray();
-               s.Write(day, 0, day.Length);
-               byte schedule = p.ucScheduleId;
-               s.WriteByte(schedule);
-           }
-           s.Position = 0;
-           int count = s.Read(hex, 0, hex.Length);
-           if (count > 0)
-           {
-               bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
-               if (b)
-               {
-                   m.flag = true;
-                   m.msg = "保存时基数据成功！";
-                   m.obj = "Plan";
-               }
-               else
-               {
-                   m.flag = false;
-                   m.msg = "保存时基数据失败！";
-                   m.obj = "Plan";
-               }
-           }
+            foreach (Plan p in lp)
+            {
+                byte id = p.ucId;
+                s.WriteByte(id);
+                byte[] month = System.BitConverter.GetBytes(p.usMonthFlag);
+                month = month.Reverse().ToArray();
+                s.Write(month, 0, month.Length);
+                byte week = p.ucWeekFlag;
+                s.WriteByte(week);
+                byte[] day = System.BitConverter.GetBytes(p.ulDayFlag);
+                day = day.Reverse().ToArray();
+                s.Write(day, 0, day.Length);
+                byte schedule = p.ucScheduleId;
+                s.WriteByte(schedule);
+            }
+            s.Position = 0;
+            int count = s.Read(hex, 0, hex.Length);
+            if (count > 0)
+            {
+                bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
+                if (b)
+                {
+                    m.flag = true;
+                    m.msg = "保存时基数据成功！";
+                    m.obj = "Plan";
+                }
+                else
+                {
+                    m.flag = false;
+                    m.msg = "保存时基数据失败！";
+                    m.obj = "Plan";
+                }
+            }
             return m;
         }
+
         /// <summary>
         /// 保存时基数据到信号机中
         /// </summary>
@@ -1922,7 +2170,7 @@ namespace tscui.Service
         /// <returns></returns>
         public static bool SetPlanByWeekend(string ip, int port, List<Plan> plans)
         {
-            byte[] ba = new byte[plans.Count * Define.PLAN_BYTE_SIZE + 1];
+            byte[] ba = new byte[plans.Count*Define.PLAN_BYTE_SIZE + 1];
             List<byte> lb = new List<byte>();
             lb.AddRange(Define.SET_PLAN_RESPONSE);
             lb.Add(Convert.ToByte(plans.Count));
@@ -1935,30 +2183,35 @@ namespace tscui.Service
             bool b = Udp.sendUdpNoReciveData(ip, port, ba);
             return b;
         }
+
         /// <summary>
         /// 返回所有时段表数据
         /// </summary>
         /// <returns></returns>
         public static List<Schedule> GetSchedule()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
-           // byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_SCHEDULE);
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+            // byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_SCHEDULE);
             //byt 在同济大学里通过无线AP 点对点。查出数据byt数组为空的
 
             byte[] byt;
-            byt= Udp.sendUdpClient(td.Node.sIpAddress, td.Node.iPort, Define.GET_SCHEDULE);
-            if (!CheckGBT(byt, "时段"))
+            byt = Udp.sendUdpClient(td.Node.sIpAddress, td.Node.iPort, Define.GET_SCHEDULE);
+            if (byt == null)
             {
-                byt = Udp.sendUdpClient(td.Node.sIpAddress, td.Node.iPort, Define.GET_SCHEDULE); 
+                return null;
             }
+            //else if (!CheckGBT(byt, "时段"))
+            //{
+            //    return null;
+            //}
             List<Schedule> listSchedule = new List<Schedule>();
             byte[] scheduleArray = new byte[6144];
             Array.Copy(byt, 5, scheduleArray, 0, 6144);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(scheduleArray,768,Define.SCHEDULE_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(scheduleArray, 768, Define.SCHEDULE_BYTE_SIZE);
             Schedule schedule;
             for (int i = 0; i < 768; i++)
             {
-                schedule  = new Schedule();
+                schedule = new Schedule();
                 schedule.ucId = twoArray[i, 0];
                 schedule.ucEventId = twoArray[i, 1];
                 schedule.ucHour = twoArray[i, 2];
@@ -1971,12 +2224,16 @@ namespace tscui.Service
             }
             return listSchedule;
         }
+
         public static Message SetSchedule(List<Schedule> ls)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             Message m = new Message();
             //字节 长度，需要加2 ，因为。数据长度需要2个字段表示。
-            byte[] hex = new byte[Define.SCHEDULE_BYTE_SIZE * (Define.SCHEDULE_RESULT_LEN*Define.SCHEDULE_EVENT_RESULT_LEN) + Define.SET_SCHEDULE_RESPONSE.Length + 2];
+            byte[] hex =
+                new byte[
+                    Define.SCHEDULE_BYTE_SIZE*(Define.SCHEDULE_RESULT_LEN*Define.SCHEDULE_EVENT_RESULT_LEN) +
+                    Define.SET_SCHEDULE_RESPONSE.Length + 2];
             Stream s = new MemoryStream();
             s.Write(Define.SET_SCHEDULE_RESPONSE, 0, Define.SET_SCHEDULE_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(Define.SCHEDULE_RESULT_LEN));
@@ -2002,7 +2259,6 @@ namespace tscui.Service
             }
             s.Position = 0;
             int count = s.Read(hex, 0, hex.Length);
-            
             if (count > 0)
             {
                 bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
@@ -2019,27 +2275,96 @@ namespace tscui.Service
                     m.obj = "Schedule";
                 }
             }
-            
+
             return m;
         }
+
+        public static bool SetCntDown()
+        {
+            try
+            {
+                TscData t = (TscData) Application.Current.Properties[Define.TSC_DATA];
+                Message m = new Message();
+
+                byte[] sendmsg = new byte[4 + 5*(t.ListCntDownDev.Count)];
+                sendmsg[0] = 0x81;
+                sendmsg[1] = 0xf1;
+                sendmsg[2] = 0x0;
+                sendmsg[3] = (Byte) (t.ListCntDownDev.Count);
+                for (Byte index = 0; index < (Byte) (t.ListCntDownDev.Count); index++)
+                {
+                    sendmsg[4 + index*5] = t.ListCntDownDev[index].ucDevId;
+                    sendmsg[5 + index*5] = 0;
+                    sendmsg[6 + index*5] = (Byte) (t.ListCntDownDev[index].ucPhase);
+                    sendmsg[7 + index*5] = (Byte) (t.ListCntDownDev[index].ucOverlapPhase);
+                    sendmsg[8 + index*5] = (Byte) (t.ListCntDownDev[index].ucMode);
+                }
+                bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, sendmsg);
+                return b;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public static List<CntDownDev> GetCntDown()
+        {
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
+            byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CNTDOWNDEV);
+            if (byt == null)
+            {
+                return null;
+            }
+            //if (!CheckGBT(byt, "倒计时"))
+            //{
+            //    return null;
+            //}
+            List<CntDownDev> listCntDown = new List<CntDownDev>();
+
+            Byte iCntCount = byt[3];
+            if (iCntCount == 0)
+            {
+                return null;
+            }
+            CntDownDev obj;
+            for (Byte index = 0; index < iCntCount; index++)
+            {
+                obj = new CntDownDev();
+                obj.ucDevId = byt[4 + 5*index];
+                obj.ucPhase = BitConverter.ToUInt16(new byte[] {byt[6 + 5*index], byt[5 + 5*index]}, 0);
+                obj.ucOverlapPhase = byt[7 + 5*index];
+                ;
+                obj.ucMode = byt[8 + 5*index];
+                listCntDown.Add(obj);
+            }
+            return listCntDown;
+        }
+
         /// <summary>
         /// 从信号机取得所有的通道信息。
         /// </summary>
         /// <returns></returns>
         public static List<Channel> GetChannel()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CHANNEL);
-            if (!CheckGBT(byt, "通道"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CHANNEL);
+                return null;
             }
+            //if (!CheckGBT(byt, "通道"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_CHANNEL);
+            //}
             List<Channel> listChannel = new List<Channel>();
             //取得)
-            byte[] channelArray = new byte[Convert.ToInt32(byt[3]) * Define.CHANNEL_BYTE_SIZE];
-            Array.Copy(byt, 4, channelArray, 0, Convert.ToInt32(byt[3]) * Define.CHANNEL_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(channelArray, Convert.ToInt32(byt[3]), Define.CHANNEL_BYTE_SIZE);
+            byte[] channelArray = new byte[Convert.ToInt32(byt[3])*Define.CHANNEL_BYTE_SIZE];
+            Array.Copy(byt, 4, channelArray, 0, Convert.ToInt32(byt[3])*Define.CHANNEL_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(channelArray, Convert.ToInt32(byt[3]),
+                Define.CHANNEL_BYTE_SIZE);
             Channel obj;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
@@ -2053,12 +2378,14 @@ namespace tscui.Service
             }
             return listChannel;
         }
+
         public static Message SetChannel(List<Channel> lc)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             Message m = new Message();
             //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.CHANNEL_BYTE_SIZE*Define.CHANNEL_RESULT_LEN+Define.SET_CHANNEL_RESPONSE.Length + 1];
+            byte[] hex =
+                new byte[Define.CHANNEL_BYTE_SIZE*Define.CHANNEL_RESULT_LEN + Define.SET_CHANNEL_RESPONSE.Length + 1];
             Stream s = new MemoryStream();
             s.Write(Define.SET_CHANNEL_RESPONSE, 0, Define.SET_CHANNEL_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(Define.CHANNEL_RESULT_LEN));
@@ -2091,27 +2418,28 @@ namespace tscui.Service
                     m.obj = "Channel";
                 }
             }
-            
+
             return m;
         }
+
         /// <summary>
         /// 从信号机取得所有的配时方案信息。
         /// </summary>
         /// <returns></returns>
         public static List<Pattern> GetPattern()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
-            byte[] byt;
-            byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PATTERN);
-            if (!CheckGBT(byt, "配时方案"))
-            {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PATTERN);
-            }
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             List<Pattern> listPattern = new List<Pattern>();
-            //取得)
-            byte[] arrayPattern = new byte[Convert.ToInt32(byt[3]) * Define.PATTERN_BYTE_SIZE];
-            Array.Copy(byt, 4, arrayPattern, 0, Convert.ToInt32(byt[3]) * Define.PATTERN_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayPattern, Convert.ToInt32(byt[3]), Define.PATTERN_BYTE_SIZE);
+            byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_PATTERN);
+            if (byt == null || byt.Length == 0x3)
+            {
+                return null;
+            }
+          
+            byte[] arrayPattern = new byte[Convert.ToInt32(byt[3])*Define.PATTERN_BYTE_SIZE];
+            Array.Copy(byt, 4, arrayPattern, 0, Convert.ToInt32(byt[3])*Define.PATTERN_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayPattern, Convert.ToInt32(byt[3]),
+                Define.PATTERN_BYTE_SIZE);
             Pattern obj;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
@@ -2125,73 +2453,88 @@ namespace tscui.Service
             }
             return listPattern;
         }
+
         public static Message SetPattern(List<Pattern> lp)
         {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Message m = new Message();
-            //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
-            byte[] hex = new byte[Define.PATTERN_BYTE_SIZE * lp.Count + Define.SET_PATTERN_RESPONSE.Length + 1 ];
-            Stream s = new MemoryStream();
-            s.Write(Define.SET_PATTERN_RESPONSE, 0, Define.SET_PATTERN_RESPONSE.Length);
-            s.WriteByte(Convert.ToByte(lp.Count));
-            foreach(Pattern p in lp)
+            try
             {
-                byte id = p.ucPatternId;
-                s.WriteByte(id);
-                byte cyc = p.ucCycleTime;
-                s.WriteByte(cyc);
-                byte r = p.ucOffset;
-                s.WriteByte(r);
-                byte coor = p.ucCoorPhase;
-                s.WriteByte(coor);
-                byte stageid = p.ucStagePatternId;
-                s.WriteByte(stageid);
+                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                Message m = new Message();
+                //字节 长度，需要加1 ，因为。数据长度需要一个字段表示。
+                byte[] hex = new byte[Define.PATTERN_BYTE_SIZE*lp.Count + Define.SET_PATTERN_RESPONSE.Length + 1];
+                Stream s = new MemoryStream();
+                s.Write(Define.SET_PATTERN_RESPONSE, 0, Define.SET_PATTERN_RESPONSE.Length);
+                s.WriteByte(Convert.ToByte(lp.Count));
+                foreach (Pattern p in lp)
+                {
+                    byte id = p.ucPatternId;
+                    s.WriteByte(id);
+                    byte cyc = p.ucCycleTime;
+                    s.WriteByte(cyc);
+                    byte r = p.ucOffset;
+                    s.WriteByte(r);
+                    byte coor = p.ucCoorPhase;
+                    s.WriteByte(coor);
+                    byte stageid = p.ucStagePatternId;
+                    s.WriteByte(stageid);
+                }
+                s.Position = 0;
+                int count = s.Read(hex, 0, hex.Length);
+                if (count > 0)
+                {
+                    bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
+                    if (b)
+                    {
+                        m.flag = true;
+                        m.msg = "保存方案数据成功！";
+                        m.obj = "Pattern";
+                    }
+                    else
+                    {
+                        m.flag = false;
+                        m.msg = "保存方案数据失败！";
+                        m.obj = "Pattern";
+                    }
+                }
+                return m;
             }
-            s.Position = 0;
-            int count = s.Read(hex, 0, hex.Length);
-            if (count > 0)
+            catch (Exception ex)
             {
-                bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
-                if (b)
-                {
-                    m.flag = true;
-                    m.msg = "保存配时方案数据成功！";
-                    m.obj = "Pattern";
-                }
-                else
-                {
-                    m.flag = false;
-                    m.msg = "保存配时方案数据失败！";
-                    m.obj = "Pattern";
-                }
+                MessageBox.Show("保存方案操作异常!");
+                return null;
             }
-            return m;
         }
+
         /// <summary>
         /// 从信号机取得所有阶段配时信息。
         /// </summary>
         /// <returns></returns>
         public static List<StagePattern> GetStagePattern()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_STAGEPATTERN);
-            if (!CheckGBT(byt, "阶段配时"))
+            if (byt == null || byt.Length == 0x3)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_STAGEPATTERN);
+                return null;
             }
+          
             List<StagePattern> listStagePattern = new List<StagePattern>();
             //取得)
-            byte[] arrayStagePattern = new byte[Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]) * Define.STAGEPATTERN_BYTE_SIZE];
-            Array.Copy(byt, 5, arrayStagePattern, 0, Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]) * Define.STAGEPATTERN_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayStagePattern, Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]), Define.STAGEPATTERN_BYTE_SIZE);
+            byte[] arrayStagePattern =
+                new byte[Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])*Define.STAGEPATTERN_BYTE_SIZE];
+            Array.Copy(byt, 5, arrayStagePattern, 0,
+                Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])*Define.STAGEPATTERN_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayStagePattern,
+                Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4]), Define.STAGEPATTERN_BYTE_SIZE);
             StagePattern obj;
-            for (int i = 0; i < (Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4])); i++)
+            for (int i = 0; i < (Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])); i++)
             {
                 obj = new StagePattern();
                 obj.ucStagePatternId = twoArray[i, 0];
                 obj.ucStageNo = twoArray[i, 1];
-                obj.usAllowPhase = (uint)((twoArray[i, 2] << 24) + (twoArray[i, 3] << 16) + (twoArray[i, 4] << 8) + twoArray[i, 5]);
+                obj.usAllowPhase =
+                    (uint) ((twoArray[i, 2] << 24) + (twoArray[i, 3] << 16) + (twoArray[i, 4] << 8) + twoArray[i, 5]);
                 obj.ucGreenTime = twoArray[i, 6];
                 obj.ucYellowTime = twoArray[i, 7];
                 obj.ucRedTime = twoArray[i, 8];
@@ -2200,61 +2543,74 @@ namespace tscui.Service
             }
             return listStagePattern;
         }
+
         public static Message SetStagePattern(List<StagePattern> lsp)
         {
-            TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
-            Message m = new Message();
-            ////字节 长度，需要加2 ，因为。数据长度需要2个字段表示，二维数组。
-            byte[] hex = new byte[Define.STAGEPATTERN_BYTE_SIZE * (Define.STAGEPATTERN_RESULT_LEN*Define.STAGE_RESULT_LEN) + Define.SET_STAGEPATTERN_RESPONSE.Length +2];
-            Stream s = new MemoryStream();
-            s.Write(Define.SET_STAGEPATTERN_RESPONSE, 0, Define.SET_STAGEPATTERN_RESPONSE.Length);
-            s.WriteByte(Convert.ToByte(Define.STAGEPATTERN_RESULT_LEN));
-            s.WriteByte(Convert.ToByte(Define.STAGE_RESULT_LEN));
-            foreach (StagePattern sp in lsp)
+            try
             {
-                byte id = sp.ucStagePatternId;
-                s.WriteByte(id);
-                byte stageno = sp.ucStageNo;
-                s.WriteByte(stageno);
-                byte[] ap  = System.BitConverter.GetBytes(sp.usAllowPhase);
-                ap = ap.Reverse().ToArray();
-                s.Write(ap,0,ap.Length);
-                byte green = sp.ucGreenTime;
-                s.WriteByte(green);
-                byte yellow = sp.ucYellowTime;
-                s.WriteByte(yellow);
-                byte red = sp.ucRedTime;
-                s.WriteByte(red);
-                byte opt = sp.ucOption;
-                s.WriteByte(opt);
+                TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                Message m = new Message();
+                ////字节 长度，需要加2 ，因为。数据长度需要2个字段表示，二维数组。
+                byte[] hex =
+                    new byte[
+                        Define.STAGEPATTERN_BYTE_SIZE*(Define.STAGEPATTERN_RESULT_LEN*Define.STAGE_RESULT_LEN) +
+                        Define.SET_STAGEPATTERN_RESPONSE.Length + 2];
+                Stream s = new MemoryStream();
+                s.Write(Define.SET_STAGEPATTERN_RESPONSE, 0, Define.SET_STAGEPATTERN_RESPONSE.Length);
+                s.WriteByte(Convert.ToByte(Define.STAGEPATTERN_RESULT_LEN));
+                s.WriteByte(Convert.ToByte(Define.STAGE_RESULT_LEN));
+                foreach (StagePattern sp in lsp)
+                {
+                    byte id = sp.ucStagePatternId;
+                    s.WriteByte(id);
+                    byte stageno = sp.ucStageNo;
+                    s.WriteByte(stageno);
+                    byte[] ap = System.BitConverter.GetBytes(sp.usAllowPhase);
+                    ap = ap.Reverse().ToArray();
+                    s.Write(ap, 0, ap.Length);
+                    byte green = sp.ucGreenTime;
+                    s.WriteByte(green);
+                    byte yellow = sp.ucYellowTime;
+                    s.WriteByte(yellow);
+                    byte red = sp.ucRedTime;
+                    s.WriteByte(red);
+                    byte opt = sp.ucOption;
+                    s.WriteByte(opt);
+                }
+                s.Position = 0;
+                int count = s.Read(hex, 0, hex.Length);
+                if (count > 0)
+                {
+                    bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
+                    if (b)
+                    {
+                        m.flag = true;
+                        m.msg = "保存阶段配时数据成功！";
+                        m.obj = "Pattern";
+                    }
+                    else
+                    {
+                        m.flag = false;
+                        m.msg = "保存阶段配时数据失败！";
+                        m.obj = "Pattern";
+                    }
+                }
+                return m;
             }
-            s.Position = 0;
-            int count = s.Read(hex, 0, hex.Length);
-            if (count > 0)
+            catch (Exception ex)
             {
-                bool b = Udp.sendUdpNoReciveData(t.Node.sIpAddress, t.Node.iPort, hex);
-                if (b)
-                {
-                    m.flag = true;
-                    m.msg = "保存阶段配时方案数据成功！";
-                    m.obj = "Pattern";
-                }
-                else
-                {
-                    m.flag = false;
-                    m.msg = "保存阶段配时方案数据失败！";
-                    m.obj = "Pattern";
-                }
+                MessageBox.Show("保存阶段配时数据异常!", "阶段配时", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
-            return m;
         }
+
         /// <summary>
         /// 从信号机取得所有阶段配时信息。
         /// </summary>
         /// <returns></returns>
         public static List<StagePattern> GetStagePattern16()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_STAGEPATTERN);
             if (!CheckGBT(byt, "阶段配时"))
             {
@@ -2262,16 +2618,19 @@ namespace tscui.Service
             }
             List<StagePattern> listStagePattern = new List<StagePattern>();
             //取得)
-            byte[] arrayStagePattern = new byte[Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]) * Define.STAGE_PATTERN_BYTE_SIZE_16];
-            Array.Copy(byt, 5, arrayStagePattern, 0, Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]) * Define.STAGE_PATTERN_BYTE_SIZE_16);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayStagePattern, Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4]), Define.STAGE_PATTERN_BYTE_SIZE_16);
+            byte[] arrayStagePattern =
+                new byte[Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])*Define.STAGE_PATTERN_BYTE_SIZE_16];
+            Array.Copy(byt, 5, arrayStagePattern, 0,
+                Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])*Define.STAGE_PATTERN_BYTE_SIZE_16);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayStagePattern,
+                Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4]), Define.STAGE_PATTERN_BYTE_SIZE_16);
             StagePattern obj;
-            for (int i = 0; i < (Convert.ToInt32(byt[3]) * Convert.ToInt32(byt[4])); i++)
+            for (int i = 0; i < (Convert.ToInt32(byt[3])*Convert.ToInt32(byt[4])); i++)
             {
                 obj = new StagePattern();
                 obj.ucStagePatternId = twoArray[i, 0];
                 obj.ucStageNo = twoArray[i, 1];
-                obj.usAllowPhase = (uint)((twoArray[i, 2] << 8) + twoArray[i, 3]);
+                obj.usAllowPhase = (uint) ((twoArray[i, 2] << 8) + twoArray[i, 3]);
                 obj.ucGreenTime = twoArray[i, 4];
                 obj.ucYellowTime = twoArray[i, 5];
                 obj.ucRedTime = twoArray[i, 6];
@@ -2280,12 +2639,16 @@ namespace tscui.Service
             }
             return listStagePattern;
         }
+
         public static Message SetStagePattern16(List<StagePattern> lsp)
         {
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             Message m = new Message();
             ////字节 长度，需要加2 ，因为。数据长度需要2个字段表示，二维数组。
-            byte[] hex = new byte[Define.STAGE_PATTERN_BYTE_SIZE_16 * (Define.STAGEPATTERN_RESULT_LEN * Define.STAGE_RESULT_LEN) + Define.SET_STAGEPATTERN_RESPONSE.Length + 2];
+            byte[] hex =
+                new byte[
+                    Define.STAGE_PATTERN_BYTE_SIZE_16*(Define.STAGEPATTERN_RESULT_LEN*Define.STAGE_RESULT_LEN) +
+                    Define.SET_STAGEPATTERN_RESPONSE.Length + 2];
             Stream s = new MemoryStream();
             s.Write(Define.SET_STAGEPATTERN_RESPONSE, 0, Define.SET_STAGEPATTERN_RESPONSE.Length);
             s.WriteByte(Convert.ToByte(Define.STAGEPATTERN_RESULT_LEN));
@@ -2328,24 +2691,30 @@ namespace tscui.Service
             }
             return m;
         }
+
         /// <summary>
         /// 从信号机取得所有的跟随相位信息。
         /// </summary>
         /// <returns></returns>
         public static List<OverlapPhase> GetOverlapPhase()
         {
-            TscData td = (TscData)Application.Current.Properties[Define.TSC_DATA];
+            TscData td = (TscData) Application.Current.Properties[Define.TSC_DATA];
             byte[] byt;
             byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_OVERLAPPHASE);
-            if (!CheckGBT(byt, "跟随相位"))
+            if (byt == null)
             {
-                byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_OVERLAPPHASE);
+                return null;
             }
+            //if (!CheckGBT(byt, "跟随相位"))
+            //{
+            //    byt = Udp.recvUdp(td.Node.sIpAddress, Define.GBT_PORT, Define.GET_OVERLAPPHASE);
+            //}
             List<OverlapPhase> listOverlapPhase = new List<OverlapPhase>();
             //取得)
-            byte[] arrayOverlapPhase = new byte[Convert.ToInt32(byt[3]) * Define.OVERLAPPHASE_BYTE_SIZE];
-            Array.Copy(byt, 4, arrayOverlapPhase, 0, Convert.ToInt32(byt[3]) * Define.OVERLAPPHASE_BYTE_SIZE);
-            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayOverlapPhase, Convert.ToInt32(byt[3]), Define.OVERLAPPHASE_BYTE_SIZE);
+            byte[] arrayOverlapPhase = new byte[Convert.ToInt32(byt[3])*Define.OVERLAPPHASE_BYTE_SIZE];
+            Array.Copy(byt, 4, arrayOverlapPhase, 0, Convert.ToInt32(byt[3])*Define.OVERLAPPHASE_BYTE_SIZE);
+            byte[,] twoArray = ByteUtils.oneArray2TwoArray(arrayOverlapPhase, Convert.ToInt32(byt[3]),
+                Define.OVERLAPPHASE_BYTE_SIZE);
             OverlapPhase obj;
             for (int i = 0; i < Convert.ToInt32(byt[3]); i++)
             {
@@ -2353,13 +2722,26 @@ namespace tscui.Service
                 obj.ucId = twoArray[i, 0];
                 obj.ucOperateType = twoArray[i, 1];
                 obj.ucIncludePhaseLen = twoArray[i, 2];
-                obj.ucIncludePhase = new byte[] { twoArray[i, 3], twoArray[i, 4], twoArray[i, 5], twoArray[i, 6], twoArray[i, 7], twoArray[i, 8], twoArray[i, 9], twoArray[i, 10], twoArray[i, 11], twoArray[i, 12], twoArray[i, 13], twoArray[i, 14], twoArray[i, 15], twoArray[i, 16], twoArray[i, 17], twoArray[i, 18], twoArray[i, 19]
-                    ,twoArray[i, 20],twoArray[i, 21],twoArray[i, 22],twoArray[i, 23],twoArray[i, 24],twoArray[i, 25],twoArray[i, 26],twoArray[i, 27],twoArray[i, 28],twoArray[i, 29],twoArray[i, 30],twoArray[i, 31],twoArray[i, 32],twoArray[i, 33],twoArray[i, 34]};
+                obj.ucIncludePhase = new byte[]
+                {
+                    twoArray[i, 3], twoArray[i, 4], twoArray[i, 5], twoArray[i, 6], twoArray[i, 7], twoArray[i, 8],
+                    twoArray[i, 9], twoArray[i, 10], twoArray[i, 11], twoArray[i, 12], twoArray[i, 13], twoArray[i, 14],
+                    twoArray[i, 15], twoArray[i, 16], twoArray[i, 17], twoArray[i, 18], twoArray[i, 19]
+                    , twoArray[i, 20], twoArray[i, 21], twoArray[i, 22], twoArray[i, 23], twoArray[i, 24],
+                    twoArray[i, 25], twoArray[i, 26], twoArray[i, 27], twoArray[i, 28], twoArray[i, 29], twoArray[i, 30],
+                    twoArray[i, 31], twoArray[i, 32], twoArray[i, 33], twoArray[i, 34]
+                };
                 obj.ucCorrectPhaseLen = twoArray[i, 35];
                 obj.ucCorrectPhase = new byte[]
                 {
-                    twoArray[i, 36], twoArray[i, 37], twoArray[i, 38], twoArray[i, 39], twoArray[i, 40], twoArray[i, 41], twoArray[i, 42], twoArray[i, 43], twoArray[i, 44], twoArray[i, 45], twoArray[i, 46], twoArray[i, 47], twoArray[i, 48], twoArray[i, 49], twoArray[i, 50], twoArray[i, 51], twoArray[i, 52], twoArray[i, 53], twoArray[i, 54], twoArray[i, 55]
-                , twoArray[i, 56],twoArray[i, 57], twoArray[i, 58], twoArray[i, 59], twoArray[i, 60], twoArray[i, 61], twoArray[i, 62], twoArray[i, 62], twoArray[i, 63], twoArray[i, 64], twoArray[i, 65], twoArray[i, 66], twoArray[i, 67]};
+                    twoArray[i, 36], twoArray[i, 37], twoArray[i, 38], twoArray[i, 39], twoArray[i, 40], twoArray[i, 41],
+                    twoArray[i, 42], twoArray[i, 43], twoArray[i, 44], twoArray[i, 45], twoArray[i, 46], twoArray[i, 47],
+                    twoArray[i, 48], twoArray[i, 49], twoArray[i, 50], twoArray[i, 51], twoArray[i, 52], twoArray[i, 53],
+                    twoArray[i, 54], twoArray[i, 55]
+                    , twoArray[i, 56], twoArray[i, 57], twoArray[i, 58], twoArray[i, 59], twoArray[i, 60],
+                    twoArray[i, 61], twoArray[i, 62], twoArray[i, 62], twoArray[i, 63], twoArray[i, 64], twoArray[i, 65],
+                    twoArray[i, 66], twoArray[i, 67]
+                };
                 obj.ucTailGreen = twoArray[i, 68];
                 obj.ucTailYellow = twoArray[i, 69];
                 obj.ucTailRed = twoArray[i, 70];
@@ -2378,27 +2760,59 @@ namespace tscui.Service
             return Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_CONTROLLER_STATUS);
 
         }
+
         /// <summary>
         /// 信号机校时功能
         /// </summary>
         /// <param name="dt"></param>
-        public static void Timing(DateTime dt,Node n)
+        public static bool Timing(DateTime dt, Node n)
         {
-            byte[] hex = { 0x81, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00 };
-            dt = dt.AddHours(8);
-            
-            DateTime bb = new DateTime(1970, 1, 1, 0, 0, 0);
-            TimeSpan t3 = dt - bb;
-            int kd = (int)t3.TotalSeconds;
+            try
+            {
+                byte[] hex = {0x81, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00};
+                dt = dt.AddHours(8);
+                DateTime bb = new DateTime(1970, 1, 1, 0, 0, 0);
+                TimeSpan t3 = dt - bb;
+                int kd = (int) t3.TotalSeconds;
 
-            byte[] btime = System.BitConverter.GetBytes(kd);
-            hex[3] = btime[3];
-            hex[4] = btime[2];
-            hex[5] = btime[1];
-            hex[6] = btime[0];
-            Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
+                byte[] btime = System.BitConverter.GetBytes(kd);
+                hex[3] = btime[3];
+                hex[4] = btime[2];
+                hex[5] = btime[1];
+                hex[6] = btime[0];
+                bool bAdjusttime = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, hex);
+                return bAdjusttime;
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("校时操作异常!");
+                return false;
+            }
         }
-        /// <summary>
+
+        public static Int32 GetTime(Byte timetye, Node n)
+        {
+            try
+            {
+                byte[] hex = { 0x80, 0x88, 0x00}; //本地时间
+                Int32 localtime = 0x0;
+                byte[] btime = Udp.sendUdpClient(n.sIpAddress, n.iPort, hex);
+                if (btime.Length != 7 )
+                     return 0;
+                else
+                {
+                    localtime = ((btime[3] << 24) | (btime[4] << 16) | (btime[5] << 8) | (btime[6]));
+                    return localtime;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("信号机时间获取异常!");
+                return 0;
+            }
+        }
+    /// <summary>
         /// 得到模块状态 
         /// </summary>
         /// <param name="n"></param>

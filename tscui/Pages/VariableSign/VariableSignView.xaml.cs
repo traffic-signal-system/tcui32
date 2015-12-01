@@ -36,7 +36,7 @@ namespace tscui.Pages.VariableSign
             TscData t = Utils.Utils.GetTscDataByApplicationCurrentProperties();
             if (t == null)
             {
-                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_vs_selected_tsc"]);
+                MessageBox.Show((string)App.Current.Resources.MergedDictionaries[3]["msg_vs_selected_tsc"], "信号机", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             ObservableCollection<CntDownDev> occdd =  new ObservableCollection<CntDownDev>(t.ListCntDownDev);

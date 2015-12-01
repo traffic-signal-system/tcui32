@@ -3,28 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="540" Width="126">
-    <Grid Margin="10,0,0,0">
-        <Rectangle Fill="{DynamicResource ZuneDarkGrayBrush}" HorizontalAlignment="Left" Height="498" Stroke="Black" VerticalAlignment="Top" Width="106"/>
-        <Rectangle Fill="{DynamicResource ZuneColor2Brush}" HorizontalAlignment="Left" Height="66" Margin="6,13,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
+             mc:Ignorable="d" Height="558" Width="126" >
+    <Grid Margin="10,0" >
+        <Rectangle Fill="{DynamicResource ScrollBarMediumBrush}" HorizontalAlignment="Left" Height="556" Stroke="Black" VerticalAlignment="Top" Width="106" Margin="0,0,0,-16"/>
+        <Rectangle Fill="{DynamicResource ScrollBarLightBrush}" HorizontalAlignment="Left" Height="66" Margin="6,13,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
         <Label Content="Run" HorizontalAlignment="Left" Margin="19,19,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Label Content="Can" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <Rectangle Fill="{DynamicResource ZuneColor2Brush}" HorizontalAlignment="Left" Height="100" Margin="6,81,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
-        <CheckBox Content="     R1" x:Name="R1" HorizontalAlignment="Left" Margin="25,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox Content="     Y1" x:Name="Y1" HorizontalAlignment="Left" Margin="25,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox Content="     G1" x:Name="G1" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <Rectangle Fill="{DynamicResource ZuneColor2Brush}" HorizontalAlignment="Left" Height="100" Margin="6,184,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
-        <CheckBox x:Name="R2" Content="     R2" HorizontalAlignment="Left" Margin="25,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="Y2" Content="     Y2" HorizontalAlignment="Left" Margin="25,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="G2" Content="     G2" HorizontalAlignment="Left" Margin="25,253,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <Rectangle Fill="{DynamicResource ZuneColor2Brush}" HorizontalAlignment="Left" Height="100" Margin="6,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
-        <CheckBox x:Name="R3" Content="     R3" HorizontalAlignment="Left" Margin="25,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="Y3" Content="     Y3" HorizontalAlignment="Left" Margin="25,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="G3" Content="     G3" HorizontalAlignment="Left" Margin="25,356,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <Rectangle Fill="{DynamicResource ZuneColor2Brush}" HorizontalAlignment="Left" Height="100" Margin="6,389,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
-        <CheckBox x:Name="R4" Content="     R4" HorizontalAlignment="Left" Margin="25,406,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="Y4" Content="     Y4" HorizontalAlignment="Left" Margin="25,432,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox x:Name="G4" Content="     G4" HorizontalAlignment="Left" Margin="25,458,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
-        <CheckBox Content="{DynamicResource tsc_lightcheck_all}" HorizontalAlignment="Left" Margin="25,519,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Rectangle Fill="{DynamicResource ScrollBarLightBrush}" HorizontalAlignment="Left" Height="100" Margin="6,81,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
+        <CheckBox x:Name="R1" HorizontalAlignment="Left" Margin="25,98,0,0" VerticalAlignment="Top"  FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="Y1" HorizontalAlignment="Left" Margin="25,124,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold" IsEnabled="False"/>
+        <CheckBox x:Name="G1" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <Rectangle Fill="{DynamicResource ScrollBarLightBrush}" HorizontalAlignment="Left" Height="100" Margin="6,184,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
+        <CheckBox x:Name="R2"  HorizontalAlignment="Left" Margin="25,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="Y2" HorizontalAlignment="Left" Margin="25,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold" IsEnabled="False"/>
+        <CheckBox x:Name="G2" HorizontalAlignment="Left" Margin="25,253,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <Rectangle Fill="{DynamicResource ScrollBarLightBrush}" HorizontalAlignment="Left" Height="100" Margin="6,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
+        <CheckBox x:Name="R3"  HorizontalAlignment="Left" Margin="25,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="Y3"  HorizontalAlignment="Left" Margin="25,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold" IsEnabled="False"/>
+        <CheckBox x:Name="G3"  HorizontalAlignment="Left" Margin="25,356,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <Rectangle Fill="{DynamicResource ScrollBarLightBrush}" HorizontalAlignment="Left" Height="100" Margin="6,389,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"/>
+        <CheckBox x:Name="R4"  HorizontalAlignment="Left" Margin="25,406,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="Y4" HorizontalAlignment="Left" Margin="25,432,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold" IsEnabled="False"/>
+        <CheckBox x:Name="G4"  HorizontalAlignment="Left" Margin="25,458,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FlowDirection="RightToLeft" FontSize="16" FontWeight="Bold"/>
+        <CheckBox Content="{DynamicResource tsc_lightcheck_all}" HorizontalAlignment="Left" Margin="26,495,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Ellipse Fill="#FF108310" HorizontalAlignment="Left" Height="22" Margin="63,26,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FF9E032E" HorizontalAlignment="Left" Height="22" Margin="63,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FF108310" HorizontalAlignment="Left" Height="22" Margin="63,146,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFC51737" HorizontalAlignment="Left" Height="22" Margin="63,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFA48F06" HorizontalAlignment="Left" Height="22" Margin="63,119,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FF108310" HorizontalAlignment="Left" Height="22" Margin="63,249,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFC51737" HorizontalAlignment="Left" Height="22" Margin="63,196,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFA48F06" HorizontalAlignment="Left" Height="22" Margin="63,222,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FF108310" HorizontalAlignment="Left" Height="22" Margin="63,352,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFC51737" HorizontalAlignment="Left" Height="22" Margin="63,299,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFA48F06" HorizontalAlignment="Left" Height="22" Margin="63,325,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FF108310" HorizontalAlignment="Left" Height="22" Margin="63,454,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFC51737" HorizontalAlignment="Left" Height="22" Margin="63,401,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <Ellipse Fill="#FFA48F06" HorizontalAlignment="Left" Height="22" Margin="63,427,0,0" Stroke="Black" VerticalAlignment="Top" Width="22"/>
+        <RadioButton Content="硬件开关关" x:Name="RadPhysicsSwitchClose" HorizontalAlignment="Left" Margin="26,538,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="硬件开关开" x:Name="RadPhysicsSwitchOpen" HorizontalAlignment="Left" Margin="26,518,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

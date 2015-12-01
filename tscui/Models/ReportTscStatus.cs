@@ -22,8 +22,23 @@ namespace tscui.Models
         private static List<uint> _listChannelGreenStatus;
         private static List<uint> _listChannelFlashStatus;
         private static int _iCycleTime;
+        private static int _iPlanId;
         private static bool _resportTscStatusFlag = false;
 
+        private static int _DynamicMinGreenTime;
+        private static int _DynamicMaxGreenTime;
+
+        public static int DynamicMinGreenTime
+        {
+            get { return _DynamicMinGreenTime; }
+            set { _DynamicMinGreenTime = value; }
+        }
+
+        public static int DynamicMaxGreenTime
+        {
+            get { return _DynamicMaxGreenTime; }
+            set { _DynamicMaxGreenTime = value; }
+        }
         public static bool resportSuccessFlag
         {
              get { return _resportTscStatusFlag; }
@@ -86,6 +101,11 @@ namespace tscui.Models
         {
             get { return _iStageRunTime; }
             set { _iStageRunTime = value; }
+        }
+        public static int iPlanId
+        {
+            get { return _iPlanId; }
+            set { _iPlanId = value; }
         }
         public static  List<uint> listChannelRedStatus
         {
