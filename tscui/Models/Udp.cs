@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
+using System.Diagnostics;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using tscui.Service;
+using ThreadState = System.Threading.ThreadState;
 
 namespace tscui.Models
 {
@@ -24,7 +29,6 @@ namespace tscui.Models
         {
             try
             {
-
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 bool aa = _socket.Connected;
                 _receiveThread = new Thread(Receive);
@@ -32,7 +36,8 @@ namespace tscui.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message.ToString());
+                Console.WriteLine(ex.Message);
+              //  Console.WriteLine("接收线程失败");
             }
         }
         #endregion
@@ -81,6 +86,7 @@ namespace tscui.Models
                 {
                     _socket.Bind(_local);                  
                 }
+                _socket.ReceiveTimeout = 10000;
                 while (true)
                 {
                     byte[] buffer = new byte[255];
@@ -88,6 +94,7 @@ namespace tscui.Models
                     int len = _socket.ReceiveFrom(buffer, ref remoteEP);
                     IPEndPoint ipEndPoint = remoteEP as IPEndPoint;
                     GBT_20999_Utils gb20999 = new GBT_20999_Utils(buffer, len);
+                  //  Console.WriteLine("Receive Thread");
                 }
             }
             catch (Exception ex)
@@ -211,6 +218,12 @@ namespace tscui.Models
                 EndPoint Remote = (EndPoint)(sender);
                 //server.Bind(sender);
                 recv = server.ReceiveFrom(bytes, ref Remote);
+<<<<<<< HEAD
+             //    Console.WriteLine("Message received from {0}", Remote.ToString());
+                //str = System.Text.Encoding.ASCII.GetString(bytes, 0, recv);
+             //   Console.WriteLine("Message: " + bytes[0]);
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 server.Close();
                 server = null;
                 if (bytes[0] == 134)
@@ -304,9 +317,9 @@ namespace tscui.Models
                 EndPoint Remote = (EndPoint)(sender);
                 //server.Bind(sender);
                 recv = server.ReceiveFrom(bytes, ref Remote);
-                Console.WriteLine("Message received from {0}", Remote.ToString());
+                Debug.WriteLine("Message received from {0}", Remote.ToString());
                 //str = System.Text.Encoding.ASCII.GetString(bytes, 0, recv);
-                Console.WriteLine("Message: " + bytes[0]);
+           //     Debug.WriteLine("Message: " + bytes[0]);
                 result = new byte[recv];
                 Array.Copy(bytes, result, recv);
                 server.Close();

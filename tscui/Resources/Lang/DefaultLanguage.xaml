@@ -219,6 +219,7 @@
     <sys:String x:Key="tsc_detector_options">Options：</sys:String>
     <sys:String x:Key="tsc_detector_saturate_flow">Saturate Flow：</sys:String>
     <sys:String x:Key="tsc_detector_vaild_time">Vaild Time：</sys:String>
+    <sys:String x:Key="tsc_detector_id">DetectorId：</sys:String>
     <sys:String x:Key="tsc_detector_saturated_occupancy">Saturate Occupancy：</sys:String>
     <sys:String x:Key="tsc_adv_detector_title">Detector Config</sys:String>
     <sys:String x:Key="tsc_log_reread">Read Log ......</sys:String>
@@ -367,6 +368,8 @@
     <sys:String x:Key="dic_schedule_hd_control">Brightness</sys:String>
     <sys:String x:Key="dic_schedule_no_fun">No Function</sys:String>
     <sys:String x:Key="dic_schedule_no_special">No Special</sys:String>
+    <sys:String x:Key="dic_schedule_PreAnalysis">PreAnalysis</sys:String>
+
     <sys:String x:Key="tsc_log_headertooltip">Log Info</sys:String>
     <sys:String x:Key="tsc_log_id">ID</sys:String>
     <sys:String x:Key="tsc_log_type">Type</sys:String>
@@ -374,12 +377,18 @@
     <sys:String x:Key="tsc_log_value">Content</sys:String>
     <sys:String x:Key="tsc_log_del">Clear Log</sys:String>
     <sys:String x:Key="tsc_log_local">Load local Log</sys:String>
+<<<<<<< HEAD
+    <sys:String x:Key="tsc_log_export">Export log</sys:String>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
     <sys:String x:Key="dic_degradation_off">Off</sys:String>
     <sys:String x:Key="dic_degradation_flashing">Yellow Flash</sys:String>
     <sys:String x:Key="dic_degradation_allred">All Red</sys:String>
     <sys:String x:Key="dic_degradation_schedule">Schedule</sys:String>
     <sys:String x:Key="dic_degradation_reaction">Reaction</sys:String>
+    <sys:String x:Key="dic_schedule_secondreaction">SecondReaction</sys:String>
+
     <sys:String x:Key="dic_degradation_main_coordination">Main Coordination</sys:String>
     <sys:String x:Key="dic_degradation_self">Self Optimize</sys:String>
     <sys:String x:Key="dic_degradation_manual">Manual</sys:String>

@@ -69,6 +69,48 @@ namespace tscui.Service
         public  void SetReportStatus(byte[] byt)
         {
             try
+<<<<<<< HEAD
+            {
+
+                byte b1 = new byte();
+                byte b2 = new byte();
+                byte b3 = new byte();
+                b1 = byt[3];
+                b2 = byt[3];
+                b3 = byt[3];
+                string workModel = Utils.Utils.ReportStatusWorkModel(b1);
+                string workStatus = Utils.Utils.ReportStatusWorkStatus(b2);
+                string controlMode = Utils.Utils.ReportStatusControlMode(b3);
+                ReportTscStatus.sControlModel = controlMode;
+                ReportTscStatus.sWorkModel = workModel;
+                ReportTscStatus.sWorkStatus = workStatus;
+                ReportTscStatus.iCurrentSchedule = Convert.ToInt32(byt[4]);
+                ReportTscStatus.iCurrentTimePattern = Convert.ToInt32(byt[5]);
+                ReportTscStatus.iCurrentStagePattern = Convert.ToInt32(byt[6]);
+                //ReportTscStatus.iCurrentStage = Convert.ToInt32
+                ReportTscStatus.iStageCount = Convert.ToInt32(byt[7]); //当前周期几个阶段
+                ReportTscStatus.iCurrentStage = Convert.ToInt32(byt[8]); //当前阶段号
+                ReportTscStatus.iStageTotalTime = Convert.ToInt32(byt[9]); //当前阶段总时长
+                ReportTscStatus.iStageRunTime = Convert.ToInt32(byt[10]); //当前相位运行时间
+              //  Console.WriteLine(ReportTscStatus.iStageRunTime);
+                //ReportTscStatus.iCycleTime = Convert.ToInt32(byt[27]); //周期
+                byte[] channelRedStatus = {byt[11], byt[12], byt[13], byt[14]}; //红灯
+                ReportTscStatus.listChannelRedStatus = Utils.Utils.ReportStatusLampStatus(channelRedStatus);
+                byte[] channelYellowStatus = {byt[15], byt[16], byt[17], byt[18]}; //黄灯
+                ReportTscStatus.listChannelYellowStatus = Utils.Utils.ReportStatusLampStatus(channelYellowStatus);
+                byte[] channelGreenStatus = {byt[19], byt[20], byt[21], byt[22]}; //绿灯
+                ReportTscStatus.listChannelGreenStatus = Utils.Utils.ReportStatusLampStatus(channelGreenStatus);
+                byte[] channelFlashStatus = {byt[23], byt[24], byt[25], byt[26]}; //黄闪
+                ReportTscStatus.listChannelFlashStatus = Utils.Utils.ReportStatusLampStatus(channelFlashStatus);
+                ReportTscStatus.iCycleTime = byt[27];
+                ReportTscStatus.iPlanId = byt[28];
+                ReportTscStatus.DynamicMinGreenTime = byt[29];
+                ReportTscStatus.DynamicMaxGreenTime = byt[30];
+
+            }
+            catch (Exception ex)
+            {
+=======
             {
                 byte b1 = new byte();
                 byte b2 = new byte();
@@ -104,6 +146,7 @@ namespace tscui.Service
             }
             catch (Exception ex)
             {
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 return;
             }
 

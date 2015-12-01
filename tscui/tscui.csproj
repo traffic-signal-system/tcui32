@@ -31,6 +31,7 @@
     <ApplicationVersion>2.4.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -114,6 +115,8 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.94.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\..\tsc32_dll\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
@@ -138,7 +141,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="WPFToolkit">
       <HintPath>..\..\tsc32_dll\WPFToolkit.dll</HintPath>
     </Reference>
     <Reference Include="WPFVisifire.Charts">
@@ -207,6 +210,10 @@
       <DependentUpon>SeasonTimeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseTime\SeasonTimeViewModel.cs" />
+    <Compile Include="Pages\BusPriority\BusPriority.xaml.cs">
+      <DependentUpon>BusPriority.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BusPriority\BusPriorityViewModel.cs" />
     <Compile Include="Pages\Collision\CollisionItem.xaml.cs">
       <DependentUpon>CollisionItem.xaml</DependentUpon>
     </Compile>
@@ -232,11 +239,19 @@
     <Compile Include="Pages\Power\PowerViewModel.cs" />
     <Compile Include="Pages\YelloFlash\YelloFlash.xaml.cs">
       <DependentUpon>YelloFlash.xaml</DependentUpon>
+<<<<<<< HEAD
     </Compile>
     <Compile Include="Pages\YelloFlash\YelloFlashViewModel.cs" />
     <Compile Include="Pages\OfflineDebug\OfflineDebugView.xaml.cs">
       <DependentUpon>OfflineDebugView.xaml</DependentUpon>
     </Compile>
+=======
+    </Compile>
+    <Compile Include="Pages\YelloFlash\YelloFlashViewModel.cs" />
+    <Compile Include="Pages\OfflineDebug\OfflineDebugView.xaml.cs">
+      <DependentUpon>OfflineDebugView.xaml</DependentUpon>
+    </Compile>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Compile Include="Pages\OfflineDebug\OfflineDebugViewModel.cs" />
     <Compile Include="Pages\PedestrianButton\PedestrianBtn.xaml.cs">
       <DependentUpon>PedestrianBtn.xaml</DependentUpon>
@@ -275,10 +290,13 @@
     <Compile Include="Pages\Stage\StageView.xaml.cs">
       <DependentUpon>StageView.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
     <Compile Include="Pages\BusPriority\BusPriority.xaml.cs">
       <DependentUpon>BusPriority.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BusPriority\BusPriorityViewModel.cs" />
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Compile Include="Popups\ChannelPopup.xaml.cs">
       <DependentUpon>ChannelPopup.xaml</DependentUpon>
     </Compile>
@@ -321,6 +339,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
+    <Page Include="Pages\BusPriority\BusPriority.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Page Include="Pages\Collision\CollisionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -355,6 +380,7 @@
     </Page>
     <Page Include="Pages\YelloFlash\YelloFlash.xaml">
       <Generator>MSBuild:Compile</Generator>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\OfflineDebug\OfflineDebugView.xaml">
@@ -368,6 +394,21 @@
     <Page Include="Pages\TscStatus\TscStatusView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+=======
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OfflineDebug\OfflineDebugView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PedestrianButton\PedestrianBtn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TscStatus\TscStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     </Page>
     <Page Include="Pages\Module\ModuleView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -425,10 +466,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+<<<<<<< HEAD
+=======
     <Page Include="Popups\ChannelPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <Page Include="Popups\GbtError.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -446,6 +490,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="App.ico" />
+    <None Include="Models\Gb.aiton" />
     <None Include="Resources\Icon1.ico" />
     <Resource Include="fama.ico" />
     <Resource Include="Resources\Images\refresh.png" />
@@ -473,7 +518,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Music\MusicView.xaml">
+    <Page Include="Pages\AdvancePhases\AdvancePhasesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -530,7 +575,7 @@
     </Compile>
     <Compile Include="Pages\Update\UpdateViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Pages\Music\MusicViewModel.cs" />
+    <Compile Include="Pages\AdvancePhases\AdvancesPhaseModel.cs" />
     <Compile Include="Pages\PageViewModel.cs" />
     <Compile Include="Pages\DetectorAdvanced\DetectorAdvancedViewModel.cs" />
     <Compile Include="Pages\VariableSign\VariableSignView.xaml.cs">
@@ -540,8 +585,8 @@
     <Compile Include="MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Music\MusicView.xaml.cs">
-      <DependentUpon>MusicView.xaml</DependentUpon>
+    <Compile Include="Pages\AdvancePhases\AdvancePhasesView.xaml.cs">
+      <DependentUpon>AdvancePhasesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DetectorAdvanced\DetectorAdvancedView.xaml.cs">
       <DependentUpon>DetectorAdvancedView.xaml</DependentUpon>

@@ -645,9 +645,9 @@ namespace tscui.Pages.Stage
                                 sldGreenTime.Value = sp.ucGreenTime;
                                 sldYellowTime.Value = sp.ucYellowTime;
                                 sldRedTime.Value = sp.ucRedTime;
+                                ChkIgnoreStage.IsChecked = (sp.ucOption & 0x2) ==0x2 ? true : false;
                                 break;
-
-                            }
+                                }
                         }
                     }
 
@@ -780,6 +780,7 @@ namespace tscui.Pages.Stage
         #region 子阶段鼠标单击选中处理
         private void stage1_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+           
             currentStage = stage1;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -787,6 +788,8 @@ namespace tscui.Pages.Stage
         }
         private void stage2_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("2"))
+                return;
             currentStage = stage2;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -795,6 +798,8 @@ namespace tscui.Pages.Stage
 
         private void stage3_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("3"))
+                return;
             currentStage = stage3;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -803,6 +808,8 @@ namespace tscui.Pages.Stage
 
         private void stage4_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("4"))
+                return;
             currentStage = stage4;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -811,6 +818,8 @@ namespace tscui.Pages.Stage
 
         private void stage5_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("5"))
+                return;
             currentStage = stage5;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -819,6 +828,8 @@ namespace tscui.Pages.Stage
 
         private void stage6_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("6"))
+                return;
             currentStage = stage6;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -827,6 +838,8 @@ namespace tscui.Pages.Stage
 
         private void stage7_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("7"))
+                return;
             currentStage = stage7;
             BigMap4SmallMap(currentStage);
             smallMap4Form(currentStage);
@@ -835,6 +848,8 @@ namespace tscui.Pages.Stage
 
         private void stage8_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("8"))
+                return;
             currentStage = stage8;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -843,6 +858,8 @@ namespace tscui.Pages.Stage
 
         private void stage9_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("9"))
+                return;
             currentStage = stage9;
             BigMap4SmallMap(currentStage); //MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -851,6 +868,8 @@ namespace tscui.Pages.Stage
 
         private void stage10_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("10"))
+                return;
             currentStage = stage10;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -859,6 +878,8 @@ namespace tscui.Pages.Stage
 
         private void stage11_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("11"))
+                return;
             currentStage = stage11;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -867,6 +888,8 @@ namespace tscui.Pages.Stage
 
         private void stage12_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("12"))
+                return;
             currentStage = stage12;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -875,6 +898,8 @@ namespace tscui.Pages.Stage
 
         private void stage13_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("13"))
+                return;
             currentStage = stage13;
             BigMap4SmallMap(currentStage); //MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -883,6 +908,8 @@ namespace tscui.Pages.Stage
 
         private void stage14_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("14"))
+                return;
             currentStage = stage14;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -891,6 +918,8 @@ namespace tscui.Pages.Stage
 
         private void stage15_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("15"))
+                return;
             currentStage = stage15;
             BigMap4SmallMap(currentStage);//MessageBox.Show("stage1");
             smallMap4Form(currentStage);
@@ -899,6 +928,8 @@ namespace tscui.Pages.Stage
 
         private void stage16_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (stageNumber.Content.Equals("16"))
+                return;
             currentStage = stage16;
             smallMap4Form(currentStage);
             BigMap4SmallMap(currentStage); //MessageBox.Show("stage1");
@@ -908,6 +939,64 @@ namespace tscui.Pages.Stage
         private bool savePattern()
         {
             try
+<<<<<<< HEAD
+            {
+              // List<Pattern> lp = t.ListPattern;
+                Pattern newpattern = new Pattern();
+                newpattern.ucPatternId = (byte)(sldSchemeId.Value);
+                newpattern.ucCycleTime = Convert.ToByte(tbxCycle.Text);
+                newpattern.ucCoorPhase = Convert.ToByte(cbxCoordination.Text);
+                newpattern.ucOffset = Convert.ToByte(tbxOffset.Text);
+                newpattern.ucStagePatternId = Convert.ToByte(sldStagePatternId.Value);
+                bool baddnewpattern = true;
+                bool bvalidstagepatternid = false;  //判断是否阶段配时阶段数为0
+
+                foreach (StagePattern sp in td.ListStagePattern)
+                {
+                    if (newpattern.ucStagePatternId == sp.ucStagePatternId)
+                    {
+                        if (sp.ucStageNo > 0)
+                        {
+                            bvalidstagepatternid = true;
+                            break;
+                        }
+                    }
+                }
+                if (bvalidstagepatternid == false)
+                {
+                    MessageBox.Show("该方案对应阶段配时"+(byte)sldStagePatternId.Value+"没配置放行相位,方案无法保存!\r\n须先配置放行相位","方案",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return false;
+                }
+                if (td.ListPattern !=  null)
+                {
+                    foreach (Pattern p in td.ListPattern)
+                    {
+                        if (p.ucPatternId == ((byte) sldSchemeId.Value))
+                        {
+                            p.ucCycleTime = newpattern.ucCycleTime;
+                            p.ucCoorPhase = newpattern.ucCoorPhase;
+                            p.ucOffset = newpattern.ucOffset;
+                            p.ucStagePatternId = newpattern.ucStagePatternId;
+                            baddnewpattern = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (baddnewpattern == true)
+                    {
+                        MessageBox.Show("添加新方案"+((byte)sldSchemeId.Value), "方案", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if(td.ListPattern ==null)
+                            td.ListPattern = new List<Pattern>();
+                        td.ListPattern.Add(newpattern);
+                    }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("方案保存异常!", "方案", MessageBoxButton.OK,MessageBoxImage.Error);
+=======
             {
                 Pattern newpattern = new Pattern();
                 newpattern.ucPatternId = (byte)(sldSchemeId.Value);
@@ -963,6 +1052,7 @@ namespace tscui.Pages.Stage
             catch (Exception ex)
             {
                 MessageBox.Show("加入方案列表异常!", "方案", MessageBoxButton.OK,MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 return false;
             }
         }
@@ -1839,6 +1929,10 @@ namespace tscui.Pages.Stage
                             sldGreenTime.Value = sp.ucGreenTime;
                             sldYellowTime.Value = sp.ucYellowTime;
                             sldRedTime.Value = sp.ucRedTime;
+<<<<<<< HEAD
+                            //ChkIgnoreStage.IsChecked = (sp.ucOption & 0x2) == 0x2 ? true : false;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                             break;
                         }
                     }
@@ -1875,6 +1969,7 @@ namespace tscui.Pages.Stage
                         }
                     }
                 }
+<<<<<<< HEAD
 
             }
             catch (Exception ex)
@@ -1945,6 +2040,95 @@ namespace tscui.Pages.Stage
 
             }
            
+        }
+
+        private void ChkCopyStage_Checked(object sender, RoutedEventArgs e)
+        {
+            CopyedstageId = (byte)(sldStagePatternId.Value);
+=======
+
+            }
+            catch (Exception ex)
+            {
+                  MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+<<<<<<< HEAD
+               
+=======
+                //  Thread.Sleep(500);
+                Slider sld = sldYellowTime;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
+                td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
+                    return;
+                List<StagePattern> lsp = td.ListStagePattern;
+                foreach (StagePattern sp in lsp)
+                {
+                    if (currentStage != null && sldStagePatternId != null )
+                    {
+                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
+                        {
+                            sp.ucOption |= 0x2;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+<<<<<<< HEAD
+                return;
+=======
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
+            }
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+<<<<<<< HEAD
+
+=======
+                ///   Thread.Sleep(500);
+                Slider sld = sldRedTime;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
+                td = Utils.Utils.GetTscDataByApplicationCurrentProperties();
+                if (td == null)
+                    return;
+                List<StagePattern> lsp = td.ListStagePattern;
+                foreach (StagePattern sp in lsp)
+                {
+                    if (currentStage != null && sldStagePatternId != null)
+                    {
+                        if (sp.ucStagePatternId == Convert.ToByte(sldStagePatternId.Value) && Convert.ToByte(currentStage.lblNumber.Content) == sp.ucStageNo)
+                        {
+                            sp.ucOption &= 0xFD;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+<<<<<<< HEAD
+                return;
+=======
+                MessageBox.Show(ex.ToString(), "阶段配时", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
+            }
         }
 
         private void ChkCopyStage_Checked(object sender, RoutedEventArgs e)

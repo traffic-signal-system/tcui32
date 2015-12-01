@@ -90,22 +90,27 @@ namespace tscui.Pages.Schedules
             string flashing = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_flashing"];
             string allred = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_allred"];
             string reaction = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_reaction"];
+            string secondreaction = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_secondreaction"];
             string gpscoordination = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_gpscoordination"];
             string one = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_self_one"];
             string maincoordination = (string)App.Current.Resources.MergedDictionaries[3]["dic_maincoordination"];
             string system = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_system"];
             string manual = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_manual"];
+            string PreAnalysis = (string)App.Current.Resources.MergedDictionaries[3]["dic_schedule_PreAnalysis"];
+
             List<ScheduleCtrl> lsc = new List<ScheduleCtrl>();
             lsc.Add(new ScheduleCtrl() { name = selfcontrol, value = (byte)0 });
             lsc.Add(new ScheduleCtrl() { name = off, value = (byte)1 });
             lsc.Add(new ScheduleCtrl() { name = flashing, value = 2 });
             lsc.Add(new ScheduleCtrl() { name = allred, value = 3 });
             lsc.Add(new ScheduleCtrl() { name = reaction, value = 6 });
+            lsc.Add(new ScheduleCtrl() { name = secondreaction, value = 5 });
             lsc.Add(new ScheduleCtrl() { name = gpscoordination, value = 7 });
-            lsc.Add(new ScheduleCtrl() { name = one, value = 8 });
+         //  lsc.Add(new ScheduleCtrl() { name = one, value = 8 });
             lsc.Add(new ScheduleCtrl() { name = maincoordination, value = 11 });
             lsc.Add(new ScheduleCtrl() { name = system, value = 12 });
             lsc.Add(new ScheduleCtrl() { name = manual, value = 13 });
+            lsc.Add(new ScheduleCtrl() { name = PreAnalysis, value = 9 });
             cbxucCtrl.ItemsSource = lsc;
 
             List<Pattern> lp = td.ListPattern;
@@ -142,6 +147,10 @@ namespace tscui.Pages.Schedules
                 if (td == null)
                     return;
                 rowvisibleflag = 0;
+<<<<<<< HEAD
+                scheduleDataGrid.ItemsSource = null;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 scheduleDataGrid.ItemsSource = initSchedule2DataGrid(td.ListSchedule);
             }
             catch (Exception ex)
@@ -169,7 +178,11 @@ namespace tscui.Pages.Schedules
             if (m.flag)
             {
                 MessageBox.Show("时段保存成功！", "时段保存", MessageBoxButton.OK, MessageBoxImage.Information);
+<<<<<<< HEAD
+                sldScheduleId_ValueChanged(this,null);
+=======
 
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             else
             {
@@ -180,13 +193,30 @@ namespace tscui.Pages.Schedules
 
         private void scheduleDataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
+<<<<<<< HEAD
+         //   e.Row.Header = e.Row.GetIndex() + 1;
+            e.Row.Header = "-";
+=======
             e.Row.Header = e.Row.GetIndex() + 1;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             Schedule currentrowSchedule = e.Row.Item as Schedule;
             if (currentrowSchedule != null)
             {
                 byte result = currentrowSchedule.ucEventId;
                 if (result == 0)
+<<<<<<< HEAD
+                {
                     rowvisibleflag += 1;
+                    e.Row.Header = "+";
+                }
+
+            }
+            if (rowvisibleflag >= 2 && currentrowSchedule.ucEventId == 0)
+            {
+                e.Row.Visibility = Visibility.Collapsed;
+=======
+                    rowvisibleflag += 1;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
             if (rowvisibleflag >= 2 && currentrowSchedule.ucEventId ==0)
                 e.Row.Visibility = Visibility.Collapsed;
@@ -200,9 +230,13 @@ namespace tscui.Pages.Schedules
                 if (currentrowSchedule != null)
                 {
                     byte result = currentrowSchedule.ucEventId;
+<<<<<<< HEAD
+                  //  if(result ==0x0)return ;
+=======
                     //MessageBox.Show(result+"");
                     if (result == 0)
                         currentrowSchedule.ucEventId = 0x10;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
                 if ((e.Row.GetIndex() + 1) <= scheduleDataGrid.Items.Count)
                 {
@@ -226,7 +260,11 @@ namespace tscui.Pages.Schedules
                 Schedule currentrowSchedule = scheduleDataGrid.SelectedItem as Schedule;
                 if (currentrowSchedule == null || currentrowSchedule.ucEventId == 0x0)
                 {
+<<<<<<< HEAD
+                    MessageBox.Show("删除子时段号非0!");
+=======
                     MessageBox.Show("请先选择一个非0时段序号!");
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     return;
                 }
                 if (
@@ -246,8 +284,39 @@ namespace tscui.Pages.Schedules
             {
                 MessageBox.Show("时段序号删除异常!");
             }
+<<<<<<< HEAD
         }
 
+
+        private void Add_ScheduleId(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Schedule currentrowSchedule = scheduleDataGrid.SelectedItem as Schedule;
+                if (currentrowSchedule == null || currentrowSchedule.ucEventId != 0x0)
+                {
+                    MessageBox.Show("已经存在子时段号" + (byte)(scheduleDataGrid.SelectedIndex + 1));
+                    return;
+                }
+                int addindex = scheduleDataGrid.SelectedIndex;
+                    currentrowSchedule.ucEventId = (byte)(scheduleDataGrid.SelectedIndex+1);
+                    this.sldScheduleId_ValueChanged(this, null);
+                    scheduleDataGrid.SelectedItem = scheduleDataGrid.Items[addindex];
+                    
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("时段序号添加异常!");
+            }
+
+        }
+
+
+=======
+        }
+
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     }
     public class ScheduleCtrl
     {

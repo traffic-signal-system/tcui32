@@ -7,8 +7,12 @@
         xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
         Background="LightSlateGray"
         Title="tscui" 
+<<<<<<< HEAD
+        Height="750" Width="900"  MinWidth="600" MinHeight="500" SizeChanged="zuneShell_SizeChanged" >
+=======
         Height="720" Width="900"  
         Closed="zuneShell_Closed" Closing="zuneShell_Closing"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeChanged="zuneShell_SizeChanged" Icon="signal.ico" >
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
     <!-- The resources. -->
     <apexControls:CustomWindow.Resources>
@@ -27,9 +31,15 @@
     </apexControls:CustomWindow.Resources>
 
     <!-- Main window shell content grid. -->
+<<<<<<< HEAD
+    <apexControls:ApexGrid Margin="0,0,0,-2" >
+        <!-- Layout for the window borders. -->
+        <apexControls:ApexGrid Background="Transparent" Rows="Auto,*,Auto" Columns="Auto,*,Auto">
+=======
     <Grid>
         <!-- Layout for the window borders. -->
         <apexControls:ApexGrid Rows="Auto,*,Auto" Columns="Auto,*,Auto">
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             <!-- The top left border.  -->
             <Thumb 
@@ -80,7 +90,7 @@
                 Background="{Binding ElementName=zuneShell, Path=Background, Mode=OneWay}"
                 Width="{Binding ElementName=zuneShell, Path=WindowState, Mode=OneWay, Converter={StaticResource WindowStateToBorderThicknessConverter}, ConverterParameter=BottomLeft}"
                 Height="{Binding ElementName=zuneShell, Path=WindowState, Mode=OneWay, Converter={StaticResource WindowStateToBorderThicknessConverter}, ConverterParameter=BottomLeft}"
-                DragDelta="thumbBottomLeft_DragDelta" />
+            />
 
             <!-- The bottom border.  -->
             <Thumb 
@@ -90,26 +100,22 @@
                 Height="{Binding ElementName=zuneShell, Path=WindowState, Mode=OneWay, Converter={StaticResource WindowStateToBorderThicknessConverter}, ConverterParameter=Bottom}"
                 DragDelta="thumbBottom_DragDelta" />
 
-            <!-- The bottom right border.  -->
-            <Thumb 
-                x:Name="thumbBottomRight"
-                Grid.Row="2" Grid.Column="2" Cursor="SizeNWSE" Style="{StaticResource EmptyThumbStyle}" 
-                Background="{Binding ElementName=zuneShell, Path=Background, Mode=OneWay}"
-                Width="{Binding ElementName=zuneShell, Path=WindowState, Mode=OneWay, Converter={StaticResource WindowStateToBorderThicknessConverter}, ConverterParameter=BottomRight}"
-                Height="{Binding ElementName=zuneShell, Path=WindowState, Mode=OneWay, Converter={StaticResource WindowStateToBorderThicknessConverter}, ConverterParameter=BottomRight}"
-                DragDelta="thumbBottomRight_DragDelta" />
-
+           
             <!-- A border for dragging the window. -->
             <Border 
                 x:Name="borderWindowTitle"
                 Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="24" 
-                Background="{Binding ElementName=zuneShell, Path=Background, Mode=OneWay}"
+                Background="Transparent"
                 MouseLeftButtonDown="borderWindowTitle_MouseLeftButtonDown" />
 
         </apexControls:ApexGrid>
 
         <!-- The window controls. -->
+<<<<<<< HEAD
+        <apexControls:ApexGrid  Width="Auto" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Top">
+=======
         <apexControls:ApexGrid Width="Auto" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Top">
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             <!-- A stack panel for window controls. -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
@@ -132,6 +138,9 @@
                     Visibility="{Binding ElementName=zuneShell, Path=WindowState, 
                     Converter={StaticResource WindowStateToButtonVisibilityConverter}, ConverterParameter=Restore}" />
 
+<<<<<<< HEAD
+       
+=======
                 <!-- Maximize. 
                 <apexControls:ImageButton 
                     x:Name="maximizeButton" Click="maximizeButton_Click"
@@ -142,6 +151,7 @@
                     Converter={StaticResource WindowStateToButtonVisibilityConverter}, ConverterParameter=Maximize}" />
                     -->
                 <!-- Close. -->
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 
                 <apexControls:ImageButton 
                     x:Name="closeButton" Click="closeButton_Click"
@@ -154,9 +164,17 @@
         </apexControls:ApexGrid>
 
         <!-- The main view, actually fils the client area and chrome too. -->
+<<<<<<< HEAD
+        <views:MainView  x:Name="view1" />
+        <StatusBar  x:Name="tscstatus" Background="LightBlue" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Bottom"  Width="Auto">
+            <TextBlock Name="tb" Text="{DynamicResource tscinfo}" Foreground="Black" Width="{Binding ElementName=zuneShell, Path=Width}" HorizontalAlignment="Left" IsEnabled="False"/>
+        </StatusBar>
+    </apexControls:ApexGrid>
+=======
         <views:MainView x:Name="view1"/>
         <StatusBar x:Name="tscstatus" Background="LightBlue" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="23" Margin="0,697,-6,-28" VerticalAlignment="Top" Width="Auto">
             <TextBlock Name="tb" Text="{DynamicResource tscinfo}" Foreground="Black" Width="890" HorizontalAlignment="Left" IsEnabled="False"/>
         </StatusBar>
     </Grid>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 </apexControls:CustomWindow>

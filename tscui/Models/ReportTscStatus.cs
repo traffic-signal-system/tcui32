@@ -25,6 +25,20 @@ namespace tscui.Models
         private static int _iPlanId;
         private static bool _resportTscStatusFlag = false;
 
+        private static int _DynamicMinGreenTime;
+        private static int _DynamicMaxGreenTime;
+
+        public static int DynamicMinGreenTime
+        {
+            get { return _DynamicMinGreenTime; }
+            set { _DynamicMinGreenTime = value; }
+        }
+
+        public static int DynamicMaxGreenTime
+        {
+            get { return _DynamicMaxGreenTime; }
+            set { _DynamicMaxGreenTime = value; }
+        }
         public static bool resportSuccessFlag
         {
              get { return _resportTscStatusFlag; }

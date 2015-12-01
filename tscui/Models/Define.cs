@@ -34,7 +34,11 @@ namespace tscui.Models
         /// <summary>
         /// *****************************联网降级相关配置常量***************************************
         /// </summary>
+<<<<<<< HEAD
+        public static byte[] DEGRADATION_UTC = {0x81, 0xE4, 0x00, 0x01};
+=======
         public static byte[] DEGRADATION_UTC = {0x82, 0xE4, 0x00, 0x01};
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
         public static byte[] SEND_DEGRADATION_MODE_ONE = {0x81, 0xbc, 0x00, 0x01};
         public static byte[] SEND_DEGRADATION_MODE_TWO = {0x81, 0xbc, 0x00, 0x02};
@@ -915,6 +919,14 @@ namespace tscui.Models
             GET_REQUEST,OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x14, 0x01
         };
 
+<<<<<<< HEAD
+        public static byte[] GET_DETECTORBD1_WORKTYPE = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x0 };
+        public static byte[] GET_DETECTORBD2_WORKTYPE = { GET_REQUEST, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x1 };
+
+        public static byte[] SET_DETECTORBD1_WORKTYPE = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x0,0x0 };
+        public static byte[] SET_DETECTORBD2_WORKTYPE = { SET_REQUEST_RESPONSE, OSCILLATOR_FREQUENCY_SENSITIVITY, 0x00, 0x1A, 0x1,0x0 };
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         #endregion
 
         #region 信号机通信及控制

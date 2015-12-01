@@ -1337,6 +1337,57 @@ namespace tscui.Service
             return lb;
         }
 
+<<<<<<< HEAD
+        /// 返回检测器板的工作类型
+        public static Byte GetDetecBdWorkType(Node n,Byte DetecBdIndex)
+        {
+            try
+            {
+                 List<byte> lb = new List<byte>();
+                if(DetecBdIndex == 0x0)//检测器板1
+                  lb=  (Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTORBD1_WORKTYPE)).ToList<byte>();
+                else if(DetecBdIndex == 0x1)//检测器板2
+                  lb=  (Udp.recvUdp(n.sIpAddress, n.iPort, Define.GET_DETECTORBD1_WORKTYPE)).ToList<byte>();
+                if (lb.Count == 0x6 && lb[5]<0x2)
+                    return (Byte)(lb[5]+1);
+                else
+                    return 0;
+               
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        //设置检测器板工作类型
+        public static bool SetDetecBdWorkType(Node n, Byte DetecBdIndex ,Byte WorkType)
+        {
+            try
+            {
+                bool SetResult = false;
+                if (DetecBdIndex == 0x0)//检测器板1
+                {
+                    (Define.SET_DETECTORBD1_WORKTYPE)[Define.SET_DETECTORBD1_WORKTYPE.Length - 1] = WorkType;
+                    SetResult = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, Define.SET_DETECTORBD1_WORKTYPE);
+                }
+                else if (DetecBdIndex == 0x1)//检测器板2
+                {
+                    (Define.SET_DETECTORBD2_WORKTYPE)[Define.SET_DETECTORBD2_WORKTYPE.Length - 1] = WorkType;
+                   SetResult = Udp.sendUdpNoReciveData(n.sIpAddress, n.iPort, Define.SET_DETECTORBD2_WORKTYPE);
+                }
+                return SetResult;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+
+
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         /// <summary>
         /// 设置相位方向 表
         /// </summary>
@@ -1524,6 +1575,11 @@ namespace tscui.Service
             return null;
         }
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         /// <summary>
         /// 取得信号机的模块数据信息
         /// </summary>

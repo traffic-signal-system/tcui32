@@ -23,7 +23,7 @@
 
                 <!-- The title. -->
                 <TextBlock 
-                    Grid.Row="0" FontWeight="ExtraBlack" FontSize="13" Text="{Binding Title}"
+                    Grid.Row="0" FontWeight="ExtraBlack" FontSize="13" Text="Andy"
                     Margin="0,2,4,0"
                     HorizontalAlignment="Right" />
 

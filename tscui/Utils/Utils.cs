@@ -99,11 +99,17 @@ namespace tscui.Utils
                 case 48:
                     result = "无电线缆协调";
                     break;
+                case 240:
+                    result = "动态预分析";
+                    break;
                 case 96:
                     result = "手动";
                     break;
                 case 112:
-                    result = "感应";
+                    result = "全感应";
+                    break;
+                case 144:
+                    result = "次线半感应";
                     break;
                 case 160:
                     result = "自适应";
@@ -230,7 +236,7 @@ namespace tscui.Utils
                     result = "黄闪器";
                     break;
                 case 15:
-                    result = "其他类型日志";
+                    result = "控制方式切换";
                     break;
                 case 6:
                     result = "灯控板";
@@ -260,7 +266,7 @@ namespace tscui.Utils
                     result = "灯色输出异常2";
                     break;
                 case 16:
-                    result = "can总线";
+                    result = "can数据总线";
                     break;
                 default:
                     break;
@@ -653,13 +659,18 @@ namespace tscui.Utils
             {
                 byte[] bpara = System.BitConverter.GetBytes(i);
                 bpara = bpara.Reverse().ToArray();
-                result = result + "其他类型日志，";
+              //  result = result + "其他类型日志，";
                 switch (bpara[0])
                 {
 
                     case 0x01:
+<<<<<<< HEAD
+                    //   result = result + "控制方式切换";
+                        result = result + "旧控制方式【" + ControlModel2String(bpara[1]) + "】,新控制方式【" + ControlModel2String(bpara[2]) + "】,";
+=======
                         result = result + "控制方式切换";
                         result = result + ",旧方式【" + ControlModel2String(bpara[1]) + "】,新方式【" + ControlModel2String(bpara[2]) + "】,";
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                         switch (bpara[3])
                         {
                             case 0x00:
@@ -670,7 +681,7 @@ namespace tscui.Utils
                                 break;
 
                             default:
-                                result = result + "未知";
+                                result = result + "初始启动";
                                 break;
                         }
                         break;
@@ -702,9 +713,9 @@ namespace tscui.Utils
             }
             else if (type == 0x10)
             {
-                byte[] bpara = System.BitConverter.GetBytes(i);
-                bpara = bpara.Reverse().ToArray();
-                result = result + "总线通信异常，总线重起，不影响信号机正常运行。";
+                //byte[] bpara = BitConverter.GetBytes(i);
+                //  bpara = bpara.Reverse().ToArray();
+                result = result + "信号机CAN总线重置";
             }
             return result;
         }
@@ -795,6 +806,20 @@ namespace tscui.Utils
                     result = result + "面板控制";
                     break;
                 case 0x0c:
+<<<<<<< HEAD
+                    result = result + "时段表关灯";
+                    break;
+                case 0x0d:
+                    result = result + "时段表黄闪";
+                    break;
+                case 0x0e:
+                    result = result + "时段表全红";
+                    break;case 0xf:
+                    result = result + "动态预分析";
+                    break;
+                default:
+                    result = result + "控制初始化";
+=======
                     result = result + "时段关灯";
                     break;
                 case 0x0d:
@@ -805,6 +830,7 @@ namespace tscui.Utils
                     break;
                 default:
                     result = result + "启动未知";
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     break;
             }
             return result;

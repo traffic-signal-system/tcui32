@@ -202,6 +202,8 @@
     <sys:String x:Key="tsc_detector_options">选项参数：</sys:String>
     <sys:String x:Key="tsc_detector_saturate_flow">饱和流量：</sys:String>
     <sys:String x:Key="tsc_detector_vaild_time">请求有效时间：</sys:String>
+    <sys:String x:Key="tsc_detector_id">检测器号：</sys:String>
+    
     <sys:String x:Key="tsc_detector_saturated_occupancy">饱和占有率：</sys:String>
     <sys:String x:Key="tsc_adv_detector_title">灵敏度数值</sys:String>
     <sys:String x:Key="tsc_log_reread">重新刷取日志......</sys:String>
@@ -220,7 +222,11 @@
     <sys:String x:Key="tsc_module_4G">4G</sys:String>
     <sys:String x:Key="tsc_phase_edit">进入设置模式</sys:String>
     <sys:String x:Key="tsc_phase_mode">灯组显示模式</sys:String>
+<<<<<<< HEAD
+    <sys:String x:Key="tsc_phase_countdown">国标GAT508-2004通讯倒计时显示</sys:String>
+=======
     <sys:String x:Key="tsc_phase_countdown">RS485倒计时显示</sys:String>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
     <sys:String x:Key="tsc_phase_lamp_open">显示灯组开启</sys:String>
     <sys:String x:Key="tsc_phase_args">参数监视</sys:String>
     <sys:String x:Key="tsc_phase_info">相位信息</sys:String>
@@ -238,8 +244,8 @@
     <sys:String x:Key="tsc_phase_cycle_time">周期时长：</sys:String>
     <sys:String x:Key="tsc_phase_work_model">工作方式</sys:String>
     <sys:String x:Key="tsc_phase_work_state">工作状态：</sys:String>
-    <sys:String x:Key="tsc_phase_control_model">控制方式：</sys:String>
-    <sys:String x:Key="tsc_phase_workmodel">工作模式：</sys:String>
+    <sys:String x:Key="tsc_phase_control_model">控制方式:</sys:String>
+    <sys:String x:Key="tsc_phase_workmodel">工作模式:</sys:String>
     <sys:String x:Key="tsc_schedule_title">时段选择</sys:String>
     <sys:String x:Key="tsc_schedule_partten_sheme">配时方案</sys:String>
     <sys:String x:Key="tsc_schedule_control_mode">控制方式</sys:String>
@@ -247,17 +253,17 @@
     <sys:String x:Key="tsc_schedule_id">时段序号</sys:String>
     <sys:String x:Key="tsc_stage_pattern_scheme">配时方案</sys:String>
     <sys:String x:Key="tsc_stage_reaction_stage">感应阶段</sys:String>
-    <sys:String x:Key="tsc_stage_scheme_id">方案号：</sys:String>
-    <sys:String x:Key="tsc_stage_green">绿：</sys:String>
-    <sys:String x:Key="tsc_stage_yellow">黄：</sys:String>
-    <sys:String x:Key="tsc_stage_red">红：</sys:String>
-    <sys:String x:Key="tsc_stage_pattern_id">配时号：</sys:String>
-    <sys:String x:Key="tsc_stage_cycle">周期：</sys:String>
-    <sys:String x:Key="tsc_stage_coordinate">协调相位：</sys:String>
-    <sys:String x:Key="tsc_stage_phaseoffset">相位差：</sys:String>
-    <sys:String x:Key="tsc_stage_options">阶段选项参数：</sys:String>
+    <sys:String x:Key="tsc_stage_scheme_id">方案号:</sys:String>
+    <sys:String x:Key="tsc_stage_green">绿 </sys:String>
+    <sys:String x:Key="tsc_stage_yellow">黄 </sys:String>
+    <sys:String x:Key="tsc_stage_red">红 </sys:String>
+    <sys:String x:Key="tsc_stage_pattern_id">配时号:</sys:String>
+    <sys:String x:Key="tsc_stage_cycle">周期:</sys:String>
+    <sys:String x:Key="tsc_stage_coordinate">协调相位:</sys:String>
+    <sys:String x:Key="tsc_stage_phaseoffset">相位差:</sys:String>
+    <sys:String x:Key="tsc_stage_options">阶段选项参数:</sys:String>
     <sys:String x:Key="tsc_update_title">升级信号机程序</sys:String>
-    <sys:String x:Key="tsc_update_selected_file">文件选择：</sys:String>
+    <sys:String x:Key="tsc_update_selected_file">文件选择:</sys:String>
     <sys:String x:Key="tsc_update_file_button">选择</sys:String>
     <sys:String x:Key="tsc_update_tsc_button">升级程序</sys:String>
     <sys:String x:Key="tsc_update_failed_and_reset">信号机程序升级失败后恢复</sys:String>
@@ -355,11 +361,14 @@
     <sys:String x:Key="dic_schedule_off">关灯</sys:String>
     <sys:String x:Key="dic_schedule_flashing">黄闪</sys:String>
     <sys:String x:Key="dic_schedule_allred">全红</sys:String>
-    <sys:String x:Key="dic_schedule_reaction">感应</sys:String>
-    <sys:String x:Key="dic_schedule_self_one">单点优化</sys:String>
+    <sys:String x:Key="dic_schedule_reaction">单点全感应</sys:String>
+    <sys:String x:Key="dic_schedule_secondreaction">单点半感应</sys:String>
+    <sys:String x:Key="dic_schedule_self_one">单点自适应控制</sys:String>
     <sys:String x:Key="dic_maincoordination">主从线控</sys:String>
-    <sys:String x:Key="dic_schedule_system">系统优化</sys:String> 
+    <sys:String x:Key="dic_schedule_system">系统联网</sys:String> 
     <sys:String x:Key="dic_schedule_manual">干预控制</sys:String>
+    <sys:String x:Key="dic_schedule_PreAnalysis">动态预分析控制</sys:String>
+
     <sys:String x:Key="dic_schedule_hd_control">辉度控制</sys:String>
     <sys:String x:Key="dic_schedule_no_fun">无功能</sys:String>
     <sys:String x:Key="dic_schedule_no_special">无特殊功能</sys:String>
@@ -370,7 +379,11 @@
     <sys:String x:Key="tsc_log_value">日志内容</sys:String>
     <sys:String x:Key="tsc_log_del">清空信号机日志</sys:String>
     <sys:String x:Key="tsc_log_local">加载本地日志</sys:String>
+<<<<<<< HEAD
+    <sys:String x:Key="tsc_log_export">导出日志</sys:String>
+=======
 
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
 
     <sys:String x:Key="dic_degradation_off">关灯</sys:String>

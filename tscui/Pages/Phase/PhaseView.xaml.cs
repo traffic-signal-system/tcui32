@@ -95,23 +95,7 @@ namespace tscui.Pages.Phase
 
         }
 
-        void ep1_RadioSelectedEvent()
-        {
-            ;
-        }
-        void ep2_RadioSelectedEvent()
-        {
-            ;
-
-        }
-        void ep3_RadioSelectedEvent()
-        {
-            ;
-        }
-        void ep4_RadioSelectedEvent()
-        {
-            ;
-        }
+ 
         void ShowPopupCommandSouthLeft_Executed(object sender, CommandEventArgs args)
         {
             ;
@@ -406,6 +390,22 @@ namespace tscui.Pages.Phase
            
             if (ReportTscStatus.resportSuccessFlag)
             {
+<<<<<<< HEAD
+                this.workmode_label.Content = "工作模式:" + ReportTscStatus.sWorkModel;
+                this.controlmode_label.Content = "控制方式:" + ReportTscStatus.sControlModel;
+                this.workstatus_label.Content = "工作状态:" + ReportTscStatus.sWorkStatus;
+                this.Lbl_RunPlanId.Content = "时基号:" + ReportTscStatus.iPlanId;
+                this.Lbl_RunPlanType.Content = "时基类型:" + ((ReportTscStatus.iPlanId > 30) ? "月时基" : ((ReportTscStatus.iPlanId > 20)?"周时基":"特殊月日时基"));
+                this.time_NO_label.Content = "方案号:" + ReportTscStatus.iCurrentTimePattern;
+                this.run_NO_label.Content = "时段号:" + ReportTscStatus.iCurrentSchedule;
+                this.lblCurrentStage.Content = "当前阶段:" + ReportTscStatus.iCurrentStage;
+                 this.label_CycleTime.Content = "周期时长: " + ReportTscStatus.iCycleTime;
+                 this.label_iCurrentStagePattern.Content = "阶段配时号: " + ReportTscStatus.iCurrentStagePattern;
+                 this.label_iStageCount.Content = "阶段总数: " + ReportTscStatus.iStageCount;
+                 this.label_iStageTotalTime.Content ="阶段总时长: " + ReportTscStatus.iStageTotalTime;
+                 this.label_iStageRunTime.Content = "阶段运行时长: " + ReportTscStatus.iStageRunTime;
+                 Console.WriteLine(label_iStageRunTime.Content);
+=======
                 this.workmode_label.Content = "工作模式：" + ReportTscStatus.sWorkModel;
                 this.controlmode_label.Content = "控制方式：" + ReportTscStatus.sControlModel;
                 this.workstatus_label.Content = "工作状态：" + ReportTscStatus.sWorkStatus;
@@ -419,6 +419,7 @@ namespace tscui.Pages.Phase
                  this.label_iStageCount.Content = "阶段总数： " + ReportTscStatus.iStageCount;
                  this.label_iStageTotalTime.Content ="阶段总时长： " + ReportTscStatus.iStageTotalTime;
                  this.label_iStageRunTime.Content = "阶段运行时长： " + ReportTscStatus.iStageRunTime;
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                  if (ReportTscStatus.sControlModel.Equals("手动") && rbnManaul.IsChecked == false && rbnSelf.IsChecked != true)
                     rbnManaul.IsChecked = true;
                  if (ReportTscStatus.sWorkStatus.Equals("闪光") && RadLampFlash.IsChecked == false)
@@ -601,12 +602,26 @@ namespace tscui.Pages.Phase
             #endregion
 */
         #endregion
+<<<<<<< HEAD
+
+            if (ReportTscStatus.sControlModel.Equals("动态预分析") && GridPreAndlysis.Visibility != Visibility.Visible)
+                    GridPreAndlysis.Visibility = Visibility.Visible;
+            else if (!ReportTscStatus.sControlModel.Equals("动态预分析") && GridPreAndlysis.Visibility == Visibility.Visible)
+                GridPreAndlysis.Visibility = Visibility.Hidden;
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             }
-            
-           
+            if (GridPreAndlysis.Visibility == Visibility.Visible)
+                PopText.Text = "动态最小绿:" + ReportTscStatus.DynamicMinGreenTime + Environment.NewLine+ "动态最大绿:" +
+                               ReportTscStatus.DynamicMaxGreenTime;
 
+<<<<<<< HEAD
+
+
+=======
            
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         }
         #endregion
    
@@ -670,9 +685,15 @@ namespace tscui.Pages.Phase
             }
             this.Visibility = Visibility.Visible;
             ThreadPool.QueueUserWorkItem(DispatcherInitPhaseToButtonByDirec);
+<<<<<<< HEAD
+            lampRush_CheckBox.IsChecked = true;}
+    
+    
+=======
         }
     
     
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         private void lampRush_CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             
@@ -719,7 +740,11 @@ namespace tscui.Pages.Phase
         DispatcherTimer echoCountDownDispatcherTimer;
         private void cbxEchoCountDown_Checked(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
+            MessageBox.Show("倒计时仅限多时段控制下正确显示,\r\n需在【外设】-【倒计时】开启GAT508-2004四方向!", "倒计时", MessageBoxButton.OK, MessageBoxImage.Warning);
+=======
             MessageBox.Show("倒计时仅限多时段控制下正确显示,\r\n需在【外设】-【倒计时】开启旧国标四方向!", "倒计时", MessageBoxButton.OK, MessageBoxImage.Warning);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
             WestCntDown.Visibility  = Visibility;
             NorthCntDown.Visibility = Visibility;
@@ -1006,6 +1031,8 @@ namespace tscui.Pages.Phase
             {
 
                 MessageBox.Show("获取方向相关参数异常!","相位状态",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+<<<<<<< HEAD
+=======
             }
 
         }
@@ -1113,10 +1140,121 @@ namespace tscui.Pages.Phase
             else
             {
                 MessageBox.Show("全红命令发送失败!", "手控", MessageBoxButton.OK, MessageBoxImage.Error);
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             }
 
         }
 
+<<<<<<< HEAD
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch (rotate%4)
+            {
+                case 0:
+                    TrafficCanvas.RenderTransform = new RotateTransform(90);
+                    EastCntDown.RenderTransform = new RotateTransform(-90);
+                    WestCntDown.RenderTransform = new RotateTransform(-90);
+                    NorthCntDown.RenderTransform = new RotateTransform(-90);
+                    SouthCntDown.RenderTransform = new RotateTransform(-90);
+                    rotate++;
+                    break;
+                case 1:
+                    TrafficCanvas.RenderTransform = new RotateTransform(180);
+                    EastCntDown.RenderTransform = new RotateTransform(-180);
+                    WestCntDown.RenderTransform = new RotateTransform(-180);
+                    NorthCntDown.RenderTransform = new RotateTransform(-180);
+                    SouthCntDown.RenderTransform = new RotateTransform(-180);
+                    rotate++;
+                    break;
+                case 2:
+                    TrafficCanvas.RenderTransform = new RotateTransform(270);
+                    EastCntDown.RenderTransform = new RotateTransform(-270);
+                    WestCntDown.RenderTransform = new RotateTransform(-270);
+                    NorthCntDown.RenderTransform = new RotateTransform(-270);
+                    SouthCntDown.RenderTransform = new RotateTransform(-270);
+                    rotate++;
+                    break;
+                case 3:
+                    TrafficCanvas.RenderTransform = new RotateTransform(360);
+                    EastCntDown.RenderTransform = new RotateTransform(-360);
+                    WestCntDown.RenderTransform = new RotateTransform(-360);
+                    NorthCntDown.RenderTransform = new RotateTransform(-360);
+                    SouthCntDown.RenderTransform = new RotateTransform(-360);
+                    rotate++;
+                    break;
+                default:
+                    TrafficCanvas.RenderTransform = new RotateTransform(0);
+                    break;
+            }
+           
+          
+        }
+
+        private void LampFlashCheck(object sender, RoutedEventArgs e)
+        {
+
+            if (ReportTscStatus.sWorkStatus.Equals("闪光"))
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                return;
+            }
+         
+            bool bok = TscDataUtils.SetFlash();
+            if (bok)
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                MessageBox.Show("黄闪命令发送成功!", "手控", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("黄闪命令发送失败!", "手控", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LampRedCheck(object sender, RoutedEventArgs e)
+        {
+            if (ReportTscStatus.sWorkStatus.Equals("全红"))
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                return;
+            }
+            bool bok = TscDataUtils.SetRed();
+            if (bok)
+            {
+                btnNextStep.IsEnabled = false;
+                btnNextPhase.IsEnabled = false;
+                btnNorth.IsEnabled = false;
+                btnEast.IsEnabled = false;
+                btnSouth.IsEnabled = false;
+                btnWest.IsEnabled = false;
+                MessageBox.Show("全红命令发送成功!", "手控", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("全红命令发送失败!", "手控", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         //private void LampOffCheck(object sender, RoutedEventArgs e)
         //{
         //    bool bok = TscDataUtils.SetOff();

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Threading;
 using Apex.MVVM;
 using Apex.Behaviours;
 using System;
@@ -15,10 +16,37 @@ namespace tscui.Pages.Degradation
     [View(typeof(DegradationViewModel))]
     public partial class DegradationView : UserControl, IView
     {
+        private DispatcherTimer SendHeartBeattimer;
+
         public DegradationView()
         {
             InitializeComponent();
             viewModel.DegradationCommand.Executed += new CommandEventHandler(DegradationCommand_Executed);
+            SendHeartBeattimer = new DispatcherTimer();
+            SendHeartBeattimer.Interval = new TimeSpan(0, 0, 1);   //间隔1秒
+            SendHeartBeattimer.Tick += new EventHandler(timer_Tick);
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (td == null)
+                    return;
+                bool bSetPscPara = false;
+
+                bSetPscPara = Udp.sendUdpNoReciveData(td.Node.sIpAddress, Define.GBT_PORT, Define.DEGRADATION_UTC);
+                if (bSetPscPara == false)
+                {
+                    MessageBox.Show("心跳发送失败!", "联网配置", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SendHeartBeattimer.Stop();
+                }
+            
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         void DegradationCommand_Executed(object sender, CommandEventArgs args)
@@ -40,7 +68,7 @@ namespace tscui.Pages.Degradation
         {
             try
             {
-                tscui.Pages.Apex.ApexView.TscInfo ti = (tscui.Pages.Apex.ApexView.TscInfo)Application.Current.Properties[Define.TSC_INFO];
+                Apex.ApexView.TscInfo ti = (Apex.ApexView.TscInfo)Application.Current.Properties[Define.TSC_INFO];
                 if (ti == null)
                     return;
                 int cbi = cbxDegradationModel.SelectedIndex;
@@ -178,6 +206,30 @@ namespace tscui.Pages.Degradation
                     }
                     lblStage.Content = countSP;
                 }
+            }
+        }
+
+        private void Chkheartbeat_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               SendHeartBeattimer.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("心跳开启异常!", "联网配置", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+        }
+
+        private void Chkheartbeat_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SendHeartBeattimer.Stop();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("心跳关闭异常!", "联网配置", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
     }

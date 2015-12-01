@@ -75,6 +75,19 @@ namespace tscui.Views
                             ((Convert.ToByte(sldDetector15.Value - 1)) |
                              ((Convert.ToByte(sldDetector16.Value - 1)) << 4));
                     bool bSendOk = TscDataUtils.SetDecBoardSensitivityAdv(BytesSlot1Garde, td.Node, 0x0);
+<<<<<<< HEAD
+                    if (DecWorkTypeCbx1.SelectedIndex != 0x0)
+                    {
+                        Byte DecWorkType = (Byte)(DecWorkTypeCbx1.SelectedIndex - 1);
+                        bool bSendOk2 = TscDataUtils.SetDetecBdWorkType(td.Node, 0x0, DecWorkType);
+                      if(bSendOk2 ==true)
+                          result += "检测器板1工作方式设置成功!\r\n";
+                      else
+                          result += "检测器板1工作方式设置失败!\r\n";
+                    }
+
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     if (bSendOk == true)
                         result += "检测器板1通道灵敏度等级设置成功!\r\n";
                     else
@@ -149,6 +162,18 @@ namespace tscui.Views
                         (byte)
                             ((Convert.ToByte(sldDetector215.Value - 1)) |
                              ((Convert.ToByte(sldDetector216.Value - 1)) << 4));
+<<<<<<< HEAD
+                    if (DecWorkTypeCbx2.SelectedIndex != 0x0)
+                    {
+                        Byte DecWorkType = (Byte)(DecWorkTypeCbx2.SelectedIndex - 1);
+                        bool bSendOk2 = TscDataUtils.SetDetecBdWorkType(td.Node, 0x0, DecWorkType);
+                        if (bSendOk2 == true)
+                            result += "检测器板2工作方式设置成功!\r\n";
+                        else
+                            result += "检测器板2工作方式设置失败!\r\n";
+                    }
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     bool bSendOk = TscDataUtils.SetDecBoardSensitivityAdv(BytesSlot2Garde, td.Node, 0x1);
                     if (bSendOk == true)
                         result += "检测器板2通道灵敏度等级设置成功!\r\n";
@@ -236,6 +261,10 @@ namespace tscui.Views
                     sldDetector14.Value = lb12[10] + 1;
                     sldDetector15.Value = lb12[11] + 1;
                     sldDetector16.Value = lb12[12] + 1;
+<<<<<<< HEAD
+                    DecWorkTypeCbx1.SelectedIndex = TscDataUtils.GetDetecBdWorkType(td.Node,0);
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
                 if (ChkBoxSlot2Grade.IsChecked == true)
                 {
@@ -258,6 +287,10 @@ namespace tscui.Views
                     sldDetector214.Value = lb22[10] + 1;
                     sldDetector215.Value = lb22[11] + 1;
                     sldDetector216.Value = lb22[12] + 1;
+<<<<<<< HEAD
+                    DecWorkTypeCbx2.SelectedIndex = TscDataUtils.GetDetecBdWorkType(td.Node, 1);
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 }
 
                 if (ChkBoxSlot1GradeData.IsChecked == true)

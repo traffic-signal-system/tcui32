@@ -11,7 +11,21 @@
                 <ResourceDictionary Source="/tscui;component/Resources/ResourceDictionaries/ZuneScrollBarResourceDictionary.xaml" />
                 <ResourceDictionary Source="/tscui;component/Resources/lang/DefaultLanguage.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+<<<<<<< HEAD
+            <Style TargetType="TextBlock">
+                <Setter Property="Visibility" Value="Visible" />
+                <Style.Triggers>
+                    <Trigger Property="Text" Value="Visifire Trial Edition">
+                        <Trigger.Setters>
+                            <Setter Property="Visibility"  Value="Collapsed"></Setter>
+                        </Trigger.Setters>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             <sys:String x:Key="tscinfo">当前信号机IP地址:000.000.000.000&#160;&#160;&#160;端口号:0000 &#160;&#160;&#160;&#160;版本:0000</sys:String>
         </ResourceDictionary>
+    
     </Application.Resources>
 </Application>

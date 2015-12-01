@@ -6,11 +6,17 @@
              xmlns:local="clr-namespace:tscui.Pages.Stage"
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+<<<<<<< HEAD
+                xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
+                xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                mc:Ignorable="d" Loaded="UserControl_Loaded" Height="610" Unloaded="UserControl_Unloaded" Width="920">
+=======
              xmlns:apexBehaviours="clr-namespace:Apex.Behaviours;assembly=Apex"
              xmlns:Controls="clr-namespace:DevComponents.WPF.Controls;assembly=DevComponents.WPF.Controls" 
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              x:Class="tscui.Pages.Stage.StageView"
              mc:Ignorable="d" Loaded="UserControl_Loaded" Height="610" Unloaded="UserControl_Unloaded" Width="920">
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 
 
     <!-- The View creates its own ViewModel, so set the ViewModel 
@@ -25,7 +31,11 @@
             <!-- 南方向的-->
             <!-- 西方向的-->
             <!-- 背景图-->
+<<<<<<< HEAD
+            <Image x:Name="bigbmp" ToolTip ="路口基准图大" Source="/tscui;component/Resources/Images/back20130627.jpg" Width="595" Height="600"></Image>
+=======
             <Image x:Name="bigbmp" ToolTip ="路口基准图大" Source="/tscui;component/Resources/Images/back20130627.jpg" Width="595" Height="600"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             <Image x:Name="northLeft" ToolTip ="北左" Canvas.Left="273" Canvas.Top="469" Height="64" RenderOptions.BitmapScalingMode="Linear" Source="/tscui;component/Resources/Images/redlight.png" Width="17" >
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.3" />
@@ -152,7 +162,11 @@
 
             <Image x:Name="southOther" ToolTip ="南其他" Canvas.Left="421" Canvas.Top="63" Height="64" Source="/tscui;component/Resources/Images/redlight.png" Width="17" >
                 <i:Interaction.Behaviors>
+<<<<<<< HEAD
+                    <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+=======
                     <apexBehaviours:SlideFadeInBehaviour/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
@@ -191,14 +205,20 @@
             <Image x:Name="southTurn" ToolTip ="南调头"  Canvas.Left="376" Canvas.Top="63" Height="64" Source="/tscui;component/Resources/Images/redlight.png" Width="17" >
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+<<<<<<< HEAD
+=======
                     <apexBehaviours:SlideFadeInBehaviour/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
             <Image x:Name="eastSouthOther" ToolTip ="南特殊" Canvas.Left="402" Canvas.Top="63" Height="64" Width="17" Source="/tscui;component/Resources/Images/redlight.png"  RenderTransformOrigin="0.353,0.633" >
                 <i:Interaction.Behaviors>
                     <apexBehaviours:SlideFadeInBehaviour BeginTime="0:0:0.9" />
+<<<<<<< HEAD
+=======
                     <apexBehaviours:SlideFadeInBehaviour/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     <ei:MouseDragElementBehavior/>
                 </i:Interaction.Behaviors>
             </Image>
@@ -250,12 +270,17 @@
             <GroupBox Header="{DynamicResource tsc_stage_pattern_scheme}" Background="Transparent" Canvas.Left="778" Height="600" Width="138">
                 <Grid>
                     <ComboBox x:Name="cbxCoordination" HorizontalAlignment="Left" Margin="58,124,0,0" VerticalAlignment="Top" Width="45" SelectedIndex="14"/>
+<<<<<<< HEAD
+                    <CheckBox x:Name="cbxReaction" Content="{DynamicResource tsc_stage_reaction_stage}" HorizontalAlignment="Left" Margin="35,515,0,0" IsEnabled="False" Visibility="Hidden" VerticalAlignment="Top"/>
+                    <Label Content="{DynamicResource tsc_stage_scheme_id}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="77"/>
+=======
                     <CheckBox x:Name="cbxReaction" Content="{DynamicResource tsc_stage_reaction_stage}" HorizontalAlignment="Left" Margin="35,515,0,0" IsEnabled="False" VerticalAlignment="Top"/>
                     <Label Content="{DynamicResource tsc_stage_scheme_id}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     <Label Content="{DynamicResource tsc_stage_green}" HorizontalAlignment="Left" Margin="0,182,0,0" VerticalAlignment="Top"/>
                     <Label Content="{DynamicResource tsc_stage_yellow}" HorizontalAlignment="Left" Margin="34,182,0,0" VerticalAlignment="Top"/>
                     <Label Content="{DynamicResource tsc_stage_red}" HorizontalAlignment="Left" Margin="68,182,0,0" VerticalAlignment="Top"/>
-                    <Label Content="{DynamicResource tsc_stage_pattern_id}" HorizontalAlignment="Left" Margin="2,44,0,0" VerticalAlignment="Top"/>
+                    <Label Content="{DynamicResource tsc_stage_pattern_id}" HorizontalAlignment="Left" Margin="2,44,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
                     <Label Content="{DynamicResource tsc_stage_cycle}" HorizontalAlignment="Left" Margin="0,97,0,0" VerticalAlignment="Top"/>
                     <Label Content="{DynamicResource tsc_stage_coordinate}" HorizontalAlignment="Left" Margin="0,123,0,0" VerticalAlignment="Top" Width="58"/>
                     <Label Content="{DynamicResource tsc_stage_phaseoffset}" HorizontalAlignment="Left" Margin="0,151,0,0" VerticalAlignment="Top"/>
@@ -267,12 +292,26 @@
                     <Slider x:Name="sldGreenTime" IsSnapToTickEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" AutoToolTipPlacement="BottomRight" Maximum="199"  TickPlacement="BottomRight" Margin="0,213,0,0" Orientation="Vertical" Height="250" SmallChange="1" ValueChanged="sldGreenTime_ValueChanged"/>
                     <Slider x:Name="sldYellowTime" IsSnapToTickEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" AutoToolTipPlacement="BottomRight" Maximum="199" TickPlacement="BottomRight" Margin="36,213,0,0" Height="250" Orientation="Vertical" SmallChange="1" ValueChanged="sldYellowTime_ValueChanged"/>
                     <Slider x:Name="sldRedTime" IsSnapToTickEnabled="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" AutoToolTipPlacement="BottomRight" Maximum="199" TickPlacement="BottomRight" Margin="69,213,0,0" Height="250" Orientation="Vertical" SmallChange="1" ValueChanged="sldRedTime_ValueChanged"/>
+<<<<<<< HEAD
+                    <TextBox x:Name="tbkGreen" Text="{Binding ElementName=sldGreenTime,Path=Value, Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Height="21" Background="Green"/>
+
+                    <TextBox x:Name="tbkYellow" Text="{Binding ElementName=sldYellowTime,Path=Value,Mode=TwoWay}" HorizontalAlignment="Left" Margin="36,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Height="21" Background="Gold"/>
+
+
+                    <TextBox x:Name="tbkRed" Text="{Binding ElementName=sldRedTime,Path=Value,Mode=TwoWay}" HorizontalAlignment="Left" Margin="73,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Height="21" Background="#FFF53213"/>
+                    <TextBlock x:Name="tbkPatternId" Text="{Binding ElementName=sldSchemeId,Path=Value}" HorizontalAlignment="Left" Margin="82,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="21" Background="{DynamicResource ScrollBarDarkBrush}"/>
+                    <TextBlock x:Name="tbkStagePatternId" Text="{Binding ElementName=sldStagePatternId,Path=Value}" HorizontalAlignment="Left" Margin="82,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="20" Background="{DynamicResource ScrollBarDarkBrush}"/>
+                    <CheckBox x:Name="ChkCopyStage" ToolTip="复制配时"  Margin="-4,70,6,481" Checked="ChkCopyStage_Checked">
+                    </CheckBox>
+
+=======
                     <TextBlock x:Name="tbkGreen" Text="{Binding Value, ElementName=sldGreenTime}" HorizontalAlignment="Left" Margin="7,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="21" Height="21" Background="#FF15DE1E"/>
                     <TextBlock x:Name="tbkYellow" Text="{Binding Value, ElementName=sldYellowTime}" HorizontalAlignment="Left" Margin="40,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="21" Height="21" Background="#FFF3FF00"/>
                     <TextBlock x:Name="tbkRed" Text="{Binding Value, ElementName=sldRedTime}" HorizontalAlignment="Left" Margin="76,468,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="21" Height="21" Background="#FFF53213"/>
                     <TextBlock x:Name="tbkPatternId" Text="{Binding Value, ElementName=sldSchemeId}" HorizontalAlignment="Left" Margin="58,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Background="{DynamicResource ScrollBarDarkBrush}"/>
                     <TextBlock x:Name="tbkStagePatternId" Text="{Binding Value, ElementName=sldStagePatternId}" HorizontalAlignment="Left" Margin="58,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Background="{DynamicResource ScrollBarDarkBrush}"/>
                     <CheckBox x:Name="ChkCopyStage" ToolTip="复制配时"  Margin="-4,70,6,481" Checked="ChkCopyStage_Checked"/>
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                     <Slider x:Name="sldStagePatternId" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="93" AutoToolTipPlacement="BottomRight" Maximum="16" Minimum="1" TickPlacement="BottomRight" SmallChange="1" Value="1" ValueChanged="sldStagePatternId_ValueChanged">
                         <Slider.BorderBrush>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -282,10 +321,18 @@
                         </Slider.BorderBrush>
                     </Slider>
                     <Slider x:Name="sldSchemeId" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="93" AutoToolTipPlacement="BottomRight" Maximum="16" Minimum="1" TickPlacement="BottomRight" SmallChange="1" ValueChanged="sldSchemeId_ValueChanged"/>
+                    <CheckBox Name="ChkIgnoreStage" Content="感应无车阶段忽略" HorizontalAlignment="Left" Margin="0,520,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 </Grid>
             </GroupBox>
             <Label x:Name="stageNumber" Content="1" Canvas.Left="286" Canvas.Top="277" Foreground="{DynamicResource ZuneColor1Brush}" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.714,0.538" Height="36"/>
             <Button x:Name="btnRead" Content="{DynamicResource tsc_stagepattern_save}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Click="btnSave_Click" Canvas.Left="701" Canvas.Top="571" />
+<<<<<<< HEAD
+            <!--北方向 -->
+            <!-- 东方向的-->
+            <!-- 南方向的-->
+            <!-- 西方向的-->
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
         </Canvas>
 
     </apexControls:ApexGrid>

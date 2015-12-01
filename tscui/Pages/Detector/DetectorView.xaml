@@ -1,10 +1,20 @@
-﻿<UserControl x:Class="tscui.Pages.Detector.DetectorView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:apexControls="clr-namespace:Apex.Controls;assembly=Apex"
+<<<<<<< HEAD
+             xmlns:WpfEditors="clr-namespace:DevComponents.WpfEditors;assembly=DevComponents.WpfEditors" 
+            xmlns:Controls="clr-namespace:DevComponents.WPF.Controls;assembly=DevComponents.WPF.Controls" 
+            xmlns:Metro="clr-namespace:DevComponents.WPF.Metro;assembly=DevComponents.WPF.Metro"
+            xmlns:System="clr-namespace:System;assembly=mscorlib"
+            xmlns:vc="clr-namespace:Visifire.Charts;assembly=WPFVisifire.Charts"           
+            x:Class="tscui.Pages.Detector.DetectorView"           
+             mc:Ignorable="d"     
+=======
              mc:Ignorable="d" 
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
              d:DesignHeight="610" Unloaded="UserControl_Unloaded" Loaded="UserControl_Loaded" Width="879">
 
 
@@ -14,27 +24,33 @@
 
     <apexControls:ApexGrid >
         <Canvas Background="Transparent" x:Name="Deteccanvas">
+<<<<<<< HEAD
+            <!--北方向 -->
+            <!-- 东方向的-->
+            <!-- 南方向的-->
+            <!-- 西方向的-->
+=======
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
             <!-- 背景图-->
-            <Image Grid.Row="0" Source="/tscui;component/Resources/Images/back20130627.jpg" Width="598" Height="600"/>
-
-            <Image Canvas.Left="308" Canvas.Top="505" Height="12" Name="southLeftDetector3" Stretch="Fill" Width="17" Source="/tscui;component/Resources/Images/detectorline.png" />
-            <Image Canvas.Left="354" Canvas.Top="566" Height="12" Name="southRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="272" Canvas.Top="77" Height="12" Name="northLeftDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="249" Canvas.Top="77" Height="12" Name="northStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="226" Canvas.Top="77" Height="12" Name="northRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="272" Canvas.Top="107" Height="12" Name="northLeftDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="249" Canvas.Top="107" Height="12" Name="northStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="226" Canvas.Top="107" Height="12" Name="northRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="272" Canvas.Top="44" Height="12" Name="northLeftDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="249" Canvas.Top="44" Height="12" Name="northStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="226" Canvas.Top="44" Height="12" Name="northRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="272" Canvas.Top="13" Height="12" Name="northLeftDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="249" Canvas.Top="13" Height="12" Name="northStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="226" Canvas.Top="13" Height="12" Name="northRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="355" Canvas.Top="505" Height="12" Name="southRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="356" Canvas.Top="478" Height="12" Name="southRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="377" Canvas.Top="536" Height="12" Name="southOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
-            <Image Canvas.Left="107" Canvas.Top="309" Height="12" Name="westLeftDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Source="/tscui;component/Resources/Images/back20130627.jpg" Width="598" Height="600"/>
+            <Image Canvas.Left="308" Canvas.Top="505" Height="12" x:Name="southLeftDetector3" Stretch="Fill" Width="17" Source="/tscui;component/Resources/Images/detectorline.png" />
+            <Image Canvas.Left="354" Canvas.Top="566" Height="12" x:Name="southRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="272" Canvas.Top="77" Height="12" x:Name="northLeftDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="249" Canvas.Top="77" Height="12" x:Name="northStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="226" Canvas.Top="77" Height="12" x:Name="northRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="272" Canvas.Top="107" Height="12" x:Name="northLeftDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="249" Canvas.Top="107" Height="12" x:Name="northStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="226" Canvas.Top="107" Height="12" x:Name="northRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="272" Canvas.Top="44" Height="12" x:Name="northLeftDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="249" Canvas.Top="44" Height="12" x:Name="northStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="226" Canvas.Top="44" Height="12" x:Name="northRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="272" Canvas.Top="13" Height="12" x:Name="northLeftDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="249" Canvas.Top="13" Height="12" x:Name="northStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="226" Canvas.Top="13" Height="12" x:Name="northRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="355" Canvas.Top="505" Height="12" x:Name="southRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="356" Canvas.Top="478" Height="12" x:Name="southRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="377" Canvas.Top="536" Height="12" x:Name="southOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="107" Canvas.Top="309" Height="12" x:Name="westLeftDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -44,6 +60,24 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+<<<<<<< HEAD
+            <Image Canvas.Left="203" Canvas.Top="13" Height="12" x:Name="northOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17"  />
+            <Image Canvas.Left="203" Canvas.Top="44" Height="12" x:Name="northOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="203" Canvas.Top="77" Height="12" x:Name="northOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17"  />
+            <Image Canvas.Left="203" Canvas.Top="107" Height="12" x:Name="northOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="333" Canvas.Top="478" Height="12" x:Name="southStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="331" Canvas.Top="536" Height="12" x:Name="southStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="354" Canvas.Top="536" Height="12" x:Name="southRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="331" Canvas.Top="566" Height="12" x:Name="southStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="307" Canvas.Top="566" Height="12" x:Name="southLeftDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="332" Canvas.Top="505" Height="12" x:Name="southStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="307" Canvas.Top="536" Height="12" x:Name="southLeftDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="309" Canvas.Top="478" Height="12" x:Name="southLeftDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="377" Canvas.Top="566" Height="12" x:Name="southOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="378" Canvas.Top="505" Height="12" x:Name="southOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="379" Canvas.Top="478" Height="12" x:Name="southOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
+            <Image Canvas.Left="37" Canvas.Top="378" Height="12" x:Name="westOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+=======
             <Image Canvas.Left="203" Canvas.Top="13" Height="12" Name="northOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17"  />
             <Image Canvas.Left="203" Canvas.Top="44" Height="12" Name="northOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
             <Image Canvas.Left="203" Canvas.Top="77" Height="12" Name="northOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17"  />
@@ -60,6 +94,7 @@
             <Image Canvas.Left="378" Canvas.Top="505" Height="12" Name="southOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
             <Image Canvas.Left="379" Canvas.Top="478" Height="12" Name="southOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" />
             <Image Canvas.Left="37" Canvas.Top="378" Height="12" Name="westOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -69,7 +104,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="6" Canvas.Top="332" Height="12" Name="westStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="6" Canvas.Top="332" Height="12" x:Name="westStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -79,7 +114,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="107" Canvas.Top="378" Height="12" Name="westOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="107" Canvas.Top="378" Height="12" x:Name="westOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -89,7 +124,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="71" Canvas.Top="355" Height="12" Name="westRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="71" Canvas.Top="355" Height="12" x:Name="westRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -99,7 +134,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="6" Canvas.Top="355" Height="12" Name="westRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="6" Canvas.Top="355" Height="12" x:Name="westRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -109,7 +144,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="71" Canvas.Top="378" Height="12" Name="westOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="71" Canvas.Top="378" Height="12" x:Name="westOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -119,7 +154,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="474" Canvas.Top="208" Height="12" Name="eastOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="474" Canvas.Top="208" Height="12" x:Name="eastOtherDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -129,7 +164,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="6" Canvas.Top="309" Height="12" Name="westLeftDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="6" Canvas.Top="309" Height="12" x:Name="westLeftDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -139,7 +174,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="37" Canvas.Top="309" Height="12" Name="westLeftDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="37" Canvas.Top="309" Height="12" x:Name="westLeftDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -149,7 +184,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="71" Canvas.Top="309" Height="12" Name="westLeftDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="71" Canvas.Top="309" Height="12" x:Name="westLeftDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -159,7 +194,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="37" Canvas.Top="355" Height="12" Name="westRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="37" Canvas.Top="355" Height="12" x:Name="westRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -169,7 +204,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="6" Canvas.Top="378" Height="12" Name="westOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="6" Canvas.Top="378" Height="12" x:Name="westOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -179,7 +214,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="71" Canvas.Top="332" Height="12" Name="westStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="71" Canvas.Top="332" Height="12" x:Name="westStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -189,7 +224,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="107" Canvas.Top="332" Height="12" Name="westStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="107" Canvas.Top="332" Height="12" x:Name="westStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -199,7 +234,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="107" Canvas.Top="355" Height="12" Name="westRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="107" Canvas.Top="355" Height="12" x:Name="westRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -209,7 +244,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="37" Canvas.Top="332" Height="12" Name="westStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="37" Canvas.Top="332" Height="12" x:Name="westStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -219,7 +254,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="574" Canvas.Top="208" Height="12" Name="eastOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="574" Canvas.Top="208" Height="12" x:Name="eastOtherDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -229,7 +264,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="540" Canvas.Top="280" Height="12" Name="eastLeftDetecotr2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="540" Canvas.Top="280" Height="12" x:Name="eastLeftDetecotr2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -239,7 +274,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="540" Canvas.Top="260" Height="12" Name="eastStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="540" Canvas.Top="260" Height="12" x:Name="eastStraightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -249,7 +284,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="540" Canvas.Top="235" Height="12" Name="eastRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="540" Canvas.Top="235" Height="12" x:Name="eastRightDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -259,7 +294,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="540" Canvas.Top="208" Height="12" Name="eastOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="540" Canvas.Top="208" Height="12" x:Name="eastOtherDetector2" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -269,7 +304,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="508" Canvas.Top="280" Height="12" Name="eastLeftDetecotr3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="508" Canvas.Top="280" Height="12" x:Name="eastLeftDetecotr3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -279,7 +314,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="508" Canvas.Top="260" Height="12" Name="eastStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="508" Canvas.Top="260" Height="12" x:Name="eastStraightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -289,7 +324,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="508" Canvas.Top="208" Height="12" Name="eastOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="508" Canvas.Top="208" Height="12" x:Name="eastOtherDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -299,7 +334,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="508" Canvas.Top="235" Height="12" Name="eastRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="508" Canvas.Top="235" Height="12" x:Name="eastRightDetector3" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -309,7 +344,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="474" Canvas.Top="280" Height="12" Name="eastLeftDetecotr4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="474" Canvas.Top="280" Height="12" x:Name="eastLeftDetecotr4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -319,7 +354,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="474" Canvas.Top="260" Height="12" Name="eastStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="474" Canvas.Top="260" Height="12" x:Name="eastStraightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -329,7 +364,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="474" Canvas.Top="235" Height="12" Name="eastRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="474" Canvas.Top="235" Height="12" x:Name="eastRightDetector4" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -339,7 +374,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="574" Canvas.Top="280" Height="12" Name="eastLeftDetecotr1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="574" Canvas.Top="280" Height="12" x:Name="eastLeftDetecotr1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -349,7 +384,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="574" Canvas.Top="260" Height="12" Name="eastStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="574" Canvas.Top="260" Height="12" x:Name="eastStraightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -359,7 +394,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Canvas.Left="574" Canvas.Top="235" Height="12" Name="eastRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
+            <Image Canvas.Left="574" Canvas.Top="235" Height="12" x:Name="eastRightDetector1" Source="/tscui;component/Resources/Images/detectorline.png" Stretch="Fill" Width="17" RenderTransformOrigin="0.5,0.5" >
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -369,6 +404,191 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+<<<<<<< HEAD
+
+            <TextBlock Text="" x:Name="detectorNorthOther1" Canvas.Left="203" Canvas.Top="13" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthOther2" Canvas.Left="203" Canvas.Top="44" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthOther3" Canvas.Left="203" Canvas.Top="76" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthOther4" Canvas.Left="203" Canvas.Top="106" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthRight4" Canvas.Left="227" Canvas.Top="106" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthStraight4" Canvas.Left="249" Canvas.Top="106" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthLeft4" Canvas.Left="271" Canvas.Top="106" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" />
+            <TextBlock Text="" x:Name="detectorNorthLeft3" Canvas.Left="272" Canvas.Top="77" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorNorthLeft2" Canvas.Left="272" Canvas.Top="44" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthLeft1" Canvas.Left="272" Canvas.Top="13" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorNorthStraight1" Canvas.Left="249" Canvas.Top="13" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthStraight2" Canvas.Left="250" Canvas.Top="44" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthRight2" Canvas.Left="226" Canvas.Top="44" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthStraight3" Canvas.Left="249" Canvas.Top="76" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthRight1" Canvas.Left="227" Canvas.Top="13" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorNorthRight3" Canvas.Left="226" Canvas.Top="76" Width="17"  Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastOther4" Canvas.Left="475" Canvas.Top="206" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastOther3" Canvas.Left="509" Canvas.Top="206" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastOther2" Canvas.Left="542" Canvas.Top="206" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastOther1" Canvas.Left="576" Canvas.Top="206" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastRight4" Canvas.Left="475" Canvas.Top="233" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastStraight4" Canvas.Left="475" Canvas.Top="258" Width="16"  Foreground="DarkRed" Height="16" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastLeft4" Canvas.Left="475" Canvas.Top="278" Width="16"  Foreground="DarkRed" Height="16" FontSize="14" FontWeight="Bold"   HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorEastRight3" Canvas.Left="509" Canvas.Top="233" Width="16" Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastRight2" Canvas.Left="542" Canvas.Top="233" Width="16" Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastRight1" Canvas.Left="576" Canvas.Top="233" Width="16" Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastStraight3" Canvas.Left="509" Canvas.Top="258" Width="16" Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastLeft3" Canvas.Left="509" Canvas.Top="278" Width="16" Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastStraight2" Canvas.Left="542" Canvas.Top="258" Width="13" Foreground="DarkRed" Height="16" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastLeft2" Canvas.Left="542" Canvas.Top="278" Width="16" Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastStraight1" Canvas.Left="576" Canvas.Top="258" Width="16" Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorEastLeft1" Canvas.Left="576" Canvas.Top="278" Width="16" Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthLeft4"  Canvas.Left="309" Canvas.Top="477" Width="17" Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthStraight4" Canvas.Left="332" Canvas.Top="477" Width="17" Foreground="DarkRed" Height="15" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthRight4" Canvas.Left="355" Canvas.Top="477" Width="17" Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthOther4" Canvas.Left="378" Canvas.Top="477" Width="17" Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthLeft3" Canvas.Left="308" Canvas.Top="504" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthLeft2" Canvas.Left="307" Canvas.Top="535" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthLeft1" Canvas.Left="307" Canvas.Top="565" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthStraight3" Canvas.Left="331" Canvas.Top="504" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthStraight2" Canvas.Left="332" Canvas.Top="535" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthStraight1" Canvas.Left="331" Canvas.Top="565" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthRight3" Canvas.Left="354" Canvas.Top="504" Width="17"  Foreground="DarkRed" Height="15" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthRight2" Canvas.Left="355" Canvas.Top="536" Width="17"  Foreground="DarkRed" Height="13" FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthRight1" Canvas.Left="355" Canvas.Top="565" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthOther3" Canvas.Left="379" Canvas.Top="505" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorSouthOther2" Canvas.Left="378" Canvas.Top="536" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorSouthOther1" Canvas.Left="378" Canvas.Top="565" Width="17"  Foreground="DarkRed" Height="15"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorWestLeft4" Canvas.Left="107" Canvas.Top="308" Width="17"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+            <TextBlock Text="" x:Name="detectorWestStraight4" Canvas.Left="109" Canvas.Top="330" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestRight4" Canvas.Left="107" Canvas.Top="353" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestOther4" Canvas.Left="108" Canvas.Top="376" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestOther3" Canvas.Left="72" Canvas.Top="376" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestOther2" Canvas.Left="39" Canvas.Top="376" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestOther1"  Canvas.Left="8" Canvas.Top="376" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestLeft3" Canvas.Left="72" Canvas.Top="307" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestStraight3" Canvas.Left="72" Canvas.Top="330" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestRight3" Canvas.Left="72" Canvas.Top="353" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestLeft2" Canvas.Left="39" Canvas.Top="307" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestLeft1" Canvas.Left="8" Canvas.Top="307" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestStraight1" Canvas.Left="8" Canvas.Top="330" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestStraight2" Canvas.Left="39" Canvas.Top="330" Width="16"  Foreground="DarkRed" Height="16" FontSize="14"  FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestRight2" Canvas.Left="39" Canvas.Top="353" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <TextBlock Text="" x:Name="detectorWestRight1" Canvas.Left="8" Canvas.Top="353" Width="16"  Foreground="DarkRed" Height="16"  FontSize="14" FontWeight="Bold" TextAlignment="Justify"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" />
+            <Label Content="车检配置数据保存后一个放行周期后生效!" Canvas.Left="603" Canvas.Top="574"/>
+            <WpfEditors:TabHeaderControl Name="TabDetectors" Canvas.Left="603" Canvas.Top="8" Width="274" Height="561">
+                <TabItem Header="检测器配置" Width="68">
+                    <Grid >
+                        <GroupBox Header="{DynamicResource tsc_detector_title}" Width="271" Margin="2,0,1,87">
+                            <Grid Height="459" VerticalAlignment="Top" Margin="0,0,0,-38" >
+                                <Label Content="{DynamicResource tsc_detector_id}" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Width="96"/>
+
+                                <Label Content="{DynamicResource tsc_detector_phase}" HorizontalAlignment="Left" Margin="18,31,0,0" VerticalAlignment="Top" Width="96"/>
+                                <Label Content="{DynamicResource tsc_detector_type}" HorizontalAlignment="Left" Margin="18,71,0,0" VerticalAlignment="Top" Width="166"/>
+                                <Label Content="{DynamicResource tsc_detector_vaild_time}" HorizontalAlignment="Left" Margin="18,388,0,0" VerticalAlignment="Top" Width="96" Visibility="Hidden"/>
+                                <Label Content="{DynamicResource tsc_detector_options}" HorizontalAlignment="Left" Margin="18,219,0,0" VerticalAlignment="Top" Width="96"/>
+                                <Label Content="{DynamicResource tsc_detector_saturate_flow}" HorizontalAlignment="Left" Margin="18,331,0,0" VerticalAlignment="Top" Width="96" Visibility="Hidden"/>
+                                <Label Content="{DynamicResource tsc_detector_saturated_occupancy}" HorizontalAlignment="Left" Margin="18,357,0,0" VerticalAlignment="Top" Width="96" Visibility="Hidden"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="122,15,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbxFlow" HorizontalAlignment="Left" Height="23" Margin="122,334,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="98" TextChanged="tbxFlow_TextChanged" IsEnabled="False" Visibility="Hidden"/>
+                                <TextBox x:Name="tbkVaildTime" HorizontalAlignment="Left" Height="23" Margin="122,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="98" TextChanged="tbkVaildTime_TextChanged" Visibility="Hidden"/>
+                                <TextBox x:Name="tbxOccupany" HorizontalAlignment="Left" Height="23" Margin="122,363,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="98" TextChanged="tbxOccupany_TextChanged" Visibility="Hidden" IsEnabled="False"/>
+                                <RadioButton x:Name="rbnTactics" Content="{DynamicResource tsc_detector_tactics}" GroupName="detectorType" HorizontalAlignment="Left" Margin="18,102,0,0" VerticalAlignment="Top" IsEnabled="True"/>
+                                <RadioButton x:Name="rbnStategy" Content="{DynamicResource tsc_detector_stategy}" GroupName="detectorType" HorizontalAlignment="Left" Margin="18,123,0,0" VerticalAlignment="Top" IsEnabled="True"/>
+                                <RadioButton x:Name="rbnReaction" Content="{DynamicResource tsc_detector_reaction}" GroupName="detectorType" HorizontalAlignment="Left" Margin="122,102,0,0" VerticalAlignment="Top" IsEnabled="True"/>
+                                <RadioButton x:Name="rbnRequest" Content="{DynamicResource tsc_detector_request}" GroupName="detectorType" HorizontalAlignment="Left" Margin="122,123,0,0" VerticalAlignment="Top" IsEnabled="True"/>
+
+                                <RadioButton x:Name="rbnBus"  Content="{DynamicResource tsc_detector_bus}" GroupName="detectorTargetType" HorizontalAlignment="Left" Margin="122,181,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <RadioButton x:Name="rbnBike" Content="{DynamicResource tsc_detector_bike}" GroupName="detectorTargetType" HorizontalAlignment="Left" Margin="122,163,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <RadioButton x:Name="rbnCar" Content="{DynamicResource tsc_detector_car}" GroupName="detectorTargetType" HorizontalAlignment="Left" Margin="18,160,0,0" VerticalAlignment="Top" IsEnabled="True"/>
+                                <RadioButton x:Name="rbnPedestrain" Content="{DynamicResource tsc_detector_pedestrain}" GroupName="detectorTargetType" HorizontalAlignment="Left" Margin="18,181,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                                <CheckBox x:Name="cbxCarType" Content="{DynamicResource tsc_detector_cartype}" HorizontalAlignment="Left" Margin="18,250,0,0" VerticalAlignment="Top" Checked="cbxCarType_Checked" Unchecked="cbxCarType_Unchecked" IsEnabled="False"/>
+                                <CheckBox x:Name="cbxKeyRoad" Content="{DynamicResource tsc_detector_keyroad}" HorizontalAlignment="Left" Margin="122,292,0,0" VerticalAlignment="Top" Unchecked="cbxKeyRoad_Unchecked" Checked="cbxKeyRoad_Checked" />
+                                <CheckBox x:Name="cbxFlow" Content="{DynamicResource tsc_detector_flow}" HorizontalAlignment="Left" Margin="122,271,0,0" VerticalAlignment="Top" Checked="cbxFlow_Checked" Unchecked="cbxFlow_Unchecked" IsEnabled="False"/>
+                                <CheckBox x:Name="cbxOccupancy" Content="{DynamicResource tsc_detector_occupancy}" HorizontalAlignment="Left" Margin="122,250,0,0" VerticalAlignment="Top" Unchecked="cbxOccupancy_Unchecked" Checked="cbxOccupancy_Checked" />
+                                <CheckBox x:Name="cbxSpeed" Content="{DynamicResource tsc_detector_speed}" HorizontalAlignment="Left" Margin="18,292,0,0" VerticalAlignment="Top" Unchecked="cbxSpeed_Unchecked" Checked="cbxSpeed_Checked" IsEnabled="False"/>
+                                <CheckBox x:Name="cbxQueun" Content="{DynamicResource tsc_detector_queun}" HorizontalAlignment="Left" Margin="18,271,0,0" VerticalAlignment="Top" Unchecked="cbxQueun_Unchecked" Checked="cbxQueun_Checked" />
+                                <Button x:Name="btnRead" Content="{DynamicResource tsc_time_read}" HorizontalAlignment="Left" Margin="50,451,0,0" VerticalAlignment="Top" Width="75" Click="btnRead_Click" Visibility="Hidden"/>
+                                <TextBlock x:Name="tbkPhaseId" HorizontalAlignment="Left" Margin="115,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+                                <ComboBox x:Name="SelectedDetectorId"   Background="Transparent" DisplayMemberPath= "ucDetectorId" SelectedValuePath="ucDetectorId"  HorizontalAlignment="Left" Margin="114,8,0,0"  VerticalAlignment="Top" Width="83" SelectionChanged="SelectedDetectorId_SelectionChanged"/>
+                            </Grid>
+                        </GroupBox>
+                        <Button x:Name="btnSave" Content="{DynamicResource tsc_time_save}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnSave_Click" Margin="21,498,0,0"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="车检状态" Width="68">
+                    <Grid Background="#FFE5E5E5" Height="476" >
+                        <ListView x:Name="Listcheckcar" AlternationCount="2"   MouseRightButtonDown="Listcheckcar_MouseRightButtonDown" Margin="0,-26,0,1">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="LightGreen"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="30" Header="序号" DisplayMemberBinding="{Binding Num, Mode=OneWay}" />
+                                    <GridViewColumn Width="60"  Header="车检板" DisplayMemberBinding="{Binding ChkBoarddNo, Mode=OneWay}"/>
+                                    <GridViewColumn Width="50" Header="通道号" DisplayMemberBinding="{Binding ChkChannel, Mode=OneWay}"/>
+                                    <GridViewColumn Width="130" Header="车检信号时间" DisplayMemberBinding="{Binding CheckedTime, Mode=OneWay}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <CheckBox Content="{DynamicResource tsc_detector_check}" x:Name="ChkCarmonitor" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Height="17" Width="211" Margin="9,480,0,-21"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="参数状态" Width="68">
+                    <Grid Background="#FFE5E5E5" Height="476" >
+                        <ListView x:Name="GridDectorsParams" AlternationCount="2"   MouseRightButtonDown="Listcheckcar_MouseRightButtonDown" Margin="0,-26,0,1">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="Background" Value="LightBlue"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="LightGreen"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+
+                                    <GridViewColumn Width="60" Header="检测器号" DisplayMemberBinding="{Binding ucDetectorId, Mode=OneWay}"/>
+                                    <GridViewColumn Width="60" Header="相位号" DisplayMemberBinding="{Binding ucPhaseId, Mode=OneWay}"/>
+                                    <GridViewColumn Width="75" Header="占有率(%)" DisplayMemberBinding="{Binding ucSaturationOccupy, Mode=OneWay}" />
+                                    <GridViewColumn Width="80" Header="车辆数统计" DisplayMemberBinding="{Binding usSaturationFlow, Mode=OneWay}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <CheckBox Content="统计时间间隔/周期" x:Name="GetParamPerTime" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="CheckBox_Checked1" Unchecked="CheckBox1_Unchecked" Height="17" Width="211" Margin="9,480,0,-21"/>
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem Header="图表显示" Width="68">
+                    <Grid Background="#FFE5E5E5" Height="476" VerticalAlignment="Stretch">
+                        <vc:Chart Name="DetectorsChart" Margin="0,-28,0,0" />
+                        <ComboBox x:Name="charttypecbx" Height="30" Width="135" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,-30" SelectedIndex="0" SelectionChanged="charttypecbx_SelectionChanged" >
+                            <System:String>横条图</System:String>
+                            <System:String>柱状图</System:String>
+                            <System:String>线状图</System:String>                          
+                            <System:String>雷达图</System:String>
+                        </ComboBox>
+                        <ComboBox x:Name="DetecBdType" Height="30" Width="135" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="136,0,0,-30" SelectedIndex="0" SelectionChanged="charttypecbx_SelectionChanged" >
+                            <System:String>检测器板1</System:String>
+                            <System:String>检测器板2</System:String>
+                            <System:String>接口板1</System:String>
+                            <System:String>接口板2</System:String>
+                        </ComboBox>
+
+                    </Grid>
+                </TabItem>
+
+            </WpfEditors:TabHeaderControl>
+        </Canvas>
+    </apexControls:ApexGrid>
+=======
             <GroupBox Header="{DynamicResource tsc_detector_title}" Canvas.Left="603" Canvas.Top="3" Visibility="Hidden" Height="597" Width="271">
                 <Grid Margin="0,0,0,41">
                     <Label Content="{DynamicResource tsc_detector_phase}" HorizontalAlignment="Left" Margin="18,24,0,0" VerticalAlignment="Top" Width="96"/>
@@ -623,4 +843,5 @@
             <!-- 西方向的-->
         </Canvas>
     </apexControls:ApexGrid >
+>>>>>>> 74e4ebd174211bd2f7215c892a9bd98ddb385798
 </UserControl>
